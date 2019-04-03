@@ -31,7 +31,7 @@ module.exports = {
         let ruleset = '/tour rules -OU, -UU, -RU, -NU, -PU, -ZU, -NFE, -LC, -Uber, -UUBL, -RUBL, -NUBL, -PUBL, -NFE, -LC Uber';
         if (bans.length) ruleset += ', -' + bans.join(', -');
         ruleset += ', +' + unbans.join(', +');
-        this['1v1'](room, user, ['rr2']);
+        Commands['1v1'](room, user, ['rr2']);
         room.send(ruleset);
         room.send('/tour name Type Challenge: ' + type + "!");
         if (Config.tchook) request({url:Config.tchook, body: {content:`Type Challenge: ${type}! Tournament started.`}, method:"POST", json:true})
