@@ -14,7 +14,7 @@ module.exports = {
         for (let i in dex) {
             let mon = dex[i];
             if (Banlist['1v1'].indexOf(mon.species) !== -1) continue;
-            if (mon.formeLetter && mon.forme != "Mega" && mon.forme != "Alola")
+            if (mon.formeLetter && mon.forme != "Mega" && mon.forme != "Alola") continue;
             if (mon.types.indexOf(type) !== -1) unbano[i] = true;
         }
         let bans = [];
