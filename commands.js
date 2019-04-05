@@ -180,8 +180,14 @@ let commands = {
     rl: 'reload',
     reload: function(room, user, args) {
         if (!user.can(room, 'all')) return;
-        if (!room) room = user;
         bot.emit('reload', args[0], room);
+    },
+    
+    update: function(room, user, args) {
+        if (!user.can(room, 'all')) return;
+        if (!Config.git) return room.say("No git url is configured for this bot.");
+        const child_process = require('child_process');
+        child_process.execSync('git pull ' + Config.git + ' master', {stdio: 'inherit'});
     },
     
     eval: function(room, user, args, val) {
