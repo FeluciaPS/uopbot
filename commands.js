@@ -190,6 +190,7 @@ let commands = {
         child_process.execSync('git pull ' + Config.git + ' master', {stdio: 'inherit'});
     },
     
+    js: 'eval',
     eval: function(room, user, args, val) {
         if (!user.can(room, 'all')) return;
         if (!room) room = user;
