@@ -14,7 +14,30 @@ module.exports = {
     '1v1om': function(room, user, args) {
         if (room != '1v1' && room != '1v1typechallenge') return false;
         if (!user.can(room, "%")) return false;
-        room.send("/addhtmlbox [Gen 7] 1v1, [Gen 7] UU 1v1, [Gen 7] 2v2 Doubles<br>[Gen 6] 1v1, [Gen 5] 1v1, [Gen 4] 1v1, [Gen 3] 1v1<br>AAA 1v1, AG 1v1, Inverse 1v1, Monotype 1v1, No Z 1v1, STABmons 1v1");
+        let text = "/addhtmlbox ";
+        text += "[Gen 7] 1v1, [Gen 7] UU 1v1, [Gen 7] LC 1v1, [Gen 7] 2v2 Doubles<br>";
+        text += "<a href='https://www.smogon.com/forums/threads/1v1-old-gens.3646875/'>1v1 Past Gens</a>: [Gen 6] 1v1, [Gen 5] 1v1, [Gen 4] 1v1, [Gen 3] 1v1<br>";
+        text += "<a href='https://www.smogon.com/forums/threads/1v1-oms.3648454/'>1v1 OMs</a>: AAA 1v1, AG 1v1, Inverse 1v1, Monotype 1v1, No Z 1v1, STABmons 1v1";
+        room.send(text);
+    },
+    randtour: function(room, user, args) {
+        let tourtypes = [
+            "1v1",
+            "2v2",
+            "gen61v1",
+            "gen51v1",
+            "gen41v1",
+            "gen31v1",
+            "aaa",
+            "ag",
+            "inverse",
+            "mono",
+            "noz",
+            "stab",
+            "uu1v1",
+            "monopoke"
+        ]
+        Commands[Utils.select(tourtypes)](room, user, args);
     },
     chill: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
