@@ -115,6 +115,7 @@ module.exports = {
         ruleset = ruleset.substring(0, ruleset.length - 2);
         room.send("/tour create " + bl.meta + ", elim");
         room.send("/tour name [Gen 5] 1v1");
+        room.send(ruleset);
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
     dp: 'gen41v1',
@@ -127,6 +128,7 @@ module.exports = {
         ruleset = ruleset.substring(0, ruleset.length - 2);
         room.send("/tour create " + bl.meta + ", elim");
         room.send("/tour name [Gen 4] 1v1");
+        room.send(ruleset);
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
     adv: 'gen31v1',
@@ -140,6 +142,7 @@ module.exports = {
         ruleset = ruleset.substring(0, ruleset.length - 2);
         room.send("/tour create " + bl.meta + ", elim");
         room.send("/tour name [Gen 3] 1v1");
+        room.send(ruleset);
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
     aaa1v1: 'aaa',
