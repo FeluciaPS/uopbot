@@ -24,7 +24,7 @@
     "nfe": {
         "meta": "nu",
         "bans": ["ZU", "NU", "RU", "UU", "OU", "UUBL", "RUBL", "NUBL", "PUBL", "PU", "Uber", "Gurdurr", "Type: Null", "Vigoroth", "Arena Trap", "Drought", "Shadow Tag", "Aurora Veil"],
-        "unbans": ["Clefairy", "Ferroseed", "Haunter", "Roselia"]
+        "unbans": ["Clefairy", "Ferroseed", "Haunter", "Roselia", "Tangela"]
     },
 
     "aaa": {
