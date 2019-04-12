@@ -42,7 +42,7 @@
         "unbans": []
     },
     "stabmons": {
-        "bans": ["Tapu Lele", "Spore"],
+        "bans": ["Pidgeot-Mega", "Tapu Lele", "Sleep Powder", "Spore"],
         "unbans": []
     },
     "uu": ["Aegislash", "Charizard-Mega-X", "Charizard-Mega-Y", "Donphan", "Dragonite", "Gardevoir-Mega", "Greninja", "Gyarados-Mega", "Kommo-o", "Lopunny-Mega", "Magearna", "Magnezone", "Mawile-Mega", "Metagross-Mega", "Mew", "Porygon-Z", "Tapu Fini", "Tapu Lele", "Venusaur-Mega", "Victini", "Zeraora", "Zygarde"],
