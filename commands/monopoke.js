@@ -38,11 +38,11 @@ module.exports = {
         if (!args[0]) args[0] = chooseMonopoke();
         if (!t[toId(args[0])]) return room.send(`${args[0]} is not a Pokémon`);
         let mon = t[toId(args[0])].species;
-        let ruleset = "/tour rules !Team Preview, -" + Banlist['1v1-allowed'].join(', -') + `, +${mon}`;
-        room.send("/tour create camomons, elim");
+        let ruleset = "/tour rules !Team Preview, [Gen 7] Camomons, -" + Banlist['1v1-allowed'].join(', -') + `, +${mon}`;
+        Commands['1v1'](room, user, args);
         room.startTour("monopoke");
         room.send(ruleset);
-        room.send("/tour name Monopoke " + mon);
-        room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
+        room.send("/tour name Camonopoke " + mon);
+        room.send(`/wall Camomons Monopoke ${mon}! Use only ${mon}`);
     }
 }
