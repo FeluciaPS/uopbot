@@ -32,5 +32,17 @@ module.exports = {
         room.send(ruleset);
         room.send("/tour name Monopoke " + mon);
         room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
+    },
+    camonopoke: function(room, user, args) {
+        if (!canMakeTour(room, user)) return;
+        if (!args[0]) args[0] = chooseMonopoke();
+        if (!t[toId(args[0])]) return room.send(`${args[0]} is not a Pokémon`);
+        let mon = t[toId(args[0])].species;
+        let ruleset = "/tour rules !Team Preview, -" + Banlist['1v1-allowed'].join(', -') + `, +${mon}`;
+        room.send("/tour create camomons, elim");
+        room.startTour("monopoke");
+        room.send(ruleset);
+        room.send("/tour name Monopoke " + mon);
+        room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
     }
 }
