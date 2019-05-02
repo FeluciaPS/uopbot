@@ -78,5 +78,10 @@ module.exports = {
         if (room.id !== "nfe") return;
         let pm = user.can(room, "+") ? room : user;
         pm.send('Leaderboards are temporarily out of order.');
+    },
+    forceend: function (room, user, args) {
+        if (room.id !== 'nfe') return;
+        if (!user.can(room, '+')) return;
+        room.send("/tour end");
     }
 }
