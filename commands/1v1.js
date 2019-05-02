@@ -108,6 +108,26 @@ module.exports = {
     bw: 'gen51v1',
     gen51v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create gen51v1, rr,, " + count);
+                else room.send("/tour create gen51v1, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create gen51v1, elim,, " + count);
+                else room.send("/tour create gen51v1, elim");
+            }
+            else {
+                room.send("/tour create gen51v1, elim")
+            }
+        }
+        else room.send("/tour create gen51v1, elim");
+        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
+    },
+    oldgen51v1: function(room, user, args) {
+        if (!canMakeTour(room, user)) return;
         let bl = Banlist.gen51v1;
         let ruleset = "/tour rules Team Preview, "
         if (bl.bans.length) ruleset += "-" + bl.bans.join(", -") + ", ";
