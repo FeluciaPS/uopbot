@@ -60,7 +60,8 @@ bot.on('n', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let oldname = parts[3];
     let newname = parts[2];
-    Rooms[room].rename(oldname, newname);
+    try {Rooms[room].rename(oldname, newname);}
+    catch (e) {}
 });
 
 bot.on('deinit', (parts) => {
