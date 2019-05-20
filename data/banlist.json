@@ -54,8 +54,8 @@
     },
     "gen41v1": {
         "meta": "gen4ou",
-        "bans": ["Porygon Z", "Mew", "Focus Sash", "Mirror Shot", "Mud Bomb", "Flash", "Octazooka", "Mud-Slap", "Muddy Water", "Sand Attack", "Smoke Screen", "Kinesis", "Dark Void", "Grass Whistle", "Hypnosis", "Lovely Kiss", "Sing", "Sleep Powder", "Spore", "Yawn", "Perish Song"],
-        "unbans": ["Wobbuffet", "Wynaut", "Manaphy"]
+        "bans": ["Porygon Z", "Mew", "Latias", "Focus Sash", "Mirror Shot", "Mud Bomb", "Flash", "Octazooka", "Mud-Slap", "Muddy Water", "Sand Attack", "Smoke Screen", "Kinesis", "Dark Void", "Grass Whistle", "Hypnosis", "Lovely Kiss", "Sing", "Sleep Powder", "Spore", "Yawn", "Perish Song"],
+        "unbans": ["Wobbuffet", "Wynaut"]
     },
     "gen31v1": {
         "meta": "gen3ubers",
