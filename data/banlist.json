@@ -45,7 +45,7 @@
         "bans": ["Pidgeot-Mega", "Tapu Lele", "Lovely Kiss", "Sleep Powder", "Spore"],
         "unbans": []
     },
-    "uu": ["Aegislash", "Charizard-Mega-X", "Charizard-Mega-Y", "Donphan", "Dragonite", "Gardevoir-Mega", "Greninja", "Gyarados-Mega", "Kommo-o", "Lopunny-Mega", "Magearna", "Magnezone", "Mawile-Mega", "Metagross-Mega", "Mew", "Porygon-Z", "Tapu Fini", "Tapu Lele", "Venusaur-Mega", "Victini", "Zeraora", "Zygarde"],
+    "uu": ["Aegislash", "Celesteela", "Charizardite-X", "Charizardite-Y", "Donphan", "Dragonite", "Garchomp", "Gardevoirite", "Genesect", "Greninja", "Gyaradosite", "Haxorus", "Heatran", "Incineroar", "Kartana", "Kommo-o", "Lopunnite", "Landorus-Therian", "Magearna", "Magnezone", "Mawilite", "Meloetta", "Metagrossite", "Mew",  "Naganadel", "Porygon-Z", "Primarina", "Serperior", "Tapu Bulu", "Tapu Fini", "Tapu Lele", "Venusaurite", "Victini", "Zeraora", "Zygarde"],
     
     "gen51v1": {
         "meta": "gen5ou",
