@@ -44,14 +44,16 @@ bot.on('pm', (parts) => {
 
 bot.on('j', (parts) => {
     let room = Utils.getRoom(parts[0]);
-    let user = parts[2];
+    let p = parts[2].split("@")
+    let user = toId(p[p.length - 1]);
     if (!Users[toId(user)]) Users.add(user);
     Users[toId(user)].join(room, user);
 });
 
 bot.on('l', (parts) => {
     let room = Utils.getRoom(parts[0]);
-    let user = toId(parts[2]);
+    let p = parts[2].split("@")
+    let user = toId(p[p.length - 1]);
     // This sometimes crashes when PS sends a message to the client that a Guest is leaving the room when the guest never joined the room in the first place which honestly makes no sense.
     if (Users[user]) Users[user].leave(room);
     else logger.emit('error', `${user} can't leave ${room}`);
@@ -60,7 +62,8 @@ bot.on('l', (parts) => {
 bot.on('n', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let oldname = parts[3];
-    let newname = parts[2];
+    let p = parts[2].substring(1).split("@")
+    let newname = parts[2].substring(0, 1) + p[p.length - 1]
     try {Rooms[room].rename(oldname, newname);}
     catch (e) {}
 });
