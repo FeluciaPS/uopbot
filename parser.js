@@ -108,7 +108,8 @@ bot.on('init', (parts, data) => {
         if (part[1] === 'users') {
             let users = part[2].split(',')
             for (let i in users) {
-                let user = users[i]
+                let user = users[i];
+                user = user.substring(0, 1) + user.substring(1).split("@")[0];
                 if (i == 0) continue;
                 if (!Users[toId(user)]) Users.add(user);
                 Users[toId(user)].join(room, user);
