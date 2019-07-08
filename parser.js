@@ -46,6 +46,7 @@ bot.on('j', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let p = parts[2].substring(1).split("@")
     let user = parts[2].substring(0, 1) + p[0];
+    console.log(user);
     if (!Users[toId(user)]) Users.add(user);
     Users[toId(user)].join(room, user);
 });
