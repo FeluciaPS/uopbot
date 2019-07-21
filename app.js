@@ -46,9 +46,13 @@ websocket.on('connect', function (connection) {
 	Connection = connection;
 	connection.on('message', function (message) {
 		let data = message.utf8Data;
-        let parts = data.split('|');
-        if (toId(parts[1]) == 'error') { console.log(data); }
-        else bot.emit(toId(parts[1]), parts, data);
+		let parts = data.split('|');
+		if (toId(parts[1]) == 'error') { console.log(data); }
+		else bot.emit(toId(parts[1]), parts, data);
+	});
+	
+	connection.on('close', function() {
+		process.exit();
 	});
 });
 
