@@ -176,7 +176,7 @@ module.exports = {
     ag1v1: 'ag',
     ag: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules !" + Banlist.ag.join(', !') + ", +" + Banlist['1v1'].join(', +') + "+Focus Sash, +Perish Song";
+        let ruleset = "/tour rules !" + Banlist.ag.join(', !') + ", +" + Banlist['1v1'].join(', +') + ", +Detect + Fightinium Z, +Focus Sash, +Perish Song";
         Commands['1v1'](room, user, args);
         room.send(ruleset);
         room.send("/tour name [Gen 7] AG 1v1");
