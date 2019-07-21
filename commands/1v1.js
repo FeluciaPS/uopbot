@@ -85,6 +85,7 @@ module.exports = {
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
     oras: 'gen61v1',
+    oars: 'gen61v1',
     gen61v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         if (args) {
