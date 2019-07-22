@@ -16,7 +16,7 @@ let isGenerator = function(arg) {
 }
 
 module.exports = {
-    nfe: function(room, user, args) {
+    oldnfe: function(room, user, args) {
         if (room.id !== 'nfe') return;
         if (!user.can(room, '+')) return;
         if (room.tournament) return room.send("A tournament is already going on");
@@ -37,7 +37,7 @@ module.exports = {
         }
         else room.send("/tour create nfe, elim")
     },
-    oldnfe: function (room, user, args, val) {
+    nfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
         if (!user.can(room, '+')) return;
         if (room.tournament) return room.send("A tournament is already going on");
