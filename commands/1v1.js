@@ -28,12 +28,12 @@ module.exports = {
             "gen51v1",
             "gen41v1",
             "gen31v1",
-            "aaa",
-            "ag",
-            "inverse",
-            "mono",
-            "noz",
-            "stab",
+            "aaa1v1",
+            "ag1v1",
+            "inverse1v1",
+            "mono1v1",
+            "noz1v1",
+            "stab1v1",
             "uu1v1",
             "monopoke"
         ]
@@ -84,7 +84,7 @@ module.exports = {
         else room.send("/tour create 2v2, elim");
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
-    oras: 'gen61v1',
+    oras1v1: 'gen61v1',
     oars: 'gen61v1',
     gen61v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
@@ -106,7 +106,7 @@ module.exports = {
         else room.send("/tour create gen61v1, elim");
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
-    bw: 'gen51v1',
+    bw1v1: 'gen51v1',
     gen51v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         if (args) {
@@ -139,7 +139,7 @@ module.exports = {
         room.send(ruleset);
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
-    dp: 'gen41v1',
+    dp1v1: 'gen41v1',
     gen41v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let bl = Banlist.gen41v1;
@@ -152,8 +152,8 @@ module.exports = {
         room.send(ruleset);
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
-    adv: 'gen31v1',
-    gsc: 'gen31v1',
+    adv1v1: 'gen31v1',
+    gsc1v1: 'gen31v1',
     gen31v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let bl = Banlist.gen31v1;
