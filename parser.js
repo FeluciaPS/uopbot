@@ -26,7 +26,7 @@ bot.on('c', (parts) => {
         logger.emit('cmd', cmd, val);
     }
     if (message.startsWith(Config.username + " ")) {
-        let msg = message.substring(config.username.length + 1);
+        let msg = message.substring(Config.username.length + 1);
         let m = msg.match(/remind me( to)?/i);
         if (m) {
             let to = !!msg.match(/remind me to/i);
