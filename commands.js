@@ -168,10 +168,10 @@ let commands = {
         Send(room, ret);
     },
     
-    tourrules: function(room, user, args, val) {
+    setrules: function(room, user, args, val) {
         if (!user.can(room, '%')) return;
         let command = toId(args.shift());
-        if (!command) return room.send("Usage: ``.tourrules [add/remove/ban/unban/clear], [args]``");
+        if (!command) return room.send("Usage: ``.setrules [add/remove/ban/unban/clear], [args]``");
         if (!room.tournament) return room.send("There is no tournament running in this room.");
         console.log(room.tournament.rules);
         if (command === "add") {
