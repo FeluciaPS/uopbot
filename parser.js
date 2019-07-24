@@ -6,6 +6,11 @@ bot.on('updateuser', (parts) => {
     logger.emit('log', 'Logged in as ' + parts[2]);
 });
 
+let natLangDict = {
+    "you": "Suspect Philosophy",
+    "me": "you",
+    "I": "you",
+}
 bot.on('c', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
@@ -128,6 +133,41 @@ bot.on('n', (parts) => {
 bot.on('deinit', (parts) => {
     let room = Utils.getRoom(parts[0]);
     if (Rooms[room]) Rooms[room].leave();
+});
+
+bot.on('raw', (parts) => {
+    let room = Rooms[Utils.getRoom(parts[0])];
+    let data = parts[2];
+    console.log(true);
+    if (!data.startsWith("<div class='infobox infobox-limited'>")) return;
+    data = data.substring(37, data.length - 7);
+    data = data.split("<br />");
+    console.log(data[0]);
+    if (data[0] !== "This tournament includes:") return;
+    data.shift();
+    console.log(true);
+    for (let line of data) {
+        let i = line.indexOf("-");
+        let type = toId(line.substring(0, i).replace(/<[^>]+>/g, ""));
+        let targets = line.substring(i+2).split(",");
+        for (let index in targets) {
+            targets[index] = targets[index].trim();
+        }
+        switch (type) {
+            case 'bans':
+                room.tournament.rules.bans = targets;
+                break;
+            case 'unbans':
+                room.tournament.rules.unbans = targets;
+                break;
+            case 'addedrules':
+                room.tournament.rules.addrules = targets;
+                break;
+            case 'removedrules':
+                room.tournament.rules.remrules = targets;
+                break;
+        }
+    }
 });
 
 bot.on('tournament', (parts, data) => {

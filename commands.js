@@ -167,7 +167,73 @@ let commands = {
         let ret = `/addrankhtmlbox %,<b>${escape(user.rooms[room])}${user.name}:</b> ${msg}<br><span style='color:#444444;font-size:10px'>Note: Only users ranked % and above can see this.</span>`
         Send(room, ret);
     },
-
+    
+    tourrules: function(room, user, args, val) {
+        if (!user.can(room, '%')) return;
+        let command = toId(args.shift());
+        if (!command) return room.send("Usage: ``.tourrules [add/remove/ban/unban/clear], [args]``");
+        if (!room.tournament) return room.send("There is no tournament running in this room.");
+        console.log(room.tournament.rules);
+        if (command === "add") {
+            for (let i of args) {
+                let rem = false;
+                for (let x = 0; x < room.tournament.rules.remrules.length; x++) {
+                    if (toId(room.tournament.rules.remrules[x]) === toId(i)) {
+                        rem = true;
+                        room.tournament.rules.remrules.splice(x, 1);
+                    }
+                }
+                if (!rem) room.tournament.rules.addrules.push(i)
+            }
+        }
+        if (command === "remove") {
+            for (let i of args) {
+                let rem = false;
+                for (let x = 0; x < room.tournament.rules.addrules.length; x++) {
+                    if (toId(room.tournament.rules.addrules[x]) === toId(i)) {
+                        rem = true;
+                        room.tournament.rules.addrules.splice(x, 1);
+                    }
+                }
+                if (!rem) room.tournament.rules.remrules.push(i)
+            }
+        }
+        if (command === "ban") {
+            for (let i of args) {
+                let rem = false;
+                for (let x = 0; x < room.tournament.rules.unbans.length; x++) {
+                    if (toId(room.tournament.rules.unbans[x]) === toId(i)) {
+                        rem = true;
+                        room.tournament.rules.unbans.splice(x, 1);
+                    }
+                }
+                if (!rem) room.tournament.rules.bans.push(i)
+            }
+        }
+        if (command === "unban") {
+            for (let i of args) {
+                let rem = false;
+                for (let x = 0; x < room.tournament.rules.bans.length; x++) {
+                    if (toId(room.tournament.rules.bans[x]) === toId(i)) {
+                        rem = true;
+                        room.tournament.rules.bans.splice(x, 1);
+                    }
+                }
+                if (!rem) room.tournament.rules.unbans.push(i)
+            }
+        }
+        if (command === "clear") {
+            room.send('/tour clearrules');
+            room.tournament.rules = {
+                "bans": [],
+                "unbans": [],
+                "addrules": [],
+                "remrules": []
+            };
+        }
+        
+        room.updateTourRules();
+    },
     // Dev stuff
     git: function(room, user, args) {
         let target = user.can(room, '+') ? room : user;

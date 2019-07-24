@@ -31,6 +31,11 @@ class Room {
         if (this.tournament) this.tournament.end();
         this.tournament = false;
     }
+    
+    updateTourRules() {
+        if (!this.tournament) throw new Error("This shouldn't happen but bot tried to update tour rules without a tour running");
+        this.send(this.tournament.buildRules());
+    }
 
     rename(oldname, newname) {
         let id = toId(newname);
