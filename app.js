@@ -25,6 +25,7 @@ global.Utils = require('./utils.js');
 global.toId = Utils.toId;
 global.Send = Utils.send;
 global.Sendpm = Utils.sendpm;
+global.Monitor = require('./monitor.js');
 
 // Config
 try {
