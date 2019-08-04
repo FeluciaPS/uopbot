@@ -16,6 +16,7 @@ bot.on('c', (parts) => {
     let user = Users[toId(parts[3])];
     if (!parts[4]) return;
     let message = parts[4].trim();
+    Monitor.monitor(user.name, message);
     logger.emit('chat', Utils.getRoom(parts[0]), user.name, message);
     let time = parts[2];
     let [cmd, args, val] = Utils.SplitMessage(message);
