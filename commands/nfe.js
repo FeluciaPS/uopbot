@@ -1,12 +1,12 @@
 global.NFE = {
     times: [ 1, 15, 20 ],
-    last: require('fs').readFileSync("./data/lastnfe.txt"),
+    last: parseInt(require('fs').readFileSync("./data/lastnfe.txt")),
     official: function() {
         let room = Rooms['nfe'];
         let now = new Date(Date.now());
         let next = (this.last + 1) % this.times.length;
         let mins = now.getMinutes();
-        if (mins > 5) return;
+        if (mins > 9) return;
         let hours = now.getHours();
         if (hours === this.times[next]) {
             if (room.tournament) {
@@ -17,12 +17,8 @@ global.NFE = {
                 }
             }
             require('fs').writeFileSync("./data/lastnfe.txt", next);
-            let fakeUser = Users['unleashourpassion'];
-            if (!fakeUser) {
-                Users.add(" UnleashOurPassion");
-                fakeUser = Users['unleashourpassion'];
-            }
-            Commands.nfe(room, fakeUser, ["o"]);
+            room.send("/tour create nfe, elim")
+            if (args[0] === 'o') room.startTour("o");
         }
     }
 }
