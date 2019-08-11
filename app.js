@@ -14,6 +14,8 @@ global.bot = new events.EventEmitter();
 
 // Globals
 global.FS = require('fs');
+global.Utils = require('./utils.js');
+global.toId = Utils.toId;
 global.colors = require('colors');
 global.logger = require('./logger.js');
 global.Parse = require('./parser.js');
@@ -21,8 +23,6 @@ global.Rooms = require('./Room.js');
 global.Users = require('./User.js');
 global.Tournament = require('./Tournament.js');
 global.Commands = require('./commands.js');
-global.Utils = require('./utils.js');
-global.toId = Utils.toId;
 global.Send = Utils.send;
 global.Sendpm = Utils.sendpm;
 global.Monitor = require('./monitor.js');
