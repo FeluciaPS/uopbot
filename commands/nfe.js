@@ -16,8 +16,13 @@ global.NFE = {
                     room.send("/tour end");
                 }
             }
-            require('fs').writeFileSync("./data/lastnfe.txt", next),
-            Commands.nfe(room, Users.self, ["o"]);
+            require('fs').writeFileSync("./data/lastnfe.txt", next);
+            let fakeUser = Users['unleashourpassion'];
+            if (!fakeUser) {
+                Users.add(" UnleashOurPassion");
+                fakeUser = Users['unleashourpassion'];
+            }
+            Commands.nfe(room, fakeUser, ["o"]);
         }
     }
 }
