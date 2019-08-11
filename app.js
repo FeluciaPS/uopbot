@@ -12,8 +12,18 @@ try {
 let events = require('events');
 global.bot = new events.EventEmitter();
 
-// Globals
+// Config
 global.FS = require('fs');
+try {
+    global.Config = require('./config.js');
+} catch (e) {
+    global.Config = require('./config-example.js');
+    logger.emit('error', 'Config.js doesn\'t exist. Cloning from config-example.js...')
+    FS.copyFile('config-example.js', 'config.js', function() {});
+}
+
+// Globals
+
 global.Utils = require('./utils.js');
 global.toId = Utils.toId;
 global.colors = require('colors');
@@ -27,14 +37,7 @@ global.Send = Utils.send;
 global.Sendpm = Utils.sendpm;
 global.Monitor = require('./monitor.js');
 
-// Config
-try {
-    global.Config = require('./config.js');
-} catch (e) {
-    global.Config = require('./config-example.js');
-    logger.emit('error', 'Config.js doesn\'t exist. Cloning from config-example.js...')
-    FS.copyFile('config-example.js', 'config.js', function() {});
-}
+
 
 // Connect
 let psurl = "ws://sim.smogon.com:8000/showdown/websocket";
