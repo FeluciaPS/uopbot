@@ -75,3 +75,6 @@ exports.add = function(name) {
     let id = toId(name);
     this[id] = new User(name);
 }
+
+exports[toId(Config.username)] = new User(" " + Config.username);
+exports.self = exports[toId(Config.username)]

@@ -1,3 +1,26 @@
+global.NFE = {
+    times: [ 1, 15, 20 ],
+    last: require('fs').readFileSync("./data/lastnfe.txt"),
+    official: function() {
+        let room = Rooms['nfe'];
+        let now = new Date(Date.now());
+        let next = (this.last + 1) % this.times.length;
+        let mins = now.getMinutes();
+        if (mins > 5) return;
+        let hours = now.getHours();
+        if (hours === this.times[next]) {
+            if (room.tournament) {
+                if (room.tournament.official) return;
+                else {
+                    room.send("/wall Official time. Ending ongoing tournament");
+                    room.send("/tour end");
+                }
+            }
+            require('fs').writeFileSync("./data/lastnfe.txt", next),
+            Commands.nfe(room, Users.self, ["o"]);
+        }
+    }
+}
 
 let isGenerator = function(arg) {
     if (arg.startsWith("rr")) {
@@ -36,6 +59,7 @@ module.exports = {
             }
         }
         else room.send("/tour create nfe, elim")
+        if (args[0] === 'o') room.startTour("o");
     },
     oldnfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
