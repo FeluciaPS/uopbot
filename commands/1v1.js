@@ -9,8 +9,8 @@ global.OT1v1 = {
         ["1v1", "gen61v1", "1v1"]
     ],
     times: [1, 9, 17],
-    day: parseInt(require('fs').readFileSync("./data/last1v1.txt").split(" ")[0]),
-    last: parseInt(require('fs').readFileSync("./data/last1v1.txt").split(" ")[1]),
+    day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
+    last: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[1]),
     official: function() {
         let room = Rooms['1v1'];
         let now = new Date(Date.now());
