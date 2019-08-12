@@ -31,7 +31,7 @@ global.OT1v1 = {
             this.day = day;
             this.last = next;
             let type = this.schedule[day][next];
-            Commands[type](room, Users.staff, ["o"]);
+            setTimeout(Commands[type], 1950, room, Users.staff, ["o"]);
         }
     }
 }
