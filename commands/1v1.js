@@ -19,19 +19,22 @@ global.OT1v1 = {
         let mins = now.getMinutes();
         if (mins > 8) return;
         let hours = now.getHours();
+        let end = false;
         if (hours === this.times[next]) {
             if (room.tournament) {
                 if (room.tournament.official) return;
                 else {
                     room.send("/wall Official time. Ending ongoing tournament");
                     room.send("/tour end");
+                    end = true;
                 }
             }
             require('fs').writeFileSync("./data/last1v1.txt", `${day} ${next}`);
             this.day = day;
             this.last = next;
             let type = this.schedule[day][next];
-            setTimeout(Commands[type], 1950, room, Users.staff, ["o"]);
+            if (end) setTimeout(Commands[type], 1950, room, Users.staff, ["o"]);
+            else Commands[type](room, Users.staff, ["o"]);
         }
     }
 }
