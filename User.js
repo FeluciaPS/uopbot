@@ -59,6 +59,7 @@ class User {
     
     can(room, rank) {
         if (Config.devs.indexOf(this.id) !== -1) return true;
+        if (this.id === "staff") return true;
         if (rank === "all") return false;
         if (this.id === toId(Config.username)) return false;
         if (!room) return false;
@@ -77,4 +78,6 @@ exports.add = function(name) {
 }
 
 exports[toId(Config.username)] = new User(" " + Config.username);
-exports.self = exports[toId(Config.username)]
+exports.self = exports[toId(Config.username)];
+
+exports.staff = new User(" Staff");

@@ -1,3 +1,40 @@
+global.OT1v1 = {
+    schedule: [ 
+        ["mono", "1v1", "1v1"],
+        ["1v1", "1v1", "gen41v1"],
+        ["2v2", "gen51v1", "uu1v1"],
+        ["1v1", "mono", "1v1"],
+        ["gen61v1", "1v1", "2v2"],
+        ["gen41v1", "uu1v1", "gen51v1"],
+        ["1v1", "gen61v1", "1v1"]
+    ],
+    times: [1, 9, 17],
+    day: parseInt(require('fs').readFileSync("./data/last1v1.txt").split(" ")[0]),
+    last: parseInt(require('fs').readFileSync("./data/last1v1.txt").split(" ")[1]),
+    official: function() {
+        let room = Rooms['1v1'];
+        let now = new Date(Date.now());
+        let next = (this.last + 1) % this.times.length;
+        let day = next === 0 ? (this.day + 1) % 7 : this.day;
+        let mins = now.getMinutes();
+        if (mins > 8) return;
+        let hours = now.getHours();
+        if (hours === this.times[next]) {
+            if (room.tournament) {
+                if (room.tournament.official) return;
+                else {
+                    room.send("/wall Official time. Ending ongoing tournament");
+                    room.send("/tour end");
+                }
+            }
+            require('fs').writeFileSync("./data/last1v1.txt", `${day} ${next}`);
+            this.day = day;
+            this.last = next;
+            let type = this.schedule[day][next];
+            Commands[type](room, Users.staff, ["o"]);
+        }
+    }
+}
 
 let canMakeTour = function(room, user) {
     // I'm gonna use this a lot so why not make a function for it

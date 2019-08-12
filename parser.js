@@ -15,6 +15,7 @@ bot.on('c', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
     if (NFE) NFE.official();
+    if (OT1v1) OT1v1.official();
     if (!parts[4]) return;
     let message = parts[4].trim();
     Monitor.monitor(user.name, message);
