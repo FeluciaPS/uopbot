@@ -18,7 +18,7 @@ global.NFE = {
             }
             require('fs').writeFileSync("./data/lastnfe.txt", next);
             room.send("/tour create nfe, elim")
-            if (args[0] === 'o') room.startTour("o");
+            room.startTour("o");
         }
     }
 }
