@@ -60,7 +60,7 @@ module.exports = {
             }
         }
         else room.send("/tour create nfe, elim")
-        if (args[0] === 'o') room.startTour("o");
+        if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     oldnfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
