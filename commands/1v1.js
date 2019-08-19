@@ -33,7 +33,7 @@ global.OT1v1 = {
             this.day = day;
             this.last = next;
             let type = this.schedule[day][next];
-            if (end) setTimeout(Commands[type], 1950, room, Users.staff, ["o"]);
+            if (end) setTimeout(Commands[type], 3950, room, Users.staff, ["o"]);
             else Commands[type](room, Users.staff, ["o"]);
         }
     }
