@@ -61,6 +61,7 @@ module.exports = {
             }
         }
         else room.send("/tour create nfe, elim")
+        if (toId(args[0]) === 'blitz') room.send("/tour rules Blitz");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     nfe1v1: function (room, user, args) {
