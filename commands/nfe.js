@@ -68,6 +68,8 @@ module.exports = {
         else if (room.id === '1v1') if (!user.can(room, '%')) return;
         else return;
         
+        let otherroom = room.id === "1v1" ? "nfe" : "1v1";
+        otherroom = Rooms[otherroom];
         if (room.tournament) return room.send("A tournament is already going on");
         if (args) {
             if (args[0].startsWith("rr")) {
@@ -87,6 +89,7 @@ module.exports = {
         else room.send("/tour create 1v1, elim");
         room.send("/tour name [Gen 7] NFE 1v1");
         room.send("/tour rules [Gen 7] NFE, -Dusclops");
+        otherroom.send(`NFE 1v1 tournament in <<${room.id}>>`);
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     oldnfe: function (room, user, args, val) {
