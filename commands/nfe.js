@@ -103,7 +103,7 @@ module.exports = {
             room.tourcool = false;
         }, time, room);
         room.send("Tours are on cooldown for the next " + time/60000 + " minutes.");
-    }
+    },
     oldnfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
         if (!user.can(room, '+')) return;
