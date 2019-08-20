@@ -85,7 +85,7 @@ module.exports = {
             }
         }
         else room.send("/tour create 1v1, elim");
-        
+        room.send("/tour name [Gen 7] NFE 1v1");
         room.send("/tour rules [Gen 7] NFE, -Dusclops");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
