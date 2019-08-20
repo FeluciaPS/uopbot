@@ -45,6 +45,7 @@ module.exports = {
         if (room.id !== 'nfe') return;
         if (!user.can(room, '+')) return;
         if (room.tournament) return room.send("A tournament is already going on");
+        if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
         if (args) {
             if (args[0].startsWith("rr")) {
                 let count = parseInt(args[0].substring(2));
@@ -72,6 +73,7 @@ module.exports = {
         let otherroom = room.id === "1v1" ? "nfe" : "1v1";
         otherroom = Rooms[otherroom];
         if (room.tournament) return room.send("A tournament is already going on");
+        if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
         if (args) {
             if (args[0].startsWith("rr")) {
                 let count = parseInt(args[0].substring(2));
@@ -93,6 +95,15 @@ module.exports = {
         otherroom.send(`NFE 1v1 tournament in <<${room.id}>>`);
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
+    tourcool: function (room, user, args, val) {
+        if (!user.can(room, '%')) return;
+        room.tourcool = true;
+        let time = isNaN(parseInt(args[0])) ? 30*60*1000 : parseInt(args[0])*60*1000
+        setTimeout(function(room) {
+            room.tourcool = false;
+        }, time, room);
+        room.send("Tours are on cooldown for the next " + time/60000 + " minutes.");
+    }
     oldnfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
         if (!user.can(room, '+')) return;
