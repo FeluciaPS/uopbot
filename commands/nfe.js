@@ -63,6 +63,32 @@ module.exports = {
         else room.send("/tour create nfe, elim")
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
+    nfe1v1: function (room, user, args) {
+        if (room.id === 'nfe') if (!user.can(room, '+')) return;
+        else if (room.id === '1v1') if (!user.can(room, '%')) return;
+        else return;
+        
+        if (room.tournament) return room.send("A tournament is already going on");
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create 1v1, rr,, " + count);
+                else room.send("/tour create 1v1, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create 1v1, elim,, " + count);
+                else room.send("/tour create 1v1, elim");
+            }
+            else {
+                room.send("/tour create 1v1, elim");
+            }
+        }
+        else room.send("/tour create 1v1, elim");
+        
+        room.send("/tour rules [Gen 7] NFE, -Dusclops");
+        if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
+    },
     oldnfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
         if (!user.can(room, '+')) return;
