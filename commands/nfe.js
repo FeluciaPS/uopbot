@@ -95,6 +95,31 @@ module.exports = {
         otherroom.send(`NFE 1v1 tournament in <<${room.id}>>`);
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
+    capnfe: function (room, user, args) {
+        if (room.id !== 'nfe' || !user.can(room, '+')) return;
+        
+        if (room.tournament) return room.send("A tournament is already going on");
+        if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create NFE, rr,, " + count);
+                else room.send("/tour create NFE, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create NFE, elim,, " + count);
+                else room.send("/tour create NFE, elim");
+            }
+            else {
+                room.send("/tour create NFE, elim");
+            }
+        }
+        else room.send("/tour create NFE, elim");
+        room.send("/tour name [Gen 7] CAP NFE");
+        room.send("/tour rules +Chansey, +Doublade, +Gligar, +Golbat, +Gurdurr, +Magneton, +Piloswine, +Porygon2, +Rhydon, +Scyther, +Sneasel, +Type: Null, +Vigoroth, Allow CAP");
+        if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
+    },
     tourcool: function (room, user, args, val) {
         if (!user.can(room, '%')) return;
         room.tourcool = true;
