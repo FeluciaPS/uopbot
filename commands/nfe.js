@@ -77,21 +77,21 @@ module.exports = {
         if (args) {
             if (args[0].startsWith("rr")) {
                 let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create gen6ou, rr,, " + count);
-                else room.send("/tour create gen6ou, rr");
+                if (count) room.send("/tour create gen6ru, rr,, " + count);
+                else room.send("/tour create gen6ru, rr");
             }
             else if (args[0].startsWith("e")){
                 let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create gen6ou, elim,, " + count);
-                else room.send("/tour create gen6ou, elim");
+                if (count) room.send("/tour create gen6ru, elim,, " + count);
+                else room.send("/tour create gen6ru, elim");
             }
             else {
-                room.send("/tour create gen6ou, elim");
+                room.send("/tour create gen6ru, elim");
             }
         }
-        else room.send("/tour create gen6ou, elim");
+        else room.send("/tour create gen6ru, elim");
         room.send("/tour name [Gen 6] NFE");
-        room.send("/tour rules [Gen 7] NFE, -Chansey, -Doublade, -Fletchinder, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Servine, -Scyther, -Sneasel, -Vigoroth");
+        room.send("/tour rules [Gen 7] NFE, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Doublade, -Fletchinder, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Servine, -Scyther, -Sneasel, -Vigoroth");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     nfe1v1: function (room, user, args) {
