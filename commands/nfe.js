@@ -46,6 +46,10 @@ module.exports = {
         if (!user.can(room, '+')) return;
         if (room.tournament) return room.send("A tournament is already going on");
         if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
+        if (toId(args[0]) === "cap") {
+            args.shift();
+            this.capnfe(room, user, args);
+        }
         if (args) {
             if (args[0].startsWith("rr")) {
                 let count = parseInt(args[0].substring(2));
