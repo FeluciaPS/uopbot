@@ -146,7 +146,7 @@ module.exports = {
         }
         else room.send("/tour create NFE, elim");
         room.send("/tour name [Gen 7] CAP NFE");
-        room.send("/tour rules +Chansey, +Doublade, +Gligar, +Golbat, +Gurdurr, +Magneton, +Piloswine, +Porygon2, +Rhydon, +Scyther, +Sneasel, +Type: Null, +Vigoroth, Allow CAP");
+        room.send("/tour rules +Chansey, +Doublade, +Golbat, +Magneton, +Piloswine, +Rhydon, +Scyther, +Sneasel, +Type: Null, +Vigoroth, Allow CAP");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     tourcool: function (room, user, args, val) {
