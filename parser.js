@@ -105,7 +105,7 @@ bot.on('pm', (parts) => {
         Commands[cmd](user, user, args, val);
         logger.emit('cmd', cmd, val);
     }
-    if (cmd === "tco" && user.id === "vrbot" && Rooms['1v1']) Rooms['1v1'].send("1v1 Type Challenge tournament in <<1v1tc>>");
+    if (cmd === "tco" && user.id === "vrbot" && Rooms['1v1']) Rooms['1v1'].send("1v1 Type Challenge official tournament in <<1v1tc>>");
     if (message.startsWith(Config.username + " ")) {
         let msg = message.substring(Config.username.length + 1);
         let m = msg.match(/remind me( to)?/i);
