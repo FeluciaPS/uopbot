@@ -43,7 +43,7 @@ let isGenerator = function(arg) {
 module.exports = {
     nfe: function(room, user, args) {
         if (room.id !== 'nfe') return;
-        if (!user.can(room, '+')) return;
+        if (!user.can(room, '%')) return;
         if (room.tournament) return room.send("A tournament is already going on");
         if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
         if (toId(args[0]) === "cap") {
@@ -66,11 +66,14 @@ module.exports = {
             }
         }
         else room.send("/tour create nfe, elim")
-        if (toId(args[0]) === 'blitz') room.send("/tour rules Blitz");
+        if (toId(args[0]) === 'blitz') {
+		room.send("/tour rules Blitz");
+		room.send("/tour forcetimer on");
+	}
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     gen6nfe: function (room, user, args) {
-        if (room.id !== 'nfe' || !user.can(room, '+')) return;
+        if (room.id !== 'nfe' || !user.can(room, '%')) return;
         
         if (room.tournament) return room.send("A tournament is already going on");
         if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
@@ -95,7 +98,7 @@ module.exports = {
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     nfe1v1: function (room, user, args) {
-        if (room.id === 'nfe') if (!user.can(room, '+')) return;
+        if (room.id === 'nfe') if (!user.can(room, '%')) return;
         else if (room.id === '1v1') if (!user.can(room, '%')) return;
         else return;
         
@@ -125,7 +128,7 @@ module.exports = {
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     capnfe: function (room, user, args) {
-        if (room.id !== 'nfe' || !user.can(room, '+')) return;
+        if (room.id !== 'nfe' || !user.can(room, '%')) return;
         
         if (room.tournament) return room.send("A tournament is already going on");
         if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
@@ -160,7 +163,7 @@ module.exports = {
     },
     oldnfe: function (room, user, args, val) {
         if (room.id !== 'nfe') return;
-        if (!user.can(room, '+')) return;
+        if (!user.can(room, '%')) return;
         if (room.tournament) return room.send("A tournament is already going on");
         let mode = "none";
         let meta = Banlist.nfe.meta;
@@ -218,12 +221,12 @@ module.exports = {
     },
     board: function (room, user, args) {
         if (room.id !== "nfe") return;
-        let pm = user.can(room, "+") ? room : user;
+        let pm = user.can(room, "%") ? room : user;
         pm.send('Leaderboards are temporarily out of order.');
     },
     forceend: function (room, user, args) {
         if (room.id !== 'nfe') return;
-        if (!user.can(room, '+')) return;
+        if (!user.can(room, '%')) return;
         room.send("/tour end");
     }
 }
