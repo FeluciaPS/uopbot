@@ -4,6 +4,7 @@ global.NFE = {
     official: function() {
         let room = Rooms['nfe'];
         let now = new Date(Date.now());
+        if (this.last === -1) return;
         let next = (this.last + 1) % this.times.length;
         let mins = now.getMinutes();
         if (mins > 9) return;
