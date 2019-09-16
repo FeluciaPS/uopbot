@@ -56,7 +56,7 @@ websocket.on('connect', function (connection) {
 	});
 	
 	connection.on('close', function() {
-		process.exit();
+		setTimeout(process.exit, 30*1000); // Force stayalive for 30 seconds
 	});
 });
 
