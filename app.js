@@ -58,6 +58,9 @@ websocket.on('connect', function (connection) {
 	connection.on('close', function() {
 		setTimeout(process.exit, 30*1000); // Force stayalive for 30 seconds
 	});
+	connection.on('connectFailed', function() {
+		setTimeout(process.exit, 30*1000); // Force stayalive for 30 seconds
+	});
 });
 
 let files = {
