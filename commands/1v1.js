@@ -57,6 +57,7 @@ module.exports = {
             let in1v1 = user.can(Rooms['1v1'], ' ');
             let inNFE = user.can(Rooms['nfe'], ' ');
             let targetroom = inNFE ? Rooms['nfe'] : (in1v1 ? Rooms['1v1'] : user );
+            if (user.id === 'akasianse') user.send(targetroom.id);
             let ret = "";
             if (targetroom !== user) {
                 ret += `/pminfobox ${user.id}, `;
