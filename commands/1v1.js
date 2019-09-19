@@ -81,7 +81,7 @@ module.exports = {
                 if (minutes < 60) hours -= 1;
                 timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
                 if (hours === 0 && minutes === 0) timestr = "should've already started";
-                ret += `<b>NFE</b> ${timestr}`;
+                ret += `<br><b>NFE</b> ${timestr}`;
             }
             targetroom.send(ret);
         }
