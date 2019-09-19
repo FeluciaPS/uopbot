@@ -229,7 +229,7 @@ bot.on('tournament', (parts, data) => {
         if (type === "create") {
             if (!room.tournament) room.startTour(false);
             if (!Rooms['1v1']) return;
-            if (room.id === "1v1oldgens") Rooms['1v1'].send(`${parts[3]} tournament in <<1v1og>>`);
+            if (room.id === "1v1oldgens") Rooms['1v1'].send(`${parts[3].replace('ou', '1v1')} tournament in <<1v1og>>`);
             if (room.id === "tournaments" && parts[3].indexOf('1v1') !== -1) Rooms['1v1'].send(`${parts[3]} tournament in <<tours>>`)
         }
         if (type === "end" || type === "forceend") room.endTour();
