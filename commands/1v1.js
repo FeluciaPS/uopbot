@@ -51,6 +51,44 @@ let canMakeTour = function(room, user) {
 }
 
 module.exports = {
+    nextot: function(room, user, args) {
+        let now = new Date(Date.now());
+        if (room === user) {
+            let in1v1 = user.can(Rooms['1v1'], ' ');
+            let inNFE = user.can(Rooms['nfe'], ' ');
+            let targetroom = inNFE ? Rooms['nfe'] : (in1v1 ? Rooms['1v1'] : user );
+            let ret = "";
+            if (targetroom !== user) {
+                ret += `/pminfobox ${user.id}, `;
+            }
+            let next = (OT1v1.last + 1) % OT1v1.times.length;
+            let day = next === 0 ? (OT1v1.day + 1) % 7 : OT1v1.day;
+            let hours = OT1v1.times[next] - now.getHours();
+            if (next === 0) hours -= 24;
+            let minutes = 60 - now.getMinutes();
+            if (minutes < 60) hours -= 1;
+            
+            let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+            if (hours === 0 && minutes === 0) timestr = "should've already started";
+            ret += "<b>1v1:</b>";
+            if (targetroom === user) ret.replace(/<\/b>/gi, '**');
+            ret += ` ${OT1v1.schedule[day][next]} ${timestr}`;
+            if (inNFE) {
+                next = (NFE.last + 1) % NFE.times.length;
+                hours = NFE.times[next] - now.getHours();
+                if (next === 0) hours -= 24;
+                minutes = 60 - now.getMinutes();
+                if (minutes < 60) hours -= 1;
+                timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+                if (hours === 0 && minutes === 0) timestr = "should've already started";
+                ret += `<b>NFE</b> ${timestr}`;
+            }
+            targetroom.send(ret);
+        }
+        else {
+            
+        }
+    },
     '1v1om': function(room, user, args) {
         if (room != '1v1' && room != '1v1typechallenge') return false;
         if (!user.can(room, "%")) return false;
