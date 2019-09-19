@@ -71,7 +71,7 @@ module.exports = {
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
             if (hours <= 0 || minutes <= 0) timestr = "should've already started";
             ret += "<b>1v1:</b>";
-            if (targetroom === user) ret.replace(/<\/?b>/gi, '**');
+            if (targetroom === user) ret = ret.replace(/<\/?b>/gi, '**');
             ret += ` ${OT1v1.schedule[day][next]} ${timestr}`;
             if (inNFE) {
                 next = (NFE.last + 1) % NFE.times.length;
