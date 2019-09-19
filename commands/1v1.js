@@ -87,7 +87,33 @@ module.exports = {
             targetroom.send(ret);
         }
         else {
-            
+            if (room.id === '1v1') {
+                let targetroom = user.can(room, '+') ? room : user;
+                let next = (OT1v1.last + 1) % OT1v1.times.length;
+                let day = next === 0 ? (OT1v1.day + 1) % 7 : OT1v1.day;
+                let hours = OT1v1.times[next] - now.getHours();
+                if (next === 0) hours += 24;
+                let minutes = 60 - now.getMinutes();
+                if (minutes < 60) hours -= 1;
+                else minutes = 0;
+                let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+                if (hours <= 0 || minutes <= 0) timestr = "should've already started";
+                ret += `**${OT1v1.schedule[day][next]}** ${timestr}`;
+                targetroom.send(ret);
+            }
+            else if (room.id === 'nfe') {
+                let targetroom = user.can(room, '+') ? room : user;
+                let next = (NFE.last + 1) % NFE.times.length;
+                let hours = NFE.times[next] - now.getHours();
+                if (next === 0) hours += 24;
+                let minutes = 60 - now.getMinutes();
+                if (minutes < 60) hours -= 1;
+                else minutes = 0;
+                let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+                if (hours <= 0 && minutes <= 0) timestr = "should've already started";
+                ret += `<b>NFE</b> ${timestr}`;
+                targetroom.send(ret);
+            }
         }
     },
     '1v1om': function(room, user, args) {
