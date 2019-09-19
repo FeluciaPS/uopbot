@@ -53,11 +53,11 @@ let canMakeTour = function(room, user) {
 module.exports = {
     nextot: function(room, user, args) {
         let now = new Date(Date.now());
+        let ret = "";
         if (room === user) {
             let in1v1 = user.can(Rooms['1v1'], ' ');
             let inNFE = user.can(Rooms['nfe'], ' ');
             let targetroom = inNFE ? Rooms['nfe'] : (in1v1 ? Rooms['1v1'] : user );
-            let ret = "";
             if (targetroom !== user) {
                 ret += `/pminfobox ${user.id}, `;
             }
