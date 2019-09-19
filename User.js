@@ -58,7 +58,7 @@ class User {
     }
     
     can(room, rank) {
-        if (!this.rooms[room]) return false;
+        if (!this.rooms[room] && room !== this) return false;
         if (Config.devs.indexOf(this.id) !== -1) return true;
         if (this.id === "staff") return true;
         if (rank === "all") return false;
