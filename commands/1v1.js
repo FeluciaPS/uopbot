@@ -61,30 +61,37 @@ module.exports = {
             if (targetroom !== user) {
                 ret += `/pminfobox ${user.id}, `;
             }
-            let next = (OT1v1.last + 1) % OT1v1.times.length;
-            let day = next === 0 ? (OT1v1.day + 1) % 7 : OT1v1.day;
-            let hours = OT1v1.times[next] - now.getHours();
-            if (next === 0) hours += 24;
-            let minutes = 60 - now.getMinutes();
-            if (minutes < 60) hours -= 1;
-            else minutes = 0;
-            let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-            if (hours <= 0 || minutes <= 0) timestr = "should've already started";
-            ret += "<b>1v1:</b>";
-            if (targetroom === user) ret = ret.replace(/<\/?b>/gi, '**');
-            ret += ` ${OT1v1.schedule[day][next]} ${timestr}`;
-            if (inNFE) {
-                next = (NFE.last + 1) % NFE.times.length;
-                hours = NFE.times[next] - now.getHours();
+            let rooms = [];
+            if (in1v1) {
+                let r = ""
+                let next = (OT1v1.last + 1) % OT1v1.times.length;
+                let day = next === 0 ? (OT1v1.day + 1) % 7 : OT1v1.day;
+                let hours = OT1v1.times[next] - now.getHours();
                 if (next === 0) hours += 24;
-                minutes = 60 - now.getMinutes();
+                let minutes = 60 - now.getMinutes();
                 if (minutes < 60) hours -= 1;
                 else minutes = 0;
-                timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-                if (hours <= 0 && minutes <= 0) timestr = "should've already started";
-                ret += `<br><b>NFE</b> ${timestr}`;
+                let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+                if (hours <= 0 || minutes <= 0) timestr = "should've already started";
+                r += "<b>1v1:</b>";
+                if (targetroom === user) r = r.replace(/<\/?b>/gi, '**');
+                r += ` ${OT1v1.schedule[day][next]} ${timestr}`;
+                rooms.push(r);
             }
-            targetroom.send(ret);
+            if (inNFE) {
+                let r = ""
+                let next = (NFE.last + 1) % NFE.times.length;
+                let hours = NFE.times[next] - now.getHours();
+                if (next === 0) hours += 24;
+                let minutes = 60 - now.getMinutes();
+                if (minutes < 60) hours -= 1;
+                else minutes = 0;
+                let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+                if (hours <= 0 && minutes <= 0) timestr = "should've already started";
+                r += `<br><b>NFE</b> ${timestr}`;
+                rooms.push(r);
+            }
+            targetroom.send(ret + rooms.join("<br>"));
         }
         else {
             if (room.id === '1v1') {
