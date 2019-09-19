@@ -96,7 +96,10 @@ bot.on('pm', (parts) => {
     let room = null;
     let user = Users[toId(parts[2])];
     let message = parts[4].trim();
-    if (!user) Users.add(parts[2]);
+    if (!user) {
+        Users.add(parts[2]);
+        user = Users[toId(parts[2])];
+    }
     else logger.emit('pm', user.name, message); // Note: No PM handler exists for the logger.
     let [cmd, args, val] = Utils.SplitMessage(message);
     if (cmd in Commands) {
