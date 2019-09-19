@@ -57,7 +57,6 @@ module.exports = {
             let in1v1 = user.can(Rooms['1v1'], ' ');
             let inNFE = user.can(Rooms['nfe'], ' ');
             let targetroom = inNFE ? Rooms['nfe'] : (in1v1 ? Rooms['1v1'] : user );
-            if (user.id === 'akasianse') user.send(targetroom.id);
             let ret = "";
             if (targetroom !== user) {
                 ret += `/pminfobox ${user.id}, `;
@@ -68,9 +67,9 @@ module.exports = {
             if (next === 0) hours -= 24;
             let minutes = 60 - now.getMinutes();
             if (minutes < 60) hours -= 1;
-            
+            else minutes = 0;
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-            if (hours === 0 && minutes === 0) timestr = "should've already started";
+            if (hours <= 0 || minutes <= 0) timestr = "should've already started";
             ret += "<b>1v1:</b>";
             if (targetroom === user) ret.replace(/<\/b>/gi, '**');
             ret += ` ${OT1v1.schedule[day][next]} ${timestr}`;
