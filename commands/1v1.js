@@ -88,7 +88,7 @@ module.exports = {
                 else minutes = 0;
                 let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
                 if (hours <= 0 && minutes <= 0) timestr = "should've already started";
-                r += `<br><b>NFE</b> ${timestr}`;
+                r += `<b>NFE</b> ${timestr}`;
                 rooms.push(r);
             }
             targetroom.send(ret + rooms.join("<br>"));
