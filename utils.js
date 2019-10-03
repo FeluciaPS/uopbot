@@ -1,4 +1,4 @@
-const DELAY = 600;
+const DELAY = 100;
 let queue = [];
 let sendNext = function () {
     if (queue.length === 0) return;
