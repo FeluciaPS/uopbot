@@ -71,6 +71,10 @@ module.exports = {
 		room.send("/tour rules Blitz");
 		room.send("/tour forcetimer on");
 	}
+	if (toId(args[0]) === 'inverse') {
+		room.send('/tour rules Inverse Mod');
+		room.send('/tour name [Gen 7] Inverse NFE');
+	}
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     gen6nfe: function (room, user, args) {
