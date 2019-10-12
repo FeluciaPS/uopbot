@@ -21,16 +21,11 @@ bot.on('c', (parts) => {
     if (!parts[4]) return;
     let message = parts[4].trim();
     console.log(room.id);
-    if (room.id == '1v1') {
-        console.log(toId(message))
-        if (toId(message) == "hellothere") {
-            console.log('works');
-            let now = Date.now();
-            if (now - lasthellothere > 5*60*1000) {
-                lasthellothere = now;
-                console.log("panic");
-                return room.send("General Kenobi!");
-            }
+    if (room === '1v1' && toId(message) == "hellothere") {
+        let now = Date.now();
+        if (now - lasthellothere > 5*60*1000) {
+            lasthellothere = now;
+            return Rooms[room].send("General Kenobi!");
         }
     }
     Monitor.monitor(user.name, message);
