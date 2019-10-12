@@ -21,6 +21,7 @@ bot.on('c', (parts) => {
     if (!parts[4]) return;
     let message = parts[4].trim();
     if (room.id === '1v1' && toId(message) === "hellothere") {
+        console.log('works');
         let now = Date.now();
         if (now - lasthellothere > 5*60*1000) {
             lasthellothere = now;
