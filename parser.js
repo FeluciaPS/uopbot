@@ -20,7 +20,8 @@ bot.on('c', (parts) => {
     if (OT1v1) OT1v1.official();
     if (!parts[4]) return;
     let message = parts[4].trim();
-    if (room.id === '1v1') {
+    console.log(room.id);
+    if (room.id == '1v1') {
         console.log(toId(message))
         if (toId(message) == "hellothere") {
             console.log('works');
