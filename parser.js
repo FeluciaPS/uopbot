@@ -24,6 +24,7 @@ bot.on('c', (parts) => {
         let now = Date.now();
         if (now - lasthellothere > 5*60*1000) {
             lasthellothere = now;
+            console.log("panic");
             return room.send("General Kenobi!");
         }
     }
