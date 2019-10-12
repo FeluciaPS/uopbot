@@ -28,7 +28,7 @@
     },
 
     "aaa": {
-        "unbans": [],
+        "unbans": ["Tapu Koko"],
         "ability-bans": ["Sturdy", "Huge Power", "Pure Power", "Fur Coat", "Illusion", "Moody", "Parental Bond", "Protean", "Simple", "Speed Boost", "Water Bubble", "Wonder Guard", "No Guard", "Imposter", "Normalize", "Psychic Surge", "Multiscale", "Shadow Shield", "Hustle"],
         "mon-bans": ["Regigigas", "Slaking", "Kartana", "Pheromosa", "Archeops"]
     },
