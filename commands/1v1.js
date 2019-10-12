@@ -282,7 +282,7 @@ module.exports = {
     aaa: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules !Obtainable Abilities, -" + Banlist.aaa['ability-bans'].join(', -') + ", -" + Banlist.aaa['mon-bans'].join(', -'); // Yes I realize this doesn't properly work if there aren't any ability-bans or mon-bans. I'll tackle that if we ever get to that point
-        if (Banlist.aaa.unbans) ruleset += "+" + Banlist.aaa['unbans'].join(', +')
+        if (Banlist.aaa.unbans) ruleset += ", +" + Banlist.aaa['unbans'].join(', +')
         Commands['1v1'](room, user, args);
         room.send(ruleset);
         room.send("/tour name [Gen 7] AAA 1v1");
