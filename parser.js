@@ -20,13 +20,16 @@ bot.on('c', (parts) => {
     if (OT1v1) OT1v1.official();
     if (!parts[4]) return;
     let message = parts[4].trim();
-    if (room.id === '1v1' && toId(message) === "hellothere") {
-        console.log('works');
-        let now = Date.now();
-        if (now - lasthellothere > 5*60*1000) {
-            lasthellothere = now;
-            console.log("panic");
-            return room.send("General Kenobi!");
+    if (room.id === '1v1') {
+        console.log(toId(message))
+        if (toId(message) == "hellothere")) {
+            console.log('works');
+            let now = Date.now();
+            if (now - lasthellothere > 5*60*1000) {
+                lasthellothere = now;
+                console.log("panic");
+                return room.send("General Kenobi!");
+            }
         }
     }
     Monitor.monitor(user.name, message);
