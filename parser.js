@@ -22,7 +22,7 @@ bot.on('c', (parts) => {
     let message = parts[4].trim();
     if (room.id === '1v1') {
         console.log(toId(message))
-        if (toId(message) == "hellothere")) {
+        if (toId(message) == "hellothere") {
             console.log('works');
             let now = Date.now();
             if (now - lasthellothere > 5*60*1000) {
