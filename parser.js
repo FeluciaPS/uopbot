@@ -240,8 +240,8 @@ bot.on('tournament', (parts, data) => {
             if (!room.tournament) room.startTour(false);
             if (!Rooms['1v1']) return;
             if (room.id === "1v1oldgens") Rooms['1v1'].send(`${parts[3].replace('ou', '1v1')} tournament in <<1v1og>>`);
-            if (room.id === "tournaments" && parts[3].indexOf('\dv\d') !== -1) Rooms['1v1'].send(`${parts[3]} tournament in <<tours>>`);
-            if (room.id === "toursplaza" && parts[3].indexOf('\dv\d') !== -1) Rooms['1v1'].send(`${parts[3]} tournament in <<tp>>`);
+            if (room.id === "tournaments" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${parts[3]} tournament in <<tours>>`);
+            if (room.id === "toursplaza" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${parts[3]} tournament in <<tp>>`);
             if (room.id === "tournaments" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${parts[3]} tournament in <<tours>>`);
             if (room.id === "toursplaza" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${parts[3]} tournament in <<tp>>`);
         }
