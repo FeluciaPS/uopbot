@@ -102,6 +102,56 @@ module.exports = {
         room.send("/tour rules [Gen 7] NFE, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Doublade, -Fletchinder, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Servine, -Scyther, -Sneasel, -Vigoroth");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
+    gen5nfe: function (room, user, args) {
+        if (room.id !== 'nfe' || !user.can(room, '%')) return;
+        
+        if (room.tournament) return room.send("A tournament is already going on");
+        if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create gen5ubers, rr,, " + count);
+                else room.send("/tour create gen5ubers, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create gen5ubers, elim,, " + count);
+                else room.send("/tour create gen5ubers, elim");
+            }
+            else {
+                room.send("/tour create gen5ubers, elim");
+            }
+        }
+        else room.send("/tour create gen5ubers, elim");
+        room.send("/tour name [Gen 5] NFE");
+        room.send("/tour rules [Gen 7] NFE, -Chansey, -Dusclops, -Fraxure, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Riolu, -Rhydon, -Piloswine, -Porygon2, -Scyther, -Vigoroth");
+        if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
+    },
+    gen4nfe: function (room, user, args) {
+        if (room.id !== 'nfe' || !user.can(room, '%')) return;
+        
+        if (room.tournament) return room.send("A tournament is already going on");
+        if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create gen4uu, rr,, " + count);
+                else room.send("/tour create gen4uu, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create gen4uu, elim,, " + count);
+                else room.send("/tour create gen4uu, elim");
+            }
+            else {
+                room.send("/tour create gen4uu, elim");
+            }
+        }
+        else room.send("/tour create gen4uu, elim");
+        room.send("/tour name [Gen 4] NFE");
+        room.send("/tour rules [Gen 7] NFE, +OU, +UUBL, +Uber, -Chansey, -Chansey, -Dragonair, -Dusclops, -Electabuzz, -Haunter, -Machoke, -Magmar, -Magneton, -Porygon2, -Rhydon, -Scyther, -Sneasel");
+        if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
+    },
     nfe1v1: function (room, user, args) {
         if (room.id === 'nfe') if (!user.can(room, '%')) return;
         else if (room.id === '1v1') if (!user.can(room, '%')) return;
