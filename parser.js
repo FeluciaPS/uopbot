@@ -24,7 +24,7 @@ bot.on('c', (parts) => {
     if (!parts[4]) return;
     let message = parts[4].trim();
     console.log(room.id);
-    if (room === '1v1' || room === 'nfe' && toId(message) == "hellothere") {
+    if ((room === '1v1' || room === 'nfe') && toId(message) === "hellothere") {
         let now = Date.now();
         if (now - lasthellothere[room] > 5*60*1000) {
             lasthellothere[room] = now;
