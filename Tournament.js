@@ -1,3 +1,5 @@
+let formats = {};
+
 class Tournament {
     constructor(room, type) {
         this.room = room;
@@ -9,9 +11,14 @@ class Tournament {
             "addrules": [],
             "remrules": []
         };
+		this.name = false;
+		this.format = false;
         let tourcheck = room.id + (this.official ? "-o" : "");
         if (type === "monopoke") tourcheck = '1v1-o'; // I know this looks ugly deal with it
-        if (type === "late") return;
+        if (type === "late") {
+			return;
+			this.format = 'unknown';
+		}
         if (Config.tours[tourcheck]) {
             let t = Config.tours[tourcheck];
             this.room.send(`/tour autostart ${t[0]}`);
@@ -30,6 +37,8 @@ class Tournament {
         }
         if (this.official) room.send('.official');
         if (this.chill) room.send('/modchat +');
+		
+
     }
     
     buildRules() {
@@ -52,12 +61,21 @@ class Tournament {
         console.log(ret);
         return ret.substring(0, ret.length - 2);
     }
-    end() {
+    end(data) {
+		if (data) {
+			let dt = JSON.parse(data);
+			this.name = dt.format ? dt.format : this.name;
+		}
         if (this.chill) this.room.send('/modchat ac');
     }
 }
 
 Tournament.prototype.toString = function() {
+	if (this.name) return this.name;
+	if (this.format) return this.format === 'unknown' ? false : this.format;
     return "Tournament in " + this.room.name;
 }
-module.exports = Tournament;
+module.exports = {
+	Tournament: Tournament,
+	formats: formats
+}

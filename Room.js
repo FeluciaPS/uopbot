@@ -3,6 +3,7 @@ class Room {
         this.users = {};
         this.id = id;
         this.tournament = false;
+		this.pasttours = [];
     }
     
     send(message) {
@@ -24,11 +25,11 @@ class Room {
     }
     
     startTour(settings) {
-        this.tournament = new Tournament(this, settings);
+        this.tournament = new Tournament.Tournament(this, settings);
     }
     
-    endTour() {
-        if (this.tournament) this.tournament.end();
+    endTour(data) {
+        if (this.tournament) this.tournament.end(data);
         this.tournament = false;
     }
     
