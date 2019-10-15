@@ -274,7 +274,8 @@ bot.on('tournament', (parts, data) => {
 		if (type === "update") {
 			let data = JSON.parse(parts[3]);
 			if (!data.format) return;
-			room.tournament.name = (room.tournament.official ? "Official " : "") + data.format;
+			if (data.format in Tournament.formats) room.tournament.name = (room.tournament.official ? "Official " : "") + Tournament.formats[data.format];
+			else room.tournament.name = (room.tournament.official ? "Official " : "") + data.format;
 		}
     }
 });
