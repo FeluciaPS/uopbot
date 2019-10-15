@@ -1,5 +1,5 @@
 global.NFE = {
-    times: [ 1, 15, 20 ],
+    times: [ 1, 9, 15, 20 ],
     last: parseInt(require('fs').readFileSync("./data/lastnfe.txt")),
     official: function() {
         let room = Rooms['nfe'];
