@@ -31,7 +31,7 @@ class Room {
     endTour(data) {
         if (this.tournament) this.tournament.end(data);
 		if (this.tournament.toString()) this.pasttours.push(this.tournament.toString());
-		while (this.pasttours.join(', ').length > 300) this.pasttours.shift();
+		while (this.pasttours.join(', ').length > 250) this.pasttours.shift();
         this.tournament = false;
     }
     
