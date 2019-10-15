@@ -98,7 +98,7 @@ let commands = {
 	tourhistory: function(room, user, args) {
 		if (!user.can(room, '+')) return;
 		if (!room.pasttours.length) return room.send("This room has no past tours recorded.");
-		this.say(room, room.pasttours.join(', '));
+		room.send(room.pasttours.join(', '));
 	},
     hangman: function(room, user, args) {
         if (!user.can(room, '%')) return;
