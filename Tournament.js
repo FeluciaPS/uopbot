@@ -74,7 +74,7 @@ class Tournament {
 Tournament.prototype.toString = function() {
 	if (this.name) return this.name;
 	if (this.format) return this.format === 'unknown' ? false : this.format;
-    return "Tournament in " + this.room.name;
+	return false;
 }
 module.exports = {
 	Tournament: Tournament,

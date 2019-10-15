@@ -311,7 +311,7 @@ bot.on('init', (parts, data) => {
         }
         if (part[1] === 'tournament') {
             if (part[2] === "end" || part[1] === "forceend") {
-                Rooms[room].endTour(part[3]);
+                Rooms[room].endTour(part[2] === "end" ? part[3] : part[2]);
             }
             else { 
                 if (!Rooms[room].tournament) Rooms[room].startTour("late");
