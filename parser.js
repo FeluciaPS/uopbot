@@ -262,6 +262,7 @@ bot.on('tournament', (parts, data) => {
         if (type === "create") {
             if (!room.tournament) room.startTour(false);
 			room.tournament.format = Tournament.formats[parts[3]];
+			if (room.tournament.official) room.tournament.name = "Official " + room.tournament.format;
             if (!Rooms['1v1']) return;
             if (room.id === "1v1oldgens") Rooms['1v1'].send(`${parts[3].replace('ou', '1v1')} tournament in <<1v1og>>`);
             if (room.id === "tournaments" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${parts[3]} tournament in <<tours>>`);
@@ -273,7 +274,7 @@ bot.on('tournament', (parts, data) => {
 		if (type === "update") {
 			let data = JSON.parse(parts[3]);
 			if (!data.format) return;
-			room.tournament.name = data.format;
+			room.tournament.name = (room.tournament.official ? "Official " : "") + data.format;
 		}
     }
 });
