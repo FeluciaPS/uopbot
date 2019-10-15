@@ -4,6 +4,26 @@ bot.on('challstr', function(parts) {
 
 bot.on('updateuser', (parts) => {
     logger.emit('log', 'Logged in as ' + parts[2]);
+	let skipnext = false;
+	let found = false;
+	for (let i of parts) {
+		if (!found && i !== 'formats') continue;
+		if (!found && i === 'formats') {
+			found = true;
+			continue;
+		}
+		if (skipnext) {
+			skipnext = false;
+			continue;
+		}
+		if (i.match(/,\d/)) {
+			skipnext = true;
+			continue;
+		}
+		
+		let format = i.split(',')[0];
+		Tournament.formats[toId(format)] = format;
+	}
 });
 
 let natLangDict = {
@@ -241,6 +261,7 @@ bot.on('tournament', (parts, data) => {
         let type = parts[2];
         if (type === "create") {
             if (!room.tournament) room.startTour(false);
+			room.tournament.format = Tournament.formats[parts[3]];
             if (!Rooms['1v1']) return;
             if (room.id === "1v1oldgens") Rooms['1v1'].send(`${parts[3].replace('ou', '1v1')} tournament in <<1v1og>>`);
             if (room.id === "tournaments" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${parts[3]} tournament in <<tours>>`);
@@ -248,7 +269,12 @@ bot.on('tournament', (parts, data) => {
             if (room.id === "tournaments" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${parts[3]} tournament in <<tours>>`);
             if (room.id === "toursplaza" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${parts[3]} tournament in <<tp>>`);
         }
-        if (type === "end" || type === "forceend") room.endTour();
+        if (type === "end" || type === "forceend") room.endTour(parts[3]);
+		if (type === "update") {
+			let data = JSON.parse(parts[3]);
+			if (!data.format) return;
+			room.tournament.name = data.format;
+		}
     }
 });
 
@@ -283,7 +309,7 @@ bot.on('init', (parts, data) => {
         }
         if (part[1] === 'tournament') {
             if (part[2] === "end" || part[1] === "forceend") {
-                Rooms[room].endTour();
+                Rooms[room].endTour(part[3]);
             }
             else { 
                 if (!Rooms[room].tournament) Rooms[room].startTour("late");
