@@ -64,7 +64,8 @@ class Tournament {
     end(data) {
 		if (data) {
 			let dt = JSON.parse(data);
-			this.name = dt.format ? dt.format : this.name;
+			if (dt.format && formats[dt.format]) this.name = formats[dt.format];
+			else this.name = dt.format ? dt.format : this.name;
 		}
         if (this.chill) this.room.send('/modchat ac');
     }
