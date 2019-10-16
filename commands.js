@@ -269,12 +269,17 @@ let commands = {
         if (!user.can(room, 'all')) return;
         if (!room) room = user;
         if (!val) return;
-        let ret = eval(val)
-        if (ret !== undefined) {
-            ret = ret.toString();
-            if (ret.indexOf("\n") !== -1) ret = "!code " + ret;
-            room.send(ret);
-        }
+        try {
+			let ret = eval(val);
+			if (ret !== undefined) {
+				ret = ret.toString();
+				if (ret.indexOf("\n") !== -1) ret = "!code " + ret;
+				room.send(ret);
+			}
+		}
+		catch (e) {
+			room.send(e.name + ": " + e.message);
+		}
     },
     
     ping: function(room, user, args) {
