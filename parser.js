@@ -47,7 +47,7 @@ bot.on('c', (parts) => {
     if ((room === '1v1' || room === 'nfe') && toId(message) === "hellothere") {
         let now = Date.now();
         if (now - lasthellothere[room] > 5*60*1000) {
-            lasthellothere[room] = now;
+            lasthellothere[room] = now + Math.floor(Math.random() * 30*60*1000);
             return Rooms[room].send("General Kenobi!");
         }
     }
