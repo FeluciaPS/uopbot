@@ -274,7 +274,7 @@ let commands = {
 			if (ret !== undefined) {
 				ret = ret.toString();
 				if (ret.indexOf("\n") !== -1) ret = "!code " + ret;
-				room.send(ret);
+				room.send(JSON.stringify(ret));
 			}
 		}
 		catch (e) {
