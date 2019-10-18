@@ -124,7 +124,7 @@ module.exports = {
         }
         else room.send("/tour create gen5ubers, elim");
         room.send("/tour name [Gen 5] NFE");
-        room.send("/tour rules [Gen 7] NFE, -Chansey, -Dusclops, -Fraxure, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Riolu, -Rhydon, -Piloswine, -Porygon2, -Scyther, -Vigoroth");
+        room.send("/tour rules [Gen 7] NFE, +NU, +RU, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Dusclops, -Fraxure, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Riolu, -Rhydon, -Piloswine, -Porygon2, -Scyther, -Vigoroth");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     gen4nfe: function (room, user, args) {
@@ -149,7 +149,7 @@ module.exports = {
         }
         else room.send("/tour create gen4uu, elim");
         room.send("/tour name [Gen 4] NFE");
-        room.send("/tour rules [Gen 7] NFE, +OU, +UUBL, +Uber, -Chansey, -Chansey, -Dragonair, -Dusclops, -Electabuzz, -Haunter, -Machoke, -Magmar, -Magneton, -Porygon2, -Rhydon, -Scyther, -Sneasel");
+        room.send("/tour rules [Gen 7] NFE, +NU, +RU, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Chansey, -Dragonair, -Dusclops, -Electabuzz, -Haunter, -Machoke, -Magmar, -Magneton, -Porygon2, -Rhydon, -Scyther, -Sneasel");
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     nfe1v1: function (room, user, args) {
