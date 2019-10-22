@@ -264,11 +264,12 @@ bot.on('tournament', (parts, data) => {
 			room.tournament.format = Tournament.formats[parts[3]];
 			if (room.tournament.official) room.tournament.name = "Official " + room.tournament.format;
             if (!Rooms['1v1']) return;
-            if (room.id === "1v1oldgens") Rooms['1v1'].send(`${parts[3].replace('ou', '1v1')} tournament in <<1v1og>>`);
-            if (room.id === "tournaments" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${parts[3]} tournament in <<tours>>`);
-            if (room.id === "toursplaza" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${parts[3]} tournament in <<tp>>`);
-            if (room.id === "tournaments" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${parts[3]} tournament in <<tours>>`);
-            if (room.id === "toursplaza" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${parts[3]} tournament in <<tp>>`);
+            let format = Tournament.formats[toId(parts[3])] ? Tournament.formats[toId(parts[3])] : parts[3]
+            if (room.id === "1v1oldgens") Rooms['1v1'].send(`${format.replace('ou', '1v1')} tournament in <<1v1og>>`);
+            if (room.id === "tournaments" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${format} tournament in <<tours>>`);
+            if (room.id === "toursplaza" && parts[3].match(/\dv\d/)) Rooms['1v1'].send(`${format} tournament in <<tp>>`);
+            if (room.id === "tournaments" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${format} tournament in <<tours>>`);
+            if (room.id === "toursplaza" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${format} tournament in <<tp>>`);
         }
         if (type === "end" || type === "forceend") room.endTour(parts[3]);
 		if (type === "update") {
