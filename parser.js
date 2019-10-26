@@ -39,7 +39,7 @@ let lasthellothere = {
 bot.on('c', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
-	room.runChecks();
+	Rooms[room].runChecks();
     if (!parts[4]) return;
     let message = parts[4].trim();
     if ((room === '1v1' || room === 'nfe') && toId(message) === "hellothere") {
