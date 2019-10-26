@@ -51,7 +51,7 @@ class Room {
 				this.saveSettings()
 			}
 		}
-		if (this.hellothere) {
+		if (this.hellothere && toId(message) === "hellothere") {
 			if (now - this.hellothere.last > 5*60*1000) {
 				this.hellothere.last = now + Math.floor(Math.random() * 30*60*1000);
 				return this.send("General Kenobi!");
