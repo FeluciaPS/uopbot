@@ -13,6 +13,11 @@ class Room {
 		this.settings = JSON.parse(FS.readFileSync(PATH));
 		this.repeat = this.settings.repeat;
 		if (this.settings.OTobj) this.OTobj = eval(this.settings.OTobj);
+		if (this.settings.hellothere) {
+			this.hellothere = {
+				last: 0
+			}
+		}
 	}
 	
 	saveSettings() {
@@ -33,10 +38,10 @@ class Room {
         Send(this.id, message);
     }
 
-	runChecks() {
+	runChecks(message) {
+		let now = Date.now();
 		if (this.OTobj) this.OTobj.official();
 		if (this.repeat) {
-			let now = Date.now();
 			let diff = (now - this.repeat.last) / 60000;
 			this.repeat.msgs += 1;
 			if (this.repeat.msgs >= this.repeat.minmsg && diff >= this.repeat.mintime) {
@@ -44,6 +49,12 @@ class Room {
 				this.repeat.msgs = 0;
 				this.send(this.repeat.message);
 				this.saveSettings()
+			}
+		}
+		if (this.hellothere) {
+			if (now - this.hellothere.last > 5*60*1000) {
+				this.hellothere.last = now + Math.floor(Math.random() * 30*60*1000);
+				return this.send("General Kenobi!");
 			}
 		}
 	}

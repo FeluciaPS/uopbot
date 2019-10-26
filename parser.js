@@ -39,16 +39,9 @@ let lasthellothere = {
 bot.on('c', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
-	Rooms[room].runChecks();
     if (!parts[4]) return;
     let message = parts[4].trim();
-    if ((room === '1v1' || room === 'nfe') && toId(message) === "hellothere") {
-        let now = Date.now();
-        if (now - lasthellothere[room] > 5*60*1000) {
-            lasthellothere[room] = now + Math.floor(Math.random() * 30*60*1000);
-            return Rooms[room].send("General Kenobi!");
-        }
-    }
+	Rooms[room].runChecks(message);
     Monitor.monitor(user.name, message);
     logger.emit('chat', Utils.getRoom(parts[0]), user.name, message);
     let time = parts[2];
