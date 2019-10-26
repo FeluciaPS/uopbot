@@ -296,6 +296,7 @@ let commands = {
     },
 	
 	disable: function(room, user, args) {
+		if (!user.can(room, 'all')) return;
 		room.send('Commands disabled.');
 		room.settings.disabled = true;
 		room.saveSettings();
