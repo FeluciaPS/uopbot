@@ -18,11 +18,15 @@ class Room {
 				last: 0
 			}
 		}
+		if (this.settings.pasttours) {
+			this.pasttours = this.settings.pasttours;
+		}
 	}
 	
 	saveSettings(load = false) {
 		const PATH = `./rooms/${this.id}.json`;
 		this.settings.repeat = this.repeat;
+		this.settings.pasttours = this.pasttours;
 		let settings = JSON.stringify(this.settings, null, 4);
 		let temp = this;
 		FS.writeFile(PATH, settings, () => {
@@ -79,6 +83,7 @@ class Room {
 		if (this.tournament.toString()) this.pasttours.push(this.tournament.toString());
 		while (this.pasttours.join(', ').length > 250) this.pasttours.shift();
         this.tournament = false;
+		this.saveSettings();
     }
 	
     updateTourRules() {

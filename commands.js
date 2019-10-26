@@ -300,6 +300,44 @@ let commands = {
 		room.send('Commands disabled.');
 		room.settings.disabled = true;
 		room.saveSettings();
+	},
+	
+	echo: {
+		'': 'help',
+		help: function(room, user, args) {
+			if (!user.can(room, '%') && room !== user) return;
+			room.send('Usage: ``.echo [time interval], [message interval], [message]``');
+		},
+		create: 'start',
+		start: function(room, user, args) {
+			if (!user.can(room, '%')) return;
+			if (room.repeat) return room.send('An echo is already running');
+			let time_interval = parseInt(args.shift());
+			let msg_interval = parseInt(args.shift());
+			let message = args.join(',');
+			
+			if (!message) return this.help(room, user, args);
+			if (isNaN(time_interval) || time_interval < 30) return room.send('time interval has to be at least 30 minutes.');
+			if (isNaN(msg_interval)) return room.send('message interval has to be a number');
+			let repeat = {
+				msgs: 0,
+				last: Date.now(),
+				mintime: time_interval,
+				minmsg: msg_interval,
+				message: message
+			}
+			room.repeat = repeat;
+			room.saveSettings();
+			return room.send('Repeat started');
+		},
+		end: function(room, user, args) {
+			if (!user.can(room, '%')) return;
+			if (!room.repeat) return room.send('No echo is currently running');
+			let msg = room.repeat.message;
+			room.repeat = false;
+			room.saveSettings();
+			return room.send(`Echo "${msg}" ended.`);
+		}
 	}
 };
 

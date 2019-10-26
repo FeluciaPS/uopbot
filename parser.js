@@ -50,8 +50,10 @@ bot.on('c', (parts) => {
         if (typeof Commands[cmd] === 'string') cmd = Commands[cmd];
         let func = Commands[cmd];
         if (typeof func === 'object') {
-            if (!args[0] || !func[toId(args[0])]) func = func[''];
-            else func = func[toId(args[0])];
+			let target = toId(args[0]);
+			if (target in func && typeof func[target] === 'string') target = func[target];
+			else target = '';
+			func = func[target];
             args.shift();
         }
         func(Rooms[room], user, args, val, time);
