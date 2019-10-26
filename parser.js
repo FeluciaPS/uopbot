@@ -39,11 +39,9 @@ let lasthellothere = {
 bot.on('c', (parts) => {
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
-    if (NFE) NFE.official();
-    if (OT1v1) OT1v1.official();
+	room.runChecks();
     if (!parts[4]) return;
     let message = parts[4].trim();
-    console.log(room.id);
     if ((room === '1v1' || room === 'nfe') && toId(message) === "hellothere") {
         let now = Date.now();
         if (now - lasthellothere[room] > 5*60*1000) {

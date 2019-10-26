@@ -4,18 +4,50 @@ class Room {
         this.id = id;
         this.tournament = false;
 		this.pasttours = [];
+		this.loadSettings();
     }
     
+	loadSettings() {
+		const PATH = `./rooms/${this.id}.json`;
+		if (!FS.existsSync(PATH)) FS.copySync('./rooms/config-example.json', PATH);
+		this.settings = JSON.parse(FS.readFileSync(PATH));
+		this.repeat = this.settings.repeat;
+		if (this.settings.OTobj) this.OTobj = eval(this.settings.OTobj);
+	}
+	
+	saveSettings() {
+		const PATH = `./rooms/${this.id}.json`;
+		this.settings.repeat = this.repeat;
+		let settings = JSON.stringify(this.settings, null, 4);
+		FS.writeFile(PATH, settings, () => {});
+	}
+	
     send(message) {
+		if (this.settings.disabled) return;
         if (typeof message === typeof {}) {
             for (let i in message) {
-                Send(this.id, message[i])
+                Send(this.id, message[i]);
             }
             return;
         }
         Send(this.id, message);
     }
-    
+
+	runChecks() {
+		if (this.OTobj) this.OTobj.official();
+		if (this.repeat) {
+			let now = Date.now();
+			let diff = (now - this.repeat.last) / 60000;
+			this.repeat.msgs += 1;
+			if (this.repeat.msgs >= this.repeat.minmsg && diff >= this.repeat.mintime) {
+				this.repeat.last = now;
+				this.repeat.msgs = 0;
+				this.send(this.repeat.message);
+				this.saveSettings()
+			}
+		}
+	}
+
     leave(room) {
         for (let u in this.users) {
             let user = this.users[u];
@@ -34,12 +66,12 @@ class Room {
 		while (this.pasttours.join(', ').length > 250) this.pasttours.shift();
         this.tournament = false;
     }
-    
+	
     updateTourRules() {
         if (!this.tournament) throw new Error("This shouldn't happen but bot tried to update tour rules without a tour running");
         this.send(this.tournament.buildRules());
     }
-
+	
     rename(oldname, newname) {
         let id = toId(newname);
         let name = newname.substring(1);

@@ -293,7 +293,13 @@ let commands = {
         if (!user.can(room, 'all')) return;
         if (!args[0]) return user.send('No room given.');
         Send('', '/j ' + args[0]);
-    }
+    },
+	
+	disable: function(room, user, args) {
+		room.send('Commands disabled.');
+		room.settings.disabled = true;
+		room.saveSettings();
+	}
 };
 
 let files = FS.readdirSync('commands');
