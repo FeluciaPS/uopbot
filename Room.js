@@ -9,7 +9,7 @@ class Room {
     
 	loadSettings() {
 		const PATH = `./rooms/${this.id}.json`;
-		if (!FS.existsSync(PATH)) FS.copySync('./rooms/config-example.json', PATH);
+		if (!FS.existsSync(PATH)) FS.copyFileSync('./rooms/config-example.json', PATH);
 		this.settings = JSON.parse(FS.readFileSync(PATH));
 		this.repeat = this.settings.repeat;
 		if (this.settings.OTobj) this.OTobj = eval(this.settings.OTobj);
