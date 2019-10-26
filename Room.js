@@ -20,11 +20,14 @@ class Room {
 		}
 	}
 	
-	saveSettings() {
+	saveSettings(load = false) {
 		const PATH = `./rooms/${this.id}.json`;
 		this.settings.repeat = this.repeat;
 		let settings = JSON.stringify(this.settings, null, 4);
-		FS.writeFile(PATH, settings, () => {});
+		let temp = this;
+		FS.writeFile(PATH, settings, () => {
+			if (load) temp.loadSettings();
+		});
 	}
 	
     send(message) {
