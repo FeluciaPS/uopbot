@@ -241,6 +241,28 @@ module.exports = {
     },
     dp1v1: 'gen41v1',
     gen41v1: function(room, user, args) {
+        if (!Tournament.formats['gen41v1']) return this.oldgen41v1(room, user, args);
+        if (!canMakeTour(room, user)) return;
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create gen41v1, rr,, " + count);
+                else room.send("/tour create gen41v1, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create gen41v1, elim,, " + count);
+                else room.send("/tour create gen41v1, elim");
+            }
+            else {
+                room.send("/tour create gen41v1, elim")
+            }
+        }
+        else room.send("/tour create gen41v1, elim");
+        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
+
+    },
+    oldgen41v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let bl = Banlist.gen41v1;
         if (args) {
