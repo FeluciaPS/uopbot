@@ -12,7 +12,10 @@ class Room {
 		if (!FS.existsSync(PATH)) FS.copyFileSync('./rooms/config-example.json', PATH);
 		this.settings = JSON.parse(FS.readFileSync(PATH));
 		this.repeat = this.settings.repeat;
-		if (this.settings.OTobj) this.OTobj = eval(this.settings.OTobj);
+		if (this.settings.OTobj) {
+			this.OTobj = eval(this.settings.OTobj);
+			OTs.push(this.OTobj);
+		}
 		if (this.settings.hellothere) {
 			this.hellothere = {
 				last: 0
@@ -47,7 +50,7 @@ class Room {
 
 	runChecks(message) {
 		let now = Date.now();
-		if (this.OTobj) this.OTobj.official();
+		//if (this.OTobj) this.OTobj.official();
 		if (this.repeat) {
 			let diff = (now - this.repeat.last) / 60000;
 			this.repeat.msgs += 1;
