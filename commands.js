@@ -306,7 +306,11 @@ let commands = {
 		'': 'help',
 		help: function(room, user, args) {
 			if (!user.can(room, '%') && room !== user) return;
-			room.send('Usage: ``.echo [time interval], [message interval], [message]``');
+			if (!Users.self.can(room, '*')) return room.send('Usage: ``.echo create, [time interval], [message interval], [message]``');
+			let ret = `<details><summary><b>Echo</b></summary><hr>`;
+			ret += `<b>- create:</b> <code>.echo create, [time interval], [message interval], [message]</code><br> - requires % @ # & ~`;
+			ret += `<b>- end:</b> <code>.echo end</code> - requires % @ # & ~`;
+			room.send("/addhtmlbox " + ret);
 		},
 		create: 'start',
 		start: function(room, user, args) {
