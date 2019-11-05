@@ -62,7 +62,7 @@ class User {
         if (!this.rooms[room] && room !== this) return false;
         if (Config.devs.indexOf(this.id) !== -1) return true;
         if (rank === "all") return false;
-        if (this.id === toId(Config.username)) return false;
+        if (this.id === toId(Config.username) && rank !== '*') return false;
         if (!room) return false;
         if (room.id) room = room.id;
         return Ranks[this.rooms[room]] <= Ranks[rank];
