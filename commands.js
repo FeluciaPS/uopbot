@@ -310,6 +310,7 @@ let commands = {
 			let ret = `<details><summary><b>Echo</b></summary><hr>`;
 			ret += `<b>- create:</b> <code>.echo create, [time interval], [message interval], [message]</code><br> - requires % @ # & ~`;
 			ret += `<b>- end:</b> <code>.echo end</code> - requires % @ # & ~`;
+			ret += "</details>";
 			room.send("/addhtmlbox " + ret);
 		},
 		create: 'start',
