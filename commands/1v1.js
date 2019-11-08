@@ -17,7 +17,7 @@ global.OT1v1 = {
         let next = (this.last + 1) % this.times.length;
         let day = next === 0 ? (this.day + 1) % 7 : this.day;
         let mins = now.getMinutes();
-        if (mins > 8) return;
+        if (mins > 15) return;
         let hours = now.getHours();
         let end = false;
         if (hours === this.times[next]) {
