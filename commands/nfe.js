@@ -51,6 +51,10 @@ module.exports = {
             args.shift();
             this.capnfe(room, user, args);
         }
+	if (toId(args[0]) === "aaa") {
+            args.shift();
+            this.aaanfe(room, user, args);
+        }
         if (args) {
             if (args[0].startsWith("rr")) {
                 let count = parseInt(args[0].substring(2));
@@ -74,10 +78,6 @@ module.exports = {
 	if (toId(args[0]) === 'inverse') {
 		room.send('/tour rules Inverse Mod');
 		room.send('/tour name [Gen 7] Inverse NFE');
-	}
-	if (toId(args[0]) === 'aaa') {
-		room.send('/tour rules [Gen 7] Almost Any Ability, +Doublade, +Gligar, +Golbat, +Magneton, +Porygon2, +Type: Null, +Vigoroth, -Electabuzz');
-		room.send('/tour name [Gen 7] Almost Any Ability NFE');
 	}
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
@@ -209,6 +209,31 @@ module.exports = {
         else room.send("/tour create NFE, elim");
         room.send("/tour name [Gen 7] CAP NFE");
         room.send("/tour rules +Doublade, +Magneton, +Piloswine, +Sneasel, +Type: Null, +Vigoroth, Allow CAP");
+        if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
+    },
+    aaanfe: function (room, user, args) {
+        if (room.id !== 'nfe' || !user.can(room, '%')) return;
+        
+        if (room.tournament) return room.send("A tournament is already going on");
+        if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
+        if (args) {
+            if (args[0].startsWith("rr")) {
+                let count = parseInt(args[0].substring(2));
+                if (count) room.send("/tour create AAA, rr,, " + count);
+                else room.send("/tour create AAA, rr");
+            }
+            else if (args[0].startsWith("e")){
+                let count = parseInt(args[0].substring(1));
+                if (count) room.send("/tour create AAA, elim,, " + count);
+                else room.send("/tour create AAA, elim");
+            }
+            else {
+                room.send("/tour create AAA, elim");
+            }
+        }
+        else room.send("/tour create AAA, elim");
+	room.send('/tour rules [Gen 7] NFE, +Doublade, +Gligar, +Golbat, +Magneton, +Porygon2, +Type: Null, +Vigoroth, -Electabuzz');
+	room.send('/tour name [Gen 7] Almost Any Ability NFE');
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },
     tourcool: function (room, user, args, val) {
