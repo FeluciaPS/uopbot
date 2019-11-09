@@ -340,8 +340,7 @@ module.exports = {
         room.send(ruleset);
         if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
     },
-    aaa1v1: 'aaa',
-    aaa: function(room, user, args) {
+    aaa1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules !Obtainable Abilities, -" + Banlist.aaa['ability-bans'].join(', -') + ", -" + Banlist.aaa['mon-bans'].join(', -'); // Yes I realize this doesn't properly work if there aren't any ability-bans or mon-bans. I'll tackle that if we ever get to that point
         if (Banlist.aaa.unbans) ruleset += ", +" + Banlist.aaa['unbans'].join(', +')
@@ -349,15 +348,14 @@ module.exports = {
         room.send(ruleset);
         room.send("/tour name [Gen 7] AAA 1v1");
     },
-    ag1v1: 'ag',
-    ag: function(room, user, args) {
+    ag1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules !" + Banlist.ag.join(', !') + ", +" + Banlist['1v1'].join(', +') + ", +Detect + Fightinium Z, +Focus Sash, +Perish Song";
         Commands['1v1'](room, user, args);
         room.send(ruleset);
         room.send("/tour name [Gen 7] AG 1v1");
     },
-    inverse: function(room, user, args) {
+    inverse1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules Inverse Mod, "
         if (Banlist.inverse.bans.length) ruleset += "-" + Banlist.inverse.bans.join(", -") + ", ";
@@ -367,8 +365,8 @@ module.exports = {
         room.send(ruleset);
         room.send("/tour name [Gen 7] Inverse 1v1");
     },
-    monotype: 'mono',
-    mono: function(room, user, args) {
+    monotype1v1: 'mono1v1',
+    mono1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules Same Type Clause, "
         if (Banlist.monotype.bans.length) ruleset += "-" + Banlist.monotype.bans.join(", -") + ", ";
@@ -378,14 +376,14 @@ module.exports = {
         room.send(ruleset);
         room.send("/tour name [Gen 7] Monotype 1v1");
     },
-    noz: function(room, user, args) {
+    noz1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         Commands['1v1'](room, user, args);
         room.send("/tour rules Z-Move Clause");
         room.send("/tour name [Gen 7] No Z 1v1");
     },
-    stabmons: 'stab',
-    stab: function(room, user, args) {
+    stabmons1v1: 'stab',
+    stab1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules STABmons Move Legality, "
         if (Banlist.stabmons.bans.length) ruleset += "-" + Banlist.stabmons.bans.join(", -") + ", ";
@@ -395,7 +393,6 @@ module.exports = {
         room.send(ruleset);
         room.send("/tour name [Gen 7] STABmons 1v1");
     },
-    uu: 'uu1v1',
     uu1v1: function(room, user, args) {
         if (!canMakeTour(room, user)) return;
         let ruleset = "/tour rules -" + Banlist.uu.join(', -');
