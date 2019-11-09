@@ -49,11 +49,11 @@ module.exports = {
         if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
         if (toId(args[0]) === "cap") {
             args.shift();
-            this.capnfe(room, user, args);
+            Commands.capnfe(room, user, args);
         }
 	if (toId(args[0]) === "aaa") {
             args.shift();
-            this.aaanfe(room, user, args);
+            Commands.aaanfe(room, user, args);
         }
         if (args) {
             if (args[0].startsWith("rr")) {
