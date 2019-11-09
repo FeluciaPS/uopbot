@@ -76,7 +76,7 @@ module.exports = {
 		room.send('/tour name [Gen 7] Inverse NFE');
 	}
 	if (toId(args[0]) === 'aaa') {
-		room.send('/tour rules Almost Any Ability, +Doublade, +Gligar, +Golbat, +Magneton, +Porygon2, +Type: Null, +Vigoroth, -Electabuzz');
+		room.send('/tour rules [Gen 7] Almost Any Ability, +Doublade, +Gligar, +Golbat, +Magneton, +Porygon2, +Type: Null, +Vigoroth, -Electabuzz');
 		room.send('/tour name [Gen 7] Almost Any Ability NFE');
 	}
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
