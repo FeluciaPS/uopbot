@@ -31,14 +31,8 @@ class Tournament {
             this.room.send(`/tour autodq ${t[1]}`);
             if (t[2]) this.room.send('/tour scouting disallow');
         }
-        else {
-            this.room.send(`/tour autostart 2`);
-            this.room.send(`/tour autodq 2`);
-        }
         if (this.official) room.send('.official');
         if (this.chill) room.send('/modchat +');
-		
-
     }
     
     buildRules() {
