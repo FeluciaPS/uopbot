@@ -29,7 +29,7 @@ let checkGenerator = function(room, meta, args) {
     }
     else room.send(`/tour create ${meta}, elim`);
 }
-exports.commands = {
+module.exports = {
 	mono: {
 		// Old (and current) generations
 		'': 'gen7',
