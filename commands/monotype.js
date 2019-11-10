@@ -32,7 +32,7 @@ let checkGenerator = function(room, meta, args) {
 exports.commands = {
 	mono: {
 		// Old (and current) generations
-		'': gen7,
+		'': 'gen7',
 		gen7: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotype', args);
