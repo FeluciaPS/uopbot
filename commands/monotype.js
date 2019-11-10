@@ -137,6 +137,11 @@ exports.commands = {
 			room.send('/tour name [Gen 7] Doubles Monotype');
 			room.send('/tour rules Same Type Clause, -Terrain Extender, -Smooth Rock, -Damp Rock');
 			room.send('/tour scouting off');
+		},
+		chill: function(room, user, args) {
+			if (!canMakeTour(room, user)) return;
+			checkGenerator(room, 'gen7monotype', args);
+			room.startTour('chill');
 		}
 	},
 	monothreat: function (room, user, args) {
