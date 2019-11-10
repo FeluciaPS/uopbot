@@ -33,35 +33,35 @@ module.exports = {
 	mono: {
 		// Old (and current) generations
 		'': 'gen7',
-		gen7: function(room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7monotype', args);
-			room.send('/tour scouting off');
-		},
-		gen6: function(room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen6monotype', args);
-			room.send('/tour scouting off');
-		},
-		gen5: function(room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen5monotype', args);
-			room.send('/tour scouting off');
-		},
-		gen4: function(room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen4ou', args);
-			room.send('/tour name [Gen 4] Monotype');
-			room.send('/tour rules Same Type Clause');
-			room.send('/tour scouting off');
-		},
-		gen3: function(room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen3ou', args);
-			room.send('/tour name [Gen 3] Monotype');
-			room.send('/tour rules Same Type Clause');
-			room.send('/tour scouting off');
-		},
+			gen7: function(room, user, args) {
+				if (!canMakeTour(room, user)) return;
+				checkGenerator(room, 'gen7monotype', args);
+				room.send('/tour scouting off');
+			},
+			gen6: function(room, user, args) {
+				if (!canMakeTour(room, user)) return;
+				checkGenerator(room, 'gen6monotype', args);
+				room.send('/tour scouting off');
+			},
+			gen5: function(room, user, args) {
+				if (!canMakeTour(room, user)) return;
+				checkGenerator(room, 'gen5monotype', args);
+				room.send('/tour scouting off');
+			},
+			gen4: function(room, user, args) {
+				if (!canMakeTour(room, user)) return;
+				checkGenerator(room, 'gen4ou', args);
+				room.send('/tour name [Gen 4] Monotype');
+				room.send('/tour rules Same Type Clause');
+				room.send('/tour scouting off');
+			},
+			gen3: function(room, user, args) {
+				if (!canMakeTour(room, user)) return;
+				checkGenerator(room, 'gen3ou', args);
+				room.send('/tour name [Gen 3] Monotype');
+				room.send('/tour rules Same Type Clause');
+				room.send('/tour scouting off');
+			},
 		// Mixups with other smogon metagames
 		'1v1': function(room, user, args) {
 	        if (!canMakeTour(room, user)) return;
@@ -145,7 +145,72 @@ module.exports = {
 		}
 	},
 	monothreat: function (room, user, args) {
-		// nothing yet
+		if (!canMakeTour(room, user)) return;
+		let type = toId(args[0]);
+		let banlist = false;
+		if (type === 'bug') {
+			banlist = "+Accelgor, +Araquanid, + Araquanid-Totem, +Ariados, +Armaldo, +Beautifly, +Beedrill, +Beedrill-Mega, +Butterfree, +Buzzwole, +Crustle, +Durant, +Dustox, +Escavalier, +Forretress, +Galvantula, +Golisopod, +Heracross, +Heracross-Mega, +Illumise, +Kricketune, +Leavanny, +Ledian, +Masquerain, +Mothim, +Ninjask, +Parasect, +Pinsir, +Pinsir-Mega, +Ribombee, +Ribombee-Totem, +Scizor, +Scizor-Mega, +Scolipede, +Scyther, +Shedinja, +Shuckle, +Silvally-Bug, +Venomoth, +Vespiquen, +Vikavolt, +Vikavolt-Totem, +Vivillon, +Vivillon-Fancy, +Vivillon-Pokeball, +Volbeat, +Volcarona, +Wormadam, +Wormadam-Sandy, +Wormadam-Trash, +Yanmega";
+		}
+		if (type === "dark") {
+			banlist = "+Absol, +Absol-Mega, +Bisharp, +Cacturne, +Crawdaunt, +Drapion, +Greninja, +Guzzlord, +Honchkrow, +Houndoom, +Houndoom-Mega, +Hydreigon, +Incineroar, +Krookodile, +Liepard, +Malamar, +Mandibuzz, +Mightyena, +Muk-Alola, +Murkrow, +Pangoro, +Persian-Alola, +Raticate-Alola, +Raticate-Alola-Totem, +Sableye, +Sableye-Mega, +Scrafty, +Sharpedo, +Sharpedo-Mega, +Shiftry, +Silvally-Dark, +Skuntank, +Sneasel, +Spiritomb, +Tyranitar, +Tyranitar-Mega, +Umbreon, +Weavile, +Zoroark";
+		}
+		if (type === "dragon") {
+			banlist = "";
+		}
+		if (type === "electric") {
+			banlist = "+Ampharos, +Ampharos-Mega, +Dedenne, +Eelektross, +Electivire, +Electrode, +Emolga, +Galvantula, +Golem-Alola, +Heliolisk, +Jolteon, +Lanturn, +Luxray, +Magneton, +Magnezone, +Manectric, +Manectric-Mega, +Minun, +Oricorio-Pom-Pom, +Pachirisu, +Pikachu, +Pikachu-Alola, +Pikachu-Hoenn, +Pikachu-Kalos, +Pikachu-Original, +Pikachu-Sinnoh, +Pikachu-Unova, +Plusle, +Raichu, +Raichu-Alola, +Raikou, +Rotom, +Silvally-Electric, +Stunfisk, +Tapu Koko, +Thundurus, +Togedemaru, +Vikavolt, +Xurkitree, +Zapdos, +Zebstrika, +Zeraora";
+		}
+		if (type === "fairy") {
+			banlist = "";
+		}
+		if (type === "fighting") {
+			banlist = "";
+		}
+		if (type === "fire") {
+			banlist = "+Arcanine, +Blacephalon, +Camerupt, +Chandelure, +Charizard, +Charizard-Mega-X, +Charizard-Mega-Y, +Darmanitan, +Darmanitan-Zen, +Delphox, +Emboar, +Entei, +Flareon, +Heatmor, +Heatran, +Houndoom, +Houndoom-Mega, +Incineroar, +Infernape, +Magcargo, +Magmortar, +Marowak-Alola, +Marowak-Alola-Totem, +Moltres, +Ninetales, +Oricorio, +Pyroar, +Rapidash, +Rotom-Heat, +Salazzle, +Salazzle-Totem, +Silvally-Fire, +Simisear, +Talonflame, +Torkoal, +Turtonator, +Typhlosion, +Victini, +Volcanion, +Volcarona, -Ninetales-Alola";
+		}
+		if (type === "flying") {
+			banlist = "+Aerodactyl, +Aerodactyl-Mega, +Altaria, +Archeops, +Articuno, +Beautifly, +Braviary, +Butterfree, +Celesteela, +Charizard, +Charizard-Mega-Y, +Chatot, +Crobat, +Delibird, +Dodrio, +Dragonite, +Drifblim, +Emolga, +Farfetch'd, +Fearow, +Gligar, +Gliscor, +Golbat, +Gyarados, +Hawlucha, +Honchkrow, +Jumpluff, +Landorus, +Landorus-Therian, +Ledian, +Mandibuzz, +Mantine, +Masquerain, +Minior, +Moltres, +Mothim, +Murkrow, +Ninjask, +Noctowl, +Noivern, +Oricorio, +Oricorio-Pau, +Oricorio-Pom-Pom, +Oricorio-Sensu, +Pelipper, +Pidgeot, +Pidgeot-Mega, +Rayquaza-Mega, +Rotom-Fan, +Salamence, +Scyther, +Sigilyph, +Silvally-Flying, +Skarmory, +Staraptor, +Swanna, +Swellow, +Swoobat, +Talonflame, +Thundurus, +Thundurus-Therian, +Togekiss, +Tornadus, +Tornadus-Therian, +Toucannon, +Tropius, +Unfezant, +Vespiquen, +Vivillon, +Vivillon-Fancy, +Vivillon-Pokeball, +Xatu, +Yanmega, +Zapdos";
+		}
+		if (type === "ghost") {
+			banlist = "+Banette, +Banette-Mega, +Blacephalon, +Chandelure, +Cofagrigus, +Decidueye, +Dhelmise, +Doublade, +Drifblim, +Dusclops, +Dusknoir, +Froslass, +Gengar, +Golurk, +Gourgeist, +Gourgeist-Small, +Gourgeist-Large, +Gourgeist-Super, +Haunter, +Hoopa, +Jellicent, +Marowak-Alola, +Marowak-Alola-Totem, +Mimikyu, +Mimikyu-Totem, +Mismagius, +Oricorio-Sensu, +Palossand, +Rotom, +Sableye, +Sableye-Mega, +Shedinja, +Silvally-Ghost, +Spiritomb, +Trevenant";
+		}
+		if (type === "grass") {
+			banlist = "+Abomasnow, +Abomasnow-Mega, +Amoonguss, +Bellossom, +Breloom, +Cacturne, +Carnivine, +Celebi, +Cherrim, +Chesnaught, +Cradily, +Decidueye, +Dhelmise, +Exeggutor, +Exeggutor-Alola, +Ferroseed, +Ferrothorn, +Gogoat, +Gourgeist, +Jumpluff, +Kartana, +Leafeon, +Leavanny, +Lilligant, +Ludicolo, +Lurantis, +Maractus, +Meganium, +Parasect, +Roselia, +Roserade, +Rotom-Mow, +Sawsbuck, +Sceptile, +Serperior, +Shaymin, +Shiftry, +Shiinotic, +Silvally-Grass, +Simisage, +Sunflora, +Tangela, +Tangrowth, +Tapu Bulu, +Torterra, +Trevenant, +Tropius, +Tsareena, +Venusaur, +Venusaur-Mega, +Victreebel, +Vileplume, +Virizion, +Whimsicott, +Wormadam";
+		}
+		if (type === "ground") {
+			banlist = "";
+		}
+		if (type === "ice") {
+			banlist = "";
+		}
+		if (type === "normal") {
+			banlist = "";
+		}
+		if (type === "poison") {
+			banlist = "";
+		}
+		if (type === "psychic") {
+			banlist = "+Alakazam, +Alakazam-Mega, +Azelf, +Beheeyem, +Bronzong, +Bruxish, +Celebi, +Chimecho, +Claydol, +Cresselia, +Delphox, +Espeon, +Exeggutor, +Gallade, +Gallade-Mega, +Gardevoir, +Gardevoir-Mega, +Girafarig, +Gothitelle, +Grumpig, +Hoopa, +Hypno, +Jirachi, +Jynx, +Latias, +Latias-Mega, +Latios, +Latios-Mega, +Lunatone, +Malamar, +Medicham, +Meloetta, +Meowstic, +Mesprit, +Metagross, +Mew, +Mr. Mime, +Musharna, +Necrozma, +Oranguru, +Oricorio-Pa'u, +Raichu-Alola, +Reuniclus, +Sigilyph, +Silvally-Psychic, +Slowbro, +Slowbro-Mega, +Slowking, +Solrock, +Starmie, +Swoobat, +Unown, +Uxie, +Victini, +Wobbuffet, +Xatu";
+		}
+		if (type === "rock") {
+			banlist = "";
+		}
+		if (type === "steel") {
+			banlist = "";
+		}
+		if (type === "water") {
+			banlist = "";
+		}
+
+		if (banlist === false) return room.send("Invalid type.");
+		if (!banlist) return room.send("Sorry, that type hasn't been coded yet.");
+
+		checkGenerator(room, 'gen7monotype', args);
+		type = type[0].toUpperCase() + type.substring(1);
+		room.send(`/tour name [Gen 7] Monothreat ${type}`);
+		room.send(`/tour rules ${banlist}, -Uber, -OU, -UU, -RU, -NU, -PU, -ZU, -NFE, -LC Uber, -LC, -UUBL, -RUBL, -NUBL, -PUBL`);
+		room.send(`!rfaq monothreat`);
 	},
 	cc1v1: function(room, user, args) {
 		if (!canMakeTour(room, user)) return;
