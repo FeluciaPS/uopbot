@@ -142,7 +142,7 @@ module.exports = {
             if (!user.can(room, '%')) return;
             room.send('Usage: ``.nfe [type]``.');
             let types = [];
-            for (let i in Object.keys(this)) {
+            for (let i in this) {
                 if (typeof this[i] !== 'string') types.push(i);
             }
             room.send('Valid types: ' + types.join(', '));
