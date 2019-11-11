@@ -27,7 +27,7 @@ global.NFE = {
 
 let canMakeTour = function(room, user) {
     // I'm gonna use this a lot so why not make a function for it
-    if (room != 'monotype') return false;
+    if (room != 'nfe') return false;
     if (!user.can(room, "%")) return false;
     if (room.tournament) {
         room.send("A tournament is already going on.");
