@@ -139,7 +139,7 @@ module.exports = {
             room.send('/tour forcetimer on');
         },
         help: function(room, user, args) {
-            if (!user.can('%', room)) return;
+            if (!user.can(room, '%')) return;
             room.send('Usage: ``.nfe [type]``.');
             let types = [];
             for (let i in Object.keys(this)) {
