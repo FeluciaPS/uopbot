@@ -147,7 +147,7 @@ module.exports = {
             }
             room.send('Valid types: ' + types.join(', '));
         }
-    }
+    },
     nfe1v1: function (room, user, args) {
         if (room.id === 'nfe') if (!user.can(room, '%')) return;
         else if (room.id === '1v1') if (!user.can(room, '%')) return;
