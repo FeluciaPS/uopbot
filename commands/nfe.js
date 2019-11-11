@@ -138,6 +138,15 @@ module.exports = {
             room.send('/tour rules Blitz');
             room.send('/tour forcetimer on');
         },
+        help: function(room, user, args) {
+            if (!user.can('%', room)) return;
+            room.send('Usage: ``.nfe [type]``.');
+            let types = [];
+            for (let i in Object.keys(this)) {
+                if (typeof this[i] !== 'string') types.push(i);
+            }
+            room.send('Valid types: ' + types.join(', '));
+        }
     }
     nfe1v1: function (room, user, args) {
         if (room.id === 'nfe') if (!user.can(room, '%')) return;
