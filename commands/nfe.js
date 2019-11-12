@@ -38,7 +38,6 @@ let canMakeTour = function(room, user) {
 
 let checkGenerator = function(room, meta, args) {
     if (args && args[0]) {
-        if (toId(args[0]) === 'o') room.startTour('o');
         if (args[0].startsWith("rr")) {
             let count = parseInt(args[0].substring(2));
             if (count) room.send(`/tour create ${meta}, rr,, ${count}`);
@@ -52,6 +51,7 @@ let checkGenerator = function(room, meta, args) {
         else {
             room.send(`/tour create ${meta}, elim`)
         }
+        if (toId(args[0]) === 'o') room.startTour('o');
     }
     else room.send(`/tour create ${meta}, elim`);
 }
