@@ -31,10 +31,8 @@ class Room {
 		this.settings.repeat = this.repeat;
 		this.settings.pasttours = this.pasttours;
 		let settings = JSON.stringify(this.settings, null, 4);
-		let temp = this;
-		FS.writeFile(PATH, settings, () => {
-			if (load) temp.loadSettings();
-		});
+		FS.writeFileSync(PATH, settings);
+		if (load) this.loadSettings();
 	}
 	
     send(message) {
