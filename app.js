@@ -11,6 +11,7 @@ try {
 // Event emitter
 let events = require('events');
 global.bot = new events.EventEmitter();
+global.logger = require('./logger.js');
 
 // Config
 global.FS = require('fs');
@@ -27,7 +28,6 @@ try {
 global.Utils = require('./utils.js');
 global.toId = Utils.toId;
 global.colors = require('colors');
-global.logger = require('./logger.js');
 global.Parse = require('./parser.js');
 global.Rooms = require('./Room.js');
 global.Users = require('./User.js');
