@@ -136,6 +136,16 @@ module.exports = {
                 if (typeof Commands.nfe[i] !== 'string' && i !== 'help') types.push(i);
             }
             room.send('Valid types: ' + types.join(', '));
+        },
+        random: function(room, user, args) {
+            if (!user.can(room, '%')) return;
+            let types = [];
+            for (let i in Commands.nfe) {
+                if (typeof Commands.nfe[i] === 'string') continue;
+                if (i === "help" || i === "random") continue;
+                types.push(i);
+            }
+            Commands.nfe[Utils.select(types)](room, user, args);
         }
     },
     nfe1v1: function (room, user, args) {
