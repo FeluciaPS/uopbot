@@ -3,10 +3,10 @@ global.OT1v1 = {
         ["mono", "gen7", "gen7"],
         ["gen7", "gen7", "dp"],
         ["gen7", "bw", "uu"],
-        ["1v1", "mono", "1v1"],
-        ["oras", "1v1", "2v2"],
+        ["gen7", "mono", "gen7"],
+        ["oras", "gen7", "2v2"],
         ["dp", "uu", "bw"],
-        ["1v1", "oras", "1v1"]
+        ["gen7", "oras", "gen7"]
     ],
     times: [1, 9, 17],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
