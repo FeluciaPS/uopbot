@@ -55,7 +55,7 @@ bot.on('c', (parts) => {
         if (typeof func === 'object') {
 			let target = toId(args[0]);
 			if (target in func && typeof func[target] === 'string') target = func[target];
-			if (!func[target]) target = '';
+			if (!target || !func[target]) target = '';
 			func = func[target];
             args.shift();
         }
