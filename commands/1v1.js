@@ -1,12 +1,12 @@
 global.OT1v1 = {
     schedule: [ 
-        ["mono", "1v1", "1v1"],
-        ["1v1", "1v1", "gen41v1"],
-        ["2v2", "gen51v1", "uu1v1"],
+        ["mono", "gen7", "gen7"],
+        ["gen7", "gen7", "gen4"],
+        ["gen7", "gen5", "uu"],
         ["1v1", "mono", "1v1"],
-        ["gen61v1", "1v1", "2v2"],
-        ["gen41v1", "uu1v1", "gen51v1"],
-        ["1v1", "gen61v1", "1v1"]
+        ["gen6", "1v1", "2v2"],
+        ["gen4", "uu", "gen5"],
+        ["1v1", "gen6", "1v1"]
     ],
     times: [1, 9, 17],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
