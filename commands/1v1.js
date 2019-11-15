@@ -1,12 +1,12 @@
 global.OT1v1 = {
     schedule: [ 
         ["mono", "gen7", "gen7"],
-        ["gen7", "gen7", "gen4"],
-        ["gen7", "gen5", "uu"],
+        ["gen7", "gen7", "dp"],
+        ["gen7", "bw", "uu"],
         ["1v1", "mono", "1v1"],
-        ["gen6", "1v1", "2v2"],
-        ["gen4", "uu", "gen5"],
-        ["1v1", "gen6", "1v1"]
+        ["oras", "1v1", "2v2"],
+        ["dp", "uu", "bw"],
+        ["1v1", "oras", "1v1"]
     ],
     times: [1, 9, 17],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
@@ -207,7 +207,9 @@ module.exports = {
                 if (hours <= 0 && minutes <= 0) timestr = "should've already started";
                 r += "<b>1v1:</b>";
                 if (targetroom === user) r = r.replace(/<\/?b>/gi, '**');
-                r += ` ${OT1v1.schedule[day][next]} ${timestr}`;
+                let meta = OT1v1.schedule[day][next];
+                if (meta !== '2v2') meta += ' 1v1';
+                r += `${meta} ${timestr}`;
                 rooms.push(r);
             }
             if (inNFE) {
@@ -239,7 +241,9 @@ module.exports = {
                 if (hours >= 24) hours -= 24;
                 let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
                 if (hours <= 0 && minutes <= 0) timestr = "should've already started";
-                ret += `**${OT1v1.schedule[day][next]}** ${timestr}`;
+                let meta = OT1v1.schedule[day][next];
+                if (meta !== "2v2") meta += ' 1v1';
+                ret += `**${meta}** ${timestr}`;
                 targetroom.send(ret);
             }
             else if (room.id === 'nfe') {
