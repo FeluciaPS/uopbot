@@ -11,7 +11,7 @@ let canMakeTour = function(room, user) {
     return true;
 }
 
-let checkGenerator = function(room, meta, args, tourname) {
+let checkGenerator = function(room, meta, args, tourname = '') {
     if (args && args[0]) {
         if (args[0].startsWith("rr")) {
             let count = parseInt(args[0].substring(2));
