@@ -24,31 +24,53 @@
     "nfe": {
         "meta": "nu",
         "bans": ["ZU", "NU", "RU", "UU", "OU", "UUBL", "RUBL", "NUBL", "PUBL", "PU", "Uber", "Gurdurr", "Type: Null", "Vigoroth", "Arena Trap", "Drought", "Shadow Tag", "Aurora Veil"],
-        "unbans": ["Clefairy", "Ferroseed", "Haunter", "Roselia", "Tangela"]
+        "unbans": ["Clefairy", "Ferroseed", "Haunter", "Roselia", "Tangela"],
+        "addrules": [],
+        "remrules": []
     },
-
     "aaa": {
         "unbans": ["Tapu Koko"],
-        "ability-bans": ["Sturdy", "Huge Power", "Pure Power", "Fur Coat", "Illusion", "Moody", "Parental Bond", "Protean", "Simple", "Speed Boost", "Water Bubble", "Wonder Guard", "No Guard", "Imposter", "Normalize", "Psychic Surge", "Multiscale", "Shadow Shield", "Hustle"],
-        "mon-bans": ["Regigigas", "Slaking", "Kartana", "Pheromosa", "Archeops"]
+        "bans": ["Sturdy", "Huge Power", "Pure Power", "Fur Coat", "Illusion", "Moody", "Parental Bond", "Protean", "Simple", "Speed Boost", "Water Bubble", "Wonder Guard", "No Guard", "Imposter", "Normalize", "Psychic Surge", "Multiscale", "Shadow Shield", "Hustle", "Regigigas", "Slaking", "Kartana", "Pheromosa", "Archeops"],
+        "addrules": [],
+        "remrules": []
     },
-    "ag": ["Accuracy Moves Clause", "Evasion Moves Clause", "Species Clause", "OHKO Clause", "Nickname Clause", "Swagger Clause", "Moody Clause"],
+    "ag": {
+        "unbans": ["ZU", "NU", "RU", "UU", "OU", "UUBL", "RUBL", "NUBL", "PUBL", "PU", "NFE", "LC", "LC Uber", "Uber"],
+        "bans": [],
+        "addrules": [],
+        "remrules": ["Accuracy Moves Clause", "Evasion Moves Clause", "Species Clause", "OHKO Clause", "Nickname Clause", "Swagger Clause", "Moody Clause"]
+    },
+    "ubers": {
+        "unbans": ["ZU", "NU", "RU", "UU", "OU", "UUBL", "RUBL", "NUBL", "PUBL", "PU", "NFE", "LC", "LC Uber", "Uber"],
+        "bans": ["Arceus", "Lunala"],
+        "addrules": [],
+        "remrules": []
+    },
     "inverse": {
         "bans": ["Porygon-Z"],
-        "unbans": []
+        "unbans": [],
+        "addrules": ["Inverse Mod"],
+        "remrules": []
     },
     "monotype": {
         "bans": [],
-        "unbans": []
+        "unbans": [],
+        "addrules": ["Same Type Clause"],
+        "remrules": []
     },
     "stabmons": {
         "bans": ["Pidgeot-Mega", "Tapu Lele", "Lovely Kiss", "Sleep Powder", "Spore"],
-        "unbans": []
+        "unbans": [],
+        "addrules": ["STABmons Move Legality"],
+        "remrules": []
     },
-    "uu": ["Aegislash", "Charizardite X", "Charizardite Y", "Donphan", "Dragonite", "Garchomp", "Gardevoirite", "Greninja", "Gyaradosite", "Kartana", "Kommo-o", "Lopunnite", "Magearna", "Magnezone", "Mawilite", "Metagrossite", "Porygon-Z", "Primarina", "Serperior", "Tapu Fini", "Tapu Lele", "Victini", "Zeraora"],
-    
+    "uu": {
+        "bans": ["Aegislash", "Charizardite X", "Charizardite Y", "Donphan", "Dragonite", "Garchomp", "Gardevoirite", "Greninja", "Gyaradosite", "Kartana", "Kommo-o", "Lopunnite", "Magearna", "Magnezone", "Mawilite", "Metagrossite", "Porygon-Z", "Primarina", "Serperior", "Tapu Fini", "Tapu Lele", "Victini", "Zeraora"],
+        "unbans": [],
+        "addrules": [],
+        "remrules": []
+    },    
     "gen51v1": {
-        "meta": "gen5ou",
         "bans": ["Focus Sash"],
         "unbans": ["Genesect", "Landorus-Incarnate", "Thundurus-Incarnate", "Tornadus-Therian", "Dugtrio", "Manaphy"]
     },

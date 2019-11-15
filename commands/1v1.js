@@ -34,15 +34,15 @@ global.OT1v1 = {
             this.last = next;
             let type = this.schedule[day][next];
             room.send('/modnote OFFICIAL: ' + type);
-            if (end) setTimeout(Commands[type], 3950, room, Users.staff, ["o"]);
-            else Commands[type](room, Users.staff, ["o"]);
+            if (end) setTimeout(Commands['1v1'][type], 3950, room, Users.staff, ["o"]);
+            else Commands['1v1'][type](room, Users.staff, ["o"]);
         }
     }
 }
 
 let canMakeTour = function(room, user) {
     // I'm gonna use this a lot so why not make a function for it
-    if (room != '1v1' && room != '1v1typechallenge' && room != '1v1oldgens') return false;
+    if (room != '1v1') return false;
     if (!user.can(room, "%")) return false;
     if (room.tournament) {
         room.send("A tournament is already going on.");
@@ -51,7 +51,136 @@ let canMakeTour = function(room, user) {
     return true;
 }
 
+let checkGenerator = function(room, meta, args, tourname = '') {
+    if (args && args[0]) {
+        if (args[0].startsWith("rr")) {
+            let count = parseInt(args[0].substring(2));
+            if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
+            else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
+        }
+        else if (args[0].startsWith("e")){
+            let count = parseInt(args[0].substring(1));
+            if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
+            else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+        }
+        else {
+            room.send(`/tour create ${meta}, elim,,, ${tourname}`)
+        }
+        if (toId(args[0]) === 'o') room.startTour('o');
+    }
+    else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+    if (toId(args[1]) === 'o') room.startTour('o');
+}
+
+let buildRuleset = function(meta) {
+    let banlist = Banlist[meta];
+    let ret = '/tour rules ';
+    let rules = [];
+    for (let x of banlist.addrules) rules.push(x);
+    for (let x of banlist.remrules) rules.push(`!${x}`);
+    for (let x of banlist.bans) rules.push(`-${x}`);
+    for (let x of banlist.unbans) rules.push(`+${x}`);
+    return ret + rules.join(', ');
+}
+
 module.exports = {
+    '1v1': {
+        '': function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args);
+        },
+        gen6: 'oras',
+        oras: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen61v1', args);
+        },
+        gen5: 'bw',
+        bw: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen51v1', args);
+        },
+        gen4: 'dp',
+        dp: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen41v1', args);
+        },
+        gen3: 'rse',
+        rse: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen31v1', args);
+        },
+        aaa: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] AAA 1v1');
+            room.send(buildRuleset('aaa'));
+        },
+        ag: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] AG 1v1');
+            room.send(buildRuleset('ag'));
+        },
+        inverse: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] Inverse 1v1');
+            room.send(buildRuleset('inverse'));
+        },
+        monotype: 'mono',
+        mono: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
+            room.send(buildRuleset('monotype'));
+        },
+        nfe: function(room, user, args) {
+            Commands.nfe1v1(room, user, args);
+        },
+        noz: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] No Z 1v1');
+            room.send('/tour rules Z Move Clause');
+        },
+        stabmons: 'stab',
+        stab: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] STABmons 1v1');
+            room.send(buildRuleset('stabmons'));
+        },
+        ubers: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] Ubers 1v1');
+            room.send(buildRuleset('ubers'));
+        },
+        uu: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args, '[Gen 7] UU 1v1');
+            room.send(buildRuleset('uu'));
+        },
+        chill: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen71v1', args);
+            room.startTour('chill');
+        },
+        '2v2': function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen72v2doubles', args);
+        },
+        help: function(room, user, args) {
+            if (!user.can(room, '%')) return;
+            room.send('Usage: ``.1v1 [type]``.');
+            let types = [];
+            for (let i in Commands['1v1']) {
+                if (typeof Commands['1v1'][i] !== 'string' && i !== 'help') types.push(i);
+            }
+            room.send('Valid types: ' + types.join(', '));
+        },
+        random: function(room, user, args) {
+            if (!user.can(room, '%')) return;
+            let types = [];
+            for (let i in Commands['1v1']) {
+                if (typeof Commands['1v1'][i] !== 'string' && i !== 'help' && i !== 'random' && i !== 'chill') types.push(i);
+            }
+            Commands['1v1'][Utils.select(types)](room, user, args);
+        }
+    },
     nextot: function(room, user, args) {
         let now = new Date(Date.now());
         let ret = "";
@@ -133,271 +262,4 @@ module.exports = {
         text += "<a href='https://www.smogon.com/forums/threads/1v1-oms.3648454/'>1v1 OMs</a>: AAA 1v1, AG 1v1, Inverse 1v1, Monotype 1v1, No Z 1v1, STABmons 1v1";
         room.send(text);
     },
-    randtour: function(room, user, args) {
-        let tourtypes = [
-            "1v1",
-            "2v2",
-            "gen61v1",
-            "gen51v1",
-            "gen41v1",
-            "gen31v1",
-            "aaa1v1",
-            "ag1v1",
-            "inverse1v1",
-            "mono1v1",
-            "noz1v1",
-            "stab1v1",
-            "uu1v1",
-            "monopoke"
-        ]
-        Commands[Utils.select(tourtypes)](room, user, args);
-    },
-    chill: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        Commands['1v1'](room, user, ["rr"]);
-        room.startTour("chill");
-    },
-    '1v1': function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create 1v1, rr,, " + count);
-                else room.send("/tour create 1v1, rr");
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create 1v1, elim,, " + count);
-                else room.send("/tour create 1v1, elim");
-            }
-            else {
-                room.send("/tour create 1v1, elim")
-            }
-        }
-        else room.send("/tour create 1v1, elim");
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-    },
-    '2v2': function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create 2v2, rr,, " + count);
-                else room.send("/tour create 2v2, rr");
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create 2v2, elim,, " + count);
-                else room.send("/tour create 2v2, elim");
-            }
-            else {
-                room.send("/tour create 2v2, elim")
-            }
-        }
-        else room.send("/tour create 2v2, elim");
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-    },
-    oras1v1: 'gen61v1',
-    oars: 'gen61v1',
-    gen61v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create gen61v1, rr,, " + count);
-                else room.send("/tour create gen61v1, rr");
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create gen61v1, elim,, " + count);
-                else room.send("/tour create gen61v1, elim");
-            }
-            else {
-                room.send("/tour create gen61v1, elim")
-            }
-        }
-        else room.send("/tour create gen61v1, elim");
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-    },
-    bw1v1: 'gen51v1',
-    gen51v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create gen51v1, rr,, " + count);
-                else room.send("/tour create gen51v1, rr");
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create gen51v1, elim,, " + count);
-                else room.send("/tour create gen51v1, elim");
-            }
-            else {
-                room.send("/tour create gen51v1, elim")
-            }
-        }
-        else room.send("/tour create gen51v1, elim");
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-    },
-    dp1v1: 'gen41v1',
-    gen41v1: function(room, user, args) {
-        if (!Tournament.formats['gen41v1']) return this.oldgen41v1(room, user, args);
-        if (!canMakeTour(room, user)) return;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create gen41v1, rr,, " + count);
-                else room.send("/tour create gen41v1, rr");
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create gen41v1, elim,, " + count);
-                else room.send("/tour create gen41v1, elim");
-            }
-            else {
-                room.send("/tour create gen41v1, elim")
-            }
-        }
-        else room.send("/tour create gen41v1, elim");
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-
-    },
-    oldgen41v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let bl = Banlist.gen41v1;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send(`/tour create ${bl.meta}, rr,, ${count}`);
-                else room.send(`/tour create ${bl.meta}, rr`);
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send(`/tour create ${bl.meta}, elim,, ${count}`);
-                else room.send(`/tour create ${bl.meta}, elim`);
-            }
-            else {
-                room.send(`/tour create ${bl.meta}, elim`)
-            }
-        }
-        let ruleset = "/tour rules Team Preview, "
-        if (bl.bans.length) ruleset += "-" + bl.bans.join(", -") + ", ";
-        if (bl.unbans.length) ruleset += "+" + bl.unbans.join(", +") + ", ";
-        ruleset = ruleset.substring(0, ruleset.length - 2);
-        room.send("/tour name [Gen 4] 1v1");
-        room.send(ruleset);
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-    },
-    adv1v1: 'gen31v1',
-    gsc1v1: 'gen31v1',
-    gen31v1: function(room, user, args) {
-        if (!Tournament.formats['gen31v1']) return this.oldgen31v1(room, user, args);
-        if (!canMakeTour(room, user)) return;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send("/tour create gen31v1, rr,, " + count);
-                else room.send("/tour create gen31v1, rr");
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send("/tour create gen31v1, elim,, " + count);
-                else room.send("/tour create gen31v1, elim");
-            }
-            else {
-                room.send("/tour create gen31v1, elim")
-            }
-        }
-        else room.send("/tour create gen31v1, elim");
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-
-    },
-    oldgen31v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let bl = Banlist.gen31v1;
-        if (args) {
-            if (args[0].startsWith("rr")) {
-                let count = parseInt(args[0].substring(2));
-                if (count) room.send(`/tour create ${bl.meta}, rr,, ${count}`);
-                else room.send(`/tour create ${bl.meta}, rr`);
-            }
-            else if (args[0].startsWith("e")){
-                let count = parseInt(args[0].substring(1));
-                if (count) room.send(`/tour create ${bl.meta}, elim,, ${count}`);
-                else room.send(`/tour create ${bl.meta}, elim`);
-            }
-            else {
-                room.send(`/tour create ${bl.meta}, elim`)
-            }
-        }
-        let ruleset = "/tour rules Team Preview, "
-        if (bl.bans.length) ruleset += "-" + bl.bans.join(", -") + ", ";
-        if (bl.unbans.length) ruleset += "+" + bl.unbans.join(", +") + ", ";
-        ruleset = ruleset.substring(0, ruleset.length - 2);
-        room.send("/tour create " + bl.meta + ", elim");
-        room.send("/tour name [Gen 3] 1v1");
-        room.send(ruleset);
-        if (args[0] === 'o') room.startTour("o"); // Make a tour object manually instead of doing it in parser so the "Official" flag can be passed
-    },
-    aaa1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules !Obtainable Abilities, -" + Banlist.aaa['ability-bans'].join(', -') + ", -" + Banlist.aaa['mon-bans'].join(', -'); // Yes I realize this doesn't properly work if there aren't any ability-bans or mon-bans. I'll tackle that if we ever get to that point
-        if (Banlist.aaa.unbans) ruleset += ", +" + Banlist.aaa['unbans'].join(', +')
-        Commands['1v1'](room, user, args);
-        room.send(ruleset);
-        room.send("/tour name [Gen 7] AAA 1v1");
-    },
-    ag1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules !" + Banlist.ag.join(', !') + ", +" + Banlist['1v1'].join(', +') + ", +Detect + Fightinium Z, +Focus Sash, +Perish Song";
-        Commands['1v1'](room, user, args);
-        room.send(ruleset);
-        room.send("/tour name [Gen 7] AG 1v1");
-    },
-    inverse1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules Inverse Mod, "
-        if (Banlist.inverse.bans.length) ruleset += "-" + Banlist.inverse.bans.join(", -") + ", ";
-        if (Banlist.inverse.unbans.length) ruleset += "+" + Banlist.inverse.unbans.join(", +") + ", ";
-        ruleset = ruleset.substring(0, ruleset.length - 2);
-        Commands['1v1'](room, user, args);
-        room.send(ruleset);
-        room.send("/tour name [Gen 7] Inverse 1v1");
-    },
-    monotype1v1: 'mono1v1',
-    mono1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules Same Type Clause, "
-        if (Banlist.monotype.bans.length) ruleset += "-" + Banlist.monotype.bans.join(", -") + ", ";
-        if (Banlist.monotype.unbans.length) ruleset += "+" + Banlist.monotype.unbans.join(", +") + ", ";
-        ruleset = ruleset.substring(0, ruleset.length - 2);
-        Commands['1v1'](room, user, args);
-        room.send(ruleset);
-        room.send("/tour name [Gen 7] Monotype 1v1");
-    },
-    noz1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        Commands['1v1'](room, user, args);
-        room.send("/tour rules Z-Move Clause");
-        room.send("/tour name [Gen 7] No Z 1v1");
-    },
-    stabmons1v1: 'stab',
-    stab1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules STABmons Move Legality, "
-        if (Banlist.stabmons.bans.length) ruleset += "-" + Banlist.stabmons.bans.join(", -") + ", ";
-        if (Banlist.stabmons.unbans.length) ruleset += "+" + Banlist.stabmons.unbans.join(", +") + ", ";
-        ruleset = ruleset.substring(0, ruleset.length - 2);
-        Commands['1v1'](room, user, args);
-        room.send(ruleset);
-        room.send("/tour name [Gen 7] STABmons 1v1");
-    },
-    uu1v1: function(room, user, args) {
-        if (!canMakeTour(room, user)) return;
-        let ruleset = "/tour rules -" + Banlist.uu.join(', -');
-        Commands['1v1'](room, user, args);
-        room.send(ruleset);
-        room.send("/tour name [Gen 7] UU 1v1");
-    }
 };
