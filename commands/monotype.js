@@ -40,6 +40,7 @@ module.exports = {
 			checkGenerator(room, 'gen8oubeta', args, '[Gen 8] Monotype');
 			room.send('/tour rules Same Type Clause -Hidden Power, -Frustration, -Pursuit, -Return, -Shadow Tag');
 			room.send('/wall Be advised, New Moves don\'t work with DYNAMAX');
+			room.send('/tour scouting off');
 		},
 		'': 'gen7',
 		gen7: function(room, user, args) {
