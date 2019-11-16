@@ -59,6 +59,11 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 
 module.exports = {
     nfe: {
+        gen8: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8oubeta', args, '[Gen 8] NFE');
+            room.send('/tour rules NFE Clause');
+        },
         '': 'gen7',
         gen7: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
