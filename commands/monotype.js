@@ -35,6 +35,12 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 module.exports = {
 	mono: {
 		// Old (and current) generations
+		gen8: function(room, user, args) {
+			if (!canMakeTour(room, user)) return;
+			checkGenerator(room, 'gen8oubeta', args, '[Gen 8] Monotype');
+			room.send('/tour rules Same Type Clause -Hidden Power, -Frustration, -Pursuit, -Return, -Shadow Tag');
+			room.send('/wall Be advised, New Moves don\'t work with DYNAMAX');
+		},
 		'': 'gen7',
 		gen7: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
