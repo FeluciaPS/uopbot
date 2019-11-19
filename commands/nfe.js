@@ -67,7 +67,7 @@ module.exports = {
         gen7: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7ou', args, '[Gen 7] NFE');
-            room.send('/tour rules NFE Clause, -Chansey, -Doublade, -Gligar, -Golbat, -Gurdurr, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Scyther, -Sneasel, -Type: Null, -Vigoroth, -Drought, -Aurora Veil'
+            room.send('/tour rules NFE Clause, -Chansey, -Doublade, -Gligar, -Golbat, -Gurdurr, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Scyther, -Sneasel, -Type: Null, -Vigoroth, -Drought, -Aurora Veil');
         },
         oras: 'gen6',
         gen6: function(room, user, args) {
