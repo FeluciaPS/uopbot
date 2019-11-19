@@ -35,13 +35,12 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 module.exports = {
 	mono: {
 		// Old (and current) generations
+		'': 'gen8',
 		gen8: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen8oubeta', args, '[Gen 8] Monotype');
-			room.send('/tour rules Same Type Clause, -Shadow Tag');
+			checkGenerator(room, 'gen8monotype', args);
 			room.send('/tour scouting off');
 		},
-		'': 'gen7',
 		gen7: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotype', args);
