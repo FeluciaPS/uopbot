@@ -85,7 +85,11 @@ let buildRuleset = function(meta) {
 
 module.exports = {
     '1v1': {
-        '': 'gen7',
+        '': 'gen8',
+        gen8: function(room, user, arg) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen81v1', args);
+        },
         gen7: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args);
