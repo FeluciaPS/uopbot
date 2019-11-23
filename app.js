@@ -37,7 +37,7 @@ try {
 	global.Send = Utils.send;
 	global.Sendpm = Utils.sendpm;
 	global.Monitor = require('./monitor.js');
-
+	global.Reminder = require('./Reminder.js');
 
 
 	// Connect

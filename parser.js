@@ -44,6 +44,8 @@ bot.on('c', (parts) => {
     if (!parts[4]) return;
     let message = parts[4].trim();
     Rooms[room].runChecks(message);
+    Reminder.check();
+    Reminder.parse(user, room, message);
     for (let i of OTs) i.official();
     Monitor.monitor(user.name, message);
     logger.emit('chat', Utils.getRoom(parts[0]), user.name, message);
