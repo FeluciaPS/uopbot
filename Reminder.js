@@ -121,7 +121,7 @@ module.exports = {
 		if (timethings.minutes) ret.push(timethings.minutes + ' minute' + (timethings.minutes === 1 ? '' : 's'));
 		let timestr = ret.join(' and ');
 		let ands = timestr.match(/and/gi);
-		while(ands.length > 1) {
+		while(ands && ands.length > 1) {
 			timestr = timestr.replace(' and', ',');
 			ands = timestr.match(/and/gi);
 		}
