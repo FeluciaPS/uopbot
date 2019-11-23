@@ -66,6 +66,7 @@ module.exports = {
 		else {
 			return "Invalid syntax.";
 		}
+		console.log(parts);
 		parts.in = parts.in.replace(/ ?and ?/gi, ',').replace(/ ?, ?/g, ',').split(',');
 		let fromnow = 0;
 		let timethings = {
