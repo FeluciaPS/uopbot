@@ -49,19 +49,19 @@ module.exports = {
 		message = message.substring(11).trim();
 		let parts = {};
 		if (message.toLowerCase().startsWith('in')) {
-			let to = message.indexOf("to");
-			parts.in = message.substring(2, to).trim();
-			parts.to = message.substring(to).trim();
+			let to = message.indexOf(" to ");
+			parts.in = message.substring(2, to+1).trim();
+			parts.to = message.substring(to+1).trim();
 		}
 		else if (message.toLowerCase().startsWith('to')) {
-			let to = message.indexOf("in");
-			parts.to = message.substring(0, to).trim();
-			parts.in = message.substring(to + 2).trim();
+			let to = message.indexOf(" in ");
+			parts.to = message.substring(0, to+1).trim();
+			parts.in = message.substring(to + 3).trim();
 		}
 		else if (message.includes("in")) {
-			let to = message.indexOf("in");
-			parts.to = message.substring(0, to).trim();
-			parts.in = message.substring(to + 2).trim();
+			let to = message.indexOf(" in ");
+			parts.to = message.substring(0, to+1).trim();
+			parts.in = message.substring(to + 3).trim();
 		}
 		else {
 			return "Invalid syntax.";
