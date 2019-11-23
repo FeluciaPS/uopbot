@@ -20,7 +20,6 @@ global.NFE = {
             require('fs').writeFileSync("./data/lastnfe.txt", next);
             this.last = next;
             Commands['nfe']['gen7'](room, Users.staff, ["o"]);
-            room.startTour("o");
         }
     }
 }
