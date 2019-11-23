@@ -45,7 +45,7 @@ bot.on('c', (parts) => {
     let message = parts[4].trim();
     Rooms[room].runChecks(message);
     Reminder.check();
-    Reminder.parse(user, room, message);
+    Reminder.parse(user, Rooms[room], message);
     for (let i of OTs) i.official();
     Monitor.monitor(user.name, message);
     logger.emit('chat', Utils.getRoom(parts[0]), user.name, message);
@@ -63,63 +63,6 @@ bot.on('c', (parts) => {
         }
         func(Rooms[room], user, args, val, time);
         logger.emit('cmd', cmd, val);
-    }
-    if (message.startsWith(Config.username + " ")) {
-        let msg = message.substring(Config.username.length + 1);
-        let m = msg.match(/remind me( to)?/i);
-        if (m) {
-            let to = !!msg.match(/remind me to/i);
-            msg = msg.replace(/remind me( to)? /i, "");
-            let temp = msg;
-            let i = 0;
-            if (!temp.match(/\sin\s/g)) {
-                room = Rooms[room];
-                if (user.can(room, "+")) {
-                    room.send("Okay, I'll remind you in 3 hours.");
-                    setTimeout(function() { room.send(msg) }, 1000*60*60*3);
-                }
-                else {
-                    user.send("Okay, I'll remind you in 3 hours.");
-                    setTimeout(function() { user.send(msg) }, 1000*60*60*3);
-                }
-                return;
-            }
-            while (temp.match(/\sin\s/g).length > 1) {
-                temp = temp.replace('in', '[![![!]!]!]');
-                i++;
-            }
-            let index = temp.indexOf(" in ") - (9*i);
-            let part1 = msg.substring(0, index);
-            let part2 = msg.substring(index+4);
-            
-            let time = 0;
-            part2 = part2.replace(/hours/gi, 'hour');
-            part2 = part2.replace(/minutes/gi, 'minute');
-            part2 = part2.replace(/ and /gi, ',');
-            let timeparts = part2.split(",");
-            console.log(timeparts);
-            for (let i in timeparts) {
-                if (!user.can(room, "+")) room = user;
-                let tmp = timeparts[i].split(' ');
-                if (tmp.length !== 2) return room.send("I don't understand your time format.");
-                if (toId(tmp[1]) !== 'hour' && toId(tmp[1]) !== 'minute') return room.send("I can only process minutes and hours.");
-                if (isNaN(parseInt(tmp[0]))) return room.send(tmp[0] + " isn't a number.");
-                let tm = parseInt(tmp[0]);
-                if (toId(tmp[1]) === 'hour') tm *= 60;
-                time += tm * 60 * 1000;
-            }
-            let ret = user.name + "! You wanted me to remind you " + (to ? "to " : "") + part1;
-            room = Rooms[room];
-            if (user.can(room, "+") || room === user) {
-                room.send("Okay, will do.");
-                setTimeout(function() { room.send(ret) }, time);
-            }
-            else {
-                user.send("Okay, will do.");
-                setTimeout(function() { user.send(ret) }, time);
-            }
-            //Rooms[room].send("In " + part2 + " you need to " + part1);
-        }
     }
 });
 
@@ -140,47 +83,8 @@ bot.on('pm', (parts) => {
         logger.emit('cmd', cmd, val);
     }
     if (cmd === "tco" && user.id === "vrbot" && Rooms['1v1']) Rooms['1v1'].send("1v1 Type Challenge official tournament in <<1v1tc>>");
-    if (message.startsWith(Config.username + " ")) {
-        let msg = message.substring(Config.username.length + 1);
-        let m = msg.match(/remind me( to)?/i);
-        if (m) {
-            let to = !!msg.match(/remind me to/i);
-            msg = msg.replace(/remind me( to)? /i, "");
-            let temp = msg;
-            let i = 0;
-            if (!temp.match(/\sin\s/g)) {
-                user.send("Okay, I'll remind you in 3 hours.");
-                setTimeout(function() { user.send(msg) }, 1000*60*60*3);
-                return;
-            }
-            while (temp.match(/\sin\s/g).length > 1) {
-                temp = temp.replace('in', '[![![!]!]!]');
-                i++;
-            }
-            let index = temp.indexOf(" in ") - (9*i);
-            let part1 = msg.substring(0, index);
-            let part2 = msg.substring(index+4);
-            
-            let time = 0;
-            part2 = part2.replace(/hours/gi, 'hour');
-            part2 = part2.replace(/minutes/gi, 'minute');
-            part2 = part2.replace(/ and /gi, ',');
-            let timeparts = part2.split(",");
-            console.log(timeparts);
-            for (let i in timeparts) {
-                let tmp = timeparts[i].split(' ');
-                if (tmp.length !== 2) return user.send("I don't understand your time format.");
-                if (toId(tmp[1]) !== 'hour' && toId(tmp[1]) !== 'minute') return user.send("I can only process minutes and hours.");
-                if (isNaN(parseInt(tmp[0]))) return user.send(tmp[0] + " isn't a number.");
-                let tm = parseInt(tmp[0]);
-                if (toId(tmp[1]) === 'hour') tm *= 60;
-                time += tm * 60 * 1000;
-            }
-            let ret = user.name + "! You wanted me to remind you " + (to ? "to " : "") + part1;
-            user.send("Okay, will do.");
-            setTimeout(function() { user.send(ret) }, time);
-        }
-    }
+    Reminder.check();
+    Reminder.parse(user, user, message);
 });
 
 bot.on('j', (parts) => {
