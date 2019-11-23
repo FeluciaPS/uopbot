@@ -119,6 +119,7 @@ module.exports = {
 		if (timethings.days) ret.push(timethings.days + ' day' + (timethings.days === 1 ? '' : 's'));
 		if (timethings.hours) ret.push(timethings.hours + ' hour' + (timethings.hours === 1 ? '' : 's'));
 		if (timethings.minutes) ret.push(timethings.minutes + ' minute' + (timethings.minutes === 1 ? '' : 's'));
+		console.log(timethings);
 		let timestr = ret.join(' and ');
 		let ands = timestr.match(/and/gi);
 		while(ands && ands.length > 1) {
