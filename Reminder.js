@@ -51,17 +51,17 @@ module.exports = {
 		if (message.toLowerCase().startsWith('in')) {
 			let to = message.indexOf(" to ");
 			parts.in = message.substring(2, to+1).trim();
-			parts.to = message.substring(to+1).trim();
+			parts.to = message.substring(to).trim();
 		}
 		else if (message.toLowerCase().startsWith('to')) {
 			let to = message.indexOf(" in ");
 			parts.to = message.substring(0, to+1).trim();
-			parts.in = message.substring(to + 3).trim();
+			parts.in = message.substring(to + 2).trim();
 		}
 		else if (message.includes("in")) {
 			let to = message.indexOf(" in ");
 			parts.to = message.substring(0, to+1).trim();
-			parts.in = message.substring(to + 3).trim();
+			parts.in = message.substring(to + 2).trim();
 		}
 		else {
 			return "Invalid syntax.";
@@ -127,7 +127,7 @@ module.exports = {
 			timestr = timestr.replace(' and', ',');
 			ands = timestr.match(/and/gi);
 		}
-		let msg = parts.to;
+		let msg = user.name + " you wanted me to remind you " + parts.to;
 		let endtime = Date.now() + fromnow;
 
 		while (reminders[endtime]) endtime += 1;
