@@ -161,8 +161,8 @@ module.exports = {
         otherroom = Rooms[otherroom];
         if (room.tournament) return room.send("A tournament is already going on");
         if (room.tourcool && !user.can(room, '%')) return room.send("Tours are on cooldown for now");
-        checkGenerator(room, 'gen71v1', args, '[Gen 7] NFE 1v1');
-        room.send("/tour rules NFE Clause, -Chansey, -Dusclops, -Magneton, -Porygon 2, -Type: Null");
+        checkGenerator(room, 'gen81v1', args, '[Gen 8] NFE 1v1');
+        room.send("/tour rules NFE Clause, -Type: Null");
         otherroom.send(`NFE 1v1 tournament in <<${room.id}>>`);
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
     },    
