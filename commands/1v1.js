@@ -166,7 +166,7 @@ module.exports = {
         },
         '2v2': function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen72v2doubles', args);
+            checkGenerator(room, 'gen82v2doubles', args);
         },
         help: function(room, user, args) {
             if (!user.can(room, '%')) return;
