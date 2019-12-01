@@ -1,12 +1,12 @@
 global.OT1v1 = {
     schedule: [ 
-        ["mono", "gen7", "gen7"],
-        ["gen7", "gen7", "dp"],
-        ["gen7", "bw", "uu"],
-        ["gen7", "mono", "gen7"],
-        ["oras", "gen7", "2v2"],
-        ["dp", "uu", "bw"],
-        ["gen7", "oras", "gen7"]
+        ["gen8", "gen8", "gen4"],
+        ["gen3", "gen5", "gen7"],
+        ["gen8", "mono", "gen8"],
+        ["gen6", "gen8", "gen3"],
+        ["gen4", "gen7", "gen5"],
+        ["gen8", "gen6", "gen8"],
+        ["ubers", "gen8", "gen8"]
     ],
     times: [1, 9, 17],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
@@ -132,7 +132,7 @@ module.exports = {
         monotype: 'mono',
         mono: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] Monotype 1v1');
             room.send(buildRuleset('monotype'));
         },
         nfe: function(room, user, args) {
@@ -151,7 +151,7 @@ module.exports = {
         },
         ubers: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] Ubers 1v1');
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] Ubers 1v1');
             room.send(buildRuleset('ubers'));
         },
         uu: function(room, user, args) {
