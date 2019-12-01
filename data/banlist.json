@@ -41,6 +41,12 @@
         "remrules": ["Accuracy Moves Clause", "Evasion Moves Clause", "Species Clause", "OHKO Clause", "Nickname Clause", "Swagger Clause", "Moody Clause"]
     },
     "ubers": {
+        "bans": [],
+        "unbans": ["Eternatus", "Zacian", "Zamazenta"],
+        "addrules": [],
+        "remrules": []
+    },
+    "gen7ubers": {
         "unbans": ["Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense", "Dialga", "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-Black", "Kyurem-White", "Lugia", "Marshadow", "Mewtwo", "Mimikyu", "Necrozma-Dawn-Wings", "Necrozma-Dusk-Mane", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky", "Snorlax", "Solgaleo", "Tapu Koko", "Xerneas", "Yveltal", "Zekrom"],
         "bans": [],
         "addrules": [],
