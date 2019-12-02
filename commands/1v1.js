@@ -94,23 +94,23 @@ module.exports = {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args);
         },
-        gen6: 'oras',
-        oras: function(room, user, args) {
+        oras: 'gen6',
+        gen6: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen61v1', args);
         },
-        gen5: 'bw',
-        bw: function(room, user, args) {
+        bw: 'gen5',
+        gen5: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen51v1', args);
         },
-        gen4: 'dp',
-        dp: function(room, user, args) {
+        dp: 'gen4',
+        gen4: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen41v1', args);
         },
-        gen3: 'rse',
-        rse: function(room, user, args) {
+        rse: 'gen3',
+        gen3: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen31v1', args);
         },
