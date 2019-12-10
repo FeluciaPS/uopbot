@@ -18,6 +18,7 @@ class Tournament {
         let tourcheck = room.id + (this.official ? "-o" : "");
         if (type === "monopoke") tourcheck = '1v1-o'; // I know this looks ugly deal with it
         if (type === "late") {
+            this.started = true;
 			return;
 			this.format = 'unknown';
 		}
@@ -44,7 +45,7 @@ class Tournament {
         if (Date.now() < this.autostart) return;
         if (this.started) return;
 
-        if (thisect.keys(this.players).length >= 2) this.room.send('/tour start');
+        if (Object.keys(this.players).length >= 2) this.room.send('/tour start');
         else if (Users.self.can(this.room, '*')) {
             this.room.send("Not enough players... Ending tournament.");
             this.room.send('/tour end');
