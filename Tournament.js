@@ -41,7 +41,7 @@ class Tournament {
     
     checkstart() {
         if (this.startCheckTimer) return;
-        if (this.autostart) return;
+        if (!this.autostart) return;
         if (Date.now() < this.autostart) this.startCheckTimer = setTimeout(this.checkstart, 60*1000);
         if (this.started) return;
         if (Object.keys(this.players).length >= 2) this.room.send('/tour start');
@@ -54,6 +54,7 @@ class Tournament {
         if (!val) return;
         let now = Date.now();
         this.autostart = now + val + 60*2*1000;
+        setTimeout(this.checkstart, 60*1000);
     }
 
     buildRules() {
