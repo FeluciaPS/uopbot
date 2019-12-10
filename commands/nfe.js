@@ -15,6 +15,7 @@ global.NFE = {
                 else {
                     room.send("/wall Official time. Ending ongoing tournament");
                     room.send("/tour end");
+                    room.endTour();
                 }
             }
             require('fs').writeFileSync("./data/lastnfe.txt", next);
@@ -100,17 +101,17 @@ module.exports = {
         },
         bh: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7balancedhackmons', args, '[Gen 7] BH NFE');
+            checkGenerator(room, 'gen8balancedhackmons', args, '[Gen 7] BH NFE');
             room.send('/tour rules NFE Clause, -Chansey, -Porygon 2, -Type: Null, -Shell Smash');
         },
         cap: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7nfe', args, '[Gen 7] CAP NFE');
-            room.send("/tour rules +Doublade, +Magneton, +Piloswine, +Sneasel, +Type: Null, +Vigoroth, +CAP");
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] CAP NFE');
+            room.send("/tour rules +Doublade, +Type: Null, +CAP");
         },
         inverse: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7nfe', args, '[Gen 7] Inverse NFE');
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] Inverse NFE');
             room.send('/tour rules Inverse Mod');
         },
         mnm: function(room, user, args) {
@@ -128,7 +129,7 @@ module.exports = {
         // other
         blitz: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7nfe', args, '[Gen 7] Blitz NFE');
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] Blitz NFE');
             room.send('/tour rules Blitz');
             room.send('/tour forcetimer on');
         },
