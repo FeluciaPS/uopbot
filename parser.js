@@ -192,7 +192,7 @@ bot.on('tournament', (parts, data) => {
         }
         if (type === "autostart") {
             if (parts[3] === "off") room.tournament.setAutostart(false);
-            else room.tournament.setAutostart(parseInt(args[4]));
+            else room.tournament.setAutostart(parseInt(parts[4]));
         }
     }
 });
