@@ -44,7 +44,7 @@ class Tournament {
         if (Date.now() < this.autostart) this.startCheckTimer = setTimeout(this.checkstart, 60*1000);
         if (this.started) return;
         if (Object.keys(this.players).length >= 2) this.room.send('/tour start');
-        else {
+        else if (Users.self.can(this.room, '*')) {
             this.room.send("Not enough players... Ending tournament.");
             this.room.send('/tour end');
         }
