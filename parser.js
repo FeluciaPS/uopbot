@@ -176,10 +176,24 @@ bot.on('tournament', (parts, data) => {
         if (type === "end" || type === "forceend") room.endTour(parts[3]);
 		if (type === "update") {
 			let data = JSON.parse(parts[3]);
+            if (data.isStarted) {
+                room.tournament.started = true;
+                return;
+            }
 			if (!data.format) return;
 			if (data.format in Tournament.formats) room.tournament.name = (room.tournament.official ? "Official " : "") + Tournament.formats[data.format];
 			else room.tournament.name = (room.tournament.official ? "Official " : "") + data.format;
 		}
+        if (type === "join") {
+            room.tournament.players[toId(parts[3])] = true;
+        }
+        if (type === "leave") {
+            delete room.tournament.players[toId(parts[3])];
+        }
+        if (type === "autostart") {
+            if (parts[3] === "off") room.tournament.setAutostart(false);
+            else room.tournament.setAutostart(parseInt(args[4]));
+        }
     }
 });
 

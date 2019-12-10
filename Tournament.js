@@ -3,6 +3,8 @@ let formats = {};
 class Tournament {
     constructor(room, type) {
         this.room = room;
+        this.started = false;
+        this.players = {};
         this.official = type === 'official' || type === 'o';
         this.chill = type === 'chill';
         this.rules = {
@@ -33,8 +35,27 @@ class Tournament {
         }
         if (this.official) room.send('.official');
         if (this.chill) room.send('/modchat +');
+        this.startCheckTimer = false;
+        this.autostart = false;
     }
     
+    checkstart() {
+        if (this.startCheckTimer) return;
+        if (this.autostart) return;
+        if (Date.now() < this.autostart) this.startCheckTimer = setTimeout(this.checkstart, 60*1000);
+        if (this.started) return;
+        if (Object.keys(this.players).length >= 2) this.room.send('/tour start');
+        this.room.send('/tour end');
+    }
+
+    setAutostart(val) {
+        this.startCheckTimer = false;
+        this.autostart = false;
+        if (!val) return;
+        let now = Date.now();
+        this.autostart = now + val + 60*2*1000;
+    }
+
     buildRules() {
         if (this.rules.bans.length === 0 && this.rules.unbans.length === 0 && this.rules.addrules.length === 0 && this.rules.remrules.length === 0) return "";
         let ret = "/tour rules ";
