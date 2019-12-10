@@ -49,6 +49,7 @@ class Tournament {
         else if (Users.self.can(this.room, '*')) {
             this.room.send("Not enough players... Ending tournament.");
             this.room.send('/tour end');
+            room.endTour();
         }
     }
 
