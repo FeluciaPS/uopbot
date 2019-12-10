@@ -49,6 +49,7 @@ class Room {
 	runChecks(message) {
 		let now = Date.now();
 		//if (this.OTobj) this.OTobj.official();
+		if (this.tournament && !this.tournament.started) this.tournament.checkstart();
 		if (this.repeat) {
 			let diff = (now - this.repeat.last) / 60000;
 			this.repeat.msgs += 1;

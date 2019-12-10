@@ -39,16 +39,15 @@ class Tournament {
         this.autostart = false;
     }
     
-    checkstart(obj) {
-        if (obj.room.id === 'groupchat-nfe-ezgame') room.send('Checking...');
-        if (!obj.autostart) return;
-        if (Date.now() < obj.autostart) obj.startCheckTimer = setTimeout(obj.checkstart, 60*1000, obj);
-        if (obj.started) return;
-        if (obj.room.id === 'groupchat-nfe-ezgame') room.send('Check passed!');
-        if (Object.keys(obj.players).length >= 2) obj.room.send('/tour start');
-        else if (Users.self.can(obj.room, '*')) {
-            obj.room.send("Not enough players... Ending tournament.");
-            obj.room.send('/tour end');
+    checkstart() {
+        if (!this.autostart) return;
+        if (Date.now() < this.autostart) return;
+        if (this.started) return;
+
+        if (thisect.keys(this.players).length >= 2) this.room.send('/tour start');
+        else if (Users.self.can(this.room, '*')) {
+            this.room.send("Not enough players... Ending tournament.");
+            this.room.send('/tour end');
         }
     }
 
@@ -58,7 +57,6 @@ class Tournament {
         if (!val) return;
         let now = Date.now();
         this.autostart = now + val + 60*2*1000;
-        this.startCheckTimer = setTimeout(this.checkstart, 60*1000, this);
     }
 
     buildRules() {
