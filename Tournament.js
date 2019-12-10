@@ -40,7 +40,6 @@ class Tournament {
     }
     
     checkstart() {
-        if (this.startCheckTimer) return;
         if (!this.autostart) return;
         if (Date.now() < this.autostart) this.startCheckTimer = setTimeout(this.checkstart, 60*1000);
         if (this.started) return;
