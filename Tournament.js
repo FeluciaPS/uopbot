@@ -42,7 +42,7 @@ class Tournament {
     checkstart() {
         if (this.room.id === 'groupchat-nfe-ezgame') room.send('Checking...');
         if (!this.autostart) return;
-        if (Date.now() < this.autostart) this.startCheckTimer = setTimeout(this.checkstart, 60*1000);
+        if (Date.now() < this.autostart) this.startCheckTimer = setTimeout(this.room.tournament.checkstart, 60*1000);
         if (this.started) return;
         if (this.room.id === 'groupchat-nfe-ezgame') room.send('Check passed!');
         if (Object.keys(this.players).length >= 2) this.room.send('/tour start');
