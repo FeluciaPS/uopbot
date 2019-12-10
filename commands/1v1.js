@@ -19,14 +19,13 @@ global.OT1v1 = {
         let mins = now.getMinutes();
         if (mins > 15) return;
         let hours = now.getHours();
-        let end = false;
         if (hours === this.times[next]) {
             if (room.tournament) {
                 if (room.tournament.official) return;
                 else {
                     room.send("/wall Official time. Ending ongoing tournament");
                     room.send("/tour end");
-                    end = true;
+                    room.endTour();
                 }
             }
             require('fs').writeFileSync("./data/last1v1.txt", `${day} ${next}`);
@@ -34,8 +33,7 @@ global.OT1v1 = {
             this.last = next;
             let type = this.schedule[day][next];
             room.send('/modnote OFFICIAL: ' + type);
-            if (end) setTimeout(Commands['1v1'][type], 3950, room, Users.staff, ["o"]);
-            else Commands['1v1'][type](room, Users.staff, ["o"]);
+            Commands['1v1'][type](room, Users.staff, ["o"]);
         }
     }
 }
