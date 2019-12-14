@@ -43,6 +43,9 @@ bot.on('c', (parts) => {
     let user = Users[toId(parts[3])];
     if (!parts[4]) return;
     let message = parts[4].trim();
+    for (let i in Rooms) {
+	if (Rooms[i].tournament && !Rooms[i].tournament.started) Rooms[i].tournament.checkstart();    
+    }
     Rooms[room].runChecks(message);
     Reminder.check();
     Reminder.parse(user, Rooms[room], message);
