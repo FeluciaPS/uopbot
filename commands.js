@@ -105,7 +105,7 @@ let commands = {
 		if (!user.can(room, '+')) return;
 		if (!room.lasttour[0]) return room.send("This room has no past tours recorded.");
 		let ago = Math.floor((Date.now() - room.lasttour[0]) / 60000);
-		return room.send(`**${room.lasttour[1]}** ${ago} minute${ago === 1 ? '' : 's'} ago.";
+		return room.send(`**${room.lasttour[1]}** ${ago} minute${ago === 1 ? '' : 's'} ago.");
 	},
     hangman: function(room, user, args) {
         if (!user.can(room, '%')) return;
