@@ -27,7 +27,9 @@ module.exports = {
         if (!t[toId(args[0])]) return room.send(`${args[0]} is not a Pokémon`);
         let mon = t[toId(args[0])].species;
         let ruleset = "/tour rules !Team Preview, -" + Banlist['1v1-allowed'].join(', -') + `, +${mon}`;
-        Commands['1v1']['gen7'](room, user, args);
+        let typeArg = toId(args[1]);
+        if (!typeArg || (!(typeArg in Commands['1v1']) && !(Commands['1v1'][typeArg] in Commands['1v1']))) typeArg = 'gen8';
+        Commands['1v1'][typeArg](room, user, args);
         room.startTour("monopoke");
         room.send(ruleset);
         room.send("/tour name Monopoke " + mon);
