@@ -73,7 +73,7 @@ module.exports = {
         gen6: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6ru', args, '[Gen 6] NFE');
-            room.send('/tour rules NFE Clause, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Doublade, -Fletchinder, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Servine, -Scyther, -Sneasel, -Vigoroth');
+            room.send('/tour rules NFE Clause, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Doublade, -Fletchinder, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Pawniard, -Piloswine, -Porygon2, -Rhydon, -Servine, -Scyther, -Sneasel, -Vigoroth');
         },
         gen5: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
