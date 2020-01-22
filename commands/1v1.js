@@ -83,8 +83,8 @@ let buildRuleset = function(meta) {
 
 module.exports = {
     inspireme: function(room, user, args) {
-        if (!user.can(room, '+')) user.send('!randpoke 3, !ubers, !lc, !nfe, !lcuber, !stall');
-        else room.send('!randpoke 3, !ubers, !lc, !nfe, !lcuber, !stall');
+        if (!user.can(room, '+')) user.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall');
+        else room.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall');
     },
     '1v1': {
         '': 'help',
