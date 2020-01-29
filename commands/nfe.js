@@ -91,6 +91,11 @@ module.exports = {
             room.send('/tour rules NFE Clause');
         },
         // OMs
+        natdex: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8nationaldex', args, '[Gen 8] National Dex NFE');
+            room.send('/tour rules NFE Clause, -Type: Null, -Chansey, -Rhydon, -Porygon 2, Doublade');
+        },
         '1v1': function(room, user, args) {
             Commands.nfe1v1(room, user, args);
         },
