@@ -102,7 +102,7 @@ class Tournament {
                 }
                 let ret = `Congratulations to the Monotype BLT qualifier tournament winners. ${first} won first place, ${second} won second place`;
                 if (thirds.length) {
-                    ret += `, and ${thirds[0]}${thirds[1] ? " and " + thirds[1]} won third place!`;
+                    ret += `, and ${thirds[0]}${thirds[1] ? " and " + thirds[1] : ""} won third place!`;
                 }
                 this.room.send(ret);
             }
