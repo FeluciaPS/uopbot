@@ -84,7 +84,7 @@ module.exports = {
         if (hours >= 24) hours -= 24;
         let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
         if (hours <= 0 && minutes <= 0) timestr = "should've just started";
-        let ret = `The next official Monotype BLT qualifier tournament will be ${BLT.getNext()} ${timestr}.`;
+        let ret = `The next official Monotype BLT qualifier tournament will be ${Tournament.formats[BLT.getNext() + "monotype"]} ${timestr}.`;
 		target.send(ret);
 	},
 	mono: {
