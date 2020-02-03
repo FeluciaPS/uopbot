@@ -21,7 +21,65 @@ global.BLT = {
 		8,
 		14,
 		20
-	]
+	],
+	points: {},
+	leaderboard: function() {
+		let board = [];
+		for (let i in this.points) {
+			board.push([this.points[i].name, this.points[i].points]);
+		}
+		board = board.sort((a, b) => {return b[1] - a[1]});
+		let html = "<center><div style='overflow-x:auto;max-height:400px'><details OPEN><summary>BLT leaderboard</summary>";
+		html += `<table style='border-spacing:0px;'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
+		for (let i = 0; i < board.length; i++) {
+			if (i === 10) {
+				html += '</table><details><summary>Everyone else</summary>';
+				html += `<table style='border-spacing:0px;'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr></table>`;
+			}
+			if (i === 9 || i === board.length - 1) html += `<tr><td style="border:1px solid black;border-radius:0px 0px 0px 5px">${i+1}</td><td style="border:1px solid black">${board[i][0]}</td><td style="border:1px solid black;border-radius:0px 0px 5px 0px">${board[i][1]}</td></tr>`;
+			else html += `<tr><td style="border:1px solid black">${i+1}</td><td style="border:1px solid black">${board[i][0]}</td><td style="border:1px solid black">${board[i][1]}</td></tr>`;
+		}
+		html += "</table>"
+		if (board.length > 10) html += "</details>";
+		html += "</details></div></center>";
+		return html;
+	},
+	loadpoints: function() {
+		if (!FS.existsSync('./data/BLT.json')) FS.writeFileSync('{}', './data/BLT.json');
+		this.points = JSON.parse(FS.readFileSync('./data/BLT.json'));
+	},
+	savepoints: function() {
+		FS.writeFileSync(JSON.stringify(this.points, null, 4), './data/BLT.json');
+	},
+	addpoints: function(first, second, thirds = []) {
+		let fobj = this.points[toId(first)];
+		if (!fobj) fobj = {};
+		fobj.name = first;
+		fobj.points = fobj.points ? fobj.points + 3 : 3;
+		this.points[toId(fobj.name)] = fobj;
+
+		let sobj = this.points[toId(second)];
+		if (!sobj) sobj = {};
+		sobj.name = second;
+		sobj.points = sobj.points ? sobj.points + 2 : 2;
+		this.points[toId(sobj.name)] = sobj;
+
+		if (thirds[0]) {
+			let tobj = this.points[toId(thirds[0])];
+			if (!tobj) tobj = {};
+			tobj.name = thirds[0];
+			tobj.points = tobj.points ? tobj.points + 1 : 1;
+			this.points[toId(tobj.name)] = tobj;
+		}
+		if (thirds[1]) {
+			let tobj = this.points[toId(thirds[1])];
+			if (!tobj) tobj = {};
+			tobj.name = thirds[1];
+			tobj.points = tobj.points ? tobj.points + 1 : 1;
+			this.points[toId(tobj.name)] = tobj;
+		}
+		this.savepoints();
+	}
 }
 
 let canMakeTour = function(room, user) {

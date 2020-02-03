@@ -100,11 +100,12 @@ class Tournament {
                     if (!i) continue;
                     if (i !== first && i !== second) thirds.push(i);
                 }
-                let ret = `Congratulations to the Monotype BLT qualifier tournament winners. ${first} won first place, ${second} won second place`;
+                let ret = `Congratulations to the ${Tournament.formats[BLT.last + "monotype"]} BLT qualifier tournament winners. ${first} won first place, ${second} won second place`;
                 if (thirds.length) {
                     ret += `, and ${thirds[0]}${thirds[1] ? " and " + thirds[1] : ""} won third place!`;
                 }
                 this.room.send(ret);
+                BLT.addpoints(first, second, thirds);
             }
 			if (dt.format && formats[dt.format]) this.name = formats[dt.format];
 			else this.name = dt.format ? dt.format : this.name;
