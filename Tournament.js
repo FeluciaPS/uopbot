@@ -85,6 +85,27 @@ class Tournament {
     end(data) {
 		if (data) {
 			let dt = JSON.parse(data);
+            if (this.blt) {
+                let rn = dt.bracketData.rootNode;
+                let first = rn.team;
+                let second = rn.children[0].team === first ? rn.children[1].team : rn.children[0].team;
+                let third = [
+                    rn.children[0].children[0] ? rn.children[0].children[0].team : false,
+                    rn.children[1].children[0] ? rn.children[1].children[0].team : false,
+                    rn.children[0].children[1] ? rn.children[0].children[1].team : false,
+                    rn.children[1].children[1] ? rn.children[1].children[1].team : false,
+                ]
+                let thirds = [];
+                for (let i of third) {
+                    if (!i) continue;
+                    if (i !== first && i !== second) thirds.push(i);
+                }
+                let ret = `Congratulations to the Monotype BLT qualifier tournament winners. ${first} won first place, ${second} won second place`;
+                if (thirds.length) {
+                    ret += `, and ${thirds[0]}${thirds[1] ? " and " + thirds[1]} won third place!`;
+                }
+                this.room.send(ret);
+            }
 			if (dt.format && formats[dt.format]) this.name = formats[dt.format];
 			else this.name = dt.format ? dt.format : this.name;
 		}
