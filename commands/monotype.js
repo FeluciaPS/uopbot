@@ -130,12 +130,13 @@ module.exports = {
 	nextblt: function(room, user, args) {
 		let target = user.can(room, '+') ? room : user;
 		if (room.id !== "monotype" && !room.id.includes('test')) target = user;
-		let now = new Date(Date.now());
+		let now = new Date(Date.now() - 20*60*1000);
 		let nhours = now.getHours();
 		let next = 0;
 		for (let i in BLT.times) {
 			if (nhours >= BLT.times[i]) next = BLT.times[(parseInt(i)+1)%BLT.times.length];
 		}
+		now = new Date(Date.now());
         let hours = next - now.getHours();
         if (next === BLT.times[0]) hours += 24;
         let minutes = 60 - now.getMinutes();
@@ -143,7 +144,7 @@ module.exports = {
         else minutes = 0;
         if (hours >= 24) hours -= 24;
         let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-        if (hours <= 0 && minutes <= 0) timestr = "should've just started";
+        if (hours <= 0 && minutes <= 0) return target.send(`The ${Tournament.formats[BLT.getNext() + "monotype"]} BLT qualifier should have started ${Math.abs(minutes)} ago`);
         let ret = `The next official Monotype BLT qualifier tournament will be ${Tournament.formats[BLT.getNext() + "monotype"]} ${timestr}.`;
 		target.send(ret);
 	},
