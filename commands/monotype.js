@@ -34,7 +34,7 @@ global.BLT = {
 		for (let i = 0; i < board.length; i++) {
 			if (i === 10) {
 				html += '</table><details><summary>Everyone else</summary>';
-				html += `<table style='border-spacing:0px;'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr></table>`;
+				html += `<table style='border-spacing:0px;'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
 			}
 			if (i === 9 || i === board.length - 1) html += `<tr><td style="border:1px solid black;border-radius:0px 0px 0px 5px">${i+1}</td><td style="border:1px solid black">${board[i][0]}</td><td style="border:1px solid black;border-radius:0px 0px 5px 0px">${board[i][1]}</td></tr>`;
 			else html += `<tr><td style="border:1px solid black">${i+1}</td><td style="border:1px solid black">${board[i][0]}</td><td style="border:1px solid black">${board[i][1]}</td></tr>`;
