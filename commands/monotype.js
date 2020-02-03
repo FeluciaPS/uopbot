@@ -71,12 +71,12 @@ module.exports = {
 		let target = user.can(room, '+') ? room : user;
 		if (room.id !== "monotype") target = user;
 		let now = new Date(Date.now());
-		let hours = now.getHours();
+		let nhours = now.getHours();
 		let next = 0;
 		for (let i in BLT.times) {
-			if (hours > BLT.times[i]) next = BLT.times[(i+1)%BLT.times.length]; 
+			if (nhours > BLT.times[i]) next = BLT.times[(i+1)%BLT.times.length]; 
 		}
-        let hours = OT1v1.times[next] - now.getHours();
+        let hours = next - now.getHours();
         if (next === BLT.times[0]) hours += 24;
         let minutes = 60 - now.getMinutes();
         if (minutes < 60) hours -= 1;
