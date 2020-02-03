@@ -162,7 +162,7 @@ module.exports = {
 				for (let i in board) {
 					board[i] = board[i][0];
 				}
-				user.send(`You are ranked **${board.indexOf(user.id) + 1}** with ${target[1]} points.`);
+				user.send(`You are ranked **${board.indexOf(user.id) + 1}** with ${target.points} points.`);
 			}
 		}
 		else {
