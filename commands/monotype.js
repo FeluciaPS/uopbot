@@ -29,12 +29,12 @@ global.BLT = {
 			board.push([this.points[i].name, this.points[i].points]);
 		}
 		board = board.sort((a, b) => {return b[1] - a[1]});
-		let html = "<center><div style='overflow-x:auto;max-height:300px'><details OPEN><summary>BLT Leaderboard top 10</summary>";
-		html += `<table style='border-spacing:0px;'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
+		let html = "<center><div style='overflow-x:auto;max-height:327px'><details OPEN><summary>BLT Leaderboard top 10</summary>";
+		html += `<table style='border-spacing:0px;text-align:center'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
 		for (let i = 0; i < board.length; i++) {
 			if (i === 10) {
 				html += '</table><details><summary>lower ranks</summary>';
-				html += `<table style='border-spacing:0px;'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
+				html += `<table style='border-spacing:0px;text-align:center'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
 			}
 			if (i === 9 || i === board.length - 1) html += `<tr><td style="padding:5px;border:1px solid black;border-radius:0px 0px 0px 5px">${i+1}</td><td style="padding:5px;border:1px solid black">${board[i][0]}</td><td style="padding:5px;border:1px solid black;border-radius:0px 0px 5px 0px">${board[i][1]}</td></tr>`;
 			else html += `<tr><td style="padding:5px;border:1px solid black">${i+1}</td><td style="padding:5px;border:1px solid black">${board[i][0]}</td><td style="padding:5px;border:1px solid black">${board[i][1]}</td></tr>`;
@@ -81,6 +81,8 @@ global.BLT = {
 		this.savepoints();
 	}
 }
+
+BLT.loadpoints();
 
 let canMakeTour = function(room, user) {
     // I'm gonna use this a lot so why not make a function for it
@@ -160,7 +162,7 @@ module.exports = {
 				for (let i in board) {
 					board[i] = board[i][0];
 				}
-				user.send(`You are ranked **${board.indexOf(user.id) + 1}** with ${target} points.`);
+				user.send(`You are ranked **${board.indexOf(user.id) + 1}** with ${target[1]} points.`);
 			}
 		}
 		else {
