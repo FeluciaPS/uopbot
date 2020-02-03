@@ -74,7 +74,7 @@ module.exports = {
 		let nhours = now.getHours();
 		let next = 0;
 		for (let i in BLT.times) {
-			if (nhours > BLT.times[(parseInt(i)+1)%BLT.times.length]) next = BLT.times[i]; 
+			if (nhours >= BLT.times[(parseInt(i)+1)%BLT.times.length]) next = BLT.times[i]; 
 		}
         let hours = next - now.getHours();
         if (next === BLT.times[0]) hours += 24;
