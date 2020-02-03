@@ -100,7 +100,7 @@ class Tournament {
                     if (!i) continue;
                     if (i !== first && i !== second) thirds.push(i);
                 }
-                let ret = `Congratulations to the ${Tournament.formats[BLT.last + "monotype"]} BLT qualifier tournament winners. ${first} won first place, ${second} won second place`;
+                let ret = `Congratulations to the ${formats[BLT.last + "monotype"]} BLT qualifier tournament winners. ${first} won first place, ${second} won second place`;
                 if (thirds.length) {
                     ret += `, and ${thirds[0]}${thirds[1] ? " and " + thirds[1] : ""} won third place!`;
                 }
