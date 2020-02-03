@@ -90,10 +90,10 @@ class Tournament {
                 let first = rn.team;
                 let second = rn.children[0].team === first ? rn.children[1].team : rn.children[0].team;
                 let third = [
-                    rn.children[0].children[0] ? rn.children[0].children[0].team : false,
-                    rn.children[1].children[0] ? rn.children[1].children[0].team : false,
-                    rn.children[0].children[1] ? rn.children[0].children[1].team : false,
-                    rn.children[1].children[1] ? rn.children[1].children[1].team : false,
+                    rn.children[0].children && rn.children[0].children[0] ? rn.children[0].children[0].team : false,
+                    rn.children[1].children && rn.children[0].children[0] ? rn.children[1].children[0].team : false,
+                    rn.children[0].children && rn.children[0].children[1] ? rn.children[0].children[1].team : false,
+                    rn.children[1].children && rn.children[0].children[1] ? rn.children[1].children[1].team : false,
                 ]
                 let thirds = [];
                 for (let i of third) {
