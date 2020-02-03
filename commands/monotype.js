@@ -149,6 +149,12 @@ module.exports = {
 		target.send(ret);
 	},
 	bltrank: function(room, user, args) {
+		if (toId(args[0]) === "reset") {
+			if (!user.can(Rooms['monotype'], '#')) return;
+			BLT.points = {};
+			BLT.savepoints();
+			return room.send('Leaderboard reset.');
+		}
 		let target = user.can(room, '+') ? room : user;
 		if (room.id !== "monotype" && !room.id.includes('test')) target = user;
 		if (target === user) {
