@@ -1,5 +1,29 @@
 'use strict'
 
+global.BLT = {
+	next: false,
+	last: false,
+	tours: [
+		'gen8',
+		'gen7',
+		'gen6',
+		'gen5'
+	],
+	getNext: function() {
+		if (BLT.next) return BLT.next;
+		let x = Object.assign([], BLT.tours);
+		if (BLT.last) x.splice(x.indexOf(BLT.last), 1);
+		BLT.next = x[Math.floor(Math.random() * x.length)];
+		return BLT.next;
+	},
+	times: [
+		2,
+		8,
+		14,
+		20
+	]
+}
+
 let canMakeTour = function(room, user) {
     // I'm gonna use this a lot so why not make a function for it
     if (room != 'monotype') return false;
@@ -33,6 +57,36 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 }
 
 module.exports = {
+	// BLT stuff
+	startblt: function(room, user, args) {
+		if (!user.can(room, '%')) return;
+		if (room.id !== "monotype") return;
+		let format = BLT.getNext();
+		BLT.last = format;
+		BLT.next = false;
+		room.send(`/tour create ${format}monotype, elim`)
+		room.startTour('blt');
+	},
+	nextblt: function(room, user, args) {
+		let target = user.can(room, '+') ? room : user;
+		if (room.id !== "monotype") target = user;
+		let now = new Date(Date.now());
+		let hours = now.getHours();
+		let next = 0;
+		for (let i in BLT.times) {
+			if (hours > BLT.times[i]) next = BLT.times[(i+1)%BLT.times.length]; 
+		}
+        let hours = OT1v1.times[next] - now.getHours();
+        if (next === BLT.times[0]) hours += 24;
+        let minutes = 60 - now.getMinutes();
+        if (minutes < 60) hours -= 1;
+        else minutes = 0;
+        if (hours >= 24) hours -= 24;
+        let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+        if (hours <= 0 && minutes <= 0) timestr = "should've just started";
+        let ret = `The next official Monotype BLT qualifier tournament will be ${BLT.getNext()} ${timestr}.`;
+		target.send(ret);
+	},
 	mono: {
 		// Old (and current) generations
 		'': 'gen8',

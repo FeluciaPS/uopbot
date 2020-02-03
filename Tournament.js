@@ -6,6 +6,7 @@ class Tournament {
         this.started = false;
         this.players = {};
         this.official = type === 'official' || type === 'o';
+        this.blt = type === 'blt';
         this.chill = type === 'chill';
         this.rules = {
             "bans": [],
