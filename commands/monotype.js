@@ -45,11 +45,11 @@ global.BLT = {
 		return html;
 	},
 	loadpoints: function() {
-		if (!FS.existsSync('./data/BLT.json')) FS.writeFileSync('./data/BLT.json'. '{}');
+		if (!FS.existsSync('./data/BLT.json')) FS.writeFileSync('./data/BLT.json', '{}');
 		this.points = JSON.parse(FS.readFileSync('./data/BLT.json'));
 	},
 	savepoints: function() {
-		FS.writeFileSync('./data/BLT.json'. JSON.stringify(this.points, null, 4));
+		FS.writeFileSync('./data/BLT.json', JSON.stringify(this.points, null, 4));
 	},
 	addpoints: function(first, second, thirds = []) {
 		let fobj = this.points[toId(first)];
