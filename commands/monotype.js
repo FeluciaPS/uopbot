@@ -132,7 +132,7 @@ module.exports = {
 		if (room.id !== "monotype" && !room.id.includes('test')) target = user;
 		let now = new Date(Date.now() - 20*60*1000);
 		let nhours = now.getHours();
-		let next = 0;
+		let next = BLT.times[0];
 		for (let i in BLT.times) {
 			if (nhours >= BLT.times[i]) next = BLT.times[(parseInt(i)+1)%BLT.times.length];
 		}
