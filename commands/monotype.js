@@ -17,10 +17,10 @@ global.BLT = {
 		return BLT.next;
 	},
 	times: [
-		2,
-		8,
-		14,
-		20
+		1,
+		7,
+		13,
+		19
 	],
 	points: {},
 	leaderboard: function() {
