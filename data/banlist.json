@@ -42,7 +42,7 @@
     },
     "ubers": {
         "bans": [],
-        "unbans": ["Eternatus", "Zacian", "Zamazenta"],
+        "unbans": ["Eternatus", "Mew", "Sableye", "Zacian", "Zamazenta"],
         "addrules": [],
         "remrules": []
     },
