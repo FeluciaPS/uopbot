@@ -124,7 +124,8 @@ module.exports = {
 		let format = BLT.getNext();
 		BLT.last = format;
 		BLT.next = false;
-		room.send(`/tour create ${format}monotype, elim`)
+		room.send(`/tour create ${format}monotype, elim`);
+		room.send('/tour scouting disallow');
 		room.startTour('blt');
 	},
 	nextblt: function(room, user, args) {
