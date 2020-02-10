@@ -144,7 +144,7 @@ module.exports = {
         else minutes = 0;
         if (hours >= 24) hours -= 24;
         let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-        if (hours <= 0) return target.send(`The ${Tournament.formats[BLT.getNext() + "monotype"]} BLT qualifier should have started ${60 - Math.abs(minutes)} ago`);
+        if (hours < 0) return target.send(`The ${Tournament.formats[BLT.getNext() + "monotype"]} BLT qualifier should have started ${60 - Math.abs(minutes)} ago`);
         let ret = `The next official Monotype BLT qualifier tournament will be ${Tournament.formats[BLT.getNext() + "monotype"]} ${timestr}.`;
 		target.send(ret);
 	},
