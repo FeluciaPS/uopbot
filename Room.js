@@ -22,9 +22,6 @@ class Room {
 				last: 0
 			}
 		}
-		if (this.settings.autohide) {
-			this.autohide = true
-		}
 		if (this.settings.pasttours) {
 			this.pasttours = this.settings.pasttours;
 		}
@@ -34,7 +31,6 @@ class Room {
 		const PATH = `./rooms/${this.id}.json`;
 		this.settings.repeat = this.repeat;
 		this.settings.pasttours = this.pasttours;
-		this.settings.autohide = this.autohide;
 		let settings = JSON.stringify(this.settings, null, 4);
 		FS.writeFileSync(PATH, settings);
 		if (load) this.loadSettings();
