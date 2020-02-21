@@ -52,6 +52,12 @@ bot.on('c', (parts) => {
     for (let i of OTs) i.official();
     Monitor.monitor(user.name, message);
     logger.emit('chat', Utils.getRoom(parts[0]), user.name, message);
+    if (message.startsWith('/log') && Rooms[room].autohide) {
+	if (message.includes("was muted by")) {
+		let username = message.split(' was muted ')[0].split(' ')[1];
+		Rooms[room].send('/hidetext ' + username);
+	}
+    }
     let time = parts[2];
     let [cmd, args, val] = Utils.SplitMessage(message);
     if (cmd in Commands) {
