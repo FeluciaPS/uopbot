@@ -202,7 +202,7 @@ module.exports = {
             if (in1v1) {
                 let r = ""
                 let next = (OT1v1.last + 1) % OT1v1.times.length;
-                let day = next === 0 ? (OT1v1.day + 1) % 7 : OT1v1.day;
+                let day = now.getDay();
                 let hours = OT1v1.times[next] - now.getHours();
                 if (next === 0) hours += 24;
                 let minutes = 60 - now.getMinutes();
