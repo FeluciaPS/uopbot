@@ -47,8 +47,11 @@ module.exports = {
 	randitem: 'randomitem',
 	randomitem: function(room, user, args) {
 		let target = user.can(room, '+') ? room : user;
-		let items = Object.keys(Items);
+		let items = [];
+		for (let i in Items) {
+			if (!Items[i].itemUser) items.push(Items[i].name)
+		}
 		let r = Math.floor(Math.random() * items.length);
-		target.send(Items[items[r]].name);
+		target.send(items[r]);
 	}
 }
