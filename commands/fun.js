@@ -23,7 +23,7 @@ module.exports = {
 			room.send(`Hello There auto response ${room.settings.hellothere ? 'en' : 'dis'}abled`);
 		},
 	},
-        autohide: {
+    autohide: {
 		'': 'on',
 		on: function(room, user, args) {
 			if (!user.can(room, '#')) return;
@@ -43,5 +43,12 @@ module.exports = {
 			room.saveSettings(true);
 			room.send(`Automatic hidetext  for mutes ${room.settings.autohide ? 'en' : 'dis'}abled`);
 		},
+	},
+	randitem: 'randomitem',
+	randomitem: function(room, user, args) {
+		let target = user.can(room, '+') ? room : user;
+		let items = Object.keys(Items);
+		let r = Math.floor(Math.random() * items.length);
+		target.send(Items[items[r]].name);
 	}
 }

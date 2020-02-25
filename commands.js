@@ -1,6 +1,6 @@
 global.Banlist = JSON.parse(FS.readFileSync('data/banlist.json'));
 global.PokeDex = require('./data/pokedex.js');
-
+global.Items = require('./data/items.js');
 
 let commands = {
     // Utilities
