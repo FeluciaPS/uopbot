@@ -49,7 +49,10 @@ module.exports = {
 		let target = user.can(room, '+') ? room : user;
 		let items = [];
 		for (let i in Items) {
-			if (!Items[i].itemUser) items.push(Items[i].name)
+			if (Items[i].isNonStandard) continue;
+			if (Items[i].isPokeball) continue;
+			if (i.match(/tr\d\d/)) continue;
+			items.push(Items[i].name);
 		}
 		let r = Math.floor(Math.random() * items.length);
 		target.send(items[r]);
