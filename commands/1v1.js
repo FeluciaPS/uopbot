@@ -219,7 +219,7 @@ module.exports = {
                 if (hours <= 0 && minutes <= 0) timestr = "should've already started";
                 r += "<b>1v1:</b>";
                 if (targetroom === user) r = r.replace(/<\/?b>/gi, '**');
-                let meta = OT1v1.schedule[day][next];
+                let meta = OT1v1.schedule[day][OT1v1.times.indexOf(next)];
                 if (meta !== '2v2') meta += ' 1v1';
                 r += `${meta} ${timestr}`;
                 rooms.push(r);
