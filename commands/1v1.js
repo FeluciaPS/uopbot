@@ -210,7 +210,7 @@ module.exports = {
                 now = new Date(Date.now());
                 let day = now.getDay();
                 let hours = next - now.getHours();
-                if (next === 0) hours += 24;
+                if (OT1v1.times.indexOf(next) === 0) hours += 24;
                 let minutes = 60 - now.getMinutes();
                 if (minutes < 60) hours -= 1;
                 else minutes = 0;
