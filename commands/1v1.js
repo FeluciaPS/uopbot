@@ -14,7 +14,6 @@ global.OT1v1 = {
     official: function() {
         let room = Rooms['1v1'];
         let now = new Date(Date.now());
-        let next = (this.last + 1) % this.times.length;
         let day = now.getDay() % 7; // Modulus 7 isn't necessary but just in case this functions differently from what I think it does
         let mins = now.getMinutes();
         if (mins > 15) return;
