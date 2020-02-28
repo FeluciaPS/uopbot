@@ -19,7 +19,13 @@ global.OT1v1 = {
         let mins = now.getMinutes();
         if (mins > 15) return;
         let hours = now.getHours();
-        if (hours === this.times[next]) {
+        let now2 = new Date(Date.now() - 20*60*1000);
+        let nhours = now2.getHours();
+        let next = OT1v1.times[0];
+        for (let i in OT1v1.times) {
+            if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
+        }
+        if (hours === next) {
             if (room.tournament) {
                 if (room.tournament.official) return;
                 else {
