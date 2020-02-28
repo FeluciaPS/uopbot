@@ -201,7 +201,13 @@ module.exports = {
             let rooms = [];
             if (in1v1) {
                 let r = ""
-                let next = (OT1v1.last + 1) % OT1v1.times.length;
+                let now2 = new Date(Date.now() - 20*60*1000);
+                let nhours = now2.getHours();
+                let next = OT1v1.times[0];
+                for (let i in OT1v1.times) {
+                    if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
+                }
+                now = new Date(Date.now());
                 let day = now.getDay();
                 let hours = OT1v1.times[next] - now.getHours();
                 if (next === 0) hours += 24;
