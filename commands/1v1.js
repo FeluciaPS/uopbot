@@ -210,7 +210,10 @@ module.exports = {
                 now = new Date(Date.now());
                 let day = now.getDay();
                 let hours = next - now.getHours();
-                if (OT1v1.times.indexOf(next) === 0) hours += 24;
+                if (OT1v1.times.indexOf(next) === 0) {
+                    hours += 24;
+                    day = (day + 1) % 7;
+                }
                 let minutes = 60 - now.getMinutes();
                 if (minutes < 60) hours -= 1;
                 else minutes = 0;
@@ -226,8 +229,14 @@ module.exports = {
             }
             if (inNFE) {
                 let r = ""
-                let next = (NFE.last + 1) % NFE.times.length;
-                let hours = NFE.times[next] - now.getHours();
+                let now2 = new Date(Date.now() - 20*60*1000);
+                let nhours = now2.getHours();
+                let next = NFE.times[0];
+                for (let i in NFE.times) {
+                    if (nhours >= NFE.times[i]) next = NFE.times[(parseInt(i)+1)%NFE.times.length];
+                }
+                now = new Date(Date.now());
+                let hours = next - now.getHours();
                 if (next === 0) hours += 24;
                 let minutes = 60 - now.getMinutes();
                 if (minutes < 60) hours -= 1;
@@ -243,25 +252,40 @@ module.exports = {
         else {
             if (room.id === '1v1') {
                 let targetroom = user.can(room, '+') ? room : user;
-                let next = (OT1v1.last + 1) % OT1v1.times.length;
-                let day = next === 0 ? (OT1v1.day + 1) % 7 : OT1v1.day;
-                let hours = OT1v1.times[next] - now.getHours();
-                if (next === 0) hours += 24;
+                let now2 = new Date(Date.now() - 20*60*1000);
+                let nhours = now2.getHours();
+                let next = OT1v1.times[0];
+                for (let i in OT1v1.times) {
+                    if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
+                }
+                now = new Date(Date.now());
+                let day = now.getDay();
+                let hours = next - now.getHours();
+                if (OT1v1.times.indexOf(next) === 0) {
+                    hours += 24;
+                    day = (day + 1) % 7;
+                }
                 let minutes = 60 - now.getMinutes();
                 if (minutes < 60) hours -= 1;
                 else minutes = 0;
                 if (hours >= 24) hours -= 24;
                 let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
                 if (hours <= 0 && minutes <= 0) timestr = "should've already started";
-                let meta = OT1v1.schedule[day][next];
+                let meta = OT1v1.schedule[day][OT1v1.times.indexOf(next)];
                 if (meta !== "2v2") meta += ' 1v1';
                 ret += `**${meta}** ${timestr}`;
                 targetroom.send(ret);
             }
             else if (room.id === 'nfe') {
                 let targetroom = user.can(room, '+') ? room : user;
-                let next = (NFE.last + 1) % NFE.times.length;
-                let hours = NFE.times[next] - now.getHours();
+                let now2 = new Date(Date.now() - 20*60*1000);
+                let nhours = now2.getHours();
+                let next = NFE.times[0];
+                for (let i in NFE.times) {
+                    if (nhours >= NFE.times[i]) next = NFE.times[(parseInt(i)+1)%NFE.times.length];
+                }
+                now = new Date(Date.now());
+                let hours = next - now.getHours();
                 if (next === 0) hours += 24;
                 let minutes = 60 - now.getMinutes();
                 if (minutes < 60) hours -= 1;
