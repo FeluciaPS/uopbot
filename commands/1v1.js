@@ -39,6 +39,7 @@ global.OT1v1 = {
             let type = this.schedule[day][OT1v1.times.indexOf(next)];
             room.send('/modnote OFFICIAL: ' + type);
             Commands['1v1'][type](room, Users.staff, ["o"]);
+            room.startTour('o');
         }
     }
 }
