@@ -16,7 +16,7 @@ global.OT1v1 = {
         let now = new Date(Date.now());
         let day = now.getDay() % 7; // Modulus 7 isn't necessary but just in case this functions differently from what I think it does
         let mins = now.getMinutes();
-        if (mins > 15) return;
+        if (mins > 5) return;
         let hours = now.getHours();
         let now2 = new Date(Date.now() - 20*60*1000);
         let nhours = now2.getHours();
