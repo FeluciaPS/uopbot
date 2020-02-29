@@ -38,8 +38,8 @@ global.OT1v1 = {
             this.last = next;
             let type = this.schedule[day][OT1v1.times.indexOf(next)];
             room.send('/modnote OFFICIAL: ' + type);
-            Commands['1v1'][type](room, Users.staff, ["o"]);
             room.startTour('o');
+            Commands['1v1'][type](room, Users.staff, ["o"]);
         }
     }
 }
