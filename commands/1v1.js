@@ -36,7 +36,7 @@ global.OT1v1 = {
             require('fs').writeFileSync("./data/last1v1.txt", `${day} ${next}`);
             this.day = day;
             this.last = next;
-            let type = this.schedule[day][next];
+            let type = this.schedule[day][OT1v1.times.indexOf(next)];
             room.send('/modnote OFFICIAL: ' + type);
             Commands['1v1'][type](room, Users.staff, ["o"]);
         }
