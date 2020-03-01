@@ -25,6 +25,7 @@ global.OT1v1 = {
             if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
         }
         if (hours === next) {
+            if (this.hasStarted) return;
             if (room.tournament) {
                 if (room.tournament.official) return;
                 else {
@@ -38,8 +39,9 @@ global.OT1v1 = {
             this.last = next;
             let type = this.schedule[day][OT1v1.times.indexOf(next)];
             room.send('/modnote OFFICIAL: ' + type);
-            room.startTour('o');
+            this.hasStarted = true;
             Commands['1v1'][type](room, Users.staff, ["o"]);
+            setTimeout(() => {OT1v1.hasStarted = false}, 30*1000*60);
         }
     }
 }
