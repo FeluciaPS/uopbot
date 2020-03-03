@@ -94,6 +94,10 @@ module.exports = {
         if (!user.can(room, '+')) user.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall');
         else room.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall');
     },
+    consistency: function(room, user, args) {
+        if (!user.can(room, '+') || (room.id !== "1v1" && room.id !== "nfe")) user.send('Consistency is boring.');
+        else room.send('Consistency is boring.');
+    },
     '1v1': {
         '': 'help',
         gen8: function(room, user, args) {
