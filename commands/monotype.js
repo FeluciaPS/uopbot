@@ -118,6 +118,17 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 
 module.exports = {
 	// BLT stuff
+	addbltpoints: function(room, user, args) {
+		if (!user.can(Rooms['monotype'], '@')) return;
+		if (args.length !== 2) return room.send('Usage: ``addbltpoints [user], [points]`` (you can use negative values)');
+		if (isNaN(parseInt(args[1]))) return room.send('Usage: ``addbltpoints [user], [points]`` (you can use negative values)');
+		let tobj = BLT.points[toId(args[0])];
+		if (!tobj) tobj = {};
+		tobj.name = args[0];
+		tobj.points = tobj.points ? tobj.points + parseInt(args[1]) : parseInt(args[1]);
+		BLT.points[toId(tobj.name)] = tobj;
+		return user.send('Done.');
+	},
 	startblt: function(room, user, args) {
 		if (!user.can(room, '%')) return;
 		if (room.id !== "monotype" && !room.id.includes('test')) return;
