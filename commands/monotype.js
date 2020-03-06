@@ -5,6 +5,8 @@ global.BLT = {
 	last: false,
 	tours: [
 		'gen8',
+		'gen8',
+		'gen8',
 		'gen7',
 		'gen6',
 		'gen5'
