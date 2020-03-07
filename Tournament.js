@@ -35,6 +35,7 @@ class Tournament {
             this.room.send(`/tour autodq ${t[1]}`);
             if (t[2]) this.room.send('/tour scouting disallow');
         }
+	if (this.room.id === "monotype") room.send('/tour modjoin disallow');
         if (this.official) room.send('.official');
         if (this.chill) room.send('/modchat +');
         this.startCheckTimer = false;
