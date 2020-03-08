@@ -177,6 +177,7 @@ module.exports = {
 			else {
 				let board = [];
 				for (let i in BLT.points) {
+					if (BLT.points[i].points <= 0) continue;
 					board.push([i, BLT.points[i].points]);
 				}
 				board = board.sort((a, b) => {return b[1] - a[1]});
