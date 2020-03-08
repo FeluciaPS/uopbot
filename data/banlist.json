@@ -42,9 +42,9 @@
     },
     "ubers": {
         "bans": [],
-        "unbans": ["Eternatus", "Mew", "Sableye", "Zacian", "Zamazenta"],
+        "unbans": ["Eternatus", "Mew", "Sableye", "Zacian", "Zacian-Crowned", "Zamazenta", "Zamazenta-Crowned", "Melmetal", "Kyurem-Black", "Kyurem-White", "Lunala", "Solgaleo", "Necrozma", "Necrozma-Dawn-Wings", "Necrozma-Dusk-Mane", "Marshadow", "Reshiram", "Zekrom", "Mewtwo"],
         "addrules": [],
-        "remrules": []
+        "remrules": ["Dynamax Clause"]
     },
     "gen7ubers": {
         "unbans": ["Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense", "Dialga", "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-Black", "Kyurem-White", "Lugia", "Marshadow", "Mewtwo", "Mimikyu", "Necrozma-Dawn-Wings", "Necrozma-Dusk-Mane", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky", "Snorlax", "Solgaleo", "Tapu Koko", "Xerneas", "Yveltal", "Zekrom"],
