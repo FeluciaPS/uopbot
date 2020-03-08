@@ -14,35 +14,24 @@ global.OT1v1 = {
     official: function() {
         let room = Rooms['1v1'];
         let now = new Date(Date.now());
-        let day = now.getDay() % 7; // Modulus 7 isn't necessary but just in case this functions differently from what I think it does
-        let mins = now.getMinutes();
-        if (mins > 5) return;
-        let hours = now.getHours();
-        let now2 = new Date(Date.now() - 20*60*1000);
-        let nhours = now2.getHours();
-        let next = OT1v1.times[0];
-        for (let i in OT1v1.times) {
-            if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
-        }
-        if (hours === next) {
-            if (this.hasStarted) return;
-            if (room.tournament) {
-                if (room.tournament.official) return;
-                else {
-                    room.send("/wall Official time. Ending ongoing tournament");
-                    room.send("/tour end");
-                    room.endTour();
-                }
+        let day = now.getDay();
+        if (!this.times.includes(now.getHours())) return;
+        if (now.getMinutes() > 5) return;
+        let nextid = OT1v1.times.indexOf(now.getHours());
+        if (this.hasStarted) return;
+        if (room.tournament) {
+            if (room.tournament.official) return;
+            else {
+                room.send("/wall Official time. Ending ongoing tournament");
+                room.send("/tour end");
+                room.endTour();
             }
-            require('fs').writeFileSync("./data/last1v1.txt", `${day} ${next}`);
-            this.day = day;
-            this.last = next;
-            let type = this.schedule[day][OT1v1.times.indexOf(next)];
-            room.send('/modnote OFFICIAL: ' + type);
-            this.hasStarted = true;
-            Commands['1v1'][type](room, Users.staff, ["o"]);
-            setTimeout(() => {OT1v1.hasStarted = false}, 30*1000*60);
         }
+        let type = this.schedule[day][nextid];
+        room.send('/modnote OFFICIAL: ' + type);
+        this.hasStarted = true;
+        Commands['1v1'][type](room, Users.staff, ["o"]);
+        setTimeout(() => {OT1v1.hasStarted = false}, 30*1000*60);
     }
 }
 
