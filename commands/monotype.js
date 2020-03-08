@@ -129,6 +129,8 @@ module.exports = {
 		tobj.name = args[0];
 		tobj.points = tobj.points ? tobj.points + parseInt(args[1]) : parseInt(args[1]);
 		BLT.points[toId(tobj.name)] = tobj;
+		if (tobj.points <= 0) delete BLT.points[toId(tobj.name)];
+		Rooms['monotype'].send(`/modnote ${parseInt(args[1])} BLT points given to ${args[0].trim()} by ${user.name}`);
 		return user.send('Done.');
 	},
 	startblt: function(room, user, args) {
