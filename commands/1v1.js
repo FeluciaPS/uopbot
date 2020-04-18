@@ -129,7 +129,7 @@ module.exports = {
         },
         inverse: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] Inverse 1v1');
+            checkGenerator(room, 'gen81v1', args, '[Gen 7] Inverse 1v1');
             room.send(buildRuleset('inverse'));
         },
         monotype: 'mono',
