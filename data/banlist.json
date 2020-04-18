@@ -65,7 +65,7 @@
         "remrules": []
     },
     "stabmons": {
-        "bans": ["Pidgeot-Mega", "Tapu Lele", "Lovely Kiss", "Sleep Powder", "Spore"],
+        "bans": ["Spore", "Sleep Powder", "Acupressure", "Belly Drum", "Bolt Beak", "Double Iron Bash", "Fishious Rend", "Shift Gear", "Silvally"],
         "unbans": [],
         "addrules": ["STABmons Move Legality"],
         "remrules": []
