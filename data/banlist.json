@@ -53,7 +53,7 @@
         "remrules": []
     },
     "inverse": {
-        "bans": ["Porygon-Z"],
+        "bans": [],
         "unbans": [],
         "addrules": ["Inverse Mod"],
         "remrules": []
