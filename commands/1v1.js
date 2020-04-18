@@ -149,7 +149,7 @@ module.exports = {
         stabmons: 'stab',
         stab: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] STABmons 1v1');
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] STABmons 1v1');
             room.send(buildRuleset('stabmons'));
         },
         ubers: function(room, user, args) {
