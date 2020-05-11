@@ -87,7 +87,7 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 module.exports = {
     natdex: {
         '': 'gen8',
-        gen8: {
+        gen8: function(room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
