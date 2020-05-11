@@ -25,8 +25,10 @@ class Tournament {
 		}
         if (Config.tours[tourcheck]) {
             let t = Config.tours[tourcheck];
-            this.room.send(`/tour autostart ${t[0]}`);
-            this.room.send(`/tour autodq ${t[1]}`);
+		if (t[0]) {
+		    this.room.send(`/tour autostart ${t[0]}`);
+		    this.room.send(`/tour autodq ${t[1]}`);
+		}
             if (t[2]) this.room.send('/tour scouting disallow');
         }
         else if (Config.tours[room.id]) {
