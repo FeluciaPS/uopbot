@@ -34,7 +34,7 @@ global.NatDex = { // this doesn't belong here but who cares
         if (this.last === -1) return;
         let next = (this.last + 1) % this.times.length;
         let mins = now.getMinutes();
-        if (mins > 9) return;
+        if (mins > 10) return;
         let hours = now.getHours();
         if (hours === this.times[next]) {
             if (room.tournament) {
@@ -47,6 +47,7 @@ global.NatDex = { // this doesn't belong here but who cares
             }
             require('fs').writeFileSync("./data/lastnatdex.txt", next);
             this.last = next;
+            console.log("natdex official")
             Commands['natdex']['gen8'](room, Users.staff, ["o"]);
         }
     }
