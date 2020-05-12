@@ -35,10 +35,10 @@
         "remrules": []
     },
     "ag": {
-        "unbans": ["All Pokemon"],
+        "unbans": ["All Pokemon", "Moody"],
         "bans": [],
         "addrules": [],
-        "remrules": ["Accuracy Moves Clause", "Evasion Moves Clause", "Species Clause", "OHKO Clause", "Nickname Clause", "Swagger Clause", "Moody Clause"]
+        "remrules": ["Accuracy Moves Clause", "Evasion Moves Clause", "Species Clause", "OHKO Clause", "Nickname Clause", "Swagger Clause"]
     },
     "ubers": {
         "bans": [],
