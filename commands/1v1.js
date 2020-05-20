@@ -81,7 +81,7 @@ let buildRuleset = function(meta) {
 module.exports = {
     inspireme: function(room, user, args) {
         if (!user.can(room, '+')) user.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall, !disguise, !doomdesire');
-        else room.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall');
+        else room.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall, !disguise, !doomdesire');
     },
     consistency: function(room, user, args) {
         if (!user.can(room, '+') || (room.id !== "1v1" && room.id !== "nfe")) user.send('Consistency is boring.');
