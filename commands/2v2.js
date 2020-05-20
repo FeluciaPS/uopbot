@@ -8,7 +8,7 @@ global.OT2v2 = {
         ["gen8", "gen7", "gen8"],
         ["gen8", "gen8", "gen8"],
     ],
-    times: [2, 10, 18],
+    times: [1, 9, 17],
     official: function() {
         let room = Rooms['2v2'];
         let now = new Date(Date.now());
