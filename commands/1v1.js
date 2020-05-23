@@ -216,7 +216,7 @@ module.exports = {
                 now = new Date(Date.now());
                 let day = now.getDay();
                 let hours = next - now.getHours();
-                if (OT1v1.times.indexOf(next) === 0) {
+                if (hours < 0) {
                     hours += 24;
                     day = (day + 1) % 7;
                 }
@@ -267,7 +267,7 @@ module.exports = {
                 now = new Date(Date.now());
                 let day = now.getDay();
                 let hours = next - now.getHours();
-                if (OT1v1.times.indexOf(next) === 0) {
+                if (hours < 0) {
                     hours += 24;
                     day = (day + 1) % 7;
                 }
