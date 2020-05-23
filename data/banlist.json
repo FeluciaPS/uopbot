@@ -76,6 +76,20 @@
         "unbans": [],
         "addrules": [],
         "remrules": []
+    },
+    "uu": {
+        "meta": "gen81v1",
+        "bans": ["Primarina", "RotomWash", "Steelix", "Sylveon", "Dracovish", "Arcanine", "Dragapult", "Corviknight", "Haxorus", "Zeraora", "Aromatisse", "Whimsicott", "Avalugg", "Aegislash", "Togekiss", "Crustle", "DarmanitanGalar", "RotomHeat", "Excadrill", "Incineroar", "Kommoo", "Cinderace", "Conkeldurr", "Sawk", "Rillaboom", "Gardevoir"],
+        "unbans": [],
+        "addrules": [],
+        "remrules": []
+    },
+    "natdex": {
+        "meta": "gen81v1",
+        "bans": ["Deoxys-Defense", "Mimikyu", "Snorlax", "Tapu Koko", "Detect"],
+        "unbans": ["Deoxys-Speed", "Landorus", "Lucario-Mega", "Lucarionite", "Naganadel", "Pheromosa", "Zygarde-Complete", "Power Construct", "Necrozma", "Sableye", "Mew", "Blastoise-Mega", "Blastoisinite"],
+        "addrules": ["Gen 8 National Dex"],
+        "remrules": []
     }
 }
  
