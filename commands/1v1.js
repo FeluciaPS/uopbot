@@ -1,11 +1,11 @@
 global.OT1v1 = {
     schedule: [ 
-        ["ubers", "gen8", "gen8"],
-        ["gen8", "gen8", "gen4"],
-        ["gen3", "gen5", "gen7"],
-        ["gen8", "mono", "gen8"],
-        ["gen6", "gen8", "gen3"],
-        ["gen4", "gen7", "gen5"],
+        ["gen8", "gen4", "gen3"],
+        ["gen5", "gen7", "gen8"],
+        ["uu", "gen8", "gen6"],
+        ["gen8", "gen3", "gen4"],
+        ["gen7", "gen5", "gen8"],
+        ["gen6", "gen8", "natdex"],
         ["gen8", "gen6", "gen8"],
     ],
     times: [1, 9, 17],
@@ -127,9 +127,14 @@ module.exports = {
             checkGenerator(room, 'gen71v1', args, '[Gen 7] AG 1v1');
             room.send(buildRuleset('ag'));
         },
+        natdex: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] National Dex 1v1');
+            room.send(buildRuleset('natdex'));
+        },
         inverse: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 7] Inverse 1v1');
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] Inverse 1v1');
             room.send(buildRuleset('inverse'));
         },
         monotype: 'mono',
@@ -159,7 +164,7 @@ module.exports = {
         },
         uu: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] UU 1v1');
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] UU 1v1');
             room.send(buildRuleset('uu'));
         },
         chill: function(room, user, args) {
