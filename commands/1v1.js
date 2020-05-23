@@ -214,7 +214,8 @@ module.exports = {
                     if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
                 }
                 now = new Date(Date.now());
-                let day = now.getDay();
+                let day = now.getDay()-1;
+                if (day < 0) day = 6;
                 let hours = next - now.getHours();
                 if (hours < 0) {
                     hours += 24;
@@ -265,7 +266,8 @@ module.exports = {
                     if (nhours >= OT1v1.times[i]) next = OT1v1.times[(parseInt(i)+1)%OT1v1.times.length];
                 }
                 now = new Date(Date.now());
-                let day = now.getDay();
+                let day = now.getDay()-1;
+                if (day < 0) day = 6;
                 let hours = next - now.getHours();
                 if (hours < 0) {
                     hours += 24;
