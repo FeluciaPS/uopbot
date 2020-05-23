@@ -1,12 +1,12 @@
 global.OT1v1 = {
     schedule: [ 
-        ["gen8", "gen4", "gen3"],
-        ["gen5", "gen7", "gen8"],
-        ["uu", "gen8", "gen6"],
-        ["gen8", "gen3", "gen4"],
-        ["gen7", "gen5", "gen8"],
-        ["gen6", "gen8", "natdex"],
+        ["gen8", "gen8", "gen4"],
+        ["gen3", "gen5", "gen7"],
+        ["gen8", "uu", "gen8"],
+        ["gen6", "gen8", "gen3"],
+        ["gen4", "gen7", "gen5"],
         ["gen8", "gen6", "gen8"],
+        ["natdex", "gen8", "gen8"],
     ],
     times: [1, 9, 17],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
