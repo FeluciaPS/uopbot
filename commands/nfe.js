@@ -146,7 +146,7 @@ module.exports = {
         ubers: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE Ubers');
-            room.send('/tour rules /tour rules +Doublade, +Gurdurr, +Ivysaur, +Mr. Mime-Galar, +Pawniard, +Rhydon, +Rufflet, +Sneasel, +Type: Null, !Dynamax Clause');
+            room.send('/tour rules +Doublade, +Gurdurr, +Ivysaur, +Mr. Mime-Galar, +Pawniard, +Rhydon, +Rufflet, +Sneasel, +Type: Null, !Dynamax Clause');
         },
         bh: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
