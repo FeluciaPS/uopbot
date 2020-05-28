@@ -14,7 +14,8 @@ global.OT1v1 = {
     official: function() {
         let room = Rooms['1v1'];
         let now = new Date(Date.now());
-        let day = now.getDay();
+        let day = now.getDay()-1;
+        if (day < 0) day = 6;
         if (!this.times.includes(now.getHours())) return;
         if (now.getMinutes() > 5) return;
         let nextid = OT1v1.times.indexOf(now.getHours());
