@@ -143,6 +143,11 @@ module.exports = {
             checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Almost Any Ability NFE');
             room.send('/tour rules Not Fully Evolved, -Chansey, -Gurdurr, -Piloswine, -Rhydon, -Scyther, -Sneasel, -Electabuzz');
         },
+        ubers: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE Ubers');
+            room.send('/tour rules +All Pokemon, +Dynamax');
+        },
         bh: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8balancedhackmons', args, '[Gen 7] BH NFE');
