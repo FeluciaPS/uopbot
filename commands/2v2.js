@@ -1,3 +1,4 @@
+let moncountrule = ', uber ++ ou ++ uubl ++ uu ++ rubl ++ ru ++ nubl ++ nu ++ publ ++ pu ++ zu ++ nfe ++ lc uber ++ lc > 4'
 global.OT2v2 = {
     schedule: [ 
         ["gen8", "gen6", "gen8"],
@@ -75,25 +76,25 @@ module.exports = {
         gen7: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7doublesou', args, '[Gen 7] 2v2 Doubles');
-            room.send('/tour rules Two vs Two, Accuracy Moves Clause, Z-Move Clause, +Gengar-Mega, -Kangaskhan-Mega, -Salamence-Mega, -Final Gambit, -Focus Sash, -Tapu Lele, -Perish Song');
+            room.send('/tour rules Two vs Two, Accuracy Moves Clause, Z-Move Clause, +Gengar-Mega, -Kangaskhan-Mega, -Salamence-Mega, -Final Gambit, -Focus Sash, -Tapu Lele, -Perish Song' + moncountrule);
         },
         oras: 'gen6',
         gen6: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6doublesou', args, '[Gen 6] 2v2 Doubles');
-            room.send('/tour rules Two vs Two, -Perish Song, -Focus Sash, -Kangaskhan-Mega');
+            room.send('/tour rules Two vs Two, -Perish Song, -Focus Sash, -Kangaskhan-Mega' + moncountrule);
         },
         bw: 'gen5',
         gen5: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen5doublesou', args, '[Gen 5] 2v2 Doubles');
-            room.send('/tour rules Two vs Two, -Perish Song, -Focus Sash');
+            room.send('/tour rules Two vs Two, -Perish Song, -Focus Sash' + moncountrule);
         },
         dp: 'gen4',
         gen4: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen4doublesou', args, '[Gen 4] 2v2 Doubles');
-            room.send('/tour rules Two vs Two, -Perish Song, -Focus Sash');
+            room.send('/tour rules Two vs Two, -Perish Song, -Focus Sash' + moncountrule);
         },
         inverse: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
@@ -108,7 +109,7 @@ module.exports = {
         },
         chill: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen82v2', args);
+            checkGenerator(room, 'gen82v2doubles', args);
             room.startTour('chill');
         },
         help: function(room, user, args) {
