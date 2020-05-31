@@ -34,6 +34,12 @@
         "addrules": [],
         "remrules": []
     },
+    "aaa": {
+        "unbans": [],
+        "bans": ["Sturdy", "Huge Power", "Pure Power", "Intrepid Sword", "Gorilla Tactics", "Fur Coat", "Ice Scales", "Moody", "Prankster", "Parental Bond", "Protean", "Libero", "Simple", "Speed Boost", "Water Bubble", "Wonder Guard", "No Guard", "Imposter", "Normalize", "Psychic Surge", "Shadow Shield", "Multiscale", "Hustle", "Neutralizing Gas"],
+        "addrules": [],
+        "remrules": ["Obtainable Abilities"]
+    },
     "ag": {
         "unbans": ["All Pokemon", "Moody"],
         "bans": [],
