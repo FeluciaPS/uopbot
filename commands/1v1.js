@@ -91,11 +91,11 @@ let getGen = function(mon) {
     if (mon.num < 1) return 0;
     if (mon.num >= 810 || ['Gmax', 'Galar', 'Galar-Zen'].includes(mon.forme)) {
         return 8;
-    } else if (mon.num >= 722 || mon.forme.startsWith('Alola') || mon.forme === 'Starter') {
+    } else if (mon.num >= 722 || (mon.forme && mon.forme.startsWith('Alola')) || mon.forme === 'Starter') {
         return 7;
     } else if (mon.forme === 'Primal') {
         return 6;
-    } else if (mon.num >= 650 || mon.isMega) {
+    } else if (mon.num >= 650 || (mon.forme && mon.forme.startsWith("Mega"))) {
         return 6;
     } else if (mon.num >= 494) {
         return 5;
