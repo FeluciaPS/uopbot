@@ -168,7 +168,7 @@ let inspireMe = function(arg) {
         if (banlist.includes(entry.name)) continue;
         if (entry.baseSpecies && banlist.includes(entry.baseSpecies.name)) continue;
         let n = 0;
-        for (let s in entry.stats) n += entry.stats[s];
+        for (let s in entry.baseStats) n += entry.baseStats[s];
         if (n < 420) continue;
         valid.push(entry.name);
     }
