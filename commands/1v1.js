@@ -274,6 +274,14 @@ module.exports = {
             checkGenerator(room, 'gen71v1', args, '[Gen 7] No Z 1v1');
             room.send('/tour rules Z Move Clause');
         },
+        dmax: 'max',
+        dynamax: 'max',
+        dyna: 'max',
+        max: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] Dynamax 1v1');
+            room.send('/tour rules !Dynamax Clause');
+        },
         stabmons: 'stab',
         stab: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
