@@ -185,7 +185,7 @@ let inspireMe = function(arg) {
 }
 module.exports = {
     inspireme: function(room, user, args) {
-        let target, prefix = user.can(room, '+') && room !== user ? [room, '/addhtmlbox '] : [findPMRoom(user), `/pminfobox ${user.id}, `;
+        let target, prefix = user.can(room, '+') && room !== user ? [room, '/addhtmlbox '] : [findPMRoom(user), `/pminfobox ${user.id}, `];
         let gen = toId(args[0]);
         let ret = inspireMe(gen);
         target.send(prefix + ret);
