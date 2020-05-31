@@ -79,10 +79,116 @@ let buildRuleset = function(meta) {
     return ret + rules.join(', ');
 }
 
+let findPMRoom = function(user) {
+    for (let i in Rooms) {
+        if (!Users.self.can(Rooms[i], '*')) continue;
+        if (Rooms[i].users[user]) return Rooms[i];
+    }
+    return false;
+}
+
+let getGen = function(mon) {
+    if (mon.num < 1) return 0;
+    if (mon.num >= 810 || ['Gmax', 'Galar', 'Galar-Zen'].includes(mon.forme)) {
+        return 8;
+    } else if (mon.num >= 722 || mon.forme.startsWith('Alola') || mon.forme === 'Starter') {
+        return 7;
+    } else if (mon.forme === 'Primal') {
+        return 6;
+    } else if (mon.num >= 650 || mon.isMega) {
+        return 6;
+    } else if (mon.num >= 494) {
+        return 5;
+    } else if (mon.num >= 387) {
+        return 4;
+    } else if (mon.num >= 252) {
+        return 3;
+    } else if (mon.num >= 152) {
+        return 2;
+    } else {
+        return 1;
+    }
+}
+let inspireMe = function(arg) {
+    let banlist = [
+        "Eternatus", "Jirachi", "Kyurem-Black", "Kyurem-White", "Lunala", "Marshadow", 
+        "Melmetal", "Mew", "Mewtwo", "Mimikyu", "Necrozma", "Necrozma-Dawn-Wings", 
+        "Necrozma-Dusk-Mane", "Reshiram", "Sableye", "Solgaleo", "Zacian", "Zamazenta", "Zekrom"
+    ]
+    let gen = 8;
+    if (['sm', 'usum', '7', 'gen7'].includes(arg)) {
+        banlist = [
+            "Arceus", "Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense", "Dialga", 
+            "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-Black", 
+            "Kyurem-White", "Lugia", "Lunala", "Marshadow", "Mewtwo", "Mimikyu", "Necrozma-Dawn-Wings", 
+            "Necrozma-Dusk-Mane", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky", 
+            "Snorlax", "Solgaleo", "Tapu Koko", "Xerneas", "Yveltal", "Zekrom"
+        ]
+        gen = 7;
+    }
+    if (['xy', 'oras', '6', 'gen6'].includes(arg)) {
+        banlist = [
+            "Arceus", "Blaziken", "Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense",
+            "Dialga", "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-White", 
+            "Lugia", "Mewtwo", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky", 
+            "Xerneas", "Yveltal", "Zekrom"
+        ]
+        gen = 6;
+    }
+    if (['bw', 'bw2', 'b2w2', '5', 'gen5'].includes(arg)) {
+        banlist = [
+            "Arceus", "Blaziken", "Darkrai", "Deoxys", "Dialga", "Giratina", "Groudon", "Ho-Oh", 
+            "Kyogre", "Kyurem-White", "Lugia", "Mewtwo", "Palkia", "Rayquaza", "Reshiram", "Shaymin-Sky",
+            "Whimsicott", "Zekrom"
+        ]
+        gen = 5;
+    }
+    if (['dp', 'dpp', 'dppt', '4', 'gen4'].includes(arg)) {
+        banlist = [
+            "Latias", "Arceus", "Darkrai", "Deoxys", "Dialga", "Garchomp", "Giratina", "Groudon", 
+            "Ho-oh", "Kyogre", "Latios", "Lugia", "Manaphy", "Mew", "Mewtwo", "Palkia", 
+            "Porygon-Z", "Rayquaza", "Salamence", "Shaymin-Sky"
+        ]
+        gen = 4
+    }
+    if (['adv', 'rse', 'rs', '3', 'gen3'].includes(arg)) {
+        banlist = [
+            "Slaking", "Deoxys", "Deoxys-Attack", "Deoxys-Defense", "Deoxys-Speed", 
+            "Groudon", "Ho-Oh", "Kyogre", "Latias", "Latios", "Lugia", "Mew", "Mewtwo", 
+            "Rayquaza", "Snorlax", "Suicune", "Wobbuffet", "Wynaut"
+        ]
+        gen = 3
+    }
+    let valid = [];
+    for (let i in PokeDex) {
+        let entry = PokeDex[i];
+        entry.gen = getGen(entry);
+        if (!entry.gen) continue;
+        if (entry.gen > gen) continue;
+        if (banlist.includes(entry.name)) continue;
+        if (entry.baseSpecies && banlist.includes(entry.baseSpecies.name)) continue;
+        valid.push(entry.name);
+    }
+    
+    let n = [];
+    while (n.length < 3) {
+        let rand = Math.floor(Math.random() * valid.length);
+        if (n.includes(valid[rand])) continue;
+        n.push(valid[rand]);
+    }
+    let ret = [
+        `<a href="//dex.pokemonshowdown.com/pokemon/${toId(n[0])}" target="_blank" class="subtle" style="white-space:nowrap"><psicon pokemon="${n[0]}" style="vertical-align:-7px;margin:-2px" />${n[0]}</a>`,
+        `<a href="//dex.pokemonshowdown.com/pokemon/${toId(n[1])}" target="_blank" class="subtle" style="white-space:nowrap"><psicon pokemon="${n[1]}" style="vertical-align:-7px;margin:-2px" />${n[1]}</a>`,
+        `<a href="//dex.pokemonshowdown.com/pokemon/${toId(n[2])}" target="_blank" class="subtle" style="white-space:nowrap"><psicon pokemon="${n[2]}" style="vertical-align:-7px;margin:-2px" />${n[2]}</a>`,
+    ]
+    return `<span style="color:#999999;">inspireme (gen ${gen}):</span><br />${ret.join(',')}`;
+}
 module.exports = {
     inspireme: function(room, user, args) {
-        if (!user.can(room, '+')) user.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall, !disguise, !doomdesire');
-        else room.send('!randpoke 3, bst < 670, !lc, !nfe, !lcuber, !stall, !disguise, !doomdesire');
+        let target, prefix = user.can(room, '+') && room !== user ? [room, '/addhtmlbox '] : [findPMRoom(user), `/pminfobox ${user.id}, `;
+        let gen = toId(args[0]);
+        let ret = inspireMe(gen);
+        target.send(prefix + ret);
     },
     consistency: function(room, user, args) {
         if (!user.can(room, '+') || (room.id !== "1v1" && room.id !== "nfe")) user.send('Consistency is boring.');
