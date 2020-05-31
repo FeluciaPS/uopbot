@@ -26,7 +26,8 @@ global.NFE = {
 }
 
 global.NatDex = { // this doesn't belong here but who cares
-    times: [ 21, 22, 23 ],
+    times: [ 0, 20, 21, 22, 23 ],
+    formats: [ 'uu', 'uu', 'gen8', 'gen8', 'gen8' ],
     last: parseInt(require('fs').readFileSync("./data/lastnatdex.txt")),
     official: function() {
         let room = Rooms['nationaldex'];
@@ -48,7 +49,9 @@ global.NatDex = { // this doesn't belong here but who cares
             require('fs').writeFileSync("./data/lastnatdex.txt", next);
             this.last = next;
             console.log("natdex official")
-            Commands['natdex']['gen8'](room, Users.staff, ["o"]);
+            let args = ["o"];
+            if (next < 2) args = []
+            Commands['natdex'][this.formats[next]](room, Users.staff, args);
         }
     }
 }
@@ -95,6 +98,15 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'gen8nationaldex', args);
+        },
+        uu: function(room, user, args) {
+            if (!user.can(room, "%")) return false;
+            if (room.tournament) {
+                room.send("A tournament is already going on.");
+                return false;
+            }
+            checkGenerator(room, 'gen8nationaldex', args);
+            room.send('/tour rules -Landorus-Therian, -Darmanitan-Galar, -Greninja-Ash, -Heatran, -Dracovish, -Dragapult, -Ferrothorn, -Kartana, -Metagross-Mega, -Volcarona, -Tapu Fini, -Chansey, -Clefable, -Magearna, -Tapu Koko, -Garchomp, -Excadrill, -Toxapex, -Zapdos, -Tapu Lele, -Corviknight, -Tangrowth, -Tornadus-Therian, -Pelipper, -Lopunny-Mega, -Scizor-Mega, -Gliscor, -Greninja, -Melmetal, -Serperior, -Magnezone, -Swampert-Mega, -Bisharp, -Blacephalon, -Tapu Bulu, -Rotom-Heat, -Ditto, -Tyranitar, -Grimmsnarl, -Rotom-Wash, -Aegislash, -Alakazam-Mega, -Charizard-Mega-X, -Charizard-Mega-Y, -Deoxys-Defense, -Dragonite, -Gallade-Mega, -Hawlucha, -Heracross-Mega, -Hoopa-Unbound, -Latias-Mega, -Latios, -Latios-Mega, -Mawile-Mega, -Medicham-Mega, -Mew, -Pinsir-Mega, -Staraptor, -Thundurus-Base, -Victini, -Drizzle, -Drought, -Aurora Veil, -Azumarill');
         }
     },
     nfe: {
