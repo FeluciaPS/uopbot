@@ -259,6 +259,16 @@ module.exports = {
         nfe: function(room, user, args) {
             Commands.nfe1v1(room, user, args);
         },
+        cap: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] CAP 1v1');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
+        },
+        lc: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen81v1', args, '[Gen 8] LC 1v1');
+            room.send('/tour rules Little Cup, [Gen 8] LC');
+        },
         noz: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args, '[Gen 7] No Z 1v1');
