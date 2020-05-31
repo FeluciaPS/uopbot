@@ -167,6 +167,9 @@ let inspireMe = function(arg) {
         if (entry.gen > gen) continue;
         if (banlist.includes(entry.name)) continue;
         if (entry.baseSpecies && banlist.includes(entry.baseSpecies.name)) continue;
+        let n = 0;
+        for (let s in entry.stats) n += entry.stats[s];
+        if (n < 420) continue;
         valid.push(entry.name);
     }
     
@@ -185,8 +188,8 @@ let inspireMe = function(arg) {
 }
 module.exports = {
     inspireme: function(room, user, args) {
-        let target = user.can(room, '+') && room !== user ? room : findPMRoom(user); 
-        let prefix = user.can(room, '+') && room !== user ? '/addhtmlbox ' : `/pminfobox ${user.id}, `;
+        let target = user.can(room, '+') && room !== user && Users.self.can(room, '*') ? room : findPMRoom(user); 
+        let prefix = user.can(room, '+') && room !== user && Users.self.can(room, '*')  ? '/addhtmlbox ' : `/pminfobox ${user.id}, `;
         console.log(target);
         let gen = toId(args[0]);
         let ret = inspireMe(gen);
