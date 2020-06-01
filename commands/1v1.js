@@ -28,6 +28,7 @@ global.OT1v1 = {
                 room.endTour();
             }
         }
+        console.log("OFFICIAL TOUR STARTS HERE");
         let type = this.schedule[day][nextid];
         room.send('/modnote OFFICIAL: ' + type);
         this.hasStarted = true;
