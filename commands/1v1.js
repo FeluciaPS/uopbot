@@ -176,10 +176,13 @@ let inspireMe = function(arg) {
     }
     
     let n = [];
+    let b = [];
     while (n.length < 3) {
         let rand = Math.floor(Math.random() * valid.length);
         if (n.includes(valid[rand])) continue;
+        if (valid[rand].baseSpecies && b.includes(valid[rand].baseSpecies.name)) continue;
         n.push(valid[rand]);
+        if (valid[rand].baseSpecies) b.push(valid[rand].baseSpecies.name)
     }
     let ret = [
         `<a href="//dex.pokemonshowdown.com/pokemon/${toId(n[0])}" target="_blank" class="subtle" style="white-space:nowrap"><psicon pokemon="${n[0]}" style="vertical-align:-7px;margin:-2px" />${n[0]}</a>`,
