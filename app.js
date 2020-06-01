@@ -52,6 +52,7 @@ try {
 		connection.on('message', function (message) {
 			let data = message.utf8Data;
 			let parts = data.split('|');
+			console.log(data); // I guess we're debugging boys and girls
 			if (toId(parts[1]) == 'error') { console.log(data); }
 			else bot.emit(toId(parts[1]), parts, data);
 		});
