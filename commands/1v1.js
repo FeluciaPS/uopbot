@@ -11,15 +11,19 @@ global.OT1v1 = {
     times: [1, 9, 17],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
     last: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[1]),
+    hasStarted: false,
     official: function() {
         let room = Rooms['1v1'];
         let now = new Date(Date.now());
         let day = now.getDay()-1;
         if (day < 0) day = 6;
         if (!this.times.includes(now.getHours())) return;
+        console.log('ot test 1');
         if (now.getMinutes() > 5) return;
         let nextid = OT1v1.times.indexOf(now.getHours());
+        console.log('ot test 2');
         if (this.hasStarted) return;
+        console.log('ot test 3');
         if (room.tournament) {
             if (room.tournament.official) return;
             else {
