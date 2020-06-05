@@ -45,7 +45,7 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (fdt.isNonstandard === "Past") return room.send(`${dex.species} is only available in past gens`);
             let mon = dex.species;
-            let ruleset = "/tour rules !Team Preview, -All Pokemon, +${mon}`;
+            let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}`;
             Commands['1v1']['gen8'](room, user, args);
             room.startTour("monopoke");
             room.send(ruleset);
@@ -60,7 +60,7 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (dex.num > 809) return room.send(`${dex.species} is not available in gen 7.`);
             let mon = dex.species;
-            let ruleset = "/tour rules !Team Preview, -All Pokemon, +${mon}`;
+            let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}`;
             Commands['1v1']['gen7'](room, user, args);
             room.startTour("monopoke");
             room.send(ruleset);
@@ -86,7 +86,7 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (fdt.isNonstandard === "Past") return room.send(`${dex.species} is only available in past gens`);
             let mon = dex.species;
-            let ruleset = "/tour rules !Team Preview, -All Pokemon, +${mon}, [Gen 8] Camomons`;
+            let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}, [Gen 8] Camomons`;
             Commands['1v1']['gen8'](room, user, args);
             room.startTour("monopoke");
             room.send(ruleset);
@@ -101,7 +101,7 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (dex.num > 809) return room.send(`${dex.species} is not available in gen 7.`);
             let mon = dex.species;
-            let ruleset = "/tour rules !Team Preview, -All Pokemon, +${mon}, [Gen 8] Camomons`;
+            let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}, [Gen 8] Camomons`;
             Commands['1v1']['gen7'](room, user, args);
             room.startTour("monopoke");
             room.send(ruleset);
