@@ -64,11 +64,14 @@ bot.on('c', (parts) => {
         if (typeof Commands[cmd] === 'string') cmd = Commands[cmd];
         let func = Commands[cmd];
         if (typeof func === 'object') {
-			let target = toId(args[0]);
-            if (!target || !func[target]) target = '';
-			if (target in func && typeof func[target] === 'string') target = func[target];
-			func = func[target];
-            args.shift();
+		let target = toId(args[0]);
+		if (!target || !func[target]) {
+			target = '';
+			args = [''].concat(args);
+		}
+		if (target in func && typeof func[target] === 'string') target = func[target];
+		func = func[target];
+		args.shift();
         }
         func(Rooms[room], user, args, val, time);
         logger.emit('cmd', cmd, val);
