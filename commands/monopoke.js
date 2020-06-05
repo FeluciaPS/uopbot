@@ -23,13 +23,14 @@ let chooseMonopoke = function(gen) {
     mon = mons[mon];
     mon = PokeDex[mon];
     if (mon.baseSpecies) mon = chooseMonopoke(gen);
-    return mon.species;
+    return mon.name;
 }
 
 module.exports = {
     monopoke: {
         '': function(room, user, args) {
             if (!canMakeTour(room, user)) return;
+            console.log(args)
             if (!args[0]) args[0] = chooseMonopoke(false);
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
@@ -43,8 +44,8 @@ module.exports = {
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
-            if (fdt.isNonstandard === "Past") return room.send(`${dex.species} is only available in past gens`);
-            let mon = dex.species;
+            if (fdt.isNonstandard === "Past") return room.send(`${dex.name} is only available in past gens`);
+            let mon = dex.name;
             let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}`;
             Commands['1v1']['gen8'](room, user, args);
             room.startTour("monopoke");
@@ -58,8 +59,8 @@ module.exports = {
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
-            if (dex.num > 809) return room.send(`${dex.species} is not available in gen 7.`);
-            let mon = dex.species;
+            if (dex.num > 809) return room.send(`${dex.name} is not available in gen 7.`);
+            let mon = dex.name;
             let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}`;
             Commands['1v1']['gen7'](room, user, args);
             room.startTour("monopoke");
@@ -84,8 +85,8 @@ module.exports = {
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
-            if (fdt.isNonstandard === "Past") return room.send(`${dex.species} is only available in past gens`);
-            let mon = dex.species;
+            if (fdt.isNonstandard === "Past") return room.send(`${dex.name} is only available in past gens`);
+            let mon = dex.name;
             let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}, [Gen 8] Camomons`;
             Commands['1v1']['gen8'](room, user, args);
             room.startTour("monopoke");
@@ -99,8 +100,8 @@ module.exports = {
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
-            if (dex.num > 809) return room.send(`${dex.species} is not available in gen 7.`);
-            let mon = dex.species;
+            if (dex.num > 809) return room.send(`${dex.name} is not available in gen 7.`);
+            let mon = dex.name;
             let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}, [Gen 8] Camomons`;
             Commands['1v1']['gen7'](room, user, args);
             room.startTour("monopoke");
