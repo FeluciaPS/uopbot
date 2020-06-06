@@ -18,12 +18,9 @@ global.OT1v1 = {
         let day = now.getDay()-1;
         if (day < 0) day = 6;
         if (!this.times.includes(now.getHours())) return;
-        console.log('ot test 1');
         if (now.getMinutes() > 5) return;
         let nextid = OT1v1.times.indexOf(now.getHours());
-        console.log('ot test 2');
         if (this.hasStarted) return;
-        console.log('ot test 3');
         if (room.tournament) {
             if (room.tournament.official) return;
             else {
@@ -32,7 +29,6 @@ global.OT1v1 = {
                 room.endTour();
             }
         }
-        console.log("OFFICIAL TOUR STARTS HERE");
         let type = this.schedule[day][nextid];
         room.send('/modnote OFFICIAL: ' + type);
         this.hasStarted = true;
