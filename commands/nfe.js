@@ -87,8 +87,8 @@ module.exports = {
         },
         gen3: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen3ru', args, '[Gen 3] NFE');
-            room.send('/tour rules Not Fully Evolved');
+            checkGenerator(room, 'gen3nu', args, '[Gen 3] NFE');
+            room.send('/tour rules Not Fully Evolved, -Diglett, -Dragonair, -Haunter, -Vigoroth, -Light Ball');
         },
         // OMs
         natdex: function(room, user, args) {
