@@ -78,7 +78,7 @@ module.exports = {
         gen5: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen5ubers', args, '[Gen 5] NFE');
-            room.send('/tour rules Not Fully Evolved, +NU, +RU, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Dusclops, -Fraxure, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magneton, -Riolu, -Rhydon, -Piloswine, -Porygon2, -Scyther, -Vigoroth');
+            room.send('/tour rules Not Fully Evolved, -Chansey, -Dusclops, -Fraxure, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magmar, -Magneton, -Riolu, -Rhydon, -Piloswine, -Porygon2, -Scyther, -Vigoroth');
         },
         gen4: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
