@@ -108,14 +108,12 @@ let commands = {
 		let ago = Math.floor((Date.now() - room.lasttour[0]) / 60000);
 		return room.send(`**${room.lasttour[1]}** ${ago} minute${ago === 1 ? '' : 's'} ago.`);
 	},
-    hangman: function(room, user, args) {
+    hangmon: function(room, user, args) {
         if (!user.can(room, '%')) return;
-        if (room != '1v1typechallenge') return;
         if (room.tournament) return room.send("You can't play hangman while a tournament is going on");
-        let dex = JSON.parse(FS.readFileSync('data/types.json'));
-        let mons = Object.keys(dex);
+        let mons = Object.values(PokeDex);
         let mon = dex[Utils.select(mons)];
-        room.send(`/hangman create ${mon.species}, Generation ${mon.gen}`);
+        room.send(`/hangman create ${mon.name}, Generation ${mon.gen}`);
     },
     mail: function(room, user, args, val) {
         let target = args[0];
