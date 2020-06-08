@@ -88,7 +88,7 @@ let findPMRoom = function(user) {
     return false;
 }
 
-let getGen = function(mon) {
+global.getGen = function(mon) {
     if (mon.num < 1) return 0;
     if (mon.num >= 810 || ['Gmax', 'Galar', 'Galar-Zen'].includes(mon.forme)) {
         return 8;
