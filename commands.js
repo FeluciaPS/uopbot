@@ -113,7 +113,7 @@ let commands = {
         if (room.tournament) return room.send("You can't play hangman while a tournament is going on");
         let mons = Object.values(PokeDex);
         let mon = Utils.select(mons);
-        room.send(`/hangman create ${mon.name}, Generation ${mon.gen}`);
+        room.send(`/hangman create ${mon.name}, Generation ${getGen(mon)}`);
     },
     mail: function(room, user, args, val) {
         let target = args[0];
