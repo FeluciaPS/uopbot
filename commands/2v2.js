@@ -1,4 +1,4 @@
-let moncountrule = ', uber ++ ou ++ uubl ++ uu ++ rubl ++ ru ++ nubl ++ nu ++ publ ++ pu ++ zu ++ nfe ++ lc uber ++ lc > 4'
+let moncountrule = ''
 global.OT2v2 = {
     schedule: [ 
         ["gen8", "gen6", "gen8"],
