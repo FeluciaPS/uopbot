@@ -177,9 +177,9 @@ bot.on('tournament', (parts, data) => {
             if (!room.tournament) room.startTour(false);
 			room.tournament.format = Tournament.formats[parts[3]];
 			if (room.tournament.official) room.tournament.name = "Official " + room.tournament.format;
-            if (!Rooms['1v1']) return;
             let format = Tournament.formats[toId(parts[3])] ? Tournament.formats[toId(parts[3])] : parts[3]
-            if (room.id === "1v1oldgens") Rooms['1v1'].send(`${format.replace('OU', '1v1')} tournament in <<1v1og>>`);
+	    if (room.id === "tournaments" && toId(parts[3]).match(/gen\dcap/gi)) Rooms['capproject'].send(`${format} tournament in <<tours>>`);
+            if (room.id === "toursplaza" && toId(parts[3]).match(/gen\dcap/gi)) Rooms['capproject'].send(`${format} tournament in <<tp>>`);
             if (room.id === "tournaments" && parts[3].match(/\dv\d/)) Rooms[parts[3].match(/\dv\d/)[0]].send(`${format} tournament in <<tours>>`);
             if (room.id === "toursplaza" && parts[3].match(/\dv\d/)) Rooms[parts[3].match(/\dv\d/)[0]].send(`${format} tournament in <<tp>>`);
             if (room.id === "tournaments" && parts[3].indexOf('nfe') !== -1) Rooms['nfe'].send(`${format} tournament in <<tours>>`);
