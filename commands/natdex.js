@@ -1,6 +1,6 @@
 global.NatDex = { // this doesn't belong here but who cares
-    times: [ 0, 20, 21, 22, 23 ],
-    formats: [ 'uu', 'uu', 'gen8', 'gen8', 'gen8' ],
+    times: [ 0, 17, 18, 20, 21, 22, 23 ],
+    formats: [ 'uu', 'gen8', 'gen8', 'uu', 'gen8', 'gen8', 'gen8' ],
     last: parseInt(require('fs').readFileSync("./data/lastnatdex.txt")),
     official: function() {
         let room = Rooms['nationaldex'];
@@ -23,7 +23,7 @@ global.NatDex = { // this doesn't belong here but who cares
             this.last = next;
             console.log("natdex official")
             let args = ["o"];
-            if (next < 2) args = []
+            if (this.formats[next]  === 'uu') args = []
             Commands['natdex'][this.formats[next]](room, Users.staff, args);
         }
     }
