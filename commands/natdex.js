@@ -67,8 +67,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'gen8nationaldex', args, '[Gen 8] National Dex UU');
-            room.send('/tour rules -Blacephalon, -Chansey, -Clefable, -Corviknight, -Darmanitan-Galar, -Dracovish, -Dragapult, -Excadrill, -Ferrothorn, -Garchomp, -Gliscor, -Greninja, -Greninja-Ash, -Heatran, -Kartana, -Kommo-o, -Landorus-Therian, -Lopunny-Mega, -Magearna, -Magnezone, -Melmetal, -Metagross-Mega, -Pelipper, -Rotom-Heat, -Scizor-Mega, -Serperior, -Slowbro, -Swampert-Mega, -Tangrowth, -Tapu Fini, -Tapu Koko, -Tapu Lele, -Tornadus-Therian, -Toxapex, -Volcarona, -Zapdos, -Aegislash, -Alakazam-Mega, -Azumarill, -Charizard-Mega-X, -Charizard-Mega-Y, -Cinderace, -Deoxys-Defense, -Dragonite, -Gallade-Mega, -Grimmsnarl, -Hawlucha, -Heracross-Mega, -Hoopa-Unbound, -Hydreigon, -Latias-Mega, -Latios, -Latios-Mega, -Manaphy, -Mawile-Mega, -Medicham-Mega, -Mew, -Pinsir-Mega, -Staraptor, -Thundurus-Base, -Victini, -Aurora Veil, -Drizzle, -Drought');
+            checkGenerator(room, 'gen8nationaldexuu', args, '[Gen 8] National Dex UU');
             room.send('!rfaq National Dex UU');
         }
     },
