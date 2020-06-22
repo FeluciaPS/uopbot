@@ -351,12 +351,9 @@ module.exports = {
             let hours = next - now.getHours();
             if (next === 0) hours += 24;
             let minutes = 60 - now.getMinutes();
-            //if (minutes < 60) hours -= 1;
-            //else minutes = 0;
+            if (minutes < 60) hours -= 1;
+            else minutes = 0;
             while (hours >= 24) hours -= 24;
-
-            let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-            if (hours <= 0 && minutes <= 0) timestr = "should've already started";
             let meta = '';
             next = obj.times.indexOf(next);
             if (obj.formats) meta = obj.formats[next];
@@ -370,6 +367,8 @@ module.exports = {
                 meta = obj.schedule[day][next];
             }
             while (hours < 0) hours += 24;
+            let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+            if (hours <= 0 && minutes >= 40) timestr = "should've just started";            
             r += `<b>${robj.name}</b> - ${meta} ${timestr}`;
             rooms.push(r);
         }
