@@ -358,6 +358,7 @@ module.exports = {
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
             if (hours <= 0 && minutes <= 0) timestr = "should've already started";
             let meta = '';
+            next = obj.times.indexOf(next);
             if (obj.formats) meta = obj.formats[next];
             else {
                 let day = now.getDay()-1;
