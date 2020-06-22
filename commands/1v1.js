@@ -378,6 +378,7 @@ module.exports = {
             else return user.send('No official tours configured for this room');
         }
         if (rooms.length === 1) {
+            rooms[0] = rooms[0].replace('<b>', '**').replace('</b>', '**');
             if (!user.can(room, '+')) { // room is either PM or permission denied
                 return user.send(rooms[0]);
             } else return room.send(rooms[0]);
