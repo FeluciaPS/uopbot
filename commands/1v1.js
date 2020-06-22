@@ -342,7 +342,7 @@ module.exports = {
             let obj = robj.OTobj;
 
             let r = ""
-            let now2 = new Date(Date.now() - 20*60*1000);
+            let now2 = new Date(Date.now() - 5*60*1000);
             let nhours = now2.getHours();
             let next = obj.times[0];
             for (let i in obj.times) {
@@ -368,7 +368,7 @@ module.exports = {
             }
             while (hours < 0) hours += 24;
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-            if (hours >= 23 && minutes >= 40) timestr = "should've just started";            
+            if (hours >= 23 && minutes >= 55) timestr = "should've just started";            
             r += `<b>${robj.name}</b> - ${meta} ${timestr}`;
             rooms.push(r);
         }
