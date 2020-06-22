@@ -368,7 +368,7 @@ module.exports = {
             }
             while (hours < 0) hours += 24;
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-            if (hours <= 0 && minutes >= 40) timestr = "should've just started";            
+            if (hours >= 23 && minutes >= 40) timestr = "should've just started";            
             r += `<b>${robj.name}</b> - ${meta} ${timestr}`;
             rooms.push(r);
         }
