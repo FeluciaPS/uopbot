@@ -1,12 +1,12 @@
 let moncountrule = ''
 global.OT2v2 = {
     schedule: [ 
-        ["gen8", "gen6", "gen8"],
-        ["gen5", "gen8", "gen8"],
-        ["gen8", "gen8", "gen7"],
-        ["gen6", "gen8", "gen8"],
-        ["gen8", "gen8", "gen5"],
-        ["gen8", "gen7", "gen8"],
+        ["gen8", "gen8", "gen6"],
+        ["gen8", "gen5", "gen8"],
+        ["gen8", "gen8", "gen8"],
+        ["gen7", "gen6", "gen8"],
+        ["gen8", "gen8", "gen8"],
+        ["gen5", "gen8", "gen7"],
         ["gen8", "gen8", "gen8"],
     ],
     times: [2, 10, 18],
