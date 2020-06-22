@@ -351,8 +351,8 @@ module.exports = {
             let hours = next - now.getHours();
             if (next === 0) hours += 24;
             let minutes = 60 - now.getMinutes();
-            if (minutes < 60) hours -= 1;
-            else minutes = 0;
+            //if (minutes < 60) hours -= 1;
+            //else minutes = 0;
             while (hours >= 24) hours -= 24;
 
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
