@@ -1,5 +1,6 @@
 global.NFE = {
     times: [ 1, 9, 15, 20 ],
+    formats: [ 'gen8', 'gen8', 'gen8', 'gen8' ],
     last: parseInt(require('fs').readFileSync("./data/lastnfe.txt")),
     official: function() {
         let room = Rooms['nfe'];
