@@ -369,7 +369,7 @@ module.exports = {
                 meta = obj.schedule[day][next];
             }
             while (hours < 0) hours += 24;
-            r += `$<b>{robj.name}</b> - ${meta} ${timestr}`;
+            r += `<b>${robj.name}</b> - ${meta} ${timestr}`;
             rooms.push(r);
         }
         if (!rooms.length) {
