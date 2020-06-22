@@ -383,7 +383,7 @@ module.exports = {
         }
         // multiple rooms, command was used in PM.
         let ret = rooms.join('<br>');
-        targetroom.send(`/pminfobox ${user.id}, ${ret}`;
+        targetroom.send(`/pminfobox ${user.id}, ${ret}`);
     },
     '1v1om': function(room, user, args) {
         if (room != '1v1' && room != '1v1typechallenge') return false;
