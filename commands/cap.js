@@ -17,7 +17,7 @@ global.CAP = {
                 room.endTour();
             }
         }
-        Commands['cap'][formats[formats.indexOf(next)]](room, Users.staff, ["o"]);
+        Commands['cap'][this.formats[this.formats.indexOf(next)]](room, Users.staff, ["o"]);
     }
 }
 
