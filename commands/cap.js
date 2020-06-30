@@ -1,10 +1,12 @@
 global.CAP = {
     times: [ 22 ],
     formats: [ 'gen8' ],
+    started: false,
     official: function() {
         let room = Rooms['capproject'];
         let now = new Date(Date.now());
         if (!this.times.includes(now.getHours())) return;
+        if (this.started) return;
         let next = now.getHours();
         let mins = now.getMinutes();
         if (mins > 5) return;
@@ -17,7 +19,9 @@ global.CAP = {
                 room.endTour();
             }
         }
+        this.started = true;
         Commands['cap'][this.formats[this.times.indexOf(next)]](room, Users.staff, ["o"]);
+        setTimeout(() => {this.started = false}, 30*60*1000);
     }
 }
 
