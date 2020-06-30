@@ -115,7 +115,7 @@ module.exports = {
         },
         mnm: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7mixandmega', args, '[Gen 7] Mix and Mega CAP');
+            checkGenerator(room, 'gen8mixandmega', args, '[Gen 8] Mix and Mega CAP');
             room.send('/tour rules +CAP');
         },
         stab: 'stabmons',
