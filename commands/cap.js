@@ -74,34 +74,34 @@ module.exports = {
         gen5: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen5ou', args, '[Gen 5] CAP');
-            room.send('/tour rules +CAP');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
         },
         gen4: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen4ou', args, '[Gen 4] CAP');
-            room.send('/tour rules +CAP');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
         },
         
         // OMs
         natdex: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nationaldex', args, '[Gen 8] National Dex CAP');
-            room.send('/tour rules +CAP');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
         },
         '1v1': function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] CAP 1v1');
-            room.send('/tour rules -All Pokemon, +CAP');
+            room.send('/tour rules -All Pokemon, +CAP, +CAP NFE, +CAP LC');
         },
         aaa: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Almost Any Ability CAP');
-            room.send('/tour rules +CAP');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
         },
         bh: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8balancedhackmons', args, '[Gen 8] BH CAP');
-            room.send('/tour rules -Ubers, +CAP');
+            room.send('/tour rules -Ubers, +CAP, +CAP NFE, +CAP LC');
         },
         nfe: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
@@ -116,13 +116,13 @@ module.exports = {
         mnm: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8mixandmega', args, '[Gen 8] Mix and Mega CAP');
-            room.send('/tour rules +CAP');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
         },
         stab: 'stabmons',
         stabmons: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8stabmons', args, '[Gen 8] STABmons CAP');
-            room.send("/tour rules +CAP");
+            room.send("/tour rules +CAP, +CAP NFE, +CAP LC");
         },
         // other
         blitz: function(room, user, args) {
