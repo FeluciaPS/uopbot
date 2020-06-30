@@ -9,17 +9,15 @@ global.CAP = {
         let mins = now.getMinutes();
         if (mins > 5) return;
         let hours = now.getHours();
-        if (hours === this.times[next]) {
-            if (room.tournament) {
-                if (room.tournament.official) return;
-                else {
-                    room.send("/wall Official time. Ending ongoing tournament");
-                    room.send("/tour end");
-                    room.endTour();
-                }
+        if (room.tournament) {
+            if (room.tournament.official) return;
+            else {
+                room.send("/wall Official time. Ending ongoing tournament");
+                room.send("/tour end");
+                room.endTour();
             }
-            Commands['cap'][formats[next]](room, Users.staff, ["o"]);
         }
+        Commands['cap'][formats[formats.indexOf(next)]](room, Users.staff, ["o"]);
     }
 }
 
