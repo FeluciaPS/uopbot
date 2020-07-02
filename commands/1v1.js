@@ -266,7 +266,7 @@ module.exports = {
         cap: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] CAP 1v1');
-            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
+            room.send('/tour rules -All Pokemon, +CAP, +CAP NFE, +CAP LC');
         },
         lc: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
