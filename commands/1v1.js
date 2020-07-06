@@ -20,9 +20,9 @@ global.OT1v1 = {
         if (!this.times.includes(now.getHours())) return;
         if (now.getMinutes() > 5) return;
         let nextid = OT1v1.times.indexOf(now.getHours());
-        if (this.hasStarted) return;
+        if (this.hasStarted) return console.log('Tour has already started');
         if (room.tournament) {
-            if (room.tournament.official) return;
+            if (room.tournament.official) return console.log('1v1: Official tour already exists');
             else {
                 room.send("/wall Official time. Ending ongoing tournament");
                 room.send("/tour end");
