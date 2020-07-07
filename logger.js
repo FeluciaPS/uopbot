@@ -15,5 +15,6 @@ logger.on('log', (msg) => {
 });
 
 logger.on('chat', (room, user, msg) => {
+    if (msg.startsWith('/uhtml') || msg.startsWith('/raw')) return;
     console.log(`[${Rooms[room].name}] ${user.trim()}: ${msg.trim()}`)
 });
