@@ -86,6 +86,7 @@ module.exports = {
             checkGenerator(room, 'gen4uu', args, '[Gen 4] NFE');
             room.send('/tour rules Not Fully Evolved, +NU, +RU, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Dragonair, -Dusclops, -Electabuzz, -Haunter, -Machoke, -Magmar, -Magneton, -Porygon2, -Rhydon, -Scyther, -Sneasel');
         },
+        //this is being rebooted after PL, will be unbanning most of the tier and retrying w more public push
         gen3: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen3nu', args, '[Gen 3] NFE');
@@ -112,8 +113,8 @@ module.exports = {
         },
         bh: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen8balancedhackmons', args, '[Gen 7] BH NFE');
-            room.send('/tour rules Not Fully Evolved, -Chansey, -Porygon 2, -Type: Null, -Shell Smash');
+            checkGenerator(room, 'gen8balancedhackmons', args, '[Gen 8] BH NFE');
+            room.send('/tour rules Not Fully Evolved, -Chansey, -Doublade, -Mr. Mime-Galar, -Porygon 2, -Raboot, -Sneasel, -Type: Null, -Fishious Rend, -Bolt Beak, -Light Ball, Dynamax Clause');
         },
         cap: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
@@ -127,15 +128,29 @@ module.exports = {
         },
         mnm: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7mixandmega', args, '[Gen 7] Mix and Mega NFE');
-            room.send('/tour rules Not Fully Evolved, -Gurdurr, -Piloswine');
-            room.send('/wall The following pokemon are not allowed to mega-evolve, if your opponent uses them tell a staff member so they can be disqualified: Chansey, Rhydon, Scyther and Gligar');
+            checkGenerator(room, 'gen8mixandmega', args, '[Gen 8] Mix and Mega NFE');
+            room.send('/tour rules Not Fully Evolved');
+            room.send('/wall The following pokemon are not allowed to mega-evolve, if your opponent uses them tell a staff member so they can be disqualified: Chansey, Doublade, Gurdurr, Haunter, Ivysaur, Magneton, Mr. Mime Galar, Pawniard, Porygon2, Rhydon, Rufflet, Scyther, Sneasel, Type:Null.');
         },
         stab: 'stabmons',
         stabmons: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7stabmons', args, '[Gen 7] STABmons NFE');
+            checkGenerator(room, 'gen8stabmons', args, '[Gen 8] STABmons NFE');
             room.send("/tour rules Not Fully Evolved, -Chansey, -Haunter, -Yanma, -Dewpider, -King's Rock, -Razor Fang");
+        },
+        camo: 'camomons',
+        camomons: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] Camomons NFE');
+            room.send("/tour rules gen8camomons");
+        },
+        //putting this in oms bc i don't know where else to
+        uu: 'NFE UU',
+        camomons: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE UU');
+            room.send("/tour rules -Brionne, -Carkol, -Charjabug, -Clefairy, -Corsola-Galar, -Duosion, -Dusclops, -Ferroseed, -Hakamo-o, -Hattrem, -Kadabra, -Klang, -Lampent, -Linoone-Galar, -Machoke, -Mareanie, -Marill, -Palpitoad, -Pikachu, -Piloswine, -Raboot, -Roselia, -Slowpoke, -Tangela, -Thwackey, -Togetic, -Trapinch, -Vibrava, -Vullaby, -Wartortle");
+            room.send("/wall Usage Stats used here: https://www.smogon.com/stats/2020-06-DLC1/gen8nfe-1630.txt");
         },
         // other
         blitz: function(room, user, args) {
