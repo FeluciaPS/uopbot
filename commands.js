@@ -118,6 +118,7 @@ let commands = {
     mail: function(room, user, args, val) {
         let target = args[0];
         let targetid = toId(target);
+	if (!val) return user.send("Usage: ``.mail [user], [message]``");
         let msg = val.substring(target.length + 1).trim();
         if (args.length < 2 || !targetid || !msg) return user.send("Usage: ``.mail [user], [message]``");
         let message = `[mail] ${user.name}: ${msg}`;
