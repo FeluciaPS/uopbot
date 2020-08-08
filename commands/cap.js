@@ -21,6 +21,7 @@ global.CAP = {
         }
         this.started = true;
         Commands['cap'][this.formats[this.times.indexOf(next)]](room, Users.staff, ["o"]);
+        room.send('/wall Rules: https://pastebin.com/HVsryxFk'); 
         setTimeout(() => {CAP.started = false}, 30*60*1000);
     }
 }
