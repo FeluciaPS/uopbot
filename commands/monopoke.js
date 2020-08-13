@@ -36,10 +36,10 @@ module.exports = {
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
-            if (fdt.isNonstandard === "Past") return Commands['monopoke']['gen7'](room, user, args);
-            else return Commands['monopoke']['gen8'](room, user, args);
+            if (fdt.isNonstandard === "Past") return Commands['monopoke']['gen7'](room, user, args, official ? "official" : false);
+            else return Commands['monopoke']['gen8'](room, user, args, official ? "official" : false);
         },
-        gen8: function(room, user, args) {
+        gen8: function(room, user, args, x) {
             if (!canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke('gen8');
             let dex = PokeDex[toId(args[0])];
@@ -53,8 +53,9 @@ module.exports = {
             room.send(ruleset);
             room.send("/tour name [Gen 8] Monopoke " + mon);
             room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
+            if (x === "official") room.send('.official');
         },
-        gen7: function(room, user, args) {
+        gen7: function(room, user, args, x) {
             if (!canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke('gen7');
             let dex = PokeDex[toId(args[0])];
@@ -68,6 +69,7 @@ module.exports = {
             room.send(ruleset);
             room.send("/tour name [Gen 7] Monopoke " + mon);
             room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
+            if (x === "official") room.send('.official');
         }
     },
     camonopoke: {
