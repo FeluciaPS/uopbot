@@ -1,14 +1,14 @@
 global.OT1v1 = {
     schedule: [ 
-        ["gen8", "gen8", "gen4"],
-        ["gen3", "gen5", "gen7"],
-        ["gen8", "uu", "gen8"],
-        ["gen6", "gen8", "gen3"],
-        ["gen4", "gen7", "gen5"],
-        ["gen8", "gen6", "gen8"],
-        ["natdex", "gen8", "gen8"],
+        ["gen7", "gen8", "monopoke", "gen7"],
+        ["gen6", "gen5", "gen8", "natdex"],
+        ["gen4", "gen7", "gen3", "gen8"],
+        ["cap", "natdex", "gen7", "gen5"],
+        ["gen8", "gen8", "gen6", "cap"],
+        ["monopoke", "gen6", "gen8", "gen3"],
+        ["gen5", "gen8", "gen4", "gen8"],
     ],
-    times: [1, 9, 17],
+    times: [1, 7, 13, 19],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
     last: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[1]),
     hasStarted: false,
@@ -310,6 +310,9 @@ module.exports = {
         '2v2': function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen82v2doubles', args);
+        },
+        monopoke: function(room, user, args) {
+            Commands.monopoke[''](room, user, args);
         },
         help: function(room, user, args) {
             if (!user.can(room, '%')) return;
