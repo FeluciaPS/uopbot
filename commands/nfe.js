@@ -146,7 +146,7 @@ module.exports = {
         },
         //putting this in oms bc i don't know where else to
         uu: 'NFE UU',
-        camomons: function(room, user, args) {
+        uu: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE UU');
             room.send("/tour rules -Brionne, -Carkol, -Charjabug, -Clefairy, -Corsola-Galar, -Duosion, -Dusclops, -Ferroseed, -Hakamo-o, -Hattrem, -Kadabra, -Klang, -Lampent, -Linoone-Galar, -Machoke, -Mareanie, -Marill, -Palpitoad, -Pikachu, -Piloswine, -Raboot, -Roselia, -Slowpoke, -Tangela, -Thwackey, -Togetic, -Trapinch, -Vibrava, -Vullaby, -Wartortle");
