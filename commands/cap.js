@@ -127,6 +127,11 @@ module.exports = {
             checkGenerator(room, 'gen8stabmons', args, '[Gen 8] STABmons CAP');
             room.send("/tour rules +CAP, +CAP NFE, +CAP LC");
         },
+        uu: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8uu', args, '[Gen 8] CAP UU');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC, -Syclant, -Krilowatt, -Tomohawk, -Cawmodore, -Volkraken, Naviathan, -Kerfluffle, -Pajantom, -Jumbao, -Smokomodo, -Equilibra, -Astrolotl');
+        },
         // other
         blitz: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
