@@ -150,10 +150,10 @@ bot.on('raw', (parts) => {
             targets[index] = targets[index].trim();
         }
         switch (type) {
-            case 'bans':
+            case 'addedbans':
                 room.tournament.rules.bans = targets;
                 break;
-            case 'unbans':
+            case 'removedbans':
                 room.tournament.rules.unbans = targets;
                 break;
             case 'addedrules':

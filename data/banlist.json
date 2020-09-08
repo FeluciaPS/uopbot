@@ -96,6 +96,34 @@
         "unbans": ["Deoxys-Speed", "Landorus", "Lucario-Mega", "Lucarionite", "Naganadel", "Pheromosa", "Zygarde-Complete", "Power Construct", "Necrozma", "Sableye", "Mew", "Blastoise-Mega", "Blastoisinite"],
         "addrules": ["Gen 8 National Dex"],
         "remrules": []
+    },
+    "ndstab": {
+        "meta": "gen8stabmons",
+        "bans": ["Greninja-Ash", "Battle Bond", "Aerodactyl", "Araquanid", "Blacephalon", "Kartana", "Komala", "Silvally", "Porygon-Z", "Tapu Koko", "Tapu Lele", "Thundurus-Base", "King's Rock", "Razor Fang"],
+        "unbans": [],
+        "addrules": ["[Gen 8] National Dex", "*Thousand Arrows", "*Geomancy", "*Chatter"],
+        "remrules": []
+    },
+    "ndaaa": {
+        "meta": "gen8almostanyability",
+        "bans": ["Kartana", "Hoopa-Unbound", "Slaking", "Regigigas", "Archeops", "Dragonite"],
+        "unbans": [],
+        "addrules": ["[Gen 8] National Dex"],
+        "remrules": []
+    },
+    "ndcamo": {
+        "meta": "gen8camomons",
+        "bans": ["Dragonite", "Kartana", "Latias-Mega", "Kommonium Z"],
+        "unbans": [],
+        "addrules": ["[Gen 8] National Dex"],
+        "remrules": []
+    },
+    "ndmono": {
+        "meta": "gen8monotype",
+        "bans": ["Arceus", "Blastoise-Mega", "Blaziken", "Darkrai", "Deoxys-Attack", "Deoxys-Base", "Dialga", "Genesect", "Gengar-Mega", "Giratina", "Groudon", "Ho-Oh", "Hoopa-Unbound", "Kangaskhan-Mega", "Kartana", "Kyogre", "Lucario-Mega", "Lugia", "Naganadel", "Palkia", "Pheromosa", "Rayquaza", "Salamence-Mega", "Shaymin-Sky", "Tapu Lele", "Xerneas", "Yveltal", "Zygarde", "Battle Bond", "Power Construct"],
+        "unbans": ["Melmetal", "Urshifu-Rapid-Strike"],
+        "addrules": ["Standard NatDex"],
+        "remrules": []
     }
 }
  
