@@ -66,7 +66,7 @@ let checkGenerator = function(room, meta, args, tourname = '') {
 }
 
 module.exports = {
-    '2v2': {
+    ag: {
         '': 'natdex',
         natdex: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
