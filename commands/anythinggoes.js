@@ -35,7 +35,7 @@ global.OTAG = {
 
 let canMakeTour = function(room, user) {
     // I'm gonna use this a lot so why not make a function for it
-    if (room != 'ag') return false;
+    if (room != 'anythinggoes') return false;
     if (!user.can(room, "%")) return false;
     if (room.tournament) {
         room.send("A tournament is already going on.");
