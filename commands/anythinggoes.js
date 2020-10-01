@@ -1,14 +1,14 @@
 global.OTAG = {
     schedule: [ 
         ["natdex"],
+        ["natdex"],
         ["gen7"],
         ["galar"],
         ["gen6"],
         ["natdex"],
         ["gen7"],
-        ["natdex"],
     ],
-    times: [6],
+    times: [18],
     official: function() {
         let room = Rooms['anythinggoes'];
         let now = new Date(Date.now());
