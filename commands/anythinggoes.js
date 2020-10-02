@@ -15,7 +15,7 @@ global.OTAG = {
         let day = now.getDay();
         if (!this.times.includes(now.getHours())) return;
         if (now.getMinutes() > 5) return;
-        let nextid = OT2v2.times.indexOf(now.getHours());
+        let nextid = OTAG.times.indexOf(now.getHours());
         if (this.hasStarted) return;
         if (room.tournament) {
             if (room.tournament.official) return;
