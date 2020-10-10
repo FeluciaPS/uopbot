@@ -110,7 +110,7 @@ class Tournament {
                 this.room.send(ret);
                 BLT.addpoints(first, second, thirds);
             }
-            else if (this.room.id === "anythinggoes") {
+            else if (this.room.id === "anythinggoes" && this.official) {
                 let rn = dt.bracketData.rootNode;
                 let first = rn.team;
                 let second = rn.children[0].team === first ? rn.children[1].team : rn.children[0].team;
