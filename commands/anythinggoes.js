@@ -1,21 +1,21 @@
 global.OTAG = {
     schedule: [ 
         ["natdex"],
+        ["natdex"],
         ["gen7"],
         ["galar"],
         ["gen6"],
         ["natdex"],
         ["gen7"],
-        ["natdex"],
     ],
-    times: [6],
+    times: [18],
     official: function() {
         let room = Rooms['anythinggoes'];
         let now = new Date(Date.now());
         let day = now.getDay();
         if (!this.times.includes(now.getHours())) return;
         if (now.getMinutes() > 5) return;
-        let nextid = OT2v2.times.indexOf(now.getHours());
+        let nextid = OTAG.times.indexOf(now.getHours());
         if (this.hasStarted) return;
         if (room.tournament) {
             if (room.tournament.official) return;
