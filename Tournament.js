@@ -110,6 +110,12 @@ class Tournament {
                 this.room.send(ret);
                 BLT.addpoints(first, second, thirds);
             }
+            else if (this.room.id === "anythinggoes") {
+                let rn = dt.bracketData.rootNode;
+                let first = rn.team;
+                let second = rn.children[0].team === first ? rn.children[1].team : rn.children[0].team;
+                this.room.send(`/wall Congratulations to ${first} for winning the tournament, and to ${second} for being runner-up! Please put your smogon username in chat to claim your points.`)
+            }
 			if (dt.format && formats[dt.format]) this.name = formats[dt.format];
 			else this.name = dt.format ? dt.format : this.name;
 		}
