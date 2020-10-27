@@ -1,5 +1,5 @@
 global.NatDex = { // this doesn't belong here but who cares
-    times: [ 17, 18, 21, 22, 23 ],
+    times: [ 0, 18, 19, 22, 23 ],
     last: parseInt(require('fs').readFileSync("./data/lastnatdex.txt")),
     official: function() {
         let room = Rooms['nationaldex'];
@@ -36,7 +36,7 @@ global.NatDexOMs = { // this doesn't belong here but who cares
         ["uu", "uu"],
         ["mono", "mono"],
     ],
-    times: [ 16, 20 ],
+    times: [ 17, 21 ],
     day: parseInt(require('fs').readFileSync("./data/lastnatdexom.txt", 'utf8').split(" ")[0]),
     last: parseInt(require('fs').readFileSync("./data/lastnatdexom.txt", 'utf8').split(" ")[1]),
     started: false,
@@ -161,8 +161,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'gen8monotype', args, '[Gen 8] National Dex Monotype');
-            room.send(buildRuleset('ndmono'));
+            checkGenerator(room, 'gen8nationaldexmonotype', args);
         },
         camo: function(room, user, args) {
             if (!user.can(room, "%")) return false;
