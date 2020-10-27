@@ -118,12 +118,5 @@
         "addrules": ["[Gen 8] National Dex"],
         "remrules": []
     },
-    "ndmono": {
-        "meta": "gen8monotype",
-        "bans": ["Arceus", "Blastoise-Mega", "Blaziken", "Darkrai", "Deoxys-Attack", "Deoxys-Base", "Dialga", "Genesect", "Gengar-Mega", "Giratina", "Groudon", "Ho-Oh", "Hoopa-Unbound", "Kangaskhan-Mega", "Kartana", "Kyogre", "Lucario-Mega", "Lugia", "Naganadel", "Palkia", "Pheromosa", "Rayquaza", "Salamence-Mega", "Shaymin-Sky", "Tapu Lele", "Xerneas", "Yveltal", "Zygarde", "Battle Bond", "Power Construct"],
-        "unbans": ["Melmetal", "Urshifu-Rapid-Strike"],
-        "addrules": ["Standard NatDex"],
-        "remrules": []
-    }
 }
  
