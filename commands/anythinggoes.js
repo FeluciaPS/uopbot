@@ -1,11 +1,11 @@
 global.OTAG = {
     schedule: [ 
-        ["natdex"],
-        ["natdex"],
-        ["gen7"],
         ["galar"],
-        ["gen6"],
+        ["galar"],
+        ["gen7"],
         ["natdex"],
+        ["gen6"],
+        ["galar"],
         ["gen7"],
     ],
     times: [18],
