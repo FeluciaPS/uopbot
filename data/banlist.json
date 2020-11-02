@@ -85,7 +85,7 @@
     },
     "uu": {
         "meta": "gen81v1",
-        "bans": ["Primarina", "RotomWash", "Steelix", "Sylveon", "Dracovish", "Arcanine", "Dragapult", "Corviknight", "Haxorus", "Zeraora", "Aromatisse", "Whimsicott", "Avalugg", "Aegislash", "Togekiss", "Crustle", "DarmanitanGalar", "RotomHeat", "Excadrill", "Incineroar", "Kommoo", "Cinderace", "Conkeldurr", "Sawk", "Rillaboom", "Gardevoir"],
+        "bans": ["Victini", "Rillaboom", "TapuFini", "Regieleki", "Aggron", "Genesect", "Glastrier", "Registeel", "TapuKoko", "Urshifu", "Sylveon", "Zeraora", "Necrozma", "LandorusTherian", "Zygarde", "Jirachi", "Primarina", "UrshifuRapidStrike", "MoltresGalar", "Snorlax"],
         "unbans": [],
         "addrules": [],
         "remrules": []
