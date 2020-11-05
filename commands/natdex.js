@@ -1,5 +1,6 @@
 global.NatDex = { // this doesn't belong here but who cares
     times: [ 0, 18, 19, 22, 23 ],
+    formats: [ 'gen8', 'gen8', 'gen8', 'gen8', 'gen8' ],
     last: parseInt(require('fs').readFileSync("./data/lastnatdex.txt")),
     official: function() {
         let room = Rooms['nationaldex'];
