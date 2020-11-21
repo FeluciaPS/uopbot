@@ -230,21 +230,21 @@ module.exports = {
 		},
 		// Mixups with other smogon metagames
 		'1v1': function(room, user, args) {
-	        if (!canMakeTour(room, user)) return;
-	        checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
+			if (!canMakeTour(room, user)) return;
+			checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
 
-	        // Build ruleset
-	        let ruleset = "/tour rules Same Type Clause, "
-	        if (Banlist.monotype.bans.length) ruleset += "-" + Banlist.monotype.bans.join(", -") + ", ";
-	        if (Banlist.monotype.unbans.length) ruleset += "+" + Banlist.monotype.unbans.join(", +") + ", ";
-	        ruleset = ruleset.substring(0, ruleset.length - 2);
-	        room.send(ruleset);
-	        room.send('/tour scouting off');
+			// Build ruleset
+			let ruleset = "/tour rules Same Type Clause, "
+			if (Banlist.monotype.bans.length) ruleset += "-" + Banlist.monotype.bans.join(", -") + ", ";
+			if (Banlist.monotype.unbans.length) ruleset += "+" + Banlist.monotype.unbans.join(", +") + ", ";
+			ruleset = ruleset.substring(0, ruleset.length - 2);
+			room.send(ruleset);
+			room.send('/tour scouting off');
 		},
 		lc: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7lc', args, '[Gen 7] Monotype LC');
-			room.send('/tour rules Same Type Clause, +Vulpix-Base, +Gothita, +Misdreavus, +Wingull, +Trapinch');
+			checkGenerator(room, 'gen8lc', args, '[Gen 8] Monotype LC');
+			room.send('/tour rules Same Type Clause, +Cutiefly, +Vulpix-Alola, +Chlorophyll');
 			room.send('/tour scouting off');
 		},
 		uber: 'ubers',
@@ -258,15 +258,15 @@ module.exports = {
 		almostanyability: 'aaa',
 		aaa: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Monotype Almost Any Ability');
-			room.send('/tour rules Same Type Clause, -Aegislash, -Genesect, -Magearna, -Minior, -Naganadel, -Noivern, -Zygarde, -Zygarde-10%, -Damp Rock, -Smooth Rock, -Terrain Extender, -Mawilite, -Medichamite, -Metagrossite, -Psychic Surge, +Victini, +Weavile');
+			checkGenerator(room, 'gen8almostanyability', args, '[Gen 8] Monotype Almost Any Ability');
+			room.send('/tour rules Same Type Clause, +Buzzwole, +Zeraora, -Dragapult, -Dracovish, -Dragonite, -Keldeo, -Urshifu, -Urshifu-Rapid-Strike, -Melmetal, -Psychic Surge, -Triage');
 			room.send('/tour scouting off');
 		},
 		stab: 'stabmons',
 		stabmons: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7stabmons', args, '[Gen 7] Monotype STABmons');
-			room.send('/tour rules Same Type Clause, -boomburst, -zygarde, -zygarde-10%, -battle bond, -smooth rock, -damp rock, -hoopa-unbound, -celebrate, -conversion, -trick-or-treat, -forest’s curse, -happy hour, -hold hands, -purify, +deoxys-speed, +deoxys-defense, -sketch, +blacephalon, +porygonz, +thundurus-base ,+aerodactyl, +araquanid')
+			checkGenerator(room, 'gen8stabmons', args, '[Gen 8] Monotype STABmons');
+			room.send('/tour rules Same Type Clause, -Blaziken, -Dracovish, -Dragapult, -Landorus-Incarnate, -Magearna, -Terrain Extender, -Damp Rock, +Darmanitan-Galar, +Porygon Z, +Thundurus, +Arena Trap')
 			room.send('/tour scouting off');
 		},
 		mixandmega: 'mnm',
@@ -300,7 +300,29 @@ module.exports = {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotype', args);
 			room.startTour('chill');
-		}
+		},
+		
+		// Old gen mashups
+		gen7lc: function(room, user, args) {
+			if (!canMakeTour(room, user)) return;
+			checkGenerator(room, 'gen7lc', args, '[Gen 7] Monotype LC');
+			room.send('/tour rules Same Type Clause, +Vulpix-Base, +Gothita, +Misdreavus, +Wingull, +Trapinch');
+			room.send('/tour scouting off');
+		},
+		gen7almostanyability: 'gen7aaa',
+		gen7aaa: function(room, user, args) {
+			if (!canMakeTour(room, user)) return;
+			checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Monotype Almost Any Ability');
+			room.send('/tour rules Same Type Clause, -Aegislash, -Genesect, -Magearna, -Minior, -Naganadel, -Noivern, -Zygarde, -Zygarde-10%, -Damp Rock, -Smooth Rock, -Terrain Extender, -Mawilite, -Medichamite, -Metagrossite, -Psychic Surge, +Victini, +Weavile');
+			room.send('/tour scouting off');
+		},
+		gen7stab: 'gen7stabmons',
+		gen7stabmons: function(room, user, args) {
+			if (!canMakeTour(room, user)) return;
+			checkGenerator(room, 'gen7stabmons', args, '[Gen 7] Monotype STABmons');
+			room.send('/tour rules Same Type Clause, -boomburst, -zygarde, -zygarde-10%, -battle bond, -smooth rock, -damp rock, -hoopa-unbound, -celebrate, -conversion, -trick-or-treat, -forest’s curse, -happy hour, -hold hands, -purify, +deoxys-speed, +deoxys-defense, -sketch, +blacephalon, +porygonz, +thundurus-base ,+aerodactyl, +araquanid')
+			room.send('/tour scouting off');
+		},
 	},
 	monothreat: function (room, user, args) {
 		if (!canMakeTour(room, user)) return;
