@@ -259,7 +259,7 @@ module.exports = {
 		aaa: function(room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen8almostanyability', args, '[Gen 8] Monotype Almost Any Ability');
-			room.send('/tour rules Same Type Clause, +Buzzwole, +Zeraora, -Dragapult, -Dracovish, -Dragonite, -Keldeo, -Urshifu, -Urshifu-Rapid-Strike, -Melmetal, -Psychic Surge, -Triage');
+			room.send('/tour rules Same Type Clause, +Buzzwole, +Zeraora, -Dragapult, -Dracovish, -Dragonite, -Keldeo, -Urshifu, -Urshifu-Rapid-Strike, -Melmetal, -Psychic Surge, -Triage, -Damp Rock, -Terrain Extender');
 			room.send('/tour scouting off');
 		},
 		stab: 'stabmons',
