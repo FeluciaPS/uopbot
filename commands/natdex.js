@@ -27,22 +27,13 @@ global.NatDex = { // this doesn't belong here but who cares
     }
 }
 
-global.NatDexOMs = { // this doesn't belong here but who cares
-    schedule: [
-        ["1v1", "1v1"],
-        ["bh", "bh"],
-        ["stab", "stab"],
-        ["aaa", "aaa"],
-        ["camo", "camo"],
-        ["uu", "uu"],
-        ["mono", "mono"],
-    ],
+global.NatDexUU = { // this doesn't belong here but who cares
     times: [ 17, 21 ],
-    day: parseInt(require('fs').readFileSync("./data/lastnatdexom.txt", 'utf8').split(" ")[0]),
-    last: parseInt(require('fs').readFileSync("./data/lastnatdexom.txt", 'utf8').split(" ")[1]),
+    day: parseInt(require('fs').readFileSync("./data/lastnatdexuu.txt", 'utf8').split(" ")[0]),
+    last: parseInt(require('fs').readFileSync("./data/lastnatdexuu.txt", 'utf8').split(" ")[1]),
     started: false,
     official: function() {
-        let room = Rooms['nationaldexoms'];
+        let room = Rooms['nationaldexuu'];
         let now = new Date(Date.now());
         let day = now.getDay()-1;
         if (day < 0) day = 6;
@@ -54,7 +45,7 @@ global.NatDexOMs = { // this doesn't belong here but who cares
         }
         if (room.tournament) {
             if (room.tournament.official) {
-                return console.log('National Dex OMs: Official tour already exists');
+                return console.log('National Dex UU: Official tour already exists');
             } else {
                 room.send("/wall Official time. Ending ongoing tournament.");
                 room.send("/tour end");
@@ -64,7 +55,7 @@ global.NatDexOMs = { // this doesn't belong here but who cares
         let type = this.schedule[day][nextid];
         room.send('/modnote OFFICIAL: ' + type);
         this.started = true;
-        Commands['natdex'][type](room, Users.staff, ["o"]);
+        Commands['natdex']['uu'](room, Users.staff, ["o"]);
         setTimeout(() => this.started = false, 30*1000*60);
     }
 }
