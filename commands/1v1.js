@@ -1,12 +1,12 @@
 global.OT1v1 = {
     schedule: [ 
-        ["gen7", "gen8", "monopoke", "gen7"],
-        ["gen6", "gen5", "gen8", "natdex"],
-        ["gen4", "gen7", "gen3", "gen8"],
-        ["cap", "natdex", "gen7", "gen5"],
-        ["gen8", "gen8", "gen6", "cap"],
-        ["monopoke", "gen6", "gen8", "gen3"],
-        ["gen5", "gen8", "gen4", "gen8"],
+        ["gen7", "gen6", "monopoke", "gen8"],
+        ["gen5", "gen4", "gen8", "gen7"],
+        ["monopoke", "gen8", "gen6", "gen5"],
+        ["gen8", "gen7", "gen4", "gen3"],
+        ["gen8", "gen6", "gen7", "gen8"],
+        ["gen5", "gen4", "gen8", "gen6"],
+        ["gen3", "gen8", "gen5", "gen4"],
     ],
     times: [1, 7, 13, 19],
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
@@ -33,6 +33,7 @@ global.OT1v1 = {
         room.send('/modnote OFFICIAL: ' + type);
         this.hasStarted = true;
         Commands['1v1'][type](room, Users.staff, ["o"]);
+        room.send('.board');
         setTimeout(() => {OT1v1.hasStarted = false}, 30*1000*60);
     }
 }
