@@ -1,6 +1,6 @@
 global.CAP = {
-    times: [ 2, 18, 22 ],
-    formats: [ 'gen8', 'gen8', 'gen8' ],
+    times: [ 2, 12, 18, 22 ],
+    formats: [ 'gen8', 'gen8', 'gen8', 'gen8' ],
     started: false,
     official: function() {
         let room = Rooms['capproject'];
