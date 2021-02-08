@@ -31,10 +31,10 @@ global.BLT = {
 			board.push([this.points[i].name, this.points[i].points]);
 		}
 		board = board.sort((a, b) => {return b[1] - a[1]});
-		let html = "<center><div style='overflow-x:auto;max-height:327px'><details OPEN><summary>BLT Leaderboard top 10</summary>";
+		let html = "<center><div style='overflow-x:auto;max-height:327px'><details OPEN><summary>BLT Leaderboard top 12</summary>";
 		html += `<table style='border-spacing:0px;text-align:center'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
 		for (let i = 0; i < board.length; i++) {
-			if (i === 10) {
+			if (i === 12) {
 				html += '</table><details><summary>lower ranks</summary>';
 				html += `<table style='border-spacing:0px;text-align:center'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
 			}
