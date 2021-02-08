@@ -42,7 +42,7 @@ global.BLT = {
 			else html += `<tr><td style="padding:5px;border:1px solid black">${i+1}</td><td style="padding:5px;border:1px solid black">${board[i][0]}</td><td style="padding:5px;border:1px solid black">${board[i][1]}</td></tr>`;
 		}
 		html += "</table>"
-		if (board.length > 10) html += "</details>";
+		if (board.length > 12) html += "</details>";
 		html += "</details></div></center>";
 		return html;
 	},
