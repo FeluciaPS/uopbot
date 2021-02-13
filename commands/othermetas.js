@@ -1,30 +1,37 @@
 global.OtherMetas = {
-    time: 21,
-    formats: [ 'lcotm', 'bh', 'mnm', 'aaa', 'stab', 'camo', 'omotm' ],
-    last: parseInt(require('fs').readFileSync("./data/lastothermetas.txt")),
+    schedule: [ 
+        ['lcotm'], 
+        ['bh'], 
+        ['mnm'], 
+        ['aaa'], 
+        ['stab'], 
+        ['camo'], 
+        ['omotm'],
+    ],
+    times: [21],
+    hasStarted: false,
     official: function() {
         let room = Rooms['othermetas'];
         let now = new Date(Date.now());
-        let day = now.getDay();
-        if (this.last === -1) return;
-        let next = (this.last + 1);
-        let mins = now.getMinutes();
-        if (mins > 10) return;
-        let hours = now.getHours();
-        if (hours === this.time) {
-            if (room.tournament) {
-                if (room.tournament.official) return;
-                else {
-                    room.send("/wall Daily time. Ending ongoing tournament");
-                    room.send("/tour end");
-                    room.endTour();
-                }
+        let day = now.getDay()-1;
+        if (day < 0) day = 6;
+        if (!this.times.includes(now.getHours())) return;
+        if (now.getMinutes() > 5) return;
+        let nextid = OtherMetas.times.indexOf(now.getHours());
+        if (this.hasStarted) return console.log('Tour has already started');
+        if (room.tournament) {
+            if (room.tournament.official) return console.log('OM: Official tour already exists');
+            else {
+                room.send("/wall Official time. Ending ongoing tournament");
+                room.send("/tour end");
+                room.endTour();
             }
-            require('fs').writeFileSync("./data/lastothermetas.txt", next);
-            this.last = next;
-            console.log("other metas daily");
-            Commands['othermetas'][this.formats[day]](room, Users.staff);
         }
+        let type = this.schedule[day][nextid];
+        room.send('/modnote OFFICIAL: ' + type);
+        this.hasStarted = true;
+        Commands['othermetas'][type](room, Users.staff, ["o"]);
+        setTimeout(() => {OtherMetas.hasStarted = false}, 30*1000*60);
     }
 }
 
