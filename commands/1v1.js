@@ -342,7 +342,7 @@ module.exports = {
             if (room !== user && robj !== room) continue;
             if (!robj.OTobj) continue;
             if (!Users.self.can(robj, '*')) continue; // bot isn't bot in the room, can't start official tours, so no point displaying them.
-            targetroom = robj; // this is useful later 
+            if (!Users.self.can(robj, '%')) targetroom = robj; // this is useful later 
             let obj = robj.OTobj;
 
             let r = ""
