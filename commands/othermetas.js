@@ -59,6 +59,7 @@ let checkGenerator = function(room, meta, args, tourname = '') {
         if (meta !== 'omotm' && meta !== 'lcotm') {
             room.send(`!rfaq ${meta}samples`);
         }
+        if (toId(args[0]) === 'o') room.startTour('o');
     }
     if (toId(args[1]) === 'o') room.startTour('o');
 }
