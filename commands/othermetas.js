@@ -1,12 +1,12 @@
 global.OtherMetas = {
-    schedule: [ 
-        ['lcotm'], 
-        ['bh'], 
-        ['mnm'], 
-        ['aaa'], 
-        ['stab'], 
-        ['camo'], 
+    schedule: [
+        ['bh'],
+        ['mnm'],
+        ['aaa'],
+        ['stab'],
+        ['camo'],
         ['omotm'],
+        ['lcotm'],
     ],
     times: [21],
     hasStarted: false,
