@@ -70,7 +70,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'bh');
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
         mnm: function(room, user, args) {
             if (!user.can(room, "%")) return false;
@@ -79,7 +79,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'mnm', args);
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
         aaa: function(room, user, args) {
             if (!user.can(room, "%")) return false;
@@ -88,7 +88,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'aaa', args);
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
         stab: function(room, user, args) {
             if (!user.can(room, "%")) return false;
@@ -97,7 +97,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'stab');
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
         camo: function(room, user, args) {
             if (!user.can(room, "%")) return false;
@@ -106,7 +106,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'camo');
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
         omotm: function(room, user, args) {
             if (!user.can(room, "%")) return false;
@@ -115,7 +115,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'omotm');
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
         lcotm: function(room, user, args) {
             if (!user.can(room, "%")) return false;
@@ -124,7 +124,7 @@ module.exports = {
                 return false;
             }
             checkGenerator(room, 'lcotm');
-            if (args[0] === 'o') room.startTour('o')
+            if (args[0] === 'o') room.startTour('ot')
         },
     },
 };
