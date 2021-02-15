@@ -5,7 +5,7 @@ class Tournament {
         this.room = room;
         this.started = false;
         this.players = {};
-        this.official = type === 'official' || type === 'o';
+        this.official = type === 'official' || type === 'o' || type === 'ot';
         this.blt = type === 'blt';
         this.chill = type === 'chill';
         this.rules = {
@@ -38,7 +38,7 @@ class Tournament {
             if (t[2]) this.room.send('/tour scouting disallow');
         }
 	if (this.room.id === "monotype") room.send('/tour modjoin disallow');
-        if (this.official) room.send('.official');
+        if (this.official && type !== 'ot') room.send('.official');
         if (this.chill) room.send('/modchat +');
         this.startCheckTimer = false;
         this.autostart = false;
