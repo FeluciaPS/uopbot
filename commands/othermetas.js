@@ -53,6 +53,8 @@ let checkGenerator = function(room, meta, args, tourname = '') {
     }
     else {
         room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+        room.send(`/tour scouting disallow`);
+        room.send(`/tour forcepublic on`);
         room.send(`/wall The daily tour!`);
         room.send(`!om ${meta}`);
         if (meta !== 'omotm' && meta !== 'lcotm') {
