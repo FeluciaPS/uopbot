@@ -1,8 +1,8 @@
 global.NatDex = { // this doesn't belong here but who cares
-    times: [ 0, 18, 19, 22, 23 ],
-    formats: [ 'gen8', 'gen8', 'gen8', 'gen8', 'gen8' ],
+    times: [0, 18, 19, 22, 23],
+    formats: ['gen8', 'gen8', 'gen8', 'gen8', 'gen8'],
     last: parseInt(require('fs').readFileSync("./data/lastnatdex.txt")),
-    official: function() {
+    official: function () {
         let room = Rooms['nationaldex'];
         let now = new Date(Date.now());
         if (this.last === -1) return;
@@ -28,14 +28,14 @@ global.NatDex = { // this doesn't belong here but who cares
 }
 
 global.NatDexUU = { // this doesn't belong here but who cares
-    times: [ 17, 21 ],
+    times: [17, 21],
     day: parseInt(require('fs').readFileSync("./data/lastnatdexuu.txt", 'utf8').split(" ")[0]),
     last: parseInt(require('fs').readFileSync("./data/lastnatdexuu.txt", 'utf8').split(" ")[1]),
     started: false,
-    official: function() {
+    official: function () {
         let room = Rooms['nationaldexuu'];
         let now = new Date(Date.now());
-        let day = now.getDay()-1;
+        let day = now.getDay() - 1;
         if (day < 0) day = 6;
         if (!this.times.includes(now.getHours())) return;
         if (now.getMinutes() > 5) return;
@@ -56,11 +56,11 @@ global.NatDexUU = { // this doesn't belong here but who cares
         room.send('/modnote OFFICIAL: ' + type);
         this.started = true;
         Commands['natdex']['uu'](room, Users.staff, ["o"]);
-        setTimeout(() => this.started = false, 30*1000*60);
+        setTimeout(() => this.started = false, 30 * 1000 * 60);
     }
 }
 
-let buildRuleset = function(meta) {
+let buildRuleset = function (meta) {
     let banlist = Banlist[meta];
     let ret = '/tour rules ';
     let rules = [];
@@ -71,31 +71,28 @@ let buildRuleset = function(meta) {
     return ret + rules.join(', ');
 }
 
-let checkGenerator = function(room, meta, args, tourname = '') {
+let checkGenerator = function (room, meta, args, tourname = '') {
     if (args && args[0]) {
         if (args[0].startsWith("rr")) {
             let count = parseInt(args[0].substring(2));
             if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        }
-        else if (args[0].startsWith("e")){
+        } else if (args[0].startsWith("e")) {
             let count = parseInt(args[0].substring(1));
             if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        }
-        else {
+        } else {
             room.send(`/tour create ${meta}, elim,,, ${tourname}`)
         }
         if (toId(args[0]) === 'o') room.startTour('o');
-    }
-    else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
     if (toId(args[1]) === 'o') room.startTour('o');
 }
 
 module.exports = {
     natdex: {
         '': 'gen8',
-        gen8: function(room, user, args) {
+        gen8: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -103,7 +100,7 @@ module.exports = {
             }
             checkGenerator(room, 'gen8nationaldex', args);
         },
-        uu: function(room, user, args) {
+        uu: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -111,7 +108,7 @@ module.exports = {
             }
             checkGenerator(room, 'gen8nationaldexuu', args);
         },
-        bh: function(room, user, args) {
+        bh: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -120,7 +117,7 @@ module.exports = {
             checkGenerator(room, 'gen8nationaldexbh', args);
             room.send('!rfaq BH');
         },
-        '1v1': function(room, user, args) {
+        '1v1': function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -129,7 +126,7 @@ module.exports = {
             checkGenerator(room, 'gen81v1', args, '[Gen 8] National Dex 1v1');
             room.send(buildRuleset('natdex'));
         },
-        stab: function(room, user, args) {
+        stab: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -138,7 +135,7 @@ module.exports = {
             checkGenerator(room, 'gen8stabmons', args, '[Gen 8] National Dex STABmons');
             room.send(buildRuleset('ndstab'));
         },
-        aaa: function(room, user, args) {
+        aaa: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -147,7 +144,7 @@ module.exports = {
             checkGenerator(room, 'gen8almostanyability', args, '[Gen 8] National Dex AAA');
             room.send(buildRuleset('ndaaa'));
         },
-        mono: function(room, user, args) {
+        mono: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -155,7 +152,7 @@ module.exports = {
             }
             checkGenerator(room, 'gen8nationaldexmonotype', args);
         },
-        camo: function(room, user, args) {
+        camo: function (room, user, args) {
             if (!user.can(room, "%")) return false;
             if (room.tournament) {
                 room.send("A tournament is already going on.");
@@ -165,4 +162,4 @@ module.exports = {
             room.send(buildRuleset('ndcamo'));
         },
     },
-  }
+}

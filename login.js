@@ -6,22 +6,22 @@ let util = require('util');
 let psurl = "ws://sim.smogon.com:8000/showdown/websocket";
 let loginurl = "https://play.pokemonshowdown.com/~~showdown/action.php";
 
-let autoJoin = function(index) {
-    for (let r in Config.rooms) {
-        Send("", "/j "  + Config.rooms[r])
-    }
+let autoJoin = function (index) {
+	for (let r in Config.rooms) {
+		Send("", "/j " + Config.rooms[r])
+	}
 }
 
 module.exports = function (id, challstr) {
 	let ac = url.parse(loginurl);
 	let requestOptions = {
-			hostname: ac.hostname,
-			port: ac.port,
-			path: ac.pathname,
-			agent: false
-		};
-		
-		
+		hostname: ac.hostname,
+		port: ac.port,
+		path: ac.pathname,
+		agent: false
+	};
+
+
 	requestOptions.method = 'POST';
 	let data = 'act=login&name=' + toId(Config.username) + '&pass=' + Config.password + '&challengekeyid=' + id + '&challenge=' + challstr;
 	requestOptions.headers = {
@@ -37,12 +37,12 @@ module.exports = function (id, challstr) {
 		res.on('end', function () {
 			if (data === ';') {
 				console.log('failed to log in; nick is registered - invalid or no password given');
-                process.exit();
+				process.exit();
 				return;
 			}
 			if (data.length < 50) {
 				console.log('failed to log in: ' + data);
-                process.exit()
+				process.exit()
 				return;
 			}
 			if (data.indexOf('heavy load') !== -1) {
@@ -61,7 +61,7 @@ module.exports = function (id, challstr) {
 			console.log('Sending log in trn...');
 			Send('', '/trn ' + Config.username + ',0,' + data);
 			Send("", "/avatar " + (Config.avatar ? Config.avatar : 167));
-            autoJoin(0);
+			autoJoin(0);
 		});
 	});
 	req.on('error', function (err) {

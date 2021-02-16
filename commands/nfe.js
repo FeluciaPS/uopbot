@@ -1,8 +1,8 @@
 global.NFE = {
-    times: [ 1, 9, 15, 20 ],
-    formats: [ 'gen8', 'gen8', 'gen8', 'gen8' ],
+    times: [1, 9, 15, 20],
+    formats: ['gen8', 'gen8', 'gen8', 'gen8'],
     last: parseInt(require('fs').readFileSync("./data/lastnfe.txt")),
-    official: function() {
+    official: function () {
         let room = Rooms['nfe'];
         let now = new Date(Date.now());
         if (this.last === -1) return;
@@ -26,7 +26,7 @@ global.NFE = {
     }
 }
 
-let canMakeTour = function(room, user) {
+let canMakeTour = function (room, user) {
     // I'm gonna use this a lot so why not make a function for it
     if (room != 'nfe') return false;
     if (!user.can(room, "%")) return false;
@@ -37,114 +37,111 @@ let canMakeTour = function(room, user) {
     return true;
 }
 
-let checkGenerator = function(room, meta, args, tourname = '') {
+let checkGenerator = function (room, meta, args, tourname = '') {
     if (args && args[0]) {
         if (args[0].startsWith("rr")) {
             let count = parseInt(args[0].substring(2));
             if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        }
-        else if (args[0].startsWith("e")){
+        } else if (args[0].startsWith("e")) {
             let count = parseInt(args[0].substring(1));
             if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        }
-        else {
+        } else {
             room.send(`/tour create ${meta}, elim,,, ${tourname}`)
         }
         if (toId(args[0]) === 'o') room.startTour('o');
-    }
-    else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
     if (toId(args[1]) === 'o') room.startTour('o');
 }
 
 module.exports = {
     nfe: {
         '': 'gen8',
-        gen8: function(room, user, args) {
+        gen8: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args);
         },
-        gen7: function(room, user, args) {
+        gen7: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7ou', args, '[Gen 7] NFE');
             room.send('/tour rules Not Fully Evolved, -Chansey, -Doublade, -Gligar, -Golbat, -Gurdurr, -Magneton, -Piloswine, -Porygon2, -Rhydon, -Scyther, -Sneasel, -Type: Null, -Vigoroth, -Drought, -Aurora Veil');
         },
         oras: 'gen6',
-        gen6: function(room, user, args) {
+        gen6: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6ru', args, '[Gen 6] NFE');
             room.send('/tour rules Not Fully Evolved, +All Pokemon, -Chansey, -Doublade, -Magneton, -Porygon2, -Rhydon, -Scyther');
         },
-        gen5: function(room, user, args) {
+        gen5: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen5ubers', args, '[Gen 5] NFE');
             room.send('/tour rules Not Fully Evolved, -Chansey, -Dusclops, -Fraxure, -Gligar, -Golbat, -Gurdurr, -Haunter, -Machoke, -Magmar, -Magneton, -Riolu, -Rhydon, -Piloswine, -Porygon2, -Scyther, -Vigoroth');
         },
-        gen4: function(room, user, args) {
+        gen4: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen4uu', args, '[Gen 4] NFE');
             room.send('/tour rules Not Fully Evolved, +NU, +RU, +UU, +OU, +UUBL, +RUBL, +NUBL, +PUBL, +PU, +Uber, -Chansey, -Dragonair, -Dusclops, -Electabuzz, -Haunter, -Machoke, -Magmar, -Magneton, -Porygon2, -Rhydon, -Scyther, -Sneasel');
         },
-        gen3: function(room, user, args) {
+        gen3: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen3nu', args, '[Gen 3] NFE');
             room.send('/tour rules Not Fully Evolved, -Abra, -Diglett, -Dragonair, -Golbat, -Haunter, -Metang, -Vigoroth, -Light Ball');
         },
         // OMs
-        natdex: function(room, user, args) {
+        natdex: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nationaldex', args, '[Gen 8] National Dex NFE');
             room.send('/tour rules Not Fully Evolved, -Type: Null, -Chansey, -Rhydon, -Porygon 2, -Doublade');
         },
-        '1v1': function(room, user, args) {
+        '1v1': function (room, user, args) {
             Commands.nfe1v1(room, user, args);
         },
-        aaa: function(room, user, args) {
+        aaa: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Almost Any Ability NFE');
             room.send('/tour rules Not Fully Evolved, -Chansey, -Gurdurr, -Piloswine, -Rhydon, -Scyther, -Sneasel, -Electabuzz');
         },
-        ubers: function(room, user, args) {
+        ubers: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE Ubers');
             room.send('/tour rules +Doublade, +Gurdurr, +Ivysaur, +Mr. Mime-Galar, +Pawniard, +Rhydon, +Rufflet, +Sneasel, +Type: Null, !Dynamax Clause');
         },
-        bh: function(room, user, args) {
+        bh: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8balancedhackmons', args, '[Gen 7] BH NFE');
             room.send('/tour rules Not Fully Evolved, -Chansey, -Porygon 2, -Type: Null, -Shell Smash');
         },
-        cap: function(room, user, args) {
+        cap: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] CAP NFE');
             room.send("/tour rules +Doublade, +Type: Null, +CAP NFE, +CAP LC");
         },
-        inverse: function(room, user, args) {
+        inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] Inverse NFE');
             room.send('/tour rules Inverse Mod');
         },
-        mnm: function(room, user, args) {
+        mnm: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7mixandmega', args, '[Gen 7] Mix and Mega NFE');
             room.send('/tour rules Not Fully Evolved, -Gurdurr, -Piloswine');
             room.send('/wall The following pokemon are not allowed to mega-evolve, if your opponent uses them tell a staff member so they can be disqualified: Chansey, Rhydon, Scyther and Gligar');
         },
         stab: 'stabmons',
-        stabmons: function(room, user, args) {
+        stabmons: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7stabmons', args, '[Gen 7] STABmons NFE');
             room.send("/tour rules Not Fully Evolved, -Chansey, -Haunter, -Yanma, -Dewpider, -King's Rock, -Razor Fang");
         },
         // other
-        blitz: function(room, user, args) {
+        blitz: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] Blitz NFE');
             room.send('/tour rules Blitz');
             room.send('/tour forcetimer on');
         },
-        help: function(room, user, args) {
+        help: function (room, user, args) {
             if (!user.can(room, '%')) return;
             room.send('Usage: ``.nfe [type]``.');
             let types = [];
@@ -153,7 +150,7 @@ module.exports = {
             }
             room.send('Valid types: ' + types.join(', '));
         },
-        random: function(room, user, args) {
+        random: function (room, user, args) {
             if (!user.can(room, '%')) return;
             let types = [];
             for (let i in Commands.nfe) {
@@ -165,10 +162,12 @@ module.exports = {
         }
     },
     nfe1v1: function (room, user, args) {
-        if (room.id === 'nfe') if (!user.can(room, '%')) return;
-        else if (room.id === '1v1') if (!user.can(room, '%')) return;
-        else return;
-        
+        if (room.id === 'nfe')
+            if (!user.can(room, '%')) return;
+            else if (room.id === '1v1')
+            if (!user.can(room, '%')) return;
+            else return;
+
         let otherroom = room.id === "1v1" ? "nfe" : "1v1";
         otherroom = Rooms[otherroom];
         if (room.tournament) return room.send("A tournament is already going on");
@@ -177,15 +176,15 @@ module.exports = {
         room.send("/tour rules Not Fully Evolved, -Type: Null");
         otherroom.send(`NFE 1v1 tournament in <<${room.id}>>`);
         if (args[0] === 'o' && user.can(room, '%')) room.startTour("o");
-    },    
+    },
     tourcool: function (room, user, args, val) {
         if (!user.can(room, '%')) return;
         room.tourcool = true;
-        let time = isNaN(parseInt(args[0])) ? 30*60*1000 : parseInt(args[0])*60*1000
-        setTimeout(function(room) {
+        let time = isNaN(parseInt(args[0])) ? 30 * 60 * 1000 : parseInt(args[0]) * 60 * 1000
+        setTimeout(function (room) {
             room.tourcool = false;
         }, time, room);
-        room.send("Tours are on cooldown for the next " + time/60000 + " minutes.");
+        room.send("Tours are on cooldown for the next " + time / 60000 + " minutes.");
     },
     forceend: function (room, user, args) {
         if (room.id !== 'nfe') return;

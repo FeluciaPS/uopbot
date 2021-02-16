@@ -1,5 +1,5 @@
 global.OTAG = {
-    schedule: [ 
+    schedule: [
         ["galar"],
         ["galar"],
         ["gen7"],
@@ -9,7 +9,7 @@ global.OTAG = {
         ["gen7"],
     ],
     times: [18],
-    official: function() {
+    official: function () {
         let room = Rooms['anythinggoes'];
         let now = new Date(Date.now());
         let day = now.getDay();
@@ -29,11 +29,13 @@ global.OTAG = {
         room.send('/modnote OFFICIAL: ' + type);
         this.hasStarted = true;
         Commands['ag'][type](room, Users.staff, ["o"]);
-        setTimeout(() => {OTAG.hasStarted = false}, 30*1000*60);
+        setTimeout(() => {
+            OTAG.hasStarted = false
+        }, 30 * 1000 * 60);
     }
 }
 
-let canMakeTour = function(room, user) {
+let canMakeTour = function (room, user) {
     // I'm gonna use this a lot so why not make a function for it
     if (room != 'anythinggoes') return false;
     if (!user.can(room, "%")) return false;
@@ -44,60 +46,57 @@ let canMakeTour = function(room, user) {
     return true;
 }
 
-let checkGenerator = function(room, meta, args, tourname = '') {
+let checkGenerator = function (room, meta, args, tourname = '') {
     if (args && args[0]) {
         if (args[0].startsWith("rr")) {
             let count = parseInt(args[0].substring(2));
             if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        }
-        else if (args[0].startsWith("e")){
+        } else if (args[0].startsWith("e")) {
             let count = parseInt(args[0].substring(1));
             if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        }
-        else {
+        } else {
             room.send(`/tour create ${meta}, elim,,, ${tourname}`)
         }
         if (toId(args[0]) === 'o') room.startTour('o');
-    }
-    else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
     if (toId(args[1]) === 'o') room.startTour('o');
 }
 
 module.exports = {
     ag: {
         '': 'natdex',
-        natdex: function(room, user, args) {
+        natdex: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nationaldexag', args);
         },
-        galar: function(room, user, args) {
+        galar: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8anythinggoes', args);
         },
         usum: 'gen7',
-        gen7: function(room, user, args) {
+        gen7: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen7anythinggoes', args);
         },
         oras: 'gen6',
-        gen6: function(room, user, args) {
+        gen6: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6anythinggoes', args);
         },
-        inverse: function(room, user, args) {
+        inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'nationaldexag', args, '[NatDex] Inverse AG');
             room.send('/tour rules Inverse Mod');
         },
         monotype: 'mono',
-        mono: function(room, user, args) {
+        mono: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'nationaldexag', args, '[NatDex] Monotype AG');
             room.send('/tour rules Same Type Clause');
         },
-        help: function(room, user, args) {
+        help: function (room, user, args) {
             if (!user.can(room, '%')) return;
             room.send('Usage: ``.ag [type]``.');
             let types = [];
@@ -106,7 +105,7 @@ module.exports = {
             }
             room.send('Valid types: ' + types.join(', '));
         },
-        random: function(room, user, args) {
+        random: function (room, user, args) {
             if (!user.can(room, '%')) return;
             let types = [];
             for (let i in Commands['ag']) {

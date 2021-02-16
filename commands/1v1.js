@@ -1,5 +1,5 @@
 global.OT1v1 = {
-    schedule: [ 
+    schedule: [
         ["gen4", "gen7", "gen6", "monopoke"],
         ["gen8", "gen5", "gen4", "gen8"],
         ["gen7", "monopoke", "gen8", "gen6"],
@@ -12,10 +12,10 @@ global.OT1v1 = {
     day: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[0]),
     last: parseInt(require('fs').readFileSync("./data/last1v1.txt", 'utf8').split(" ")[1]),
     hasStarted: false,
-    official: function() {
+    official: function () {
         let room = Rooms['1v1'];
         let now = new Date(Date.now());
-        let day = now.getDay()-1;
+        let day = now.getDay() - 1;
         if (day < 0) day = 6;
         if (!this.times.includes(now.getHours())) return;
         if (now.getMinutes() > 5) return;
@@ -34,11 +34,13 @@ global.OT1v1 = {
         this.hasStarted = true;
         Commands['1v1'][type](room, Users.staff, ["o"]);
         room.send('.board');
-        setTimeout(() => {OT1v1.hasStarted = false}, 30*1000*60);
+        setTimeout(() => {
+            OT1v1.hasStarted = false
+        }, 30 * 1000 * 60);
     }
 }
 
-let canMakeTour = function(room, user) {
+let canMakeTour = function (room, user) {
     // I'm gonna use this a lot so why not make a function for it
     if (room != '1v1') return false;
     if (!user.can(room, "%")) return false;
@@ -49,28 +51,25 @@ let canMakeTour = function(room, user) {
     return true;
 }
 
-let checkGenerator = function(room, meta, args, tourname = '') {
+let checkGenerator = function (room, meta, args, tourname = '') {
     if (args && args[0]) {
         if (args[0].startsWith("rr")) {
             let count = parseInt(args[0].substring(2));
             if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        }
-        else if (args[0].startsWith("e")){
+        } else if (args[0].startsWith("e")) {
             let count = parseInt(args[0].substring(1));
             if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
             else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        }
-        else {
+        } else {
             room.send(`/tour create ${meta}, elim,,, ${tourname}`)
         }
         if (toId(args[0]) === 'o') room.startTour('o');
-    }
-    else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
     if (toId(args[1]) === 'o') room.startTour('o');
 }
 
-let buildRuleset = function(meta) {
+let buildRuleset = function (meta) {
     let banlist = Banlist[meta];
     let ret = '/tour rules ';
     let rules = [];
@@ -81,7 +80,7 @@ let buildRuleset = function(meta) {
     return ret + rules.join(', ');
 }
 
-let findPMRoom = function(user) {
+let findPMRoom = function (user) {
     for (let i in Rooms) {
         if (!Users.self.can(Rooms[i], '*')) continue;
         if (Rooms[i].users[user]) return Rooms[i];
@@ -89,7 +88,7 @@ let findPMRoom = function(user) {
     return false;
 }
 
-global.getGen = function(mon) {
+global.getGen = function (mon) {
     if (mon.num < 1) return 0;
     if (mon.num >= 810 || ['Gmax', 'Galar', 'Galar-Zen'].includes(mon.forme)) {
         return 8;
@@ -111,19 +110,19 @@ global.getGen = function(mon) {
         return 1;
     }
 }
-let inspireMe = function(arg) {
+let inspireMe = function (arg) {
     let banlist = [
-        "Eternatus", "Jirachi", "Kyurem-Black", "Kyurem-White", "Lunala", "Marshadow", 
-        "Melmetal", "Mew", "Mewtwo", "Mimikyu", "Necrozma", "Necrozma-Dawn-Wings", 
+        "Eternatus", "Jirachi", "Kyurem-Black", "Kyurem-White", "Lunala", "Marshadow",
+        "Melmetal", "Mew", "Mewtwo", "Mimikyu", "Necrozma", "Necrozma-Dawn-Wings",
         "Necrozma-Dusk-Mane", "Reshiram", "Sableye", "Solgaleo", "Zacian", "Zamazenta", "Zekrom"
     ]
     let gen = 8;
     if (['sm', 'usum', '7', 'gen7'].includes(arg)) {
         banlist = [
-            "Arceus", "Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense", "Dialga", 
-            "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-Black", 
-            "Kyurem-White", "Lugia", "Lunala", "Marshadow", "Mewtwo", "Mimikyu", "Necrozma-Dawn-Wings", 
-            "Necrozma-Dusk-Mane", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky", 
+            "Arceus", "Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense", "Dialga",
+            "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-Black",
+            "Kyurem-White", "Lugia", "Lunala", "Marshadow", "Mewtwo", "Mimikyu", "Necrozma-Dawn-Wings",
+            "Necrozma-Dusk-Mane", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky",
             "Snorlax", "Solgaleo", "Tapu Koko", "Xerneas", "Yveltal", "Zekrom"
         ]
         gen = 7;
@@ -131,15 +130,15 @@ let inspireMe = function(arg) {
     if (['xy', 'oras', '6', 'gen6'].includes(arg)) {
         banlist = [
             "Arceus", "Blaziken", "Darkrai", "Deoxys-Base", "Deoxys-Attack", "Deoxys-Defense",
-            "Dialga", "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-White", 
-            "Lugia", "Mewtwo", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky", 
+            "Dialga", "Giratina", "Groudon", "Ho-Oh", "Kangaskhan-Mega", "Kyogre", "Kyurem-White",
+            "Lugia", "Mewtwo", "Palkia", "Rayquaza", "Reshiram", "Salamence-Mega", "Shaymin-Sky",
             "Xerneas", "Yveltal", "Zekrom"
         ]
         gen = 6;
     }
     if (['bw', 'bw2', 'b2w2', '5', 'gen5'].includes(arg)) {
         banlist = [
-            "Arceus", "Blaziken", "Darkrai", "Deoxys", "Dialga", "Giratina", "Groudon", "Ho-Oh", 
+            "Arceus", "Blaziken", "Darkrai", "Deoxys", "Dialga", "Giratina", "Groudon", "Ho-Oh",
             "Kyogre", "Kyurem-White", "Lugia", "Mewtwo", "Palkia", "Rayquaza", "Reshiram", "Shaymin-Sky",
             "Whimsicott", "Zekrom"
         ]
@@ -147,16 +146,16 @@ let inspireMe = function(arg) {
     }
     if (['dp', 'dpp', 'dppt', '4', 'gen4'].includes(arg)) {
         banlist = [
-            "Latias", "Arceus", "Darkrai", "Deoxys", "Dialga", "Garchomp", "Giratina", "Groudon", 
-            "Ho-oh", "Kyogre", "Latios", "Lugia", "Manaphy", "Mew", "Mewtwo", "Palkia", 
+            "Latias", "Arceus", "Darkrai", "Deoxys", "Dialga", "Garchomp", "Giratina", "Groudon",
+            "Ho-oh", "Kyogre", "Latios", "Lugia", "Manaphy", "Mew", "Mewtwo", "Palkia",
             "Porygon-Z", "Rayquaza", "Salamence", "Shaymin-Sky"
         ]
         gen = 4
     }
     if (['adv', 'rse', 'rs', '3', 'gen3'].includes(arg)) {
         banlist = [
-            "Slaking", "Deoxys", "Deoxys-Attack", "Deoxys-Defense", "Deoxys-Speed", 
-            "Groudon", "Ho-Oh", "Kyogre", "Latias", "Latios", "Lugia", "Mew", "Mewtwo", 
+            "Slaking", "Deoxys", "Deoxys-Attack", "Deoxys-Defense", "Deoxys-Speed",
+            "Groudon", "Ho-Oh", "Kyogre", "Latias", "Latios", "Lugia", "Mew", "Mewtwo",
             "Rayquaza", "Snorlax", "Suicune", "Wobbuffet", "Wynaut"
         ]
         gen = 3
@@ -175,7 +174,7 @@ let inspireMe = function(arg) {
         if (n < 420) continue;
         valid.push(entry.name);
     }
-    
+
     let n = [];
     let b = [];
     while (n.length < 3) {
@@ -193,88 +192,88 @@ let inspireMe = function(arg) {
     return `<span style="color:#999999;">inspireme (gen ${gen}):</span><br />${ret.join(',')}`;
 }
 module.exports = {
-    inspireme: function(room, user, args) {
-        let target = user.can(room, '+') && room !== user && Users.self.can(room, '*') ? room : findPMRoom(user); 
-        let prefix = user.can(room, '+') && room !== user && Users.self.can(room, '*')  ? '/addhtmlbox ' : `/pminfobox ${user.id}, `;
+    inspireme: function (room, user, args) {
+        let target = user.can(room, '+') && room !== user && Users.self.can(room, '*') ? room : findPMRoom(user);
+        let prefix = user.can(room, '+') && room !== user && Users.self.can(room, '*') ? '/addhtmlbox ' : `/pminfobox ${user.id}, `;
         console.log(target);
         let gen = toId(args[0]);
         let ret = inspireMe(gen);
         target.send(prefix + ret);
     },
-    consistency: function(room, user, args) {
+    consistency: function (room, user, args) {
         if (!user.can(room, '+') || (room.id !== "1v1" && room.id !== "nfe")) user.send('Consistency is boring.');
         else room.send('Consistency is boring.');
     },
     '1v1': {
         '': 'help',
-        gen8: function(room, user, args) {
+        gen8: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args);
         },
-        gen7: function(room, user, args) {
+        gen7: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args);
         },
         oras: 'gen6',
-        gen6: function(room, user, args) {
+        gen6: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen61v1', args);
         },
         bw: 'gen5',
-        gen5: function(room, user, args) {
+        gen5: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen51v1', args);
         },
         dp: 'gen4',
-        gen4: function(room, user, args) {
+        gen4: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen41v1', args);
         },
         rse: 'gen3',
-        gen3: function(room, user, args) {
+        gen3: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen31v1', args);
         },
-        aaa: function(room, user, args) {
+        aaa: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args, '[Gen 7] AAA 1v1');
             room.send(buildRuleset('aaa'));
         },
-        ag: function(room, user, args) {
+        ag: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args, '[Gen 7] AG 1v1');
             room.send(buildRuleset('ag'));
         },
-        natdex: function(room, user, args) {
+        natdex: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] National Dex 1v1');
             room.send(buildRuleset('natdex'));
         },
-        inverse: function(room, user, args) {
+        inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] Inverse 1v1');
             room.send(buildRuleset('inverse'));
         },
         monotype: 'mono',
-        mono: function(room, user, args) {
+        mono: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] Monotype 1v1');
             room.send(buildRuleset('monotype'));
         },
-        nfe: function(room, user, args) {
+        nfe: function (room, user, args) {
             Commands.nfe1v1(room, user, args);
         },
-        cap: function(room, user, args) {
+        cap: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] CAP 1v1');
             room.send('/tour rules -All Pokemon, +CAP, +CAP NFE, +CAP LC');
         },
-        lc: function(room, user, args) {
+        lc: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] LC 1v1');
             room.send('/tour rules Little Cup, [Gen 8] LC');
         },
-        noz: function(room, user, args) {
+        noz: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args, '[Gen 7] No Z 1v1');
             room.send('/tour rules Z Move Clause');
@@ -282,40 +281,40 @@ module.exports = {
         dmax: 'max',
         dynamax: 'max',
         dyna: 'max',
-        max: function(room, user, args) {
+        max: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] Dynamax 1v1');
             room.send('/tour rules !Dynamax Clause');
         },
         stabmons: 'stab',
-        stab: function(room, user, args) {
+        stab: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] STABmons 1v1');
             room.send(buildRuleset('stabmons'));
         },
-        ubers: function(room, user, args) {
+        ubers: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] Ubers 1v1');
             room.send(buildRuleset('ubers'));
         },
-        uu: function(room, user, args) {
+        uu: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen81v1', args, '[Gen 8] UU 1v1');
             room.send(buildRuleset('uu'));
         },
-        chill: function(room, user, args) {
+        chill: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen71v1', args);
             room.startTour('chill');
         },
-        '2v2': function(room, user, args) {
+        '2v2': function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen82v2doubles', args);
         },
-        monopoke: function(room, user, args) {
+        monopoke: function (room, user, args) {
             Commands.monopoke[''](room, user, args);
         },
-        help: function(room, user, args) {
+        help: function (room, user, args) {
             if (!user.can(room, '%')) return;
             room.send('Usage: ``.1v1 [type]``.');
             let types = [];
@@ -324,7 +323,7 @@ module.exports = {
             }
             room.send('Valid types: ' + types.join(', '));
         },
-        random: function(room, user, args) {
+        random: function (room, user, args) {
             if (!user.can(room, '%')) return;
             let types = [];
             for (let i in Commands['1v1']) {
@@ -333,7 +332,7 @@ module.exports = {
             Commands['1v1'][Utils.select(types)](room, user, args);
         }
     },
-    '1v1om': function(room, user, args) {
+    '1v1om': function (room, user, args) {
         if (room != '1v1' && room != '1v1typechallenge') return false;
         if (!user.can(room, "%")) return false;
         let text = "/addhtmlbox ";

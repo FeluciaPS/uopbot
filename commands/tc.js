@@ -23,7 +23,7 @@ module.exports = {
             if (unbano[toId(ban)]) delete unbano[toId(ban)];
             else bans.push(ban);
         }
-        
+
         // These lines exist because PartMan complained
         let unbans = []
         for (let i in unbano) {
@@ -35,10 +35,17 @@ module.exports = {
         Commands['1v1'](room, user, ['rr2']);
         room.send(ruleset);
         room.send('/tour name Type Challenge: ' + type + "!");
-        if (Config.tchook) request({url:Config.tchook, body: {content:`Type Challenge: ${type}! Tournament started.`}, method:"POST", json:true})
+        if (Config.tchook) request({
+            url: Config.tchook,
+            body: {
+                content: `Type Challenge: ${type}! Tournament started.`
+            },
+            method: "POST",
+            json: true
+        })
         room.send('$settype ' + type)
     },
-    rt: function(room, user, args) {
+    rt: function (room, user, args) {
         let target = user.can(room, '+') ? room : user;
         let type = Utils.select(Object.keys(Banlist.tc));
         target.send(type);

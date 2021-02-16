@@ -14,7 +14,7 @@ let reminders = JSON.parse(FS.readFileSync('./data/reminders.json'));
  */
 
 module.exports = {
-	check: function() {
+	check: function () {
 		let now = Date.now().toString();
 		let dates = Object.keys(reminders);
 		dates.push(now);
@@ -29,20 +29,18 @@ module.exports = {
 					continue;
 				}
 				room.send(reminder.message);
-			}
-			else {
+			} else {
 				let user = Users[reminder.target];
 				if (!user) { // User is offline or not in the room
 					Commands.mail(Users.self, Users.self, [reminder.target, reminder.message]);
-				}
-				else { // Send the reminder to the user
+				} else { // Send the reminder to the user
 					user.send(reminder.message);
 				}
 			}
 			this.delete(stamp);
 		}
 	},
-	parse: function(user, room, message) {
+	parse: function (user, room, message) {
 		if (!message.startsWith(Config.username)) return;
 		message = message.substring(Config.username.length).trim();
 		if (!message.toLowerCase().startsWith('remind me')) return;
@@ -50,20 +48,17 @@ module.exports = {
 		let parts = {};
 		if (message.toLowerCase().startsWith('in')) {
 			let to = message.indexOf(" to ");
-			parts.in = message.substring(2, to+1).trim();
+			parts.in = message.substring(2, to + 1).trim();
 			parts.to = message.substring(to).trim();
-		}
-		else if (message.toLowerCase().startsWith('to')) {
+		} else if (message.toLowerCase().startsWith('to')) {
 			let to = message.indexOf(" in ");
-			parts.to = message.substring(0, to+1).trim();
+			parts.to = message.substring(0, to + 1).trim();
 			parts.in = message.substring(to + 2).trim();
-		}
-		else if (message.includes("in")) {
+		} else if (message.includes("in")) {
 			let to = message.indexOf(" in ");
-			parts.to = message.substring(0, to+1).trim();
+			parts.to = message.substring(0, to + 1).trim();
 			parts.in = message.substring(to + 2).trim();
-		}
-		else {
+		} else {
 			return "Invalid syntax.";
 		}
 		console.log(parts);
@@ -80,7 +75,7 @@ module.exports = {
 			let type = toId(x[1]);
 			let val = parseInt(x[0]);
 			if (isNaN(val) || !type) continue;
-			if (type.charAt(type.length-1) !== 's') type += 's';
+			if (type.charAt(type.length - 1) !== 's') type += 's';
 			switch (type) {
 				case 'minutes':
 					fromnow += val * 1000 * 60;
@@ -110,7 +105,7 @@ module.exports = {
 					fromnow += val * 1000 * 60 * 60 * 24 * 7;
 					timethings.weeks += val;
 					break;
-				default: 
+				default:
 					break;
 			}
 		}
@@ -123,7 +118,7 @@ module.exports = {
 		console.log(timethings);
 		let timestr = ret.join(' and ');
 		let ands = timestr.match(/and/gi);
-		while(ands && ands.length > 1) {
+		while (ands && ands.length > 1) {
 			timestr = timestr.replace(' and', ',');
 			ands = timestr.match(/and/gi);
 		}
@@ -140,19 +135,19 @@ module.exports = {
 			target = user;
 		}
 		reminders[endtime.toString()] = {
-		  	type,
-		  	target: target.id,
-		  	message: msg
+			type,
+			target: target.id,
+			message: msg
 		}
 
 		target.send("I'll remind you in " + timestr);
 		this.save();
 	},
-	delete: function(id) {
+	delete: function (id) {
 		delete reminders[id];
 		this.save();
 	},
-	save: function() {
+	save: function () {
 		FS.writeFileSync('./data/reminders.json', JSON.stringify(reminders, null, 4));
 	}
 }

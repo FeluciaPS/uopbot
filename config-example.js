@@ -8,7 +8,7 @@ exports.password = "";
 /*
  * Other
  */
- 
+
 exports.rooms = [];
 exports.char = '.';
 exports.devs = [];
@@ -16,7 +16,7 @@ exports.devs = [];
 /*
  * Mail
  */
- 
+
 exports.mail = {
     'inboxSize': 5,
     'bans': []
