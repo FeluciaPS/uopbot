@@ -1,7 +1,35 @@
-// not really a command file, just houses generic modules for official tours
+/**
+ * Returns a Date object converted to Eastern Time
+ */
+let getESTDate = function () {
+    let now = Date.now();
+
+    // Subtract 5 hours to convert from UTC to EST
+    let est = now - 5 * 60 * 60 * 1000
+
+    return new Date(est);
+}
+
+/*
+ *   
+ */
+global.Officials = {
+    '1v1': {
+        schedule: [
+            ["gen4", "gen7", "gen6", "monopoke"],
+            ["gen8", "gen5", "gen4", "gen8"],
+            ["gen7", "monopoke", "gen8", "gen6"],
+            ["gen5", "gen8", "gen7", "gen4"],
+            ["gen3", "gen8", "gen6", "gen7"],
+            ["gen8", "gen5", "gen4", "gen8"],
+            ["gen6", "gen3", "gen8", "gen5"],
+        ],
+        times: [1, 7, 13, 19],
+    }
+}
 
 module.exports = {
-    nextot: function(room, user, args) {
+    nextot: function (room, user, args) {
         let now = new Date(Date.now());
         let rooms = [];
         let targetroom = false;
@@ -14,11 +42,11 @@ module.exports = {
             let obj = robj.OTobj;
 
             let r = ""
-            let now2 = new Date(Date.now() - 5*60*1000);
+            let now2 = new Date(Date.now() - 5 * 60 * 1000);
             let nhours = now2.getHours();
             let next = obj.times[0];
             for (let i in obj.times) {
-                if (nhours >= obj.times[i]) next = obj.times[(parseInt(i)+1)%obj.times.length];
+                if (nhours >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
             }
             let hours = next - now.getHours();
             //if (next === 0) hours += 24;
@@ -30,7 +58,7 @@ module.exports = {
             next = obj.times.indexOf(next);
             if (obj.formats) meta = obj.formats[next];
             else {
-                let day = now.getDay()-1;
+                let day = now.getDay() - 1;
                 if (day < 0) day = 6;
                 let hours = next - now.getHours();
                 if (hours < 0) {
@@ -40,7 +68,7 @@ module.exports = {
             }
             while (hours < 0) hours += 24;
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-            if (hours >= 23 && minutes >= 55) timestr = "should've just started";            
+            if (hours >= 23 && minutes >= 55) timestr = "should've just started";
             r += `<b>${robj.name}</b> - ${meta} ${timestr}`;
             rooms.push(r);
         }

@@ -11,7 +11,7 @@ global.BLT = {
 		'gen6',
 		'gen5'
 	],
-	getNext: function() {
+	getNext: function () {
 		if (BLT.next) return BLT.next;
 		let x = Object.assign([], BLT.tours);
 		if (BLT.last) x.splice(x.indexOf(BLT.last), 1);
@@ -25,12 +25,14 @@ global.BLT = {
 		19
 	],
 	points: {},
-	leaderboard: function() {
+	leaderboard: function () {
 		let board = [];
 		for (let i in this.points) {
 			board.push([this.points[i].name, this.points[i].points]);
 		}
-		board = board.sort((a, b) => {return b[1] - a[1]});
+		board = board.sort((a, b) => {
+			return b[1] - a[1]
+		});
 		let html = "<center><div style='overflow-x:auto;max-height:327px'><details OPEN><summary>BLT Leaderboard top 12</summary>";
 		html += `<table style='border-spacing:0px;text-align:center'><tr><th style="padding:5px;border:1px solid black;border-radius:5px 0px 0px 0px">#</th><th style="border:1px solid black">Name</th><th style="padding:3px;border:1px solid black;border-radius:0px 5px 0px 0px">Score</th></tr>`;
 		for (let i = 0; i < board.length; i++) {
@@ -46,14 +48,14 @@ global.BLT = {
 		html += "</details></div></center>";
 		return html;
 	},
-	loadpoints: function() {
+	loadpoints: function () {
 		if (!FS.existsSync('./data/BLT.json')) FS.writeFileSync('./data/BLT.json', '{}');
 		this.points = JSON.parse(FS.readFileSync('./data/BLT.json'));
 	},
-	savepoints: function() {
+	savepoints: function () {
 		FS.writeFileSync('./data/BLT.json', JSON.stringify(this.points, null, 4));
 	},
-	addpoints: function(first, second, thirds = []) {
+	addpoints: function (first, second, thirds = []) {
 		let fobj = this.points[toId(first)];
 		if (!fobj) fobj = {};
 		fobj.name = first;
@@ -86,41 +88,38 @@ global.BLT = {
 
 BLT.loadpoints();
 
-let canMakeTour = function(room, user) {
-    // I'm gonna use this a lot so why not make a function for it
-    if (room != 'monotype') return false;
-    if (!user.can(room, "%")) return false;
-    if (room.tournament) {
-        room.send("A tournament is already going on.");
-        return false;
-    }
-    return true;
+let canMakeTour = function (room, user) {
+	// I'm gonna use this a lot so why not make a function for it
+	if (room != 'monotype') return false;
+	if (!user.can(room, "%")) return false;
+	if (room.tournament) {
+		room.send("A tournament is already going on.");
+		return false;
+	}
+	return true;
 }
 
-let checkGenerator = function(room, meta, args, tourname = '') {
-    if (args && args[0]) {
-        if (args[0].startsWith("rr")) {
-            let count = parseInt(args[0].substring(2));
-            if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
-            else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        }
-        else if (args[0].startsWith("e")){
-            let count = parseInt(args[0].substring(1));
-            if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
-            else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        }
-        else {
-            room.send(`/tour create ${meta}, elim,,, ${tourname}`)
-        }
-        if (toId(args[0]) === 'o') room.startTour('o');
-    }
-    else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-    if (toId(args[1]) === 'o') room.startTour('o');
+let checkGenerator = function (room, meta, args, tourname = '') {
+	if (args && args[0]) {
+		if (args[0].startsWith("rr")) {
+			let count = parseInt(args[0].substring(2));
+			if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
+			else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
+		} else if (args[0].startsWith("e")) {
+			let count = parseInt(args[0].substring(1));
+			if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
+			else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+		} else {
+			room.send(`/tour create ${meta}, elim,,, ${tourname}`)
+		}
+		if (toId(args[0]) === 'o') room.startTour('o');
+	} else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+	if (toId(args[1]) === 'o') room.startTour('o');
 }
 
 module.exports = {
 	// BLT stuff
-	addbltpoints: function(room, user, args) {
+	addbltpoints: function (room, user, args) {
 		if (!user.can(Rooms['monotype'], '@')) return;
 		if (args.length !== 2) return room.send('Usage: ``addbltpoints [user], [points]`` (you can use negative values)');
 		if (isNaN(parseInt(args[1]))) return room.send('Usage: ``addbltpoints [user], [points]`` (you can use negative values)');
@@ -133,7 +132,7 @@ module.exports = {
 		Rooms['monotype'].send(`/modnote ${parseInt(args[1])} BLT points given to ${args[0].trim()} by ${user.name}`);
 		return user.send('Done.');
 	},
-	startblt: function(room, user, args) {
+	startblt: function (room, user, args) {
 		if (!user.can(room, '%')) return;
 		if (room.id !== "monotype" && !room.id.includes('test')) return;
 		let format = BLT.getNext();
@@ -143,28 +142,28 @@ module.exports = {
 		room.send('/tour scouting disallow');
 		room.startTour('blt');
 	},
-	nextblt: function(room, user, args) {
+	nextblt: function (room, user, args) {
 		let target = user.can(room, '+') ? room : user;
 		if (room.id !== "monotype" && !room.id.includes('test')) target = user;
-		let now = new Date(Date.now() - 20*60*1000);
+		let now = new Date(Date.now() - 20 * 60 * 1000);
 		let nhours = now.getHours();
 		let next = BLT.times[0];
 		for (let i in BLT.times) {
-			if (nhours >= BLT.times[i]) next = BLT.times[(parseInt(i)+1)%BLT.times.length];
+			if (nhours >= BLT.times[i]) next = BLT.times[(parseInt(i) + 1) % BLT.times.length];
 		}
 		now = new Date(Date.now());
-        let hours = next - now.getHours();
-        if (next === BLT.times[0]) hours += 24;
-        let minutes = 60 - now.getMinutes();
-        if (minutes < 60) hours -= 1;
-        else minutes = 0;
-        if (hours >= 24) hours -= 24;
-        let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-        if (hours < 0) return target.send(`The ${Tournament.formats[BLT.getNext() + "monotype"]} BLT qualifier should have started ${60 - Math.abs(minutes)} ago`);
-        let ret = `The next official Monotype BLT qualifier tournament will be ${Tournament.formats[BLT.getNext() + "monotype"]} ${timestr}.`;
+		let hours = next - now.getHours();
+		if (next === BLT.times[0]) hours += 24;
+		let minutes = 60 - now.getMinutes();
+		if (minutes < 60) hours -= 1;
+		else minutes = 0;
+		if (hours >= 24) hours -= 24;
+		let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
+		if (hours < 0) return target.send(`The ${Tournament.formats[BLT.getNext() + "monotype"]} BLT qualifier should have started ${60 - Math.abs(minutes)} ago`);
+		let ret = `The next official Monotype BLT qualifier tournament will be ${Tournament.formats[BLT.getNext() + "monotype"]} ${timestr}.`;
 		target.send(ret);
 	},
-	bltrank: function(room, user, args) {
+	bltrank: function (room, user, args) {
 		if (toId(args[0]) === "reset") {
 			if (!user.can(Rooms['monotype'], '#')) return;
 			BLT.points = {};
@@ -182,54 +181,55 @@ module.exports = {
 					if (BLT.points[i].points <= 0) continue;
 					board.push([i, BLT.points[i].points]);
 				}
-				board = board.sort((a, b) => {return b[1] - a[1]});
+				board = board.sort((a, b) => {
+					return b[1] - a[1]
+				});
 				for (let i in board) {
 					board[i] = board[i][0];
 				}
 				user.send(`You are ranked **${board.indexOf(user.id) + 1}** with ${target.points} points.`);
 			}
-		}
-		else {
+		} else {
 			room.send(`/adduhtml bltboard, ${BLT.leaderboard()}`);
 		}
 	},
 	mono: {
 		// Old (and current) generations
 		'': 'gen8',
-		gen8: function(room, user, args) {
+		gen8: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen8monotype', args);
 			room.send('/tour scouting off');
 		},
-		gen7: function(room, user, args) {
+		gen7: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotype', args);
 			room.send('/tour scouting off');
 		},
-		gen6: function(room, user, args) {
+		gen6: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen6monotype', args);
 			room.send('/tour scouting off');
 		},
-		gen5: function(room, user, args) {
+		gen5: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen5monotype', args);
 			room.send('/tour scouting off');
 		},
-		gen4: function(room, user, args) {
+		gen4: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen4ou', args, '[Gen 4] Monotype');
 			room.send('/tour rules Same Type Clause');
 			room.send('/tour scouting off');
 		},
-		gen3: function(room, user, args) {
+		gen3: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen3ou', args, '[Gen 3] Monotype');
 			room.send('/tour rules Same Type Clause');
 			room.send('/tour scouting off');
 		},
 		// Mixups with other smogon metagames
-		'1v1': function(room, user, args) {
+		'1v1': function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
 
@@ -241,14 +241,14 @@ module.exports = {
 			room.send(ruleset);
 			room.send('/tour scouting off');
 		},
-		lc: function(room, user, args) {
+		lc: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen8lc', args, '[Gen 8] Monotype LC');
 			room.send('/tour rules Same Type Clause, +Cutiefly, +Vulpix-Alola, +Chlorophyll');
 			room.send('/tour scouting off');
 		},
 		uber: 'ubers',
-		ubers: function(room, user, args) {
+		ubers: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7ubers', args, '[Gen 7] Monotype Ubers');
 			room.send('/tour rules Same Type Clause, -Marshadow');
@@ -256,21 +256,21 @@ module.exports = {
 		},
 		// Mixups with OMs
 		almostanyability: 'aaa',
-		aaa: function(room, user, args) {
+		aaa: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen8almostanyability', args, '[Gen 8] Monotype Almost Any Ability');
 			room.send('/tour rules Same Type Clause, +Buzzwole, +Zeraora, -Dragapult, -Dracovish, -Dragonite, -Keldeo, -Urshifu, -Urshifu-Rapid-Strike, -Melmetal, -Psychic Surge, -Triage, -Damp Rock, -Terrain Extender');
 			room.send('/tour scouting off');
 		},
 		stab: 'stabmons',
-		stabmons: function(room, user, args) {
+		stabmons: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen8stabmons', args, '[Gen 8] Monotype STABmons');
 			room.send('/tour rules Same Type Clause, -Blaziken, -Dracovish, -Dragapult, -Landorus-Incarnate, -Magearna, -Terrain Extender, -Damp Rock, +Darmanitan-Galar, +Porygon Z, +Thundurus, +Arena Trap')
 			room.send('/tour scouting off');
 		},
 		mixandmega: 'mnm',
-		mnm: function(room, user, args) {
+		mnm: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7mixandmega', args, '[Gen 7] Monotype Mix and Mega');
 			room.send('/tour rules Same Type Clause, -Aggronite, -Altarianite, -Ampharosite, -Audinite, -Charizardite X, -Gyaradosite, -Lopunnite, -Mewtwonite X, -Pinsirite, -Sceptilite, -Red Orb')
@@ -279,45 +279,45 @@ module.exports = {
 		// Other monotype
 		mrb: 'monotyperandombattle',
 		random: 'monotyperandombattle',
-		monotyperandombattle: function(room, user, args) {
+		monotyperandombattle: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotyperandombattle', args);
 		},
-		blitz: function(room, user, args) {
+		blitz: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotype', args, '[Gen 7] Blitz Monotype');
 			room.send('/tour rules Blitz');
 			room.send('/tour forcetimer on');
 			room.send('/tour scouting off');
 		},
-		doubles: function(room, user, args) {
+		doubles: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7doublesou', args, '[Gen 7] Doubles Monotype');
 			room.send('/tour rules Same Type Clause, -Terrain Extender, -Smooth Rock, -Damp Rock');
 			room.send('/tour scouting off');
 		},
-		chill: function(room, user, args) {
+		chill: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7monotype', args);
 			room.startTour('chill');
 		},
-		
+
 		// Old gen mashups
-		gen7lc: function(room, user, args) {
+		gen7lc: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7lc', args, '[Gen 7] Monotype LC');
 			room.send('/tour rules Same Type Clause, +Vulpix-Base, +Gothita, +Misdreavus, +Wingull, +Trapinch');
 			room.send('/tour scouting off');
 		},
 		gen7almostanyability: 'gen7aaa',
-		gen7aaa: function(room, user, args) {
+		gen7aaa: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Monotype Almost Any Ability');
 			room.send('/tour rules Same Type Clause, -Aegislash, -Genesect, -Magearna, -Minior, -Naganadel, -Noivern, -Zygarde, -Zygarde-10%, -Damp Rock, -Smooth Rock, -Terrain Extender, -Mawilite, -Medichamite, -Metagrossite, -Psychic Surge, +Victini, +Weavile');
 			room.send('/tour scouting off');
 		},
 		gen7stab: 'gen7stabmons',
-		gen7stabmons: function(room, user, args) {
+		gen7stabmons: function (room, user, args) {
 			if (!canMakeTour(room, user)) return;
 			checkGenerator(room, 'gen7stabmons', args, '[Gen 7] Monotype STABmons');
 			room.send('/tour rules Same Type Clause, -boomburst, -zygarde, -zygarde-10%, -battle bond, -smooth rock, -damp rock, -hoopa-unbound, -celebrate, -conversion, -trick-or-treat, -forest’s curse, -happy hour, -hold hands, -purify, +deoxys-speed, +deoxys-defense, -sketch, +blacephalon, +porygonz, +thundurus-base ,+aerodactyl, +araquanid')
@@ -391,7 +391,7 @@ module.exports = {
 		room.send(`/tour rules ${banlist}, -Uber, -OU, -UU, -RU, -NU, -PU, -ZU, -NFE, -LC Uber, -LC, -UUBL, -RUBL, -NUBL, -PUBL`);
 		room.send(`!rfaq monothreat`);
 	},
-	cc1v1: function(room, user, args) {
+	cc1v1: function (room, user, args) {
 		if (!canMakeTour(room, user)) return;
 		checkGenerator(room, 'challengecup1v1', args);
 	}

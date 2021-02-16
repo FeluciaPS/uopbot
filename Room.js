@@ -1,13 +1,13 @@
 class Room {
-    constructor(id) {
-        this.users = {};
-        this.id = id;
-        this.tournament = false;
+	constructor(id) {
+		this.users = {};
+		this.id = id;
+		this.tournament = false;
 		this.pasttours = [];
-        this.lasttour = [false, false];
+		this.lasttour = [false, false];
 		this.loadSettings();
-    }
-    
+	}
+
 	loadSettings() {
 		const PATH = `./rooms/${this.id}.json`;
 		if (!FS.existsSync(PATH)) FS.copyFileSync('./rooms/config-example.json', PATH);
@@ -26,7 +26,7 @@ class Room {
 			this.pasttours = this.settings.pasttours;
 		}
 	}
-	
+
 	saveSettings(load = false) {
 		const PATH = `./rooms/${this.id}.json`;
 		this.settings.repeat = this.repeat;
@@ -35,17 +35,17 @@ class Room {
 		FS.writeFileSync(PATH, settings);
 		if (load) this.loadSettings();
 	}
-	
-    send(message) {
+
+	send(message) {
 		if (this.settings.disabled) return;
-        if (typeof message === typeof {}) {
-            for (let i in message) {
-                Send(this.id, message[i]);
-            }
-            return;
-        }
-        Send(this.id, message);
-    }
+		if (typeof message === typeof {}) {
+			for (let i in message) {
+				Send(this.id, message[i]);
+			}
+			return;
+		}
+		Send(this.id, message);
+	}
 
 	runChecks(message) {
 		let now = Date.now();
@@ -60,27 +60,27 @@ class Room {
 			}
 		}
 		if (this.hellothere && toId(message) === "hellothere") {
-			if (now - this.hellothere.last > 5*60*1000) {
-				this.hellothere.last = now + Math.floor(Math.random() * 30*60*1000);
+			if (now - this.hellothere.last > 5 * 60 * 1000) {
+				this.hellothere.last = now + Math.floor(Math.random() * 30 * 60 * 1000);
 				return this.send("General Kenobi!");
 			}
 		}
 	}
 
-    leave(room) {
-        for (let u in this.users) {
-            let user = this.users[u];
-            user.leave(this.id);
-        }
-        bot.emit('dereg', 'room', this.id);
-    }
-    
-    startTour(settings) {
-        this.tournament = new Tournament.Tournament(this, settings);
-    }
-    
-    endTour(data) {
-        if (this.tournament) this.tournament.end(data);
+	leave(room) {
+		for (let u in this.users) {
+			let user = this.users[u];
+			user.leave(this.id);
+		}
+		bot.emit('dereg', 'room', this.id);
+	}
+
+	startTour(settings) {
+		this.tournament = new Tournament.Tournament(this, settings);
+	}
+
+	endTour(data) {
+		if (this.tournament) this.tournament.end(data);
 		if (this.tournament.toString()) {
 			this.pasttours.push(this.tournament.toString());
 			this.lasttour[0] = Date.now();
@@ -89,35 +89,35 @@ class Room {
 		while (this.pasttours.join(', ').length > 250) this.pasttours.shift();
 		this.tournament = false;
 		this.saveSettings();
-    }
-	
-    updateTourRules() {
-        if (!this.tournament) throw new Error("This shouldn't happen but bot tried to update tour rules without a tour running");
-        this.send(this.tournament.buildRules());
-    }
-	
-    rename(oldname, newname) {
-        let id = toId(newname);
-        let name = newname.substring(1);
-        let rank = newname.charAt(0);
-        if (!(id in Users)) {
-            Utils.ObjectRename(Users, oldname, id);
-            Users[id].rename(newname);
-        }
-        Utils.ObjectRename(this.users, oldname, id);
-        Users[id].rooms[this.id] = rank;    
-    }
-    
-    can(user, rank) {
-        if (!(toId(user) in Users)) return false;
-        return Users[user].can(this.id, rank);
-    }
+	}
+
+	updateTourRules() {
+		if (!this.tournament) throw new Error("This shouldn't happen but bot tried to update tour rules without a tour running");
+		this.send(this.tournament.buildRules());
+	}
+
+	rename(oldname, newname) {
+		let id = toId(newname);
+		let name = newname.substring(1);
+		let rank = newname.charAt(0);
+		if (!(id in Users)) {
+			Utils.ObjectRename(Users, oldname, id);
+			Users[id].rename(newname);
+		}
+		Utils.ObjectRename(this.users, oldname, id);
+		Users[id].rooms[this.id] = rank;
+	}
+
+	can(user, rank) {
+		if (!(toId(user) in Users)) return false;
+		return Users[user].can(this.id, rank);
+	}
 }
 
-Room.prototype.toString = function() {
+Room.prototype.toString = function () {
 	return this.id;
 }
 
-exports.add = function(id) {
-    this[id] = new Room(id);
+exports.add = function (id) {
+	this[id] = new Room(id);
 }
