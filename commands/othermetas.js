@@ -54,6 +54,7 @@ let checkGenerator = function (room, meta, args, tourname = '') {
         room.send(`/tour create ${meta}, elim,,, ${tourname}`);
         room.send(`/tour scouting disallow`);
         room.send(`/tour forcepublic on`);
+        room.send(`/tour forcetimer on`);
         room.send(`/wall The daily tour!`);
         room.send(`!om ${meta}`);
         if (meta !== 'omotm' && meta !== 'lcotm') {
@@ -79,7 +80,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'mnm', args);
+            checkGenerator(room, 'mnm');
             if (args[0] === 'o') room.startTour('ot')
         },
         aaa: function (room, user, args) {
@@ -88,7 +89,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'aaa', args);
+            checkGenerator(room, 'aaa');
             if (args[0] === 'o') room.startTour('ot')
         },
         stab: function (room, user, args) {
