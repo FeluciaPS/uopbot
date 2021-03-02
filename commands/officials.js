@@ -58,7 +58,7 @@ module.exports = {
             next = obj.times.indexOf(next);
             if (obj.formats) meta = obj.formats[next];
             else {
-                let day = now.getDay() - 1;
+                let day = now.getDay();
                 if (day < 0) day = 6;
                 let hours = next - now.getHours();
                 if (hours < 0) {
