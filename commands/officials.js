@@ -53,7 +53,7 @@ module.exports = {
             let minutes = 60 - now.getMinutes();
             if (minutes < 60) hours -= 1;
             else minutes = 0;
-            let daycorrect = 0;
+            let daycorrect = -1;
             while (hours < 0) {
                 hours += 24;
                 daycorrect = 1;
