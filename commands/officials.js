@@ -56,7 +56,7 @@ module.exports = {
             let daycorrect = -1;
             while (hours < 0) {
                 hours += 24;
-                daycorrect = 1;
+                daycorrect += 1;
             }
             
             /*let now2 = new Date(Date.now() - 5 * 60 * 1000);
