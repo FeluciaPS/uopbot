@@ -71,7 +71,7 @@ module.exports = {
         gen6: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6ru', args, '[Gen 6] NFE');
-            room.send('/tour rules Not Fully Evolved, +All Pokemon, -Chansey, -Doublade, -Magneton, -Porygon2, -Rhydon, -Scyther');
+            room.send('/tour rules Not Fully Evolved, +All Pokemon, -Chansey, -Doublade, -Magneton, -Porygon2, -Rhydon, -Scyther, -Arena Trap, -Drought, -Moody, -Shadow Tag, -Swagger, -Baton Pass');
         },
         gen5: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
