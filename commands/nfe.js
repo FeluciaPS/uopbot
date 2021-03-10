@@ -117,6 +117,12 @@ module.exports = {
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] CAP NFE');
             room.send("/tour rules +Doublade, +Type: Null, +CAP NFE, +CAP LC");
         },
+        uu: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE UU');
+            room.send('/tour rules -Gurdurr, -Golbat, -Piloswine, -Thwackey, -Tangela, -Pikachu, -Hattrem, -Corsola-Galar, -Electabuzz, -Raboot, -Wartortle, -Magmar, -Clefairy, -Klang, -Togetic, -Kadabra, -Morgrem, -Lampent, -Mareanie, -Mr. Mime-Galar., -Gabite, -Fraxure, -Marshtomp, -Carkol, -Ferroseed, -Rufflet, -Charjabug, -Krokorok, -Dusclops, -Seadra, -Machoke, -Combusken, -Vullaby, -Koffing, -Linoone-Galar, -Pupitar, -Drilbur
+');
+        },
         inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] Inverse NFE');
