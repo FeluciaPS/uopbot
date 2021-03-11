@@ -1,5 +1,5 @@
 global.NFE = {
-    times: [1, 20],
+    times: [15, 20],
     formats: ['gen8', 'gen8'],
     last: parseInt(require('fs').readFileSync("./data/lastnfe.txt")),
     official: function () {
