@@ -72,16 +72,17 @@ module.exports = {
         gen6: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6cap', args);
+            room.send("/tour rules -Cawmodore, -Aurumoth");
         },
         gen5: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen5ou', args, '[Gen 5] CAP');
-            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC, +Paleo Wave, -Cawmodore');
         },
         gen4: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen4ou', args, '[Gen 4] CAP');
-            room.send('/tour rules +CAP, +CAP NFE, +CAP LC');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC, -Revenankh');
         },
 
         // OMs
@@ -109,6 +110,11 @@ module.exports = {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8cap', args, '[Gen 8] CAP NFE');
             room.send("/tour rules Not Fully Evolved");
+        },
+        monotype: function (room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8cap', args, '[Gen 8] Monotype CAP');
+            room.send("/tour rules +darmanitan-galar, +Dracovish, +Urshifu, +Spectrier, +Blaziken, -Cawmodore, -Kartana, -Magearna, -Damp Rock, -Smooth Rock, -Terrain Extender")
         },
         inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
