@@ -77,7 +77,7 @@ module.exports = {
         gen5: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen5ou', args, '[Gen 5] CAP');
-            room.send('/tour rules +CAP, +CAP NFE, +CAP LC, +Paleo Wave, -Cawmodore');
+            room.send('/tour rules +CAP, +CAP NFE, +CAP LC, -Cawmodore');
         },
         gen4: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
