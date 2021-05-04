@@ -120,7 +120,9 @@ module.exports = {
         uu: function(room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE UU');
-            room.send('/tour rules -Gurdurr, -Golbat, -Piloswine, -Thwackey, -Tangela, -Pikachu, -Hattrem, -Corsola-Galar, -Electabuzz, -Raboot, -Wartortle, -Magmar, -Clefairy, -Klang, -Togetic, -Kadabra, -Morgrem, -Lampent, -Mareanie, -Mr. Mime-Galar., -Gabite, -Fraxure, -Marshtomp, -Carkol, -Ferroseed, -Rufflet, -Charjabug, -Krokorok, -Dusclops, -Seadra, -Machoke, -Combusken, -Vullaby, -Koffing, -Linoone-Galar, -Pupitar, -Drilbur');
+            room.send('/tour rules -Thwackey, -Gurdurr, -Electabuzz, -Piloswine, -Golbat, -Raboot, -Kadabra, -Pikachu, -Clefairy, -Wartortle, -Tangela, -Hattrem, -Corsola-Galar, -Magmar, -Carkol, -Togetic, -Gabite, -Mr. Mime-Galar, -Dusclops, -Klang, -Charjabug, -Mareanie, -Ferroseed, -Slowpoke, -Marshtomp, -Fraxure, -Lampent, -Krokorok');
+            room.send('/tour autostart 10');
+            room.send('.exclude');
         },
         inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
