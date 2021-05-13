@@ -11,21 +11,116 @@ let getESTDate = function () {
 }
 
 /*
- *   
+ *  Officials object
+ *  key: roomid
+ *  - schedule || formats: schedule is for a repeating weekly schedule (string[] or string[][]), formats for a repeating daily schedule (string[]). 
+ *      use these correctly or the bot will majorly freak out
+ *  - monthly: true to use a locally configurable monthly schedule instead.
+ *  - times: the times at which to hold tournaments, UTC by default
+ *  - EST: set to true if you want to note down the times in UTC-5 (note: doesn't change with daylight savings)
+ *  - forcepublic: true for forcing public tour games
+ *  - scouting: true to ban scouting
+ *  - modjoin: true to disallow modjoin
+ *  - scrappie: true to have the bot send .official on tour creation, to denote it as an official tour for Scrappie
+ *  - autostart: autostart in minutes
+ *  - autodq: autodq in minutes
  */
+
 global.Officials = {
-    '1v1': {
+    "1v1": {
         schedule: [
-            ["gen4", "gen7", "gen6", "monopoke"],
-            ["gen8", "gen5", "gen4", "gen8"],
-            ["gen7", "monopoke", "gen8", "gen6"],
-            ["gen5", "gen8", "gen7", "gen4"],
-            ["gen3", "gen8", "gen6", "gen7"],
-            ["gen8", "gen5", "gen4", "gen8"],
-            ["gen6", "gen3", "gen8", "gen5"],
+            ["gen7", "gen6", "monopoke", "gen8"], // Monday
+            ["gen5", "gen4", "gen8", "gen7"], // Tuesday
+            ["monopoke", "gen8", "gen6", "gen5"], // Wednesday
+            ["gen8", "gen7", "gen4", "gen3"], // Thursday
+            ["gen8", "gen6", "gen7", "gen8"], // Friday
+            ["gen5", "gen4", "gen8", "gen6"], // Saturday
+            ["gen3", "gen8", "gen5", "gen4"], // Sunday
         ],
-        times: [1, 7, 13, 19],
-    }
+        times: [2, 8, 14, 20],
+        EST: true,
+        scouting: true,
+        scrappie: true,
+        command: "1v1",
+        autostart: 7,
+    },
+    "2v2": {
+        schedule: [
+            ["gen8", "gen6", "gen8"],
+            ["gen5", "gen8", "gen8"],
+            ["gen8", "gen8", "gen7"],
+            ["gen6", "gen8", "gen8"],
+            ["gen8", "gen8", "gen5"],
+            ["gen8", "gen7", "gen8"],
+            ["gen8", "gen8", "gen8"],
+        ],
+        times: [5, 13, 21],
+        EST: true,
+        scouting: true,
+        scrappie: true,
+        command: "2v2",
+        autostart: 7,
+    },
+    "anythinggoes": {
+        schedule: [
+            "galar",
+            "galar",
+            "gen7",
+            "natdex",
+            "gen6",
+            "galar",
+            "gen7",
+        ],
+        times: [18],
+        scouting: true,
+        command: "ag",
+        autostart: 7,
+    },
+    "capproject": {
+        formats: ["gen8", "gen8", "gen8", "gen8"],
+        times: [2, 12, 18, 22],
+        scrappie: true,
+        command: "cap",
+    },
+    "nationaldex": {
+        times: [0, 18, 19, 22, 23],
+        formats: ["gen8", "gen8", "gen8", "gen8", "gen8"],
+        scrappie: true,
+        command: "natdex",
+    },
+    "nationaldexuu": {
+        times: [17, 21],
+        formats: ["uu", "uu"],
+        scrappie: true,
+        command: "natdex",
+    },
+    "nfe": {
+        times: [1, 9, 15, 20],
+        formats: ["gen8", "gen8", "gen8", "gen8"],
+        scrappie: true,
+        scouting: true,
+        command: "nfe",
+        autostart: 7,
+    },
+    "othermetas": {
+        schedule: [
+            "bh",
+            "mnm",
+            "aaa",
+            "stab",
+            "camo",
+            "omotm",
+            "lcotm",
+        ],
+        times: [21],
+        forcepublic: true,
+        scouting: true,
+        command: "othermetas",
+    },
+	"overused": {
+		monthly: true,
+		command: "overused",
+	}
 }
 
 module.exports = {
