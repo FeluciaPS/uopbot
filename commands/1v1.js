@@ -42,7 +42,6 @@ global.OT1v1 = {
 
 let canMakeTour = function (room, user) {
     // I'm gonna use this a lot so why not make a function for it
-    if (room != '1v1') return false;
     if (!user.can(room, "%")) return false;
     if (room.tournament) {
         room.send("A tournament is already going on.");
@@ -199,10 +198,6 @@ module.exports = {
         let gen = toId(args[0]);
         let ret = inspireMe(gen);
         target.send(prefix + ret);
-    },
-    consistency: function (room, user, args) {
-        if (!user.can(room, '+') || (room.id !== "1v1" && room.id !== "nfe")) user.send('Consistency is boring.');
-        else room.send('Consistency is boring.');
     },
     '1v1': {
         '': 'help',

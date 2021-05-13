@@ -56,5 +56,9 @@ module.exports = {
 		}
 		let r = Math.floor(Math.random() * items.length);
 		target.send(items[r]);
-	}
+	},
+	consistency: function (room, user, args) {
+        if (!user.can(room, '+') || (room.id !== "1v1" && room.id !== "nfe")) user.send('Consistency is boring.');
+        else room.send('Consistency is boring.');
+    },
 }
