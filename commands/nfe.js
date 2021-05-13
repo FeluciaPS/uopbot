@@ -1,6 +1,6 @@
 global.NFE = {
-    times: [1, 9, 15, 20],
-    formats: ['gen8', 'gen8', 'gen8', 'gen8'],
+    times: [15, 20],
+    formats: ['gen8', 'gen8'],
     last: parseInt(require('fs').readFileSync("./data/lastnfe.txt")),
     official: function () {
         let room = Rooms['nfe'];
@@ -71,7 +71,7 @@ module.exports = {
         gen6: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen6ru', args, '[Gen 6] NFE');
-            room.send('/tour rules Not Fully Evolved, +All Pokemon, -Chansey, -Doublade, -Magneton, -Porygon2, -Rhydon, -Scyther');
+            room.send('/tour rules Not Fully Evolved, +All Pokemon, -Chansey, -Doublade, -Magneton, -Porygon2, -Rhydon, -Scyther, -Arena Trap, -Drought, -Moody, -Shadow Tag, -Swagger, -Baton Pass');
         },
         gen5: function (room, user, args) {
             if (!canMakeTour(room, user)) return;
@@ -116,6 +116,13 @@ module.exports = {
             if (!canMakeTour(room, user)) return;
             checkGenerator(room, 'gen8nfe', args, '[Gen 8] CAP NFE');
             room.send("/tour rules +Doublade, +Type: Null, +CAP NFE, +CAP LC");
+        },
+        uu: function(room, user, args) {
+            if (!canMakeTour(room, user)) return;
+            checkGenerator(room, 'gen8nfe', args, '[Gen 8] NFE UU');
+            room.send('/tour rules -Thwackey, -Gurdurr, -Electabuzz, -Piloswine, -Golbat, -Raboot, -Kadabra, -Pikachu, -Clefairy, -Wartortle, -Tangela, -Hattrem, -Corsola-Galar, -Magmar, -Carkol, -Togetic, -Gabite, -Mr. Mime-Galar, -Dusclops, -Klang, -Charjabug, -Mareanie, -Ferroseed, -Slowpoke, -Marshtomp, -Fraxure, -Lampent, -Krokorok');
+            room.send('/tour autostart 10');
+            room.send('.exclude');
         },
         inverse: function (room, user, args) {
             if (!canMakeTour(room, user)) return;

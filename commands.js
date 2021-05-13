@@ -15,12 +15,12 @@ let commands = {
         let stats = ["hp", "atk", "def", "spa", "spd", "spe"];
 
         if (!pokemon) {
-            Send(room, "Usage: .stat [pokemon], [hp/atk/def/spa/spd/spe], [ivs:evs], [boost]");
+            target.send("Usage: .stat [pokemon], [hp/atk/def/spa/spd/spe], [ivs:evs], [boost]");
             return [null];
         }
 
         if (!stat || stats.indexOf(stat) === -1) {
-            Send(room, "No valid stat given. (hp/atk/def/spa/spd/spe)");
+            target.send("No valid stat given. (hp/atk/def/spa/spd/spe)");
             return [null];
         }
         if (!invest) invest = "0";
@@ -52,7 +52,7 @@ let commands = {
         }
         let mon = PokeDex[toId(pokemon)];
         if (!mon) {
-            Send(room, `${pokemon} is not a valid pokemon`);
+            target.send(`${pokemon} is not a valid pokemon`);
             return [null];
         }
 
@@ -67,17 +67,17 @@ let commands = {
 
         // Check for dumb shit
         if (boost > 4 || boost < 0.25) {
-            Send(room, "Boost must be between +6 and -6");
+            target.send("Boost must be between +6 and -6");
             return [null]
         }
 
         if (ev > 252 || ev < 0) {
-            Send(room, "ev must be between 0 and 252");
+            target.send("ev must be between 0 and 252");
             return [null]
         }
 
         if (iv > 31 || iv < 0) {
-            Send(room, "iv must be between 0 and 31");
+            target.send("iv must be between 0 and 31");
             return [null];
         }
 
@@ -89,7 +89,7 @@ let commands = {
             fin = Math.floor(fin * boost);
         }
 
-        room.send(fin)
+        target.send(fin)
     },
     th: 'tourhistory',
     tourhistory: function (room, user, args) {

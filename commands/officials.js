@@ -137,24 +137,42 @@ module.exports = {
             let obj = robj.OTobj;
 
             let r = ""
-            let now2 = new Date(Date.now() - 5 * 60 * 1000);
+            
+            let nhours = now.getHours();
+            let next = obj.times[0];
+            for (let i in obj.times) {
+                if (nhours >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
+            }
+            
+            let hours = next - nhours;
+            let minutes = 60 - now.getMinutes();
+            if (minutes < 60) hours -= 1;
+            else minutes = 0;
+            let daycorrect = -1;
+            while (hours < 0) {
+                hours += 24;
+                daycorrect += 1;
+            }
+            
+            /*let now2 = new Date(Date.now() - 5 * 60 * 1000);
             let nhours = now2.getHours();
             let next = obj.times[0];
             for (let i in obj.times) {
                 if (nhours >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
             }
             let hours = next - now.getHours();
+            
             //if (next === 0) hours += 24;
             let minutes = 60 - now.getMinutes();
             if (minutes < 60) hours -= 1;
             else minutes = 0;
-            while (hours >= 24) hours -= 24;
+            while (hours >= 24) hours -= 24;*/
             let meta = '';
             next = obj.times.indexOf(next);
             if (obj.formats) meta = obj.formats[next];
             else {
-                let day = now.getDay() - 1;
-                if (day < 0) day = 6;
+                let day = now.getDay() - 1 + daycorrect;
+                while (day < 0) day += 7;
                 let hours = next - now.getHours();
                 if (hours < 0) {
                     day = (day + 1) % 7;
