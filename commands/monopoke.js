@@ -47,7 +47,7 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (fdt.isNonstandard === "Past") return room.send(`${dex.name} is only available in past gens`);
             let mon = dex.name;
-            let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}`;
+            let ruleset = `/tour rules !Team Preview, !!Max Team Size = 1, !Picked Team Size, -All Pokemon, +${mon}`;
             Commands['1v1']['gen8'](room, user, args);
             room.startTour("monopoke");
             room.send(ruleset);
@@ -63,7 +63,7 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (dex.num > 809) return room.send(`${dex.name} is not available in gen 7.`);
             let mon = dex.name;
-            let ruleset = `/tour rules !Team Preview, -All Pokemon, +${mon}`;
+            let ruleset = `/tour rules !Team Preview, !!Max Team Size = 1, !Picked Team Size, -All Pokemon, +${mon}`;
             Commands['1v1']['gen7'](room, user, args);
             room.startTour("monopoke");
             room.send(ruleset);
