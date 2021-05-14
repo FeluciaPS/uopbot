@@ -1,42 +1,3 @@
-global.OtherMetas = {
-    schedule: [
-        ['bh'],
-        ['mnm'],
-        ['aaa'],
-        ['stab'],
-        ['camo'],
-        ['omotm'],
-        ['lcotm'],
-    ],
-    times: [21],
-    hasStarted: false,
-    official: function () {
-        let room = Rooms['othermetas'];
-        let now = new Date(Date.now());
-        let day = now.getDay() - 1;
-        if (day < 0) day = 6;
-        if (!this.times.includes(now.getHours())) return;
-        if (now.getMinutes() > 5) return;
-        let nextid = OtherMetas.times.indexOf(now.getHours());
-        if (this.hasStarted) return console.log('Tour has already started');
-        if (room.tournament) {
-            if (room.tournament.official) return console.log('OM: Official tour already exists');
-            else {
-                room.send("/wall Official time. Ending ongoing tournament");
-                room.send("/tour end");
-                room.endTour();
-            }
-        }
-        let type = this.schedule[day][nextid];
-        room.send('/modnote OFFICIAL: ' + type);
-        this.hasStarted = true;
-        Commands['othermetas'][type](room, Users.staff, ["o"]);
-        setTimeout(() => {
-            OtherMetas.hasStarted = false
-        }, 30 * 1000 * 60);
-    }
-}
-
 let checkGenerator = function (room, meta, args, tourname = '') {
     if (args && args[0]) {
         if (args[0].startsWith("rr")) {
@@ -71,7 +32,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'bh');
+            checkGenerator(room, 'bh', args);
             if (args[0] === 'o') room.startTour('ot')
         },
         mnm: function (room, user, args) {
@@ -80,7 +41,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'mnm');
+            checkGenerator(room, 'mnm', args);
             if (args[0] === 'o') room.startTour('ot')
         },
         aaa: function (room, user, args) {
@@ -89,7 +50,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'aaa');
+            checkGenerator(room, 'aaa', args);
             if (args[0] === 'o') room.startTour('ot')
         },
         stab: function (room, user, args) {
@@ -98,7 +59,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'stab');
+            checkGenerator(room, 'stab', args);
             if (args[0] === 'o') room.startTour('ot')
         },
         camo: function (room, user, args) {
@@ -107,7 +68,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'camo');
+            checkGenerator(room, 'camo', args);
             if (args[0] === 'o') room.startTour('ot')
         },
         omotm: function (room, user, args) {
@@ -116,7 +77,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'omotm');
+            checkGenerator(room, 'omotm', args);
             if (args[0] === 'o') room.startTour('ot')
         },
         lcotm: function (room, user, args) {
@@ -125,7 +86,7 @@ module.exports = {
                 room.send("A tournament is already going on.");
                 return false;
             }
-            checkGenerator(room, 'lcotm');
+            checkGenerator(room, 'lcotm', args);
             if (args[0] === 'o') room.startTour('ot')
         },
     },

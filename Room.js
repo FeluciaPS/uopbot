@@ -13,10 +13,6 @@ class Room {
 		if (!FS.existsSync(PATH)) FS.copyFileSync('./rooms/config-example.json', PATH);
 		this.settings = JSON.parse(FS.readFileSync(PATH));
 		this.repeat = this.settings.repeat;
-		if (this.settings.OTobj) {
-			this.OTobj = eval(this.settings.OTobj);
-			OTs.push(this.OTobj);
-		}
 		if (this.settings.hellothere) {
 			this.hellothere = {
 				last: 0

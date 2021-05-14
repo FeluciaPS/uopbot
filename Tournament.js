@@ -1,13 +1,23 @@
 let formats = {};
 
+/*
+ *  Data options
+ *  - forcepublic: true for forcing public tour games
+ *  - scouting: true to ban scouting
+ *  - modjoin: true to disallow modjoin
+ *  - scrappie: true to have the bot send .official on tour creation, to denote it as an official tour for Scrappie
+ *  - autostart: autostart in minutes
+ *  - autodq: autodq in minutes
+ *  - forcetimer: true to force timers in the tour
+ */
 class Tournament {
-    constructor(room, type) {
+    constructor(room, data) {
         this.room = room;
         this.started = false;
         this.players = {};
-        this.official = type === 'official' || type === 'o' || type === 'ot';
-        this.blt = type === 'blt';
-        this.chill = type === 'chill';
+        this.official = data.official || data.scrappie;
+        this.blt = data.blt;
+        this.chill = data.chill;
         this.rules = {
             "bans": [],
             "unbans": [],
@@ -16,28 +26,27 @@ class Tournament {
         };
         this.name = false;
         this.format = false;
-        let tourcheck = room.id + (this.official ? "-o" : "");
-        if (type === "monopoke") tourcheck = '1v1-o'; // I know this looks ugly deal with it
-        if (type === "late") {
+        if (data.late) {
             this.started = true;
             return;
-            this.format = 'unknown';
         }
-        if (Config.tours[tourcheck]) {
-            let t = Config.tours[tourcheck];
-            if (t[0]) {
-                this.room.send(`/tour autostart ${t[0]}`);
-                this.room.send(`/tour autodq ${t[1]}`);
-            }
-            if (t[2]) this.room.send('/tour scouting disallow');
-        } else if (Config.tours[room.id]) {
+        if (Config.tours[room.id] && !(data.autostart || data.autodq || data.scouting)) {
             let t = Config.tours[room.id];
             this.room.send(`/tour autostart ${t[0]}`);
             this.room.send(`/tour autodq ${t[1]}`);
             if (t[2]) this.room.send('/tour scouting disallow');
         }
-        if (this.room.id === "monotype") room.send('/tour modjoin disallow');
-        if (this.official && type !== 'ot') room.send('.official');
+
+		// Various data things
+        if (data.scrappie) room.send('.official');
+		if (data.monopoke) room.send('/tour autostart 7');
+		if (data.forcepublic) room.send('/tour forcepublic on');
+		if (data.scouting) room.send('/tour scouting disallow');
+		if (data.modjoin) room.send('/tour modjoin off');
+		if (data.autostart) room.send(`/tour autostart ${data.autostart}`);
+		if (data.autodq) room.send(`/tour autodq ${data.autodq}`);
+		if (data.forcetimer) room.send(`/tour forcetimer on`);
+		
         if (this.chill) room.send('/modchat +');
         this.startCheckTimer = false;
         this.autostart = false;

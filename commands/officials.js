@@ -19,11 +19,13 @@ let getESTDate = function () {
  *  - times: the times at which to hold tournaments, UTC by default
  *  - EST: set to true if you want to note down the times in UTC-5 (note: doesn't change with daylight savings)
  *  - forcepublic: true for forcing public tour games
+ *  - forcetimer: true to force timer in tour games
  *  - scouting: true to ban scouting
  *  - modjoin: true to disallow modjoin
  *  - scrappie: true to have the bot send .official on tour creation, to denote it as an official tour for Scrappie
  *  - autostart: autostart in minutes
  *  - autodq: autodq in minutes
+ *  - args: optional set of arguments to pass into the tournament command
  */
 
 global.Officials = {
@@ -43,6 +45,9 @@ global.Officials = {
         scrappie: true,
         command: "1v1",
         autostart: 7,
+		handler: function(room) {
+			room.send(".board");
+		}
     },
     "2v2": {
         schedule: [
@@ -75,6 +80,9 @@ global.Officials = {
         scouting: true,
         command: "ag",
         autostart: 7,
+		handler: function(room) {
+			room.send("/wall Rules: https://pastebin.com/raw/Z3SgDjjL")
+		}
     },
     "capproject": {
         formats: ["gen8", "gen8", "gen8", "gen8"],
@@ -114,13 +122,122 @@ global.Officials = {
         ],
         times: [21],
         forcepublic: true,
+		forcetimer: true,
         scouting: true,
         command: "othermetas",
+		handler: function (room, format) {
+			room.send(`/wall The daily tour!`);
+			room.send(`!om ${format}`);
+			if (meta !== 'omotm' && format !== 'lcotm') {
+				room.send(`!rfaq ${format}samples`);
+			}
+		}
     },
 	"overused": {
+		schedule: {},
 		monthly: true,
+		EST: true,
 		command: "overused",
-	}
+	},
+
+	// Overarching official tournament function.
+	// This will make so many things so much better.
+	official: function () {
+		for (let i in this) {
+			if (i === "official") continue;
+			let room = Rooms[i];
+
+			// Bot is not in the room.
+			if (!room) continue;
+
+			let data = this[i];
+
+			// Tour has already been made.
+			if (data.hasStarted) {
+				//console.log(`${i} - tour has already started`);
+				continue;
+			}
+
+			// Some current date/time settings.
+			let now = data.est ? getESTDate() : new Date(Date.now());
+			let day = now.getDay() - 1;
+        	if (day < 0) day = 6;
+
+			// We don't do tours not at a full hour. Deal with it.
+			if (now.getMinutes() > 5) continue;
+
+			// Check if a tour should be made at all
+			// and check the format if so
+			let format = false;
+			if (data.monthly) {
+				if (!data.schedule[now.getDate()]) {
+					// There is no tour scheduled for today.
+					continue;
+				}
+				let today = data.schedule[now.getDate()];
+				if (!today[now.getHours]) {
+					// There is no tour scheduled for right now.
+					continue;
+				}
+				format = today[now.getHours()];
+			} else if (data.formats) {
+				let index = data.times.indexOf(now.getHours());
+				if (index === -1) {
+					// There's no tour scheduled for right now.
+					continue;
+				}
+				format = data.formats[index];
+			} else if (data.schedule) {
+				let index = data.times.indexOf(now.getHours());
+				if (index === -1) {
+					// There's no tour scheduled for right now.
+					continue;
+				}
+				format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
+			} else {
+				// Something went wrong
+				continue;
+			}
+
+			if (!data.command) {
+				// is bad
+				console.log(`No tour command given for ${i}`);
+				continue;
+			}
+
+			if (!Commands[data.command]) {
+				// is also bad
+				console.log(`Invalid tour command for ${i}: ${data.command}`);
+				continue;
+			}
+
+			if (!Commands[data.command][format]) {
+				// is equally bad
+				console.log(`Invalid subcommand for ${i}-${data.command}: ${format}`);
+				continue;
+			}
+
+			if (room.tournament) {
+				if (room.tournament.official) return console.log(`${i}: Official tour already exists`);
+				else {
+					room.send("/wall Official time. Ending ongoing tournament");
+					room.send("/tour end");
+					room.endTour();
+				}
+			}
+
+			room.send("/modnote OFFICIAL: " + format);
+			Commands[data.command][format](room, Users.staff, data.args ? [...data.args] : []);
+			room.startTour()
+
+			handler(room, format);
+
+			data.hasStarted = true;
+			setTimeout(() => {
+				data.hasStarted = false
+			}, 30 * 1000 * 60);
+		}        
+    }
 }
 
 module.exports = {

@@ -1,40 +1,4 @@
-let moncountrule = 'Max Team Size = 4'
-global.OT2v2 = {
-    schedule: [
-        ["gen8", "gen8", "gen6"],
-        ["gen8", "gen5", "gen8"],
-        ["gen8", "gen8", "gen8"],
-        ["gen7", "gen6", "gen8"],
-        ["gen8", "gen8", "gen8"],
-        ["gen5", "gen8", "gen7"],
-        ["gen8", "gen8", "gen8"],
-    ],
-    times: [2, 10, 18],
-    official: function () {
-        let room = Rooms['2v2'];
-        let now = new Date(Date.now());
-        let day = now.getDay();
-        if (!this.times.includes(now.getHours())) return;
-        if (now.getMinutes() > 5) return;
-        let nextid = OT2v2.times.indexOf(now.getHours());
-        if (this.hasStarted) return;
-        if (room.tournament) {
-            if (room.tournament.official) return;
-            else {
-                room.send("/wall Official time. Ending ongoing tournament");
-                room.send("/tour end");
-                room.endTour();
-            }
-        }
-        let type = this.schedule[day][nextid];
-        room.send('/modnote OFFICIAL: ' + type);
-        this.hasStarted = true;
-        Commands['2v2'][type](room, Users.staff, ["o"]);
-        setTimeout(() => {
-            OT2v2.hasStarted = false
-        }, 30 * 1000 * 60);
-    }
-}
+let moncountrule = 'Max Team Size = 4';
 
 let canMakeTour = function (room, user) {
     // I'm gonna use this a lot so why not make a function for it

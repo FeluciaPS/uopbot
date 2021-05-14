@@ -2,8 +2,6 @@ bot.on('challstr', function (parts) {
     require("./login.js")(parts[2], parts[3])
 });
 
-global.OTs = [];
-
 bot.on('updateuser', (parts) => {
     logger.emit('log', 'Logged in as ' + parts[2]);
     let skipnext = false;
@@ -49,7 +47,11 @@ bot.on('c', (parts) => {
     Rooms[room].runChecks(message);
     Reminder.check();
     Reminder.parse(user, Rooms[room], message);
-    for (let i of OTs) i.official();
+
+	// Check if any official tours need starting
+    Officials.official();
+
+	// Continue as usual
     Monitor.monitor(user.name, message);
     logger.emit('chat', Utils.getRoom(parts[0]), user.name, message);
     if (message.startsWith('/log') && Rooms[room].settings.autohide) {

@@ -1,33 +1,3 @@
-global.CAP = {
-    times: [2, 12, 18, 22],
-    formats: ['gen8', 'gen8', 'gen8', 'gen8'],
-    started: false,
-    official: function () {
-        let room = Rooms['capproject'];
-        let now = new Date(Date.now());
-        if (!this.times.includes(now.getHours())) return;
-        if (this.started) return;
-        let next = now.getHours();
-        let mins = now.getMinutes();
-        if (mins > 5) return;
-        let hours = now.getHours();
-        if (room.tournament) {
-            if (room.tournament.official) return;
-            else {
-                room.send("/wall Official time. Ending ongoing tournament");
-                room.send("/tour end");
-                room.endTour();
-            }
-        }
-        this.started = true;
-        Commands['cap'][this.formats[this.times.indexOf(next)]](room, Users.staff, ["o"]);
-        room.send('/wall Rules: https://pastebin.com/raw/Z3SgDjjL');
-        setTimeout(() => {
-            CAP.started = false
-        }, 30 * 60 * 1000);
-    }
-}
-
 let canMakeTour = function (room, user) {
     // I'm gonna use this a lot so why not make a function for it
     if (room != 'capproject') return false;
