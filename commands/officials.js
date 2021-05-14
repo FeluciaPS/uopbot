@@ -248,7 +248,7 @@ module.exports = {
             let robj = Rooms[i];
             if (room !== user && robj !== room) continue;
             if (!Officials[i]) continue;
-            if (!Users.self.can(robj, '%')) continue; // bot isn't auth in the room, can't start official tours, so no point displaying them.
+            if (!Users.self.can(robj, '*')) continue; // bot isn't auth in the room, can't start official tours, so no point displaying them.
             if (Users.self.rooms[i] === "*") targetroom = robj; // this is useful later 
             let obj = Officials[i];
 
