@@ -1,4 +1,4 @@
-let moncountrule = ''
+let moncountrule = 'Max Team Size = 4'
 global.OT2v2 = {
     schedule: [
         ["gen8", "gen8", "gen6"],
