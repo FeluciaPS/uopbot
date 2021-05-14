@@ -228,7 +228,7 @@ global.Officials = {
 
 			room.send("/modnote OFFICIAL: " + format);
 			Commands[data.command][format](room, Users.staff, data.args ? [...data.args] : []);
-			room.startTour()
+			room.startTour(data)
 
 			handler(room, format);
 
