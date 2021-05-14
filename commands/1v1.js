@@ -1,31 +1,3 @@
-let canMakeTour = function (room, user) {
-    // I'm gonna use this a lot so why not make a function for it
-    if (!user.can(room, "%")) return false;
-    if (room.tournament) {
-        room.send("A tournament is already going on.");
-        return false;
-    }
-    return true;
-}
-
-let checkGenerator = function (room, meta, args, tourname = '') {
-    if (args && args[0]) {
-        if (args[0].startsWith("rr")) {
-            let count = parseInt(args[0].substring(2));
-            if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
-            else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        } else if (args[0].startsWith("e")) {
-            let count = parseInt(args[0].substring(1));
-            if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
-            else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        } else {
-            room.send(`/tour create ${meta}, elim,,, ${tourname}`)
-        }
-        if (toId(args[0]) === 'o') room.startTour('o');
-    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-    if (toId(args[1]) === 'o') room.startTour('o');
-}
-
 let buildRuleset = function (meta) {
     let banlist = Banlist[meta];
     let ret = '/tour rules ';
@@ -160,109 +132,109 @@ module.exports = {
     '1v1': {
         '': 'help',
         gen8: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args);
         },
         gen7: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen71v1', args);
         },
         oras: 'gen6',
         gen6: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen61v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen61v1', args);
         },
         bw: 'gen5',
         gen5: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen51v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen51v1', args);
         },
         dp: 'gen4',
         gen4: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen41v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen41v1', args);
         },
         rse: 'gen3',
         gen3: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen31v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen31v1', args);
         },
         aaa: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] AAA 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen71v1', args, '[Gen 7] AAA 1v1');
             room.send(buildRuleset('aaa'));
         },
         ag: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] AG 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen71v1', args, '[Gen 7] AG 1v1');
             room.send(buildRuleset('ag'));
         },
         natdex: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] National Dex 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] National Dex 1v1');
             room.send(buildRuleset('natdex'));
         },
         inverse: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] Inverse 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] Inverse 1v1');
             room.send(buildRuleset('inverse'));
         },
         monotype: 'mono',
         mono: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] Monotype 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] Monotype 1v1');
             room.send(buildRuleset('monotype'));
         },
         nfe: function (room, user, args) {
             Commands.nfe1v1(room, user, args);
         },
         cap: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] CAP 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] CAP 1v1');
             room.send('/tour rules -All Pokemon, +CAP, +CAP NFE, +CAP LC');
         },
         lc: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] LC 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] LC 1v1');
             room.send('/tour rules Little Cup, [Gen 8] LC');
         },
         noz: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args, '[Gen 7] No Z 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen71v1', args, '[Gen 7] No Z 1v1');
             room.send('/tour rules Z Move Clause');
         },
         dmax: 'max',
         dynamax: 'max',
         dyna: 'max',
         max: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] Dynamax 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] Dynamax 1v1');
             room.send('/tour rules !Dynamax Clause');
         },
         stabmons: 'stab',
         stab: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] STABmons 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] STABmons 1v1');
             room.send(buildRuleset('stabmons'));
         },
         ubers: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] Ubers 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] Ubers 1v1');
             room.send(buildRuleset('ubers'));
         },
         uu: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen81v1', args, '[Gen 8] UU 1v1');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen81v1', args, '[Gen 8] UU 1v1');
             room.send(buildRuleset('uu'));
         },
         chill: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen71v1', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen71v1', args);
             room.startTour('chill');
         },
         '2v2': function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen82v2doubles', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen82v2doubles', args);
         },
         monopoke: function (room, user, args) {
             Commands.monopoke[''](room, user, args);

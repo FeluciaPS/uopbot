@@ -1,16 +1,5 @@
 let t = JSON.parse(FS.readFileSync('data/types.json'));
 
-let canMakeTour = function (room, user) {
-    // I'm gonna use this a lot so why not make a function for it
-    if (room != '1v1' && room != '1v1typechallenge') return false;
-    if (!user.can(room, "%")) return false;
-    if (room.tournament) {
-        room.send("A tournament is already going on.");
-        return false;
-    }
-    return true;
-}
-
 let chooseMonopoke = function (gen) {
     let mons = [];
     for (let i in PokeDex) {
@@ -29,7 +18,7 @@ let chooseMonopoke = function (gen) {
 module.exports = {
     monopoke: {
         '': function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
+            if (!Utils.canMakeTour(room, user)) return;
             let official = args[0] === 'o';
             if (official) args = [];
             if (!args[0]) args[0] = chooseMonopoke(false);
@@ -40,7 +29,7 @@ module.exports = {
             else return Commands['monopoke']['gen8'](room, user, args, official ? "official" : false);
         },
         gen8: function (room, user, args, x) {
-            if (!canMakeTour(room, user)) return;
+            if (!Utils.canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke('gen8');
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
@@ -56,7 +45,7 @@ module.exports = {
             if (x === "official") room.send('.official');
         },
         gen7: function (room, user, args, x) {
-            if (!canMakeTour(room, user)) return;
+            if (!Utils.canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke('gen7');
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
@@ -74,7 +63,7 @@ module.exports = {
     },
     camonopoke: {
         '': function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
+            if (!Utils.canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke(false);
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
@@ -83,7 +72,7 @@ module.exports = {
             else return Commands['camonopoke']['gen8'](room, user, args);
         },
         gen8: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
+            if (!Utils.canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke('gen8');
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];
@@ -98,7 +87,7 @@ module.exports = {
             room.send(`/wall Camomons Monopoke ${mon}! Use only ${mon}`);
         },
         gen7: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
+            if (!Utils.canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke('gen7');
             let dex = PokeDex[toId(args[0])];
             let fdt = fdata[toId(args[0])];

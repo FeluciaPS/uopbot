@@ -1,62 +1,33 @@
-let canMakeTour = function (room, user) {
-    // I'm gonna use this a lot so why not make a function for it
-    if (room != 'anythinggoes') return false;
-    if (!user.can(room, "%")) return false;
-    if (room.tournament) {
-        room.send("A tournament is already going on.");
-        return false;
-    }
-    return true;
-}
-
-let checkGenerator = function (room, meta, args, tourname = '') {
-    if (args && args[0]) {
-        if (args[0].startsWith("rr")) {
-            let count = parseInt(args[0].substring(2));
-            if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
-            else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-        } else if (args[0].startsWith("e")) {
-            let count = parseInt(args[0].substring(1));
-            if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
-            else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-        } else {
-            room.send(`/tour create ${meta}, elim,,, ${tourname}`)
-        }
-        if (toId(args[0]) === 'o') room.startTour('o');
-    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-    if (toId(args[1]) === 'o') room.startTour('o');
-}
-
 module.exports = {
     ag: {
         '': 'natdex',
         natdex: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen8nationaldexag', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen8nationaldexag', args);
         },
         galar: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen8anythinggoes', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen8anythinggoes', args);
         },
         usum: 'gen7',
         gen7: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen7anythinggoes', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen7anythinggoes', args);
         },
         oras: 'gen6',
         gen6: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'gen6anythinggoes', args);
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'gen6anythinggoes', args);
         },
         inverse: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'nationaldexag', args, '[NatDex] Inverse AG');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'nationaldexag', args, '[NatDex] Inverse AG');
             room.send('/tour rules Inverse Mod');
         },
         monotype: 'mono',
         mono: function (room, user, args) {
-            if (!canMakeTour(room, user)) return;
-            checkGenerator(room, 'nationaldexag', args, '[NatDex] Monotype AG');
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, 'nationaldexag', args, '[NatDex] Monotype AG');
             room.send('/tour rules Same Type Clause');
         },
         help: function (room, user, args) {

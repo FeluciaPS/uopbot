@@ -88,35 +88,6 @@ global.BLT = {
 
 BLT.loadpoints();
 
-let canMakeTour = function (room, user) {
-	// I'm gonna use this a lot so why not make a function for it
-	if (room != 'monotype') return false;
-	if (!user.can(room, "%")) return false;
-	if (room.tournament) {
-		room.send("A tournament is already going on.");
-		return false;
-	}
-	return true;
-}
-
-let checkGenerator = function (room, meta, args, tourname = '') {
-	if (args && args[0]) {
-		if (args[0].startsWith("rr")) {
-			let count = parseInt(args[0].substring(2));
-			if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
-			else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
-		} else if (args[0].startsWith("e")) {
-			let count = parseInt(args[0].substring(1));
-			if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
-			else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-		} else {
-			room.send(`/tour create ${meta}, elim,,, ${tourname}`)
-		}
-		if (toId(args[0]) === 'o') room.startTour('o');
-	} else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
-	if (toId(args[1]) === 'o') room.startTour('o');
-}
-
 module.exports = {
 	// BLT stuff
 	addbltpoints: function (room, user, args) {
@@ -197,41 +168,41 @@ module.exports = {
 		// Old (and current) generations
 		'': 'gen8',
 		gen8: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen8monotype', args);
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen8monotype', args);
 			room.send('/tour scouting off');
 		},
 		gen7: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7monotype', args);
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7monotype', args);
 			room.send('/tour scouting off');
 		},
 		gen6: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen6monotype', args);
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen6monotype', args);
 			room.send('/tour scouting off');
 		},
 		gen5: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen5monotype', args);
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen5monotype', args);
 			room.send('/tour scouting off');
 		},
 		gen4: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen4ou', args, '[Gen 4] Monotype');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen4ou', args, '[Gen 4] Monotype');
 			room.send('/tour rules Same Type Clause');
 			room.send('/tour scouting off');
 		},
 		gen3: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen3ou', args, '[Gen 3] Monotype');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen3ou', args, '[Gen 3] Monotype');
 			room.send('/tour rules Same Type Clause');
 			room.send('/tour scouting off');
 		},
 		// Mixups with other smogon metagames
 		'1v1': function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen71v1', args, '[Gen 7] Monotype 1v1');
 
 			// Build ruleset
 			let ruleset = "/tour rules Same Type Clause, "
@@ -242,37 +213,37 @@ module.exports = {
 			room.send('/tour scouting off');
 		},
 		lc: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen8lc', args, '[Gen 8] Monotype LC');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen8lc', args, '[Gen 8] Monotype LC');
 			room.send('/tour rules Same Type Clause, +Cutiefly, +Vulpix-Alola, +Chlorophyll');
 			room.send('/tour scouting off');
 		},
 		uber: 'ubers',
 		ubers: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7ubers', args, '[Gen 7] Monotype Ubers');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7ubers', args, '[Gen 7] Monotype Ubers');
 			room.send('/tour rules Same Type Clause, -Marshadow');
 			room.send('/tour scouting off');
 		},
 		// Mixups with OMs
 		almostanyability: 'aaa',
 		aaa: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen8almostanyability', args, '[Gen 8] Monotype Almost Any Ability');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen8almostanyability', args, '[Gen 8] Monotype Almost Any Ability');
 			room.send('/tour rules Same Type Clause, +Buzzwole, +Zeraora, -Dragapult, -Dracovish, -Dragonite, -Keldeo, -Urshifu, -Urshifu-Rapid-Strike, -Melmetal, -Psychic Surge, -Triage, -Damp Rock, -Terrain Extender');
 			room.send('/tour scouting off');
 		},
 		stab: 'stabmons',
 		stabmons: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen8stabmons', args, '[Gen 8] Monotype STABmons');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen8stabmons', args, '[Gen 8] Monotype STABmons');
 			room.send('/tour rules Same Type Clause, -Blaziken, -Dracovish, -Dragapult, -Landorus-Incarnate, -Magearna, -Terrain Extender, -Damp Rock, +Darmanitan-Galar, +Porygon Z, +Thundurus, +Arena Trap')
 			room.send('/tour scouting off');
 		},
 		mixandmega: 'mnm',
 		mnm: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7mixandmega', args, '[Gen 7] Monotype Mix and Mega');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7mixandmega', args, '[Gen 7] Monotype Mix and Mega');
 			room.send('/tour rules Same Type Clause, -Aggronite, -Altarianite, -Ampharosite, -Audinite, -Charizardite X, -Gyaradosite, -Lopunnite, -Mewtwonite X, -Pinsirite, -Sceptilite, -Red Orb')
 			room.send('/tour scouting off');
 		},
@@ -280,52 +251,52 @@ module.exports = {
 		mrb: 'monotyperandombattle',
 		random: 'monotyperandombattle',
 		monotyperandombattle: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7monotyperandombattle', args);
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7monotyperandombattle', args);
 		},
 		blitz: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7monotype', args, '[Gen 7] Blitz Monotype');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7monotype', args, '[Gen 7] Blitz Monotype');
 			room.send('/tour rules Blitz');
 			room.send('/tour forcetimer on');
 			room.send('/tour scouting off');
 		},
 		doubles: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7doublesou', args, '[Gen 7] Doubles Monotype');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7doublesou', args, '[Gen 7] Doubles Monotype');
 			room.send('/tour rules Same Type Clause, -Terrain Extender, -Smooth Rock, -Damp Rock');
 			room.send('/tour scouting off');
 		},
 		chill: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7monotype', args);
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7monotype', args);
 			room.startTour('chill');
 		},
 
 		// Old gen mashups
 		gen7lc: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7lc', args, '[Gen 7] Monotype LC');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7lc', args, '[Gen 7] Monotype LC');
 			room.send('/tour rules Same Type Clause, +Vulpix-Base, +Gothita, +Misdreavus, +Wingull, +Trapinch');
 			room.send('/tour scouting off');
 		},
 		gen7almostanyability: 'gen7aaa',
 		gen7aaa: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Monotype Almost Any Ability');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7almostanyability', args, '[Gen 7] Monotype Almost Any Ability');
 			room.send('/tour rules Same Type Clause, -Aegislash, -Genesect, -Magearna, -Minior, -Naganadel, -Noivern, -Zygarde, -Zygarde-10%, -Damp Rock, -Smooth Rock, -Terrain Extender, -Mawilite, -Medichamite, -Metagrossite, -Psychic Surge, +Victini, +Weavile');
 			room.send('/tour scouting off');
 		},
 		gen7stab: 'gen7stabmons',
 		gen7stabmons: function (room, user, args) {
-			if (!canMakeTour(room, user)) return;
-			checkGenerator(room, 'gen7stabmons', args, '[Gen 7] Monotype STABmons');
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen7stabmons', args, '[Gen 7] Monotype STABmons');
 			room.send('/tour rules Same Type Clause, -boomburst, -zygarde, -zygarde-10%, -battle bond, -smooth rock, -damp rock, -hoopa-unbound, -celebrate, -conversion, -trick-or-treat, -forest’s curse, -happy hour, -hold hands, -purify, +deoxys-speed, +deoxys-defense, -sketch, +blacephalon, +porygonz, +thundurus-base ,+aerodactyl, +araquanid')
 			room.send('/tour scouting off');
 		},
 	},
 	monothreat: function (room, user, args) {
-		if (!canMakeTour(room, user)) return;
+		if (!Utils.canMakeTour(room, user)) return;
 		let type = toId(args[0]);
 		let banlist = false;
 		if (type === 'bug') {
@@ -386,13 +357,13 @@ module.exports = {
 		if (banlist === false) return room.send("Invalid type.");
 		if (!banlist) return room.send("Sorry, that type hasn't been coded yet.");
 
-		checkGenerator(room, 'gen7monotype', args, `[Gen 7] Monothreat ${type}`);
+		Utils.checkGenerator(room, 'gen7monotype', args, `[Gen 7] Monothreat ${type}`);
 		type = type[0].toUpperCase() + type.substring(1);
 		room.send(`/tour rules ${banlist}, -Uber, -OU, -UU, -RU, -NU, -PU, -ZU, -NFE, -LC Uber, -LC, -UUBL, -RUBL, -NUBL, -PUBL`);
 		room.send(`!rfaq monothreat`);
 	},
 	cc1v1: function (room, user, args) {
-		if (!canMakeTour(room, user)) return;
-		checkGenerator(room, 'challengecup1v1', args);
+		if (!Utils.canMakeTour(room, user)) return;
+		Utils.checkGenerator(room, 'challengecup1v1', args);
 	}
 }

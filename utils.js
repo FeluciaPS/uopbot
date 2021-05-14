@@ -87,3 +87,31 @@ String.prototype.capitalize = function () {
     let str = this.toLowerCase();
     return str.charAt(0).toUpperCase() + str.substring(1);
 }
+
+exports.canMakeTour = function (room, user) {
+    // I'm gonna use this a lot so why not make a function for it
+    if (!user.can(room, "%")) return false;
+    if (room.tournament) {
+        room.send("A tournament is already going on.");
+        return false;
+    }
+    return true;
+}
+
+exports.checkGenerator = function (room, meta, args, tourname = '') {
+    if (args && args[0]) {
+        if (args[0].startsWith("rr")) {
+            let count = parseInt(args[0].substring(2));
+            if (count) room.send(`/tour create ${meta}, rr,, ${count}, ${tourname}`);
+            else room.send(`/tour create ${meta}, rr,,, ${tourname}`);
+        } else if (args[0].startsWith("e")) {
+            let count = parseInt(args[0].substring(1));
+            if (count) room.send(`/tour create ${meta}, elim,, ${count}, ${tourname}`);
+            else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+        } else {
+            room.send(`/tour create ${meta}, elim,,, ${tourname}`)
+        }
+        if (toId(args[0]) === 'o') room.startTour('o');
+    } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
+    if (toId(args[1]) === 'o') room.startTour({official: true});
+}
