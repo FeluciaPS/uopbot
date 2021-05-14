@@ -128,7 +128,7 @@ global.Officials = {
 		handler: function (room, format) {
 			room.send(`/wall The daily tour!`);
 			room.send(`!om ${format}`);
-			if (meta !== 'omotm' && format !== 'lcotm') {
+			if (format !== 'omotm' && format !== 'lcotm') {
 				room.send(`!rfaq ${format}samples`);
 			}
 		}
@@ -138,6 +138,10 @@ global.Officials = {
 		monthly: true,
 		EST: true,
 		command: "overused",
+		handler: function (room, format) {
+			if (format === "gen8") room.send(`!rfaq gen8samples`);
+			else room.send(`!rfaq roasamples`);
+		}
 	},
 
 	// Overarching official tournament function.
