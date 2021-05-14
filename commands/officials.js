@@ -242,19 +242,21 @@ global.Officials = {
 
 module.exports = {
     nextot: function (room, user, args) {
-        let now = new Date(Date.now());
         let rooms = [];
         let targetroom = false;
         for (let i in user.rooms) {
             let robj = Rooms[i];
             if (room !== user && robj !== room) continue;
-            if (!robj.OTobj) continue;
-            if (!Users.self.can(robj, '*')) continue; // bot isn't bot in the room, can't start official tours, so no point displaying them.
+            if (!Officials[i]) continue;
+            if (!Users.self.can(robj, '%')) continue; // bot isn't auth in the room, can't start official tours, so no point displaying them.
             if (Users.self.rooms[i] === "*") targetroom = robj; // this is useful later 
-            let obj = robj.OTobj;
+            let obj = Officials[i];
 
-            let r = ""
-            
+			// Sorry I can't be asked to write this right now
+			if (obj.monthly) continue;
+
+            let r = "";
+            let now = obj.est ? getESTDate() : new Date(Date.now());
             let nhours = now.getHours();
             let next = obj.times[0];
             for (let i in obj.times) {
@@ -294,7 +296,7 @@ module.exports = {
                 if (hours < 0) {
                     day = (day + 1) % 7;
                 }
-                meta = obj.schedule[day][next];
+                meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
             }
             while (hours < 0) hours += 24;
             let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
