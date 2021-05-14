@@ -230,7 +230,7 @@ global.Officials = {
 			Commands[data.command][format](room, Users.staff, data.args ? [...data.args] : []);
 			room.startTour(data)
 
-			handler(room, format);
+			if (data.handler) data.handler(room, format);
 
 			data.hasStarted = true;
 			setTimeout(() => {
