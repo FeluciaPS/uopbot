@@ -22,7 +22,7 @@ module.exports = {
         gen5: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, 'gen5doublesou', args, '[Gen 5] 2v2 Doubles');
-            room.send('/tour rules Accuracy Moves Clause, -Perish Song, -Focus Sash, -Kingdra, ' + moncountrule;
+            room.send('/tour rules Accuracy Moves Clause, -Perish Song, -Focus Sash, -Kingdra, ' + moncountrule);
         },
         dp: 'gen4',
         gen4: function (room, user, args) {
