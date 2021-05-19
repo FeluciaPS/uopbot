@@ -1,5 +1,5 @@
 module.exports = {
-    natdex: {
+    overused: {
         '': 'gen8',
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
