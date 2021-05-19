@@ -115,3 +115,33 @@ exports.checkGenerator = function (room, meta, args, tourname = '') {
     } else room.send(`/tour create ${meta}, elim,,, ${tourname}`);
     if (toId(args[1]) === 'o') room.startTour({official: true});
 }
+
+exports.uploadToHastebin = function (toUpload, callback) {
+	let https = require("https");
+	if (typeof callback !== 'function') return false;
+	var reqOpts = {
+		hostname: 'pastie.io',
+		method: 'POST',
+		path: '/documents'
+	};
+
+	var req = https.request(reqOpts, function (res) {
+		res.on('data', function (chunk) {
+			try {
+				var filename = JSON.parse(chunk).key;
+				callback('https://pastie.io/raw/' + filename);
+			} catch (e) {
+				if (typeof chunk === 'string' && new RegExp("/^[^\<]*\<!DOCTYPE html\>/").test(chunk)) {
+					callback('Cloudflare-related error uploading to Hastebin: ' + e.message);
+				} else {
+					callback('Unknown error uploading to Hastebin: ' + e.message);
+				}
+			}
+		});
+	});
+	req.on('error', function (e) {
+		callback('Error uploading to Hastebin: ' + e.message);
+	});
+	req.write(toUpload);
+	req.end();
+}

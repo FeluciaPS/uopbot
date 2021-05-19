@@ -12,6 +12,7 @@ let getESTDate = function () {
 
 const PATH = "./data/schedules";
 const fs = require('fs');
+
 let Schedules = {
 	save: function (room, data) {
 		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
@@ -420,5 +421,28 @@ module.exports = {
 		}).on('error', (e) => {
 			console.error(e);
 		});
+	},
+	viewschedule: function(room, user, args) {
+		if (room !== user && args.length < 1) args = [room.id, ...args];
+		if (!Rooms[room.id]) return user.send("Room doesn't exist");
+		if (!Officials[room.id] || !Officials[room.id].monthly) return user.send("No officials configured for this room");
+		if (!Object.keys(Officials[room.id].schedule).length) return user.send("No schedule yet.");
+
+		let header = ``;
+		header += `+------+------+------+\n`;
+		header += `| Date | Time | Meta |\n`;
+		header += `+------+------+------+\n`;
+
+		for (let i in Officials[room.id].schedule) {
+			let dt = Officials[room.id].schedule[i];
+			for (let x in dt) {
+				header += `|   ${(i < 10 ? " " : "") + i} |   ${(x < 10 ? " " : "") + x} | ${dt[x]} |\n`;
+			}
+		}
+
+		header += `+------+------+------+`;
+		Utils.uploadToHastebin(header, (x) => {
+			room.send(x);
+		})
 	}
 }
