@@ -31,6 +31,8 @@ let Schedules = {
 		}
 	}
 }
+
+Schedules.load();
 /*
  *  Officials object
  *  key: roomid
