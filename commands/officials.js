@@ -13,26 +13,6 @@ let getESTDate = function () {
 const PATH = "./data/schedules";
 const fs = require('fs');
 
-let Schedules = {
-	save: function (room, data) {
-		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
-		fs.writeFileSync(PATH + '/' + room + '.json', JSON.stringify(data, null, 2));
-		this.load();
-	},
-	load: function () {
-		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
-		for (let i of fs.readdirSync(PATH)) {
-			let data = fs.readFileSync(PATH + '/' + i);
-			data = JSON.parse(data);
-			let room = i.split('.')[0];
-			if (Officials[room] && Officials[room].monthly) {
-				Officials[room].schedule = data;
-			}
-		}
-	}
-}
-
-Schedules.load();
 /*
  *  Officials object
  *  key: roomid
@@ -274,6 +254,27 @@ global.Officials = {
         }        
     }
 }
+
+let Schedules = {
+	save: function (room, data) {
+		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
+		fs.writeFileSync(PATH + '/' + room + '.json', JSON.stringify(data, null, 2));
+		this.load();
+	},
+	load: function () {
+		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
+		for (let i of fs.readdirSync(PATH)) {
+			let data = fs.readFileSync(PATH + '/' + i);
+			data = JSON.parse(data);
+			let room = i.split('.')[0];
+			if (Officials[room] && Officials[room].monthly) {
+				Officials[room].schedule = data;
+			}
+		}
+	}
+}
+
+Schedules.load();
 
 module.exports = {
     nextot: function (room, user, args) {
