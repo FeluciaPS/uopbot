@@ -386,35 +386,35 @@ module.exports = {
 					let parts = line.split(/[|,-]/g).map(x => x.trim());
 					let [date, time, meta] = parts;
 					if (parts.length !== 3) {
-						return room.send(`Invalid data on line ${l+1}: ${line}`);
+						return user.send(`Invalid data on line ${l+1}: ${line}`);
 					}
 
 					date = parseInt(date);
 					time = parseInt(time);
 
 					if (isNaN(date) || date < 1 || date > 31) {
-						return room.send(`Invalid date input on line ${l+1}: \`\`${line}\`\`. Must be a whole number below 31.`);
+						return user.send(`Invalid date input on line ${l+1}: \`\`${line}\`\`. Must be a whole number below 31.`);
 					}
 
 					if (isNaN(time) || time < 0 || time > 23) {
-						return room.send(`Invalid time input on line ${l+1}: \`\`${line}\`\`. Must be a whole number below 23.`);
+						return user.send(`Invalid time input on line ${l+1}: \`\`${line}\`\`. Must be a whole number below 23.`);
 					}
 
 					if (!Commands[Officials[roomid].command][meta]) {
-						return room.send(`Invalid meta input on line ${l+1}. Valid metas: ${Object.keys(Commands[Officials[roomid].command]).join(" ")}`);
+						return user.send(`Invalid meta input on line ${l+1}. Valid metas: ${Object.keys(Commands[Officials[roomid].command]).join(" ")}`);
 					}
 					// ok everything is valid.
 
 					if (!schedule[date]) schedule[date] = {};
 					if (schedule[date][time]) {
-						return room.send(`Duplicate date+time ${date}-${time}`);
+						return user.send(`Duplicate date+time ${date}-${time}`);
 					}
 
 					schedule[date][time] = meta;
 				}
 
 				Schedules.save(room, schedule);
-				return room.send("Official schedule successfully updated.");
+				return user.send("Official schedule successfully updated.");
 			});
 
 		}).on('error', (e) => {
