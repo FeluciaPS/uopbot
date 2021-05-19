@@ -405,7 +405,7 @@ module.exports = {
 					}
 					// ok everything is valid.
 
-					if (!shedule[date]) schedule[date] = {};
+					if (!schedule[date]) schedule[date] = {};
 					if (schedule[date][time]) {
 						return room.send(`Duplicate date+time ${date}-${time}`);
 					}
