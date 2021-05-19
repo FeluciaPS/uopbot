@@ -424,17 +424,18 @@ module.exports = {
 	},
 	viewschedule: function(room, user, args) {
 		if (room !== user && args.length < 1) args = [room.id, ...args];
-		if (!Rooms[room.id]) return user.send("Room doesn't exist");
-		if (!Officials[room.id] || !Officials[room.id].monthly) return user.send("No officials configured for this room");
-		if (!Object.keys(Officials[room.id].schedule).length) return user.send("No schedule yet.");
+		args[0] = toId(args[0]);
+		if (!Rooms[args[0]]) return user.send("Room doesn't exist");
+		if (!Officials[args[0]] || !Officials[args[0]].monthly) return user.send("No officials configured for this room");
+		if (!Object.keys(Officials[args[0]].schedule).length) return user.send("No schedule yet.");
 
 		let header = ``;
 		header += `+------+------+------+\n`;
 		header += `| Date | Time | Meta |\n`;
 		header += `+------+------+------+\n`;
 
-		for (let i in Officials[room.id].schedule) {
-			let dt = Officials[room.id].schedule[i];
+		for (let i in Officials[args[0]].schedule) {
+			let dt = Officials[args[0]].schedule[i];
 			for (let x in dt) {
 				header += `|   ${(i < 10 ? " " : "") + i} |   ${(x < 10 ? " " : "") + x} | ${dt[x]} |\n`;
 			}
