@@ -10,6 +10,26 @@ let getESTDate = function () {
     return new Date(est);
 }
 
+const PATH = "./data/schedules";
+const fs = require('fs');
+let Schedules = {
+	save: function (room, data) {
+		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
+		fs.writeFileSync(PATH + '/' + room + '.json', JSON.stringify(data, null, 2));
+		this.load();
+	},
+	load: function () {
+		if (!fs.existsSync(PATH)) fs.mkdirSync(PATH);
+		for (let i of fs.readdirSync(PATH)) {
+			let data = fs.readFileSync(PATH + '/' + i);
+			data = JSON.parse(data);
+			let room = i.split('.')[0];
+			if (Officials[room] && Officials[room].monthly) {
+				Officials[room].schedule = data;
+			}
+		}
+	}
+}
 /*
  *  Officials object
  *  key: roomid
@@ -138,10 +158,14 @@ global.Officials = {
 		monthly: true,
 		EST: true,
 		command: "overused",
+		autostart: 5,
 		handler: function (room, format) {
 			if (format === "gen8") room.send(`!rfaq gen8samples`);
 			else room.send(`!rfaq roasamples`);
-		}
+		},
+		args: [
+			"official"
+		]
 	},
 
 	// Overarching official tournament function.
@@ -308,5 +332,89 @@ module.exports = {
         // multiple rooms, command was used in PM.
         let ret = rooms.join('<br>');
         targetroom.send(`/pminfobox ${user.id}, ${ret}`);
-    }
+    },
+	updateschedule: function (room, user, args) {
+		if (room !== user && args.length < 2) args = [room.id, ...args];
+		if (args.length < 2) return user.send("Usage: ``.updateschedule [room], [url]``");
+		let roomid = toId(args[0]);
+
+		if (!Officials[roomid]) return user.send("The specified room does not exist or does not have official tournaments configured.");
+		if (!Officials[roomid].monthly) return user.send("This room does not use user-configurable schedules.");
+
+		room = Rooms[roomid];
+		if (!room) return user.send("I can't check if you have permission to do that, as I am not in the specified room...");
+		if (!user.can(room, "#")) return user.send("Only Room Owners (#) can update their room's tournament schedule");
+
+		let url = args[1];
+		
+		// We use https around these parts
+		url = url.replace('http://', 'https://');
+
+		// Check if the url is valid
+		if (!url.match(/https:\/\/(pastebin.com|hastebin.com|pastie.io)(\/raw)?\/[A-z0-9]+(?!.*\/)/)) {
+			return user.send("Url provided must be a valid pastebin.com, hastebin.com, or pastie.io link");
+		}
+		
+		// Convert url to a raw url
+		url = url.replace(/https:\/\/(pastebin.com|hastebin.com|pastie.io)(?!\/raw)/, "https://$1/raw");
+
+
+		let https = require('https');
+
+		https.get(url, (res) => {
+			let data = "";
+
+			res.on('data', (d) => {
+				data += d;
+			});
+
+			res.on('end', () => {
+				// Remove ugly \r
+				data = data.replace(/\r\n?/gi, '\n');
+
+				// Split by line.
+				data = data.split('\n');
+
+				let schedule = {}
+
+				for (let l = 0; l < data.length; l++) {
+					let line = data[l];
+					let parts = line.split(/[|,-]/g).map(x => x.trim());
+					let [date, time, meta] = parts;
+					if (parts.length !== 3) {
+						return room.send(`Invalid data on line ${l+1}: ${line}`);
+					}
+
+					date = parseInt(date);
+					time = parseInt(time);
+
+					if (isNaN(date) || date < 1 || date > 31) {
+						return room.send(`Invalid date input on line ${l+1}: \`\`${line}\`\`. Must be a whole number below 31.`);
+					}
+
+					if (isNaN(time) || time < 0 || time > 23) {
+						return room.send(`Invalid time input on line ${l+1}: \`\`${line}\`\`. Must be a whole number below 23.`);
+					}
+
+					if (!Commands[Officials[roomid].command][meta]) {
+						return room.send(`Invalid meta input on line ${l+1}. Valid metas: ${Object.keys(Commands[Officials[roomid].command]).join(" ")}`);
+					}
+					// ok everything is valid.
+
+					if (!shedule[date]) schedule[date] = {};
+					if (schedule[date][time]) {
+						return room.send(`Duplicate date+time ${date}-${time}`);
+					}
+
+					schedule[date][time] = meta;
+				}
+
+				Schedules.save(room, schedule);
+				return room.send("Official schedule successfully updated.");
+			});
+
+		}).on('error', (e) => {
+			console.error(e);
+		});
+	}
 }
