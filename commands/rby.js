@@ -1,6 +1,6 @@
 module.exports = {
 	rby: {
-		'': help,
+		'': "help",
 		ou: function (room, user, args) {
 			if (!Utils.canMakeTour(room, user)) return;
 			Utils.checkGenerator(room, 'gen1ou', args);
