@@ -72,12 +72,12 @@ global.Officials = {
 	"anythinggoes": {
 		schedule: [
 			"galar",
-			"galar",
 			"gen7",
 			"natdex",
 			"gen6",
 			"galar",
 			"gen7",
+			"galar",
 		],
 		times: [18],
 		scouting: true,
