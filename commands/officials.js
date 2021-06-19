@@ -82,17 +82,16 @@ global.Officials = {
 		times: [18],
 		scouting: true,
 		command: "ag",
-		autostart: 7,
-		handler: function (room) {
-			room.send("/wall Rules: https://pastebin.com/raw/Z3SgDjjL")
-		}
+		autostart: 7
 	},
 	"capproject": {
 		formats: ["gen8", "gen8", "gen8", "gen8"],
 		times: [2, 12, 18, 22],
 		scrappie: true,
 		command: "cap",
-		handl
+		handler: function (room) {
+			room.send("/wall Rules: https://pastebin.com/raw/Z3SgDjjL");
+		}
 	},
 	"nationaldex": {
 		times: [0, 18, 19, 22, 23],
