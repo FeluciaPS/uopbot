@@ -85,7 +85,15 @@ global.Officials = {
 		autostart: 7
 	},
 	"capproject": {
-		formats: ["gen8", "gen8", "gen8", "gen8"],
+		schedule: [
+			["gen8", "gen8", "gen8", "gen8"], // Monday
+			["gen8", "gen8", "gen8", "gen8"], // Tuesday
+			["gen8", "gen8", "gen8", "gen8"], // Wednesday
+			["gen8", "gen8", "gen8", "gen6"], // Thursday
+			["gen8", "gen7", "gen8", "gen8"], // Friday
+			["gen8", "gen8", "gen8", "gen7"], // Saturday
+			["gen8", "gen6", "gen8", "gen8"], // Sunday
+		],
 		times: [2, 12, 18, 22],
 		scrappie: true,
 		command: "cap",
