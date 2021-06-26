@@ -178,7 +178,7 @@ global.Officials = {
 			}
 
 			// Some current date/time settings.
-			let now = data.est ? getESTDate() : new Date(Date.now());
+			let now = data.EST ? getESTDate() : new Date(Date.now());
 			let day = now.getDay() - 1; // 0 = monday
 			if (day < 0) day = 6;
 
@@ -296,7 +296,7 @@ module.exports = {
 			if (obj.monthly) continue;
 
 			let r = "";
-			let now = obj.est ? getESTDate() : new Date(Date.now());
+			let now = obj.EST ? getESTDate() : new Date(Date.now());
 			let nhours = now.getHours();
 			let next = obj.times[0];
 			for (let i in obj.times) {
