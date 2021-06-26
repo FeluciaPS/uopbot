@@ -342,7 +342,7 @@ module.exports = {
 				while (day < 0) day += 7;
 				meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
 			}
-			ret = "in ";
+			ret = "in " + ret;
 			if (timeremaining < -5 * 60) ret = "should've just started";
 			r += `<b>${robj.name}</b> - ${meta} ${ret}`;
 			rooms.push(r);
