@@ -297,38 +297,53 @@ module.exports = {
 
 			let r = "";
 			let now = obj.EST ? getESTDate() : new Date(Date.now());
-			let nhours = now.getHours();
 			let next = obj.times[0];
 			for (let i in obj.times) {
-				if (nhours >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
+				if (now.getHours() >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
 			}
 
-			let hours = next - nhours;
-			let minutes = 60 - now.getMinutes();
-			if (minutes < 60) hours -= 1;
-			else minutes = 0;
-			let daycorrect = -1;
-			while (hours < 0) {
-				hours += 24;
-				daycorrect += 1;
+			let tomorrow = now.getHours() > next;
+
+			let time = next * 60 * 60 * 1000;
+			let dayprogress = now.getTime() % (24 * 60 * 60 * 1000);
+
+			if (tomorrow) dayprogress -= 24 * 60 * 60 * 1000;
+
+			let timeremaining = Math.floor((time - dayprogress) / 1000);
+			let timer = {
+				hours: 0,
+				minutes: 0,
+				seconds: 0
 			}
+
+			timer.hours = Math.floor(timeremaining / 3600);
+			timer.minutes = Math.floor((timeremaining - (timer.hours * 3600)) / 60);
+			timer.seconds = timeremaining % 60;
+	
+			let ret = [];
+			if (timer.hours) {
+				ret += timer.hours + " hours";
+			}
+			if (timer.minutes) {
+				ret += timer.minutes + " minutes";
+			}
+			if (timer.seconds) {
+				ret += timer.seconds + " seconds";
+			}
+			
+			if (ret.length > 1) ret[ret.length - 1] = "and " + ret[ret.length - 1];
+			ret = ret.join(', ');
 
 			let meta = '';
 			next = obj.times.indexOf(next);
 			if (obj.formats) meta = obj.formats[next];
 			else {
-				let day = now.getDay() - 1 + daycorrect;
+				let day = now.getDay() - 1 + tomorrow;
 				while (day < 0) day += 7;
-				hours = next - now.getHours();
-				if (hours < 0) {
-					day = (day + 1) % 7;
-				}
 				meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
 			}
-			while (hours < 0) hours += 24;
-			let timestr = "in " + (hours !== 0 ? hours + " hour" + (hours === 1 ? '' : 's') : '') + (hours !== 0 && minutes !== 0 ? ' and ' : '') + (minutes !== 0 ? minutes + " minute" + (minutes === 1 ? '' : 's') : '');
-			if (hours >= 23 && minutes >= 55) timestr = "should've just started";
-			r += `<b>${robj.name}</b> - ${meta} ${timestr}`;
+			if (timeremaining < 5 * 60) ret = "should've just started";
+			r += `<b>${robj.name}</b> - ${meta} ${ret}`;
 			rooms.push(r);
 		}
 		if (!rooms.length) {
