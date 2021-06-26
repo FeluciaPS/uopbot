@@ -108,12 +108,12 @@ global.Officials = {
 		command: "natdex",
 	},
 	"nfe": {
-		times: [1, 9, 15, 20],
-		formats: ["gen8", "gen8", "gen8", "gen8"],
+		times: [1, 20],
+		formats: ["gen8", "gen8"],
 		scrappie: true,
 		scouting: true,
 		command: "nfe",
-		autostart: 7,
+		autostart: 5,
 	},
 	"othermetas": {
 		schedule: [
