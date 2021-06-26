@@ -331,7 +331,7 @@ module.exports = {
 				ret.push(timer.seconds + " seconds");
 			}
 			
-			if (ret.length > 1) ret[ret.length - 1] = "and " + ret[ret.length - 1];
+			if (ret.length > 2) ret[ret.length - 1] = "and " + ret[ret.length - 1];
 			ret = ret.join(', ');
 
 			let meta = '';
@@ -342,6 +342,7 @@ module.exports = {
 				while (day < 0) day += 7;
 				meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
 			}
+			ret = "in ";
 			if (timeremaining < -5 * 60) ret = "should've just started";
 			r += `<b>${robj.name}</b> - ${meta} ${ret}`;
 			rooms.push(r);
