@@ -331,8 +331,8 @@ module.exports = {
 				ret.push(timer.seconds + " seconds");
 			}
 			
-			if (ret.length > 2) ret[ret.length - 1] = "and " + ret[ret.length - 1];
-			ret = ret.join(', ');
+			if (ret.length > 1) ret[ret.length - 1] = "and " + ret[ret.length - 1];
+			ret = ret.join(ret.length === 3 ? ', ' : " ");
 
 			let meta = '';
 			next = obj.times.indexOf(next);
