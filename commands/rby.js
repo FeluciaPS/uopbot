@@ -37,6 +37,10 @@ module.exports = {
 			Utils.checkGenerator(room, 'gen1ou', args, '[Gen 1] Monotype');
 			room.send('/tour rules +Same Type Clause');
 		},
+		randbats: function (room, user, args) {
+			if (!Utils.canMakeTour(room, user)) return;
+			Utils.checkGenerator(room, 'gen1randombattle', args);
+		},
 		help: function (room, user, args) {
 			if (!user.can(room, '%')) return;
 			room.send('Usage: ``.rby [type]``.');

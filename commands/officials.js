@@ -163,8 +163,8 @@ global.Officials = {
 		]
 	},
 	"rby": {
-		times: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
-		formats: ["ou", "ou", "ou", "ou", "ou", "ou", "ou", "ou", "ou", "ou", "ou", "ou", ],
+		times: [1, 7, 13, 19],
+		formats: ["ou", "randbats", "ou", "randbats" ],
 		command: "rby",
 		autostart: 7,
 	},
