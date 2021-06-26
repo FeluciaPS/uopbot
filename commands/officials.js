@@ -189,7 +189,7 @@ global.Officials = {
 
 			// Some current date/time settings.
 			let now = data.est ? getESTDate() : new Date(Date.now());
-			let day = now.getDay() - 1;
+			let day = now.getDay() - 1; // 0 = monday
 			if (day < 0) day = 6;
 
 			// We don't do tours not at a full hour. Deal with it.
@@ -204,7 +204,7 @@ global.Officials = {
 					continue;
 				}
 				let today = data.schedule[now.getDate()];
-				if (!today[now.getHours]) {
+				if (!today[now.getHours()]) {
 					// There is no tour scheduled for right now.
 					continue;
 				}
