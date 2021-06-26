@@ -143,16 +143,6 @@ global.Officials = {
 		monthly: true,
 		EST: true,
 		command: "overused",
-		handler: function (room, format) {
-			if (format === "gen8") room.send(`!rfaq gen8samples`);
-			else room.send(`!rfaq roasamples`);
-		}
-	},
-	"overused": {
-		schedule: {},
-		monthly: true,
-		EST: true,
-		command: "overused",
 		autostart: 5,
 		handler: function (room, format) {
 			if (format === "gen8") room.send(`!rfaq gen8samples`);
