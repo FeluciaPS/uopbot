@@ -34,13 +34,13 @@ const fs = require('fs');
 global.Officials = {
 	"1v1": {
 		schedule: [
-			["gen7", "gen6", "monopoke", "gen8"], // Monday
-			["gen5", "gen4", "gen8", "gen7"], // Tuesday
-			["monopoke", "gen8", "gen6", "gen5"], // Wednesday
-			["gen8", "gen7", "gen4", "gen3"], // Thursday
-			["gen8", "gen6", "gen7", "gen8"], // Friday
-			["gen5", "gen4", "gen8", "gen6"], // Saturday
-			["gen3", "gen8", "gen5", "gen4"], // Sunday
+			["gen6", "monopoke", "gen8", "gen5"], // Monday
+			["gen4", "gen8", "gen7", "monopoke"], // Tuesday
+			["gen8", "gen6", "gen5", "gen8"], // Wednesday
+			["gen7", "gen4", "gen3", "gen8"], // Thursday
+			["gen6", "gen7", "gen8", "gen5"], // Friday
+			["gen4", "gen8", "gen6", "gen3"], // Saturday
+			["gen8", "gen5", "gen4", "gen7"], // Sunday
 		],
 		times: [3, 9, 15, 21],
 		EST: true,
