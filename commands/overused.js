@@ -3,7 +3,7 @@ module.exports = {
         '': 'gen8',
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, 'gen8overused', args, args[0] === "official" ? "[Gen 8] OURLT" : undefined);
+            Utils.checkGenerator(room, 'gen8ou', args, args[0] === "official" ? "[Gen 8] OURLT" : undefined);
         },
         gen7: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
