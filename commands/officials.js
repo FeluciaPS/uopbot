@@ -42,7 +42,7 @@ global.Officials = {
 			["gen5", "gen4", "gen8", "gen6"], // Saturday
 			["gen3", "gen8", "gen5", "gen4"], // Sunday
 		],
-		times: [2, 8, 14, 20],
+		times: [3, 9, 15, 21],
 		EST: true,
 		scouting: true,
 		scrappie: true,
