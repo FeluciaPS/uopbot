@@ -322,13 +322,13 @@ module.exports = {
 	
 			let ret = [];
 			if (timer.hours) {
-				ret.push(timer.hours + " hours");
+				ret.push(timer.hours + " hours" + (timer.hours === 1 ? "" : "s"));
 			}
 			if (timer.minutes) {
-				ret.push(timer.minutes + " minutes");
+				ret.push(timer.minutes + " minute" + (timer.minutes === 1 ? "" : "s"));
 			}
 			if (timer.seconds) {
-				ret.push(timer.seconds + " seconds");
+				ret.push(timer.seconds + " seconds" + (timer.seconds === 1 ? "" : "s"));
 			}
 			
 			if (ret.length > 1) ret[ret.length - 1] = "and " + ret[ret.length - 1];
