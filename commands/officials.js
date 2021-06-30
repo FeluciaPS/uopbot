@@ -142,6 +142,7 @@ global.Officials = {
 		schedule: {},
 		monthly: true,
 		EST: true,
+		scrappie: true,
 		command: "overused",
 		autostart: 5,
 		handler: function (room, format) {
