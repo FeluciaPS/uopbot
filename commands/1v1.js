@@ -312,7 +312,10 @@ module.exports = {
                 basesum += defaults[i];
             }
             
-            for (let tour of room.pasttours) {
+            let banned = [];
+
+            for (let t = 0; t < room.pasttours.length; t++) {
+                let tour = room.pasttours[t];
                 let target = key[toId(tour)];
                 if (toId(tour).includes("monopoke")) target = "monopoke";
                 if (!target) continue;
@@ -322,6 +325,8 @@ module.exports = {
                 if (gen7oms.includes(target)) distribution.gen7--;
                 if (otheroms.includes(target)) distribution.other--;
                 if (target === "monopoke") distribution.monopoke--;
+                if (["gen8", "monopoke"].includes(target)) continue;
+                if (!banned.includes(target) && t > room.pasttours.length - 6) banned.push(target);
             }
             
             let sum = 0;
@@ -348,21 +353,41 @@ module.exports = {
                 type = regular[Math.floor(Math.random() * regular.length)];
             }
             else if (result < distribution[1]) {
+                for (let i = oldgens.length - 1; i >= 0; i--) {
+                    if (banned.includes(oldgens[i])) {
+                        oldgens.splice(i, 1);
+                    }
+                }
                 type = oldgens[Math.floor(Math.random() * oldgens.length)];
             }
             else if (result < distribution[2]) {
+                for (let i = easyoms.length - 1; i >= 0; i--) {
+                    if (banned.includes(easyoms[i])) {
+                        easyoms.splice(i, 1);
+                    }
+                }
                 type = easyoms[Math.floor(Math.random() * easyoms.length)];
             }
             else if (result < distribution[3]) {
                 type = "monopoke"
             }
             else if (result < distribution[4]) {
+                for (let i = gen7oms.length - 1; i >= 0; i--) {
+                    if (banned.includes(gen7oms[i])) {
+                        gen7oms.splice(i, 1);
+                    }
+                }
                 type = gen7oms[Math.floor(Math.random() * gen7oms.length)];
             }
             else {
+                for (let i = otheroms.length - 1; i >= 0; i--) {
+                    if (banned.includes(otheroms[i])) {
+                        otheroms.splice(i, 1);
+                    }
+                }
                 type = otheroms[Math.floor(Math.random() * otheroms.length)];
             }
-
+            if (!type) type = "gen8";
             Commands['1v1'][type](room, user, args);
         }
     },
