@@ -350,7 +350,7 @@ module.exports = {
             let result = Math.floor(Math.random() * sum);
             let type = "";
             if (result < distribution[0]) {
-                type = regular[Math.floor(Math.random() * regular.length)];
+                type = regulartours[Math.floor(Math.random() * regulartours.length)];
             }
             else if (result < distribution[1]) {
                 for (let i = oldgens.length - 1; i >= 0; i--) {
