@@ -255,6 +255,115 @@ module.exports = {
                 if (typeof Commands['1v1'][i] !== 'string' && i !== 'help' && i !== 'random' && i !== 'chill') types.push(i);
             }
             Commands['1v1'][Utils.select(types)](room, user, args);
+        },
+        rec: 'recommended',
+        recommended: function(room, user, args) {
+            let key = {
+                "gen81v1": "gen8",
+                "gen71v1": "gen7",
+                "gen61v1": "gen6",
+                "gen51v1": "gen5",
+                "gen41v1": "gen4",
+                "gen31v1": "gen3",
+
+                "gen82v2doubles": "2v2",
+                "gen8monotype1v1": "mono",
+                "gen8inverse1v1": "inverse",
+                "gen8natdex1v1": "natdex",
+                "gen8nfe1v1": "nfe",
+                "gen8cap1v1": "cap",
+                "gen8lc1v1": "lc",
+
+                "gen8dynamax1v1": "max",
+
+                "gen8stabmons1v1": "stab",
+                "gen8ubers1v1": "ubers",
+                "gen8uu1v1": "uu",
+                "gen8monopoke": "monopoke",
+                "gen7monopoke": "monopoke",
+
+                "gen7ag1v1": "ag",
+                "gen7aaa1v1": "aaa",
+                "gen7noz1v1": "noz",
+            }
+
+            let regulartours = ["gen8"];
+            let oldgens = ["gen7", "gen6", "gen5", "gen4", "gen3"];
+            let easyoms = ["mono", "inverse", "natdex", "lc", "uu"];
+            let gen7oms = ["noz", "ag", "aaa"];
+            let otheroms = ["nfe", "cap", "stab", "ubers", "max"];
+
+            let distribution = {
+                regular: 0.75,
+                old: 0.25,
+                om: 0.15,
+                monopoke: 0.15,
+                gen7: 0.05,
+                other: 0.05
+            }
+
+            let defaults = {};
+            let basesum = 0;
+
+            let n = room.pasttours.length;
+            for (let i in distribution) {
+                defaults[i] = Math.ceil(n * distribution[i]);
+                distribution[i] = Math.ceil(n * distribution[i]);
+                basesum += defaults[i];
+            }
+            
+            for (let tour of room.pasttours) {
+                let target = key[toId(tour)];
+                if (toId(tour).includes("monopoke")) target = "monopoke";
+                if (!target) continue;
+                if (regulartours.includes(target)) distribution.regular--;
+                if (oldgens.includes(target)) distribution.old--;
+                if (easyoms.includes(target)) distribution.om--;
+                if (gen7oms.includes(target)) distribution.gen7--;
+                if (otheroms.includes(target)) distribution.other--;
+                if (target === "monopoke") distribution.monopoke--;
+            }
+            
+            let sum = 0;
+            for (let i in distribution) {
+                if (distribution[i] <= 0) {
+                    distribution[i] = 0;
+                }
+                sum += distribution[i];
+            }
+
+            if (sum === 0) {
+                distribution = defaults;
+                sum = basesum;
+            }
+            distribution = Object.values(distribution);
+
+            for (let i = 1; i < distribution.length; i++) {
+                distribution[i] += distribution[i-1];
+            }
+
+            let result = Math.floor(Math.random() * sum);
+            let type = "";
+            if (result < distribution[0]) {
+                type = regular[Math.floor(Math.random() * regular.length)];
+            }
+            else if (result < distribution[1]) {
+                type = oldgens[Math.floor(Math.random() * oldgens.length)];
+            }
+            else if (result < distribution[2]) {
+                type = easyoms[Math.floor(Math.random() * easyoms.length)];
+            }
+            else if (result < distribution[3]) {
+                type = "monopoke"
+            }
+            else if (result < distribution[4]) {
+                type = gen7oms[Math.floor(Math.random() * gen7oms.length)];
+            }
+            else {
+                type = otheroms[Math.floor(Math.random() * otheroms.length)];
+            }
+
+            Commands['1v1'][type](room, user, args);
         }
     },
     '1v1om': function (room, user, args) {
