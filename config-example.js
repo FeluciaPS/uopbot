@@ -1,4 +1,4 @@
-/* 
+/*
  * User details
  */
 
@@ -10,7 +10,7 @@ exports.password = "";
  */
 
 exports.rooms = [];
-exports.char = '.';
+exports.char = ".";
 exports.devs = [];
 
 /*
@@ -18,6 +18,6 @@ exports.devs = [];
  */
 
 exports.mail = {
-    'inboxSize': 5,
-    'bans': []
-}
+    inboxSize: 5,
+    bans: [],
+};

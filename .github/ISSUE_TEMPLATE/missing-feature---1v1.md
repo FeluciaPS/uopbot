@@ -1,16 +1,16 @@
 ---
 name: Missing feature - 1v1
 about: Feature to be transferred from old bot
-title: ''
+title: ""
 labels: 1v1, transfer
-assignees: ''
-
+assignees: ""
 ---
 
-__Room__
-- All
-- **1v1**
-- NFE
-- Other
+**Room**
 
-__Issue__
+-   All
+-   **1v1**
+-   NFE
+-   Other
+
+**Issue**

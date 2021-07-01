@@ -1,12 +1,12 @@
-global.Banlist = JSON.parse(FS.readFileSync('data/banlist.json'));
-global.PokeDex = require('./data/pokedex.js');
-global.fdata = require('./data/formats-data.js');
-global.Items = require('./data/items.js');
+global.Banlist = JSON.parse(FS.readFileSync("data/banlist.json"));
+global.PokeDex = require("./data/pokedex.js");
+global.fdata = require("./data/formats-data.js");
+global.Items = require("./data/items.js");
 
 let commands = {
     // Utilities
     stat: function (room, user, args) {
-        let target = user.can(room, '+') ? room : user;
+        let target = user.can(room, "+") ? room : user;
         args = args[0].split(" ");
         let pokemon = args[0];
         let stat = toId(args[1]);
@@ -26,7 +26,9 @@ let commands = {
         if (!invest) invest = "0";
         if (!boost) boost = "0";
         let invests = invest.split(":");
-        let ev, iv, nature = 1;
+        let ev,
+            iv,
+            nature = 1;
         if (invests[1]) {
             if (invests[1].indexOf("+") != -1) {
                 nature = "1.1";
@@ -56,7 +58,7 @@ let commands = {
             return [null];
         }
 
-        if (stat === "hp" && toId(pokemon) === 'shedinja') return 1;
+        if (stat === "hp" && toId(pokemon) === "shedinja") return 1;
         if (boost.startsWith("+")) {
             boost = 1 + 0.5 * parseInt(boost.substring(1));
         } else if (boost.startsWith("-")) {
@@ -68,12 +70,12 @@ let commands = {
         // Check for dumb shit
         if (boost > 4 || boost < 0.25) {
             target.send("Boost must be between +6 and -6");
-            return [null]
+            return [null];
         }
 
         if (ev > 252 || ev < 0) {
             target.send("ev must be between 0 and 252");
-            return [null]
+            return [null];
         }
 
         if (iv > 31 || iv < 0) {
@@ -83,29 +85,29 @@ let commands = {
 
         let fin = 0;
         if (stat === "hp") {
-            fin = Math.floor(mon.baseStats[stat] * 2 + iv + (ev / 4) + 110);
+            fin = Math.floor(mon.baseStats[stat] * 2 + iv + ev / 4 + 110);
         } else {
-            fin = Math.floor((mon.baseStats[stat] * 2 + iv + (ev / 4) + 5) * nature);
+            fin = Math.floor((mon.baseStats[stat] * 2 + iv + ev / 4 + 5) * nature);
             fin = Math.floor(fin * boost);
         }
 
-        target.send(fin)
+        target.send(fin);
     },
-    th: 'tourhistory',
+    th: "tourhistory",
     tourhistory: function (room, user, args) {
-        if (!user.can(room, '+')) return;
+        if (!user.can(room, "+")) return;
         if (!room.pasttours.length) return room.send("This room has no past tours recorded.");
-        room.send("**Tour history** (most recent first): " + room.pasttours.reverse().join(', '));
+        room.send("**Tour history** (most recent first): " + room.pasttours.reverse().join(", "));
         room.pasttours.reverse();
     },
     lasttour: function (room, user, args) {
-        if (!user.can(room, '+')) return;
+        if (!user.can(room, "+")) return;
         if (!room.lasttour[0]) return room.send("This room has no past tours recorded.");
         let ago = Math.floor((Date.now() - room.lasttour[0]) / 60000);
-        return room.send(`**${room.lasttour[1]}** ${ago} minute${ago === 1 ? '' : 's'} ago.`);
+        return room.send(`**${room.lasttour[1]}** ${ago} minute${ago === 1 ? "" : "s"} ago.`);
     },
     hangmon: function (room, user, args) {
-        if (!user.can(room, '%')) return;
+        if (!user.can(room, "%")) return;
         if (room.tournament) return room.send("You can't play hangman while a tournament is going on");
         let mons = Object.values(PokeDex);
         let mon = Utils.select(mons);
@@ -122,10 +124,11 @@ let commands = {
         if (Users[targetid]) return Users[targetid].send(message);
         FS.readFile(`mail/${targetid}.json`, (err, data) => {
             let maildata = [];
-            if (err) {} else {
+            if (err) {
+            } else {
                 try {
                     maildata = JSON.parse(data);
-                } catch (e) {};
+                } catch (e) {}
             }
             if (maildata.length === Config.mail.inboxSize) return user.send("That user's mailbox is full.");
             maildata.push(message);
@@ -136,10 +139,10 @@ let commands = {
         });
     },
 
-    // Staff things 
-    settype: 'st',
+    // Staff things
+    settype: "st",
     st: function (room, user, args) {
-        if (!user.can(room, '%')) return;
+        if (!user.can(room, "%")) return;
         let type = args[0];
         if (!type) return;
         console.log(type);
@@ -152,7 +155,7 @@ let commands = {
             if (count) room.send("/tour settype elim,, " + count);
             else room.send("/tour settype elim");
         } else {
-            room.send('Invalid type.');
+            room.send("Invalid type.");
         }
     },
 
@@ -167,16 +170,18 @@ let commands = {
         if (!Rooms[room]) return user.send("Room doesn't exist, or I'm not in it");
         let self = Users[toId(Config.username)];
         if (self.rooms[room] != "*") return user.send("I'm not a bot in that room");
-        if (!user.can(room, "%")) return user.send('Access denied.');
-        let escape = require('escape-html');
+        if (!user.can(room, "%")) return user.send("Access denied.");
+        let escape = require("escape-html");
         let msg = val.substring(args[0].length + 1).trim();
         if (Config.devs.indexOf(user.id) == -1) msg = escape(msg);
-        let ret = `/addrankhtmlbox %,<b>${escape(user.rooms[room])}${user.name}:</b> ${msg}<br><span style='color:#444444;font-size:10px'>Note: Only users ranked % and above can see this.</span>`
+        let ret = `/addrankhtmlbox %,<b>${escape(user.rooms[room])}${
+            user.name
+        }:</b> ${msg}<br><span style='color:#444444;font-size:10px'>Note: Only users ranked % and above can see this.</span>`;
         Send(room, ret);
     },
 
     setrules: function (room, user, args, val) {
-        if (!user.can(room, '%')) return;
+        if (!user.can(room, "%")) return;
         let command = toId(args.shift());
         if (!command) return room.send("Usage: ``.setrules [add/remove/ban/unban/clear], [args]``");
         if (!room.tournament) return room.send("There is no tournament running in this room.");
@@ -190,7 +195,7 @@ let commands = {
                         room.tournament.rules.remrules.splice(x, 1);
                     }
                 }
-                if (!rem) room.tournament.rules.addrules.push(i)
+                if (!rem) room.tournament.rules.addrules.push(i);
             }
         }
         if (command === "remove") {
@@ -202,7 +207,7 @@ let commands = {
                         room.tournament.rules.addrules.splice(x, 1);
                     }
                 }
-                if (!rem) room.tournament.rules.remrules.push(i)
+                if (!rem) room.tournament.rules.remrules.push(i);
             }
         }
         if (command === "ban") {
@@ -214,7 +219,7 @@ let commands = {
                         room.tournament.rules.unbans.splice(x, 1);
                     }
                 }
-                if (!rem) room.tournament.rules.bans.push(i)
+                if (!rem) room.tournament.rules.bans.push(i);
             }
         }
         if (command === "unban") {
@@ -226,16 +231,16 @@ let commands = {
                         room.tournament.rules.bans.splice(x, 1);
                     }
                 }
-                if (!rem) room.tournament.rules.unbans.push(i)
+                if (!rem) room.tournament.rules.unbans.push(i);
             }
         }
         if (command === "clear") {
-            room.send('/tour clearrules');
+            room.send("/tour clearrules");
             room.tournament.rules = {
-                "bans": [],
-                "unbans": [],
-                "addrules": [],
-                "remrules": []
+                bans: [],
+                unbans: [],
+                addrules: [],
+                remrules: [],
             };
         }
 
@@ -243,32 +248,32 @@ let commands = {
     },
     // Dev stuff
     git: function (room, user, args) {
-        let target = user.can(room, '+') ? room : user;
+        let target = user.can(room, "+") ? room : user;
         if (!target) target = user;
-        let msg = "No git url is configured for this bot."
+        let msg = "No git url is configured for this bot.";
         if (Config.git) msg = Config.git;
         target.send(msg);
     },
 
-    rl: 'reload',
+    rl: "reload",
     reload: function (room, user, args) {
-        if (!user.can(room, 'all')) return;
-        bot.emit('reload', args[0], room);
+        if (!user.can(room, "all")) return;
+        bot.emit("reload", args[0], room);
     },
 
     update: function (room, user, args) {
-        if (!user.can(room, 'all')) return;
+        if (!user.can(room, "all")) return;
         if (!Config.git) return room.say("No git url is configured for this bot.");
-        const child_process = require('child_process');
-        child_process.execSync('git pull ' + Config.git + ' master', {
-            stdio: 'inherit'
+        const child_process = require("child_process");
+        child_process.execSync("git pull " + Config.git + " master", {
+            stdio: "inherit",
         });
         room.send("Code updated to the latest version.");
     },
 
-    js: 'eval',
+    js: "eval",
     eval: function (room, user, args, val) {
-        if (!user.can(room, 'all')) return;
+        if (!user.can(room, "all")) return;
         if (!room) room = user;
         if (!val) return;
         try {
@@ -284,75 +289,78 @@ let commands = {
     },
 
     ping: function (room, user, args) {
-        if (!user.can(room, 'all')) return;
+        if (!user.can(room, "all")) return;
         if (!room) room = user;
         room.send("pong!");
     },
 
-    join: 'joinroom',
+    join: "joinroom",
     joinroom: function (room, user, args) {
-        if (!user.can(room, 'all')) return;
-        if (!args[0]) return user.send('No room given.');
-        Send('', '/j ' + args[0]);
+        if (!user.can(room, "all")) return;
+        if (!args[0]) return user.send("No room given.");
+        Send("", "/j " + args[0]);
     },
 
     disable: function (room, user, args) {
-        if (!user.can(room, 'all')) return;
-        room.send('Commands disabled.');
+        if (!user.can(room, "all")) return;
+        room.send("Commands disabled.");
         room.settings.disabled = true;
         room.saveSettings();
     },
 
     echo: {
-        '': 'help',
+        "": "help",
         help: function (room, user, args) {
-            if (!user.can(room, '%') && room !== user) return;
-            if (!Users.self.can(room, '*')) return room.send('Usage: ``.echo create, [time interval], [message interval], [message]``');
+            if (!user.can(room, "%") && room !== user) return;
+            if (!Users.self.can(room, "*"))
+                return room.send("Usage: ``.echo create, [time interval], [message interval], [message]``");
             let ret = `<details><summary><b>Echo</b></summary><hr>`;
             ret += `<b>- create:</b> <code>.echo create, [time interval], [message interval], [message]</code> - requires % @ # & ~<br>`;
             ret += `<b>- end:</b> <code>.echo end</code> - requires % @ # & ~`;
             ret += "</details>";
             room.send("/addhtmlbox " + ret);
         },
-        create: 'start',
+        create: "start",
         start: function (room, user, args) {
-            if (!user.can(room, '%')) return;
-            if (room.repeat) return room.send('An echo is already running');
+            if (!user.can(room, "%")) return;
+            if (room.repeat) return room.send("An echo is already running");
             let time_interval = parseInt(args.shift());
             let msg_interval = parseInt(args.shift());
-            let message = args.join(',');
+            let message = args.join(",");
 
             if (!message) return this.help(room, user, args);
-            if (isNaN(time_interval) || time_interval < 30) return room.send('time interval has to be at least 30 minutes.');
-            if (isNaN(msg_interval)) return room.send('message interval has to be a number');
+            if (isNaN(time_interval) || time_interval < 30)
+                return room.send("time interval has to be at least 30 minutes.");
+            if (isNaN(msg_interval)) return room.send("message interval has to be a number");
             let repeat = {
                 msgs: 0,
                 last: Date.now(),
                 mintime: time_interval,
                 minmsg: msg_interval,
-                message: message
-            }
+                message: message,
+            };
             room.repeat = repeat;
             room.saveSettings();
-            return room.send('Repeat started');
+            return room.send("Repeat started");
         },
         end: function (room, user, args) {
-            if (!user.can(room, '%')) return;
-            if (!room.repeat) return room.send('No echo is currently running');
+            if (!user.can(room, "%")) return;
+            if (!room.repeat) return room.send("No echo is currently running");
             let msg = room.repeat.message;
             room.repeat = false;
             room.saveSettings();
             return room.send(`Echo "${msg}" ended.`);
-        }
-    }
+        },
+    },
 };
 
-let files = FS.readdirSync('commands');
+let files = FS.readdirSync("commands");
 for (let f in files) {
     let file = files[f];
     if (file.substring(file.length - 3) !== ".js") continue;
-    if (require.cache[require.resolve('./commands/' + file)]) delete require.cache[require.resolve('./commands/' + file)];
-    let contents = require('./commands/' + file);
+    if (require.cache[require.resolve("./commands/" + file)])
+        delete require.cache[require.resolve("./commands/" + file)];
+    let contents = require("./commands/" + file);
     Object.assign(commands, contents);
 }
 

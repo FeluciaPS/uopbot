@@ -9,7 +9,7 @@ class User {
     send(message) {
         if (typeof message === typeof {}) {
             for (let i in message) {
-                Sendpm(this.name, message[i])
+                Sendpm(this.name, message[i]);
             }
             return;
         }
@@ -49,7 +49,7 @@ class User {
     leave(room) {
         delete this.rooms[room];
         delete Rooms[room].users[this.id];
-        if (!Object.keys(this.rooms).length) bot.emit('dereg', 'user', this.id);
+        if (!Object.keys(this.rooms).length) bot.emit("dereg", "user", this.id);
     }
 
     rename(name) {
@@ -63,7 +63,7 @@ class User {
         if (!this.rooms[room] && room !== this) return false;
         if (Config.devs.indexOf(this.id) !== -1) return true;
         if (rank === "all") return false;
-        if (this.id === toId(Config.username) && rank !== '*') return false;
+        if (this.id === toId(Config.username) && rank !== "*") return false;
         if (!room) return false;
         if (room.id) room = room.id;
         return Ranks[this.rooms[room]] <= Ranks[rank];
@@ -72,12 +72,12 @@ class User {
 
 User.prototype.toString = function () {
     return this.id;
-}
+};
 
 exports.add = function (name) {
     let id = toId(name);
     this[id] = new User(name);
-}
+};
 
 exports[toId(Config.username)] = new User(" " + Config.username);
 exports.self = exports[toId(Config.username)];
