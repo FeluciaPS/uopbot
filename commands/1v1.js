@@ -440,6 +440,7 @@ module.exports = {
 
             for (let t = 0; t < room.pasttours.length; t++) {
                 let tour = room.pasttours[t];
+                if (tour.startsWith("Official ")) tour = tour.slice(9);
                 let target = key[toId(tour)];
                 if (toId(tour).includes("monopoke")) target = "monopoke";
                 if (!target) continue;
