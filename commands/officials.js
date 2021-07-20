@@ -137,7 +137,7 @@ global.Officials = {
         args: ["official"],
     },
     rby: {
-        times: [1, 7, 13, 19],
+        times: [3, 9, 15, 21],
         formats: ["ou", "randbats", "ou", "randbats"],
         command: "rby",
         autostart: 7,
