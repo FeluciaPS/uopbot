@@ -266,6 +266,7 @@ Schedules.load();
 
 module.exports = {
     nextot: function (room, user, args) {
+        if (room.id === "1v1" && !user.can(room, '+')) return user.send("Please use this command in PM.");
         let rooms = [];
         let targetroom = false;
         for (let i in user.rooms) {
