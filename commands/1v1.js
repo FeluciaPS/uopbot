@@ -242,12 +242,12 @@ let inspireMe = function (arg) {
 };
 module.exports = {
     inspireme: function (room, user, args) {
+        if (room !== user && !user.can(room, "+")) return user.send("Please use this command in private messages.");
         let target = user.can(room, "+") && room !== user && Users.self.can(room, "*") ? room : findPMRoom(user);
         let prefix =
             user.can(room, "+") && room !== user && Users.self.can(room, "*")
                 ? "/addhtmlbox "
                 : `/pminfobox ${user.id}, `;
-        console.log(target);
         let gen = toId(args[0]);
         let ret = inspireMe(gen);
         target.send(prefix + ret);
