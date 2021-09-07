@@ -80,8 +80,8 @@ global.Officials = {
     capproject: {
         schedule: [
             ["gen8", "gen8", "gen8", "gen8"], // Monday
-            ["gen8", "gen8", "gen8", "gen8"], // Tuesday
-            ["gen8", "gen8", "gen8", "gen8"], // Wednesday
+            ["gen8", "gen8", "gen8", "gen4"], // Tuesday
+            ["gen8", "gen8", "gen8", "gen5"], // Wednesday
             ["gen8", "gen8", "gen8", "gen6"], // Thursday
             ["gen8", "gen7", "gen8", "gen8"], // Friday
             ["gen8", "gen8", "gen8", "gen7"], // Saturday
