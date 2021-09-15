@@ -53,7 +53,7 @@ global.Officials = {
             room.send(".board");
             if (!room.settings.tourhook) return;
             let request = require('request');
-            request({url:room.settings.tourhook, body: {content:`Official ${format} tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
+            request({url:room.settings.tourhook, body: {content:`<@&887737042786746369> **Official ${format}** tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
     },
     "2v2": {
