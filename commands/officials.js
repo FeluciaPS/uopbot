@@ -49,8 +49,11 @@ global.Officials = {
         officialname: true,
         command: "1v1",
         autostart: 7,
-        handler: function (room) {
+        handler: function (room, format) {
             room.send(".board");
+            if (!room.settings.tourhook) return;
+            let request = require('request');
+            request({url:room.settings.tourhook, body: {content:`Official ${format} tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
     },
     "2v2": {
