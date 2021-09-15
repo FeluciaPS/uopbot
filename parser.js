@@ -1,3 +1,27 @@
+let checkOnlineStaff = function(room) {
+    room = Rooms[room];
+    if (!room) return;
+    if (!room.settings.webhook) return;
+
+    // Check if we're already running the timer for not having online staff.
+    if (room.staffTimer) return;
+    if (room.onlineStaff) return;
+    for (let user in room.users) {
+        if ("#@%&".includes(Users[user].rooms[room.id])) return;
+    }
+
+    room.staffTimer = true;
+    room.stafftimeout = setTimeout(function(room) {
+        room.staffTimer = false;
+        for (let user in room.users) {
+            if ("#@%&".includes(Users[user].rooms[room.id])) return;
+        }
+        let request = require('request');
+        request({url:room.settings.webhook, body: {content:`There's not been any online staff for the past 5 minutes.`}, method:"POST", json:true});
+        room.onlineStaff = true;
+    }, 5 * 60 * 1000, room);
+}
+
 bot.on("challstr", function (parts) {
     require("./login.js")(parts[2], parts[3]);
 });
@@ -108,6 +132,13 @@ bot.on("j", (parts) => {
     console.log(user);
     if (!Users[toId(user)]) Users.add(user);
     Users[toId(user)].join(room, user);
+
+    // Set a variable to tell the bot staff is online
+    if ("%@#&".includes(parts[2].substring(0, 1))) {
+        Rooms[room].onlineStaff = false;
+        room.staffTimer = false;
+        clearTimeout(room.stafftimeout);
+    }
 });
 
 bot.on("l", (parts) => {
@@ -117,6 +148,7 @@ bot.on("l", (parts) => {
     // This sometimes crashes when PS sends a message to the client that a Guest is leaving the room when the guest never joined the room in the first place which honestly makes no sense.
     if (Users[user]) Users[user].leave(room);
     else logger.emit("error", `${user} can't leave ${room}`);
+    checkOnlineStaff(room);
 });
 
 bot.on("n", (parts) => {
@@ -127,6 +159,13 @@ bot.on("n", (parts) => {
     try {
         Rooms[room].rename(oldname, newname);
     } catch (e) {}
+
+    // Set a variable to tell the bot staff is online
+    if ("%@#&".includes(parts[2].substring(0, 1))) {
+        Rooms[room].onlineStaff = false;
+        room.staffTimer = false;
+        clearTimeout(room.stafftimeout);
+    }
 });
 
 bot.on("deinit", (parts) => {
