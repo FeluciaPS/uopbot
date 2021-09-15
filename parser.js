@@ -112,7 +112,7 @@ bot.on("j", (parts) => {
 
 bot.on("l", (parts) => {
     let room = Utils.getRoom(parts[0]);
-    let p = parts[2].split("@");
+    let p = parts[2].slice(1).split("@");
     let user = toId(p[0]);
     // This sometimes crashes when PS sends a message to the client that a Guest is leaving the room when the guest never joined the room in the first place which honestly makes no sense.
     if (Users[user]) Users[user].leave(room);
