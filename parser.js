@@ -202,6 +202,8 @@ bot.on("n", (parts) => {
         Rooms[room].rename(oldname, newname);
     } catch (e) {}
 
+    setTimeout(50, checkOnlineStaff, room);
+
     // Set a variable to tell the bot staff is online
     if ("%@#&".includes(parts[2].substring(0, 1))) {
         if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
