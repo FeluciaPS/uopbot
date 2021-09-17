@@ -199,7 +199,9 @@ bot.on("n", (parts) => {
     let p = parts[2].substring(1).split("@");
     try {
         Rooms[room].rename(oldname, newname, p[1] === "!");
-    } catch (e) {}
+    } catch (e) {
+        console.log(e);
+    }
 
     setTimeout(checkOnlineStaff, 100, room);
 
