@@ -1,4 +1,4 @@
-const Timer = require('./Timer');
+const Timer = require('./Timer').Timer;
 
 let checkOnlineStaff = function(room) {
     room = Rooms[room];
