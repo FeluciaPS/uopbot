@@ -1,25 +1,62 @@
+const Timer = require('./Timer');
+
 let checkOnlineStaff = function(room) {
     room = Rooms[room];
     if (!room) return;
     if (!room.settings.webhook) return;
 
-    // Check if we're already running the timer for not having online staff.
-    if (room.staffTimer) return;
-    if (room.onlineStaff) return;
+    idlestaff = false;
     for (let user in room.users) {
-        if ("#@%&".includes(Users[user].rooms[room.id])) return;
+        if ("#@%&".includes(Users[user].rooms[room.id])) {
+            if (!Users[user].isIdle) return;
+            idlestaff = true;
+        }
     }
 
-    room.staffTimer = true;
-    room.stafftimeout = setTimeout(function(room) {
+    if (!idlestaff && room.staffTimer === "nostaff") return;
+    if (idlestaff && room.staffTimer === "idle") return;
+
+    // Set staffTimer to either "idle" or "nostaff" depending on the state of the room
+    if (idlestaff) room.staffTimer = "idle";
+    else room.staffTimer = "nostaff";
+
+    // no point notifying something we already know.
+    if (room.staffTimer === room.onlineStaff) return;
+
+    let time = 0;
+    // increase or lower the timeout depending on if idle staff joined or left.
+    if (room.stafftimeout) {
+        let remaining = room.stafftimeout.getRemaining();
+        remaining = remaining.minutes * 60 + remaining.seconds;
+        if (idlestaff) remaining += 10*60;
+        else remaining -= 10*60;
+        room.stafftimeout.stop();
+        time = remaining;
+        if (time <= 0) time = 1;
+    }
+
+    let callback = function(room, type) {
         room.staffTimer = false;
+        idlestaff = false;
         for (let user in room.users) {
-            if ("#@%&".includes(Users[user].rooms[room.id])) return;
+            if ("#@%&".includes(Users[user].rooms[room.id])) {
+                if (!Users[user].isIdle) return;
+                idlestaff = true;
+            }
+        }
+
+        if (type === "nostaff" && idlestaff) {
+            room.stafftimeout = new Timer("10m", callback, room, type);
+            staffTimer.start();
+            return;
         }
         let request = require('request');
-        request({url:room.settings.webhook, body: {content:`There's not been any online staff for the past 5 minutes.`}, method:"POST", json:true});
-        room.onlineStaff = true;
-    }, 5 * 60 * 1000, room);
+        if (type === "nostaff") request({url:room.settings.webhook, body: {content:`There's not been any online staff for the past 5 minutes.`}, method:"POST", json:true});
+        else request({url:room.settings.webhook, body: {content:`All online staff has been idle for the past 15 minutes.`}, method:"POST", json:true});
+        room.onlineStaff = type;
+    };
+
+    room.stafftimeout = new Timer(time ? `${time}s` : `${idlestaff ? 15 : 5}m`);
 }
 
 bot.on("challstr", function (parts) {
@@ -138,7 +175,8 @@ bot.on("j", (parts) => {
         if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
         Rooms[room].onlineStaff = false;
         room.staffTimer = false;
-        clearTimeout(room.stafftimeout);
+        room.stafftimeout.stop();
+        room.stafftimeout = false;
     }
 });
 
@@ -167,7 +205,8 @@ bot.on("n", (parts) => {
         if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
         Rooms[room].onlineStaff = false;
         room.staffTimer = false;
-        clearTimeout(room.stafftimeout);
+        room.stafftimeout.stop();
+        room.stafftimeout = false;
     }
 });
 
