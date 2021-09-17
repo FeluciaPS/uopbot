@@ -47,7 +47,7 @@ let checkOnlineStaff = function(room) {
 
         if (type === "nostaff" && idlestaff) {
             room.stafftimeout = new Timer("10m", callback, room, type);
-            staffTimer.start();
+            room.stafftimeout.start();
             return;
         }
         let request = require('request');
@@ -56,7 +56,8 @@ let checkOnlineStaff = function(room) {
         room.onlineStaff = type;
     };
 
-    room.stafftimeout = new Timer(time ? `${time}s` : `${idlestaff ? 15 : 5}m`);
+    room.stafftimeout = new Timer(time ? `${time}s` : `${idlestaff ? 15 : 5}m`, callback, room, type);
+    room.stafftimeout.start();
 }
 
 bot.on("challstr", function (parts) {
