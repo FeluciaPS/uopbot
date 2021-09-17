@@ -344,6 +344,7 @@ bot.on("init", (parts, data) => {
                 if (i == 0) continue;
                 if (!Users[toId(user)]) Users.add(user);
                 Users[toId(user)].join(room, user);
+                Users[toId(user)].isIdle = user.substring(1).split("@")[1] === "!";
             }
         }
         if (part[1] === "tournament") {
