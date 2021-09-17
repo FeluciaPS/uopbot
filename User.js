@@ -1,9 +1,10 @@
 class User {
-    constructor(name) {
+    constructor(name, idle = false) {
         this.rooms = {};
         this.name = name.substring(1);
         this.id = toId(name);
         this.checkmail();
+        this.isIdle = idle;
     }
 
     send(message) {
@@ -74,9 +75,9 @@ User.prototype.toString = function () {
     return this.id;
 };
 
-exports.add = function (name) {
+exports.add = function (name, idle = false) {
     let id = toId(name);
-    this[id] = new User(name);
+    this[id] = new User(name, idle);
 };
 
 exports[toId(Config.username)] = new User(" " + Config.username);

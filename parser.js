@@ -129,12 +129,13 @@ bot.on("j", (parts) => {
     let room = Utils.getRoom(parts[0]);
     let p = parts[2].substring(1).split("@");
     let user = parts[2].substring(0, 1) + p[0];
-    console.log(user);
-    if (!Users[toId(user)]) Users.add(user);
+    let idle = p[1] === "!";
+    if (!Users[toId(user)]) Users.add(user, idle);
     Users[toId(user)].join(room, user);
 
     // Set a variable to tell the bot staff is online
     if ("%@#&".includes(parts[2].substring(0, 1))) {
+        if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
         Rooms[room].onlineStaff = false;
         room.staffTimer = false;
         clearTimeout(room.stafftimeout);
@@ -155,6 +156,7 @@ bot.on("n", (parts) => {
     let room = Utils.getRoom(parts[0]);
     let oldname = parts[3];
     let p = parts[2].substring(1).split("@");
+    Users[toId(oldname)].isIdle = p[1] === "!";
     let newname = parts[2].substring(0, 1) + p[0];
     try {
         Rooms[room].rename(oldname, newname);
@@ -162,6 +164,7 @@ bot.on("n", (parts) => {
 
     // Set a variable to tell the bot staff is online
     if ("%@#&".includes(parts[2].substring(0, 1))) {
+        if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
         Rooms[room].onlineStaff = false;
         room.staffTimer = false;
         clearTimeout(room.stafftimeout);
