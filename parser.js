@@ -56,7 +56,7 @@ let checkOnlineStaff = function(room) {
         room.onlineStaff = type;
     };
 
-    room.stafftimeout = new Timer(time ? `${time}s` : `${idlestaff ? 15 : 5}m`, callback, room, type);
+    room.stafftimeout = new Timer(time ? `${time}s` : `${idlestaff ? 15 : 5}m`, callback, room, room.staffTimer);
     room.stafftimeout.start();
 }
 
