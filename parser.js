@@ -175,8 +175,10 @@ bot.on("j", (parts) => {
         if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
         Rooms[room].onlineStaff = false;
         room.staffTimer = false;
-        room.stafftimeout.stop();
-        room.stafftimeout = false;
+        if (room.stafftimeout) {
+            room.stafftimeout.stop();
+            room.stafftimeout = false;
+        }
     }
 });
 
@@ -205,8 +207,10 @@ bot.on("n", (parts) => {
         if (room.staffTimer === "idle" && Users[toId(user)].isIdle) return;
         Rooms[room].onlineStaff = false;
         room.staffTimer = false;
-        room.stafftimeout.stop();
-        room.stafftimeout = false;
+        if (room.stafftimeout) {
+            room.stafftimeout.stop();
+            room.stafftimeout = false;
+        }
     }
 });
 
