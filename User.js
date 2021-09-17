@@ -53,9 +53,10 @@ class User {
         if (!Object.keys(this.rooms).length) bot.emit("dereg", "user", this.id);
     }
 
-    rename(name) {
+    rename(name, idle = false) {
         this.id = toId(name);
         this.name = name.substring(1);
+        this.isIdle = idle;
         this.checkmail();
     }
 

@@ -93,13 +93,13 @@ class Room {
         this.send(this.tournament.buildRules());
     }
 
-    rename(oldname, newname) {
+    rename(oldname, newname, idle = false) {
         let id = toId(newname);
         let name = newname.substring(1);
         let rank = newname.charAt(0);
         if (!(id in Users)) {
             Utils.ObjectRename(Users, oldname, id);
-            Users[id].rename(newname);
+            Users[id].rename(newname, idle);
         }
         Utils.ObjectRename(this.users, oldname, id);
         Users[id].rooms[this.id] = rank;

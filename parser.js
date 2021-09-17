@@ -197,9 +197,8 @@ bot.on("n", (parts) => {
     let oldname = parts[3];
     let p = parts[2].substring(1).split("@");
     Users[toId(oldname)].isIdle = p[1] === "!";
-    let newname = parts[2].substring(0, 1) + p[0];
     try {
-        Rooms[room].rename(oldname, newname);
+        Rooms[room].rename(oldname, newname, p[1] === "!");
     } catch (e) {}
 
     setTimeout(checkOnlineStaff, 100, room);
