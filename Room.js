@@ -101,6 +101,7 @@ class Room {
             Utils.ObjectRename(Users, oldname, id);
             Users[id].rename(newname, idle);
         }
+        Users[id].isIdle = idle;
         Utils.ObjectRename(this.users, oldname, id);
         Users[id].rooms[this.id] = rank;
     }
