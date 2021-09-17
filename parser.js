@@ -199,7 +199,7 @@ bot.on("n", (parts) => {
     let p = parts[2].substring(1).split("@");
     let newname = p[0];
     try {
-        Rooms[room].rename(oldname, newname, p[1] === "!");
+        Rooms[room].rename(oldname, parts[2].charAt(0) + newname, p[1] === "!");
     } catch (e) {
         console.log(e);
     }
