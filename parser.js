@@ -258,6 +258,26 @@ bot.on("raw", (parts) => {
     }
 });
 
+let announceTours = function(room, format) {
+    for (let roomid in Rooms) {
+        if (roomid === "add") continue;
+        let targetroom = Rooms[roomid];
+        if (!targetroom.settings.announcedFormats) continue;
+        if (
+            !targetroom.settings.tourRooms || 
+            !targetroom.settings.tourRooms.includes(room.id) && 
+            !targetroom.settings.tourRooms.includes("all")
+        ) {
+            continue;
+        }
+        let formatid = toId(format);
+        if (targetroom.settings.announcedFormats.includes(formatid)) {
+            let msg = `/addhtmlbox <a href="/${room.id}" class="ilink"><b>${format}</b> tournament in <b>${room.name}</b></a>`;
+            targetroom.send(msg);
+        }
+    }
+}
+
 bot.on("tournament", (parts, data) => {
     let room = Rooms[Utils.getRoom(parts[0])];
     let dt = data.split("\n");
@@ -268,9 +288,10 @@ bot.on("tournament", (parts, data) => {
         if (type === "create") {
             if (!room.tournament) room.startTour(false);
             room.tournament.format = Tournament.formats[parts[3]];
-            if (room.tournament.official) room.tournament.name = "Official " + room.tournament.format;
+            //if (room.tournament.official) room.tournament.name = "Official " + room.tournament.format;
             let format = Tournament.formats[toId(parts[3])] ? Tournament.formats[toId(parts[3])] : parts[3];
-            if (room.id === "tournaments" && toId(parts[3]).match(/gen\dcap/gi))
+            announceTours(room, format);
+            /*if (room.id === "tournaments" && toId(parts[3]).match(/gen\dcap/gi))
                 Rooms["capproject"].send(`${format} tournament in <<tours>>`);
             if (room.id === "toursplaza" && toId(parts[3]).match(/gen\dcap/gi))
                 Rooms["capproject"].send(`${format} tournament in <<tp>>`);
@@ -281,7 +302,7 @@ bot.on("tournament", (parts, data) => {
             if (room.id === "tournaments" && parts[3].indexOf("nfe") !== -1)
                 Rooms["nfe"].send(`${format} tournament in <<tours>>`);
             if (room.id === "toursplaza" && parts[3].indexOf("nfe") !== -1)
-                Rooms["nfe"].send(`${format} tournament in <<tp>>`);
+                Rooms["nfe"].send(`${format} tournament in <<tp>>`);*/
         }
         if (type === "end" || type === "forceend") room.endTour(parts[3]);
         if (type === "update") {
