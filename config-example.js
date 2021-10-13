@@ -10,6 +10,7 @@ exports.password = "";
  */
 
 exports.rooms = [];
+exports.privaterooms = [...exports.rooms];
 exports.char = ".";
 exports.devs = [];
 

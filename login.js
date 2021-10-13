@@ -7,8 +7,8 @@ let psurl = "ws://sim3.psim.us:8000/showdown/websocket";
 let loginurl = "https://play.pokemonshowdown.com/~~showdown/action.php";
 
 let autoJoin = function (index) {
-    for (let r in Config.rooms) {
-        Send("", "/j " + Config.rooms[r]);
+    for (let r in Config.privaterooms) {
+        Send("", "/j " + Config.privaterooms[r]);
     }
 };
 
