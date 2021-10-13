@@ -153,8 +153,18 @@ bot.on("pm", (parts) => {
     let [cmd, args, val] = Utils.SplitMessage(message);
     if (cmd in Commands) {
         if (typeof Commands[cmd] === "string") cmd = Commands[cmd];
-        if (typeof Commands[cmd] === "object") return; // Can't do that right now
-        Commands[cmd](user, user, args, val);
+        let func = Commands[cmd];
+        if (typeof func === "object") {
+            let target = toId(args[0]);
+            if (!target || !func[target]) {
+                target = "";
+                args = [""].concat(args);
+            }
+            if (target in func && typeof func[target] === "string") target = func[target];
+            func = func[target];
+            args.shift();
+        }
+        func(user, user, args, val, time, cmd);
         logger.emit("cmd", cmd, val);
     }
     if (cmd === "tco" && user.id === "vrbot" && Rooms["1v1"])
