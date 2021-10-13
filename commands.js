@@ -356,7 +356,46 @@ let commands = {
         '': 'help',
         help: function(room, user, args) {
             let target = user.can(room, '#') ? room : user;
-            target.send("Usage: ``.settings [target], [...options]``. Valid options: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff")
+            if (args.length === 0) {
+                target.send("Usage: ``.settings [target], [...options]``. Valid options: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff.");
+                target.send("For more information use ``.settings help, [cmd]``.");
+                return;
+            }
+
+            let topic = toId(args[0]);
+            if (!Commands.settings[topic]) {
+                target.send("Usage: ``.settings [target], [...options]``. Valid options: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff.");
+                target.send("For more information use ``.settings help, [cmd]``.");
+                return;
+            }
+
+            if (["clear"].includes(topic)) {
+                return target.send("Irreversibly clears all settings for the selected room.");
+            }
+
+            if (["disable", "mutebot"].includes(topic)) {
+                return target.send("Prevents the bot from sending messages in the selected room, effectively disabling it.");
+            }
+
+            if (["unmutebot"].includes(topic)) {
+                return target.send("Reverts the effects of ``.settings mutebot``");
+            }
+
+            if (["hellothere"].includes(topic)) {
+                return target.send("Sets the bot responding to ``Hello There`` with ``General Kenobi!`` on or off.");
+            }
+
+            if (["autohide", "autohidetext"].includes(topic)) {
+                return target.send("If set to on, the bot automatically hidetexts anyone who gets muted or hourmuted in the selected room.");
+            }
+
+            if (["tourmessages"].includes(topic)) {
+                return target.send("Settings for notifying rooms when tours of specific (or all) formats are made in specific (or all) rooms");
+            }
+
+            if (["nostaff"].includes(topic)) {
+                return target.send("Setup for notifying staff discord servers if there hasn't been online staff in 5 minutes, or all online staff has been idle for 15 minutes.");
+            }
         },
         checkPerms: function(room, user, args) {
             let targetroom = room;
