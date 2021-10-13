@@ -352,6 +352,152 @@ let commands = {
             return room.send(`Echo "${msg}" ended.`);
         },
     },
+    settings: {
+        '': 'help',
+        help: function(room, user, args) {
+            let target = user.can(room, '#') ? room : user;
+            target.send("Usage: ``.settings [target], [...options]``. Valid options: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff")
+        },
+        checkPerms: function(room, user, args) {
+            let targetroom = room;
+            if (room === user) {
+                targetroom = Rooms[toRoomId(args[0])];
+            }
+            if (!targetroom) {
+                return true;
+            }
+            if (!user.can(targetroom, "#")) {
+                if (room === user) user.send("You do not have permission to change settings in that room.");
+                return false;
+            }
+            return targetroom;
+        },
+        clear: function(room, user, args) {
+            let targetroom = this.checkPerms(room, user, args);
+            if (targetroom === false) return;
+            if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room]``");
+
+            delete targetroom.settings.disabled;
+            delete targetroom.settings.hellothere;
+            delete targetroom.settings.OTobj; //obsolete anyway
+            delete targetroom.settings.autohide;
+            delete targetroom.settings.webhook;
+            delete targetroom.settings.tourhook;
+            delete targetroom.settings.announcedFormats;
+            delete targetroom.settings.tourRooms;
+            targetroom.saveSettings();
+            return room.send("All settings cleared");
+        },
+        disable: "mutebot",
+        unmutebot: "mutebot",
+        mutebot: function(room, user, args, val, time, cmd) {
+            let targetroom = this.checkPerms(room, user, args);
+            if (targetroom === false) return;
+            if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room]``");
+
+            targetroom.settings.disabled = cmd != "unmutebot";
+            targetroom.saveSettings();
+            room.send(`Bot messages ${cmd === "unmutebot" ? "un" : ""}muted for room ${targetroom.id}`);
+        },
+        hellothere: function(room, user, args) {
+            let targetroom = this.checkPerms(room, user, args);
+            if (targetroom === false) return;
+            if (targetroom === true) return user.send("Usage: ``.settings hellothere, [room], [on/off]``");
+            if (targetroom.id === toRoomId(args[0])) args.shift();
+
+            if (args.length != 1 || !["on", "off"].includes(toId(args[0]))) {
+                if (room === user) return user.send("Usage: ``.settings hellothere, [room], [on/off]``");
+                return room.send("Usage: ``.settings hellothere, [on/off]``");
+            }
+
+            targetroom.settings.hellothere = toId(args[0]) === "on";
+            targetroom.saveSettings();
+            room.send("Hello There auto-response turned " + toId(args[0]) + " for room " + targetroom.id);
+        },
+        autohide: "autohidetext",
+        autohidetext: function(room, user, args, val, time, cmd) {
+            let targetroom = this.checkPerms(room, user, args);
+            if (targetroom === false) return;
+            if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room], [on/off]``");
+            if (targetroom.id === toRoomId(args[0])) args.shift();
+
+            if (args.length != 1 || !["on", "off"].includes(toId(args[0]))) {
+                if (room === user) return user.send("Usage: ``.settings " + cmd + ", [room], [on/off]``");
+                return room.send("Usage: ``.settings " + cmd + ", [on/off]``");
+            }
+
+            targetroom.settings.autohide = toId(args[0]) === "on";
+            targetroom.saveSettings();
+            room.send("Hello There auto-response turned " + toId(args[0]) + " for room " + targetroom.id);
+        },
+        tourmessages: function(room, user, args, val, time, cmd) {
+            let targetroom = this.checkPerms(room, user, args);
+            if (targetroom === false) return;
+            if (targetroom === true) return user.send("Usage: ``.settings tourmessages, [room], [addroom/addformat/removeroom/removeformat/list], [room/format]``");
+            if (targetroom.id === toRoomId(args[0])) args.shift();
+
+            if (args.length !== 2 && args[0] != "list") {
+                return room.send("Usage: ``.settings tourmessages, [room], [addroom/addformat/removeroom/removeformat/list], [room/format/\"all\"]``");
+            }
+
+            if (toId(args[0]) === "addroom") {
+                let roomid = toRoomId(args[1]);
+                if (!Rooms[roomid] && roomid != "all") return user.send(`I can't help you with the room ${roomid} because I'm not in it.`);
+                if (!targetroom.settings.tourRooms) targetroom.settings.tourRooms = [];
+                targetroom.settings.tourRooms.push(roomid);
+                targetroom.saveSettings();
+                return user.send("Added the room successfully.")
+            }
+
+            if (toId(args[0]) === "removeroom") {
+                let roomid = toRoomId(args[1]);
+                if (!targetroom.settings.tourRooms) targetroom.settings.tourRooms = [];
+                if (!targetroom.settings.tourRooms.includes(roomid)) return user.send(`The room ${roomid} already isn't set up, so I can't remove it.`);
+                targetroom.settings.tourRooms.splice(targetroom.settings.tourRooms.indexOf(roomid), 1);
+                targetroom.saveSettings();
+                return user.send("Removed the room successfully.")
+            }
+
+            if (toId(args[0]) === "addformat") {
+                let format = toId(args[1]);
+                if (!Tournaments.formats[format] && format != "all") return user.send(`I can't help you with the format ${format} because I can't find it.`);
+                if (!targetroom.settings.announcedFormats) targetroom.settings.announcedFormats = [];
+                targetroom.settings.announcedFormats.push(format);
+                targetroom.saveSettings();
+                return user.send("Added the format successfully.")
+            }
+
+            if (toId(args[0]) === "removeformat") {
+                let format = toId(args[1]);
+                if (!targetroom.settings.announcedFormats) targetroom.settings.announcedFormats = [];
+                if (!targetroom.settings.announcedFormats.includes(format)) return user.send(`The format ${format} already isn't set up, so I can't remove it.`);
+                targetroom.settings.announcedFormats.splice(targetroom.settings.announcedFormats.indexOf(room), 1);
+                targetroom.saveSettings();
+                return user.send("Removed the format successfully.")
+            }
+
+            if (toId(args[0]) === "list") {
+                let ret = `I will send a message to ${targetroom.id} if a tour is made in one of the following rooms:<br>`;
+                ret += `${targetroom.settings.tourRooms ? targetroom.settings.tourRooms.join(", ") : ""}<br><br>`;
+                ret += `in one of the following formats:<br>`;
+                ret += `${targetroom.settings.announcedFormats ? targetroom.settings.announcedFormats.join(", ") : ""}`;
+                targetroom.send(`/pminfobox ${user.id}, ${ret}`);
+                return;
+            }
+        },
+        nostaff: function(room, user, args, val, time, cmd) {
+            let targetroom = this.checkPerms(room, user, args);
+            if (targetroom === false) return;
+            if (targetroom === true) return user.send("Please ask Felucia to set this up for you.");
+            if (targetroom.id === toRoomId(args[0])) args.shift();
+            if (!user.can(room, "all")) return user.send("Please ask Felucia to set this up for you.");
+            
+
+            targetroom.settings.webhook = args[0]
+            targetroom.saveSettings();
+            room.send("Webhook set for " + targetroom.id);
+        },
+    }
 };
 
 let files = FS.readdirSync("commands");
