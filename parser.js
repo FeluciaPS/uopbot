@@ -275,7 +275,8 @@ let announceTours = function(room, format) {
             !Config.rooms.includes(room.id)
         ) continue;
         let formatid = toId(format);
-        if (targetroom.settings.announcedFormats.includes(formatid)) {
+        if (targetroom.settings.announcedFormats.includes(formatid) || 
+            targetroom.settings.announcedFormats.includes("all")) {
             let msg = `/addhtmlbox <a href="/${room.id}" class="ilink"><b>${format}</b> tournament in <b>${room.name}</b></a>`;
             targetroom.send(msg);
         }
