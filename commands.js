@@ -357,15 +357,15 @@ let commands = {
         help: function(room, user, args) {
             let target = user.can(room, '#') ? room : user;
             if (args.length === 0) {
-                target.send("Usage: ``.settings [target], [...options]``. Valid options: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff.");
-                target.send("For more information use ``.settings help, [cmd]``.");
+                target.send("Usage: ``.settings [type], [...options]``. Valid types: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff.");
+                target.send("For more information use ``.settings help, [type]``.");
                 return;
             }
 
             let topic = toId(args[0]);
             if (!Commands.settings[topic]) {
-                target.send("Usage: ``.settings [target], [...options]``. Valid options: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff.");
-                target.send("For more information use ``.settings help, [cmd]``.");
+                target.send("Usage: ``.settings [type], [...options]``. Valid types: clear, mutebot, unmutebot, hellothere, autohidetext, tourmessages, nostaff.");
+                target.send("For more information use ``.settings help, [type]``.");
                 return;
             }
 
