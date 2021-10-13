@@ -373,7 +373,7 @@ let commands = {
             return targetroom;
         },
         clear: function(room, user, args) {
-            let targetroom = this.checkPerms(room, user, args);
+            let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room]``");
 
@@ -391,7 +391,7 @@ let commands = {
         disable: "mutebot",
         unmutebot: "mutebot",
         mutebot: function(room, user, args, val, time, cmd) {
-            let targetroom = this.checkPerms(room, user, args);
+            let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room]``");
 
@@ -400,7 +400,7 @@ let commands = {
             room.send(`Bot messages ${cmd === "unmutebot" ? "un" : ""}muted for room ${targetroom.id}`);
         },
         hellothere: function(room, user, args) {
-            let targetroom = this.checkPerms(room, user, args);
+            let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings hellothere, [room], [on/off]``");
             if (targetroom.id === toRoomId(args[0])) args.shift();
@@ -416,7 +416,7 @@ let commands = {
         },
         autohide: "autohidetext",
         autohidetext: function(room, user, args, val, time, cmd) {
-            let targetroom = this.checkPerms(room, user, args);
+            let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room], [on/off]``");
             if (targetroom.id === toRoomId(args[0])) args.shift();
@@ -431,7 +431,7 @@ let commands = {
             room.send("Hello There auto-response turned " + toId(args[0]) + " for room " + targetroom.id);
         },
         tourmessages: function(room, user, args, val, time, cmd) {
-            let targetroom = this.checkPerms(room, user, args);
+            let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings tourmessages, [room], [addroom/addformat/removeroom/removeformat/list], [room/format]``");
             if (targetroom.id === toRoomId(args[0])) args.shift();
@@ -486,7 +486,7 @@ let commands = {
             }
         },
         nostaff: function(room, user, args, val, time, cmd) {
-            let targetroom = this.checkPerms(room, user, args);
+            let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Please ask Felucia to set this up for you.");
             if (targetroom.id === toRoomId(args[0])) args.shift();
