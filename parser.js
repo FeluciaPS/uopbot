@@ -137,7 +137,7 @@ bot.on("c", (parts) => {
             func = func[target];
             args.shift();
         }
-        func(Rooms[room], user, args, val, time);
+        func(Rooms[room], user, args, val, time, cmd);
         logger.emit("cmd", cmd, val);
     }
 });
