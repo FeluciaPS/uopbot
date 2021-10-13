@@ -499,7 +499,7 @@ let commands = {
 
             if (toId(args[0]) === "addformat") {
                 let format = toId(args[1]);
-                if (!Tournaments.formats[format] && format != "all") return user.send(`I can't help you with the format ${format} because I can't find it.`);
+                if (!Tournament.formats[format] && format != "all") return user.send(`I can't help you with the format ${format} because I can't find it.`);
                 if (!targetroom.settings.announcedFormats) targetroom.settings.announcedFormats = [];
                 targetroom.settings.announcedFormats.push(format);
                 targetroom.saveSettings();
