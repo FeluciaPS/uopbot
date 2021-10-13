@@ -9,6 +9,7 @@ exports.password = "";
  * Other
  */
 
+// Please use full room names, and not aliases. Some code relies on these arrays.
 exports.rooms = [];
 exports.privaterooms = [...exports.rooms];
 exports.char = ".";
