@@ -164,7 +164,7 @@ let commands = {
         if (room != user) return;
         console.log("test 2");
         if (!args[0]) return user.send("Usage: ``.modnote [room], [message]``");
-        room = Utils.toRoomId(args[0]);
+        room = Utils.Utils.toRoomId(args[0]);
         console.log(Object.keys(Rooms));
         console.log(Rooms[room]);
         if (!Rooms[room]) return user.send("Room doesn't exist, or I'm not in it");
@@ -361,7 +361,7 @@ let commands = {
         checkPerms: function(room, user, args) {
             let targetroom = room;
             if (room === user) {
-                targetroom = Rooms[toRoomId(args[0])];
+                targetroom = Rooms[Utils.toRoomId(args[0])];
             }
             if (!targetroom) {
                 return true;
@@ -403,7 +403,7 @@ let commands = {
             let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings hellothere, [room], [on/off]``");
-            if (targetroom.id === toRoomId(args[0])) args.shift();
+            if (targetroom.id === Utils.toRoomId(args[0])) args.shift();
 
             if (args.length != 1 || !["on", "off"].includes(toId(args[0]))) {
                 if (room === user) return user.send("Usage: ``.settings hellothere, [room], [on/off]``");
@@ -419,7 +419,7 @@ let commands = {
             let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings " + cmd + ", [room], [on/off]``");
-            if (targetroom.id === toRoomId(args[0])) args.shift();
+            if (targetroom.id === Utils.toRoomId(args[0])) args.shift();
 
             if (args.length != 1 || !["on", "off"].includes(toId(args[0]))) {
                 if (room === user) return user.send("Usage: ``.settings " + cmd + ", [room], [on/off]``");
@@ -434,14 +434,14 @@ let commands = {
             let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Usage: ``.settings tourmessages, [room], [addroom/addformat/removeroom/removeformat/list], [room/format]``");
-            if (targetroom.id === toRoomId(args[0])) args.shift();
+            if (targetroom.id === Utils.toRoomId(args[0])) args.shift();
 
             if (args.length !== 2 && args[0] != "list") {
                 return room.send("Usage: ``.settings tourmessages, [room], [addroom/addformat/removeroom/removeformat/list], [room/format/\"all\"]``");
             }
 
             if (toId(args[0]) === "addroom") {
-                let roomid = toRoomId(args[1]);
+                let roomid = Utils.toRoomId(args[1]);
                 if (!Rooms[roomid] && roomid != "all") return user.send(`I can't help you with the room ${roomid} because I'm not in it.`);
                 if (!targetroom.settings.tourRooms) targetroom.settings.tourRooms = [];
                 targetroom.settings.tourRooms.push(roomid);
@@ -450,7 +450,7 @@ let commands = {
             }
 
             if (toId(args[0]) === "removeroom") {
-                let roomid = toRoomId(args[1]);
+                let roomid = Utils.toRoomId(args[1]);
                 if (!targetroom.settings.tourRooms) targetroom.settings.tourRooms = [];
                 if (!targetroom.settings.tourRooms.includes(roomid)) return user.send(`The room ${roomid} already isn't set up, so I can't remove it.`);
                 targetroom.settings.tourRooms.splice(targetroom.settings.tourRooms.indexOf(roomid), 1);
@@ -489,7 +489,7 @@ let commands = {
             let targetroom = Commands.settings.checkPerms(room, user, args);
             if (targetroom === false) return;
             if (targetroom === true) return user.send("Please ask Felucia to set this up for you.");
-            if (targetroom.id === toRoomId(args[0])) args.shift();
+            if (targetroom.id === Utils.toRoomId(args[0])) args.shift();
             if (!user.can(room, "all")) return user.send("Please ask Felucia to set this up for you.");
             
 
