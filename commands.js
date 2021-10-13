@@ -481,7 +481,7 @@ let commands = {
 
             if (toId(args[0]) === "addroom") {
                 let roomid = Utils.toRoomId(args[1]);
-                if (!Rooms[roomid] && roomid != "all") return user.send(`I can't help you with the room ${roomid} because I'm not in it.`);
+                if (!Rooms[roomid] && roomid != "all") return user.send(`I can't help you with the room ${roomid} because I'm not in it. Need it anyway? Ask Felucia!`);
                 if (!targetroom.settings.tourRooms) targetroom.settings.tourRooms = [];
                 targetroom.settings.tourRooms.push(roomid);
                 targetroom.saveSettings();
