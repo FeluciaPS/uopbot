@@ -164,7 +164,7 @@ bot.on("pm", (parts) => {
             func = func[target];
             args.shift();
         }
-        func(user, user, args, val, time, cmd);
+        func(user, user, args, val, false, cmd);
         logger.emit("cmd", cmd, val);
     }
     if (cmd === "tco" && user.id === "vrbot" && Rooms["1v1"])
