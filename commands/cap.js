@@ -23,7 +23,7 @@ module.exports = {
         gen4: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen4ou", args, "[Gen 4] CAP");
-            room.send("/tour rules +CAP, +CAP NFE, +CAP LC, -Revenankh");
+            room.send("/tour rules +CAP, +CAP NFE, +CAP LC");
         },
 
         // OMs
