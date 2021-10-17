@@ -102,6 +102,10 @@ bot.on("c", (parts) => {
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
     if (!parts[4]) return;
+    if (!user) {
+        console.log(parts);
+        return;
+    }
     let message = parts[4].trim();
     for (let i in Rooms) {
         if (Rooms[i].tournament && !Rooms[i].tournament.started) Rooms[i].tournament.checkstart();
