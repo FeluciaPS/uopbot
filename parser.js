@@ -333,19 +333,24 @@ bot.on("tournament", (parts, data) => {
                 return;
             }
             if (!data.format) return;
-            if (room.tournament.official && room.tournament.officialname) {
-                if (data.format in Tournament.formats) {
-                    room.tournament.updateName(Tournament.formats[data.format]);
-                    if (!room.tournament.name.startsWith("Official"))
-                        room.send(`/tour name Official ${room.tournament.name}`);
+            try {
+                if (room.tournament.official && room.tournament.officialname) {
+                    if (data.format in Tournament.formats) {
+                        room.tournament.updateName(Tournament.formats[data.format]);
+                        if (!room.tournament.name.startsWith("Official"))
+                            room.send(`/tour name Official ${room.tournament.name}`);
+                    } else {
+                        room.tournament.updateName(data.format);
+                        if (!room.tournament.name.startsWith("Official"))
+                            room.send(`/tour name Official ${room.tournament.name}`);
+                    }
                 } else {
-                    room.tournament.updateName(data.format);
-                    if (!room.tournament.name.startsWith("Official"))
-                        room.send(`/tour name Official ${room.tournament.name}`);
+                    if (data.format in Tournament.formats) room.tournament.updateName(Tournament.formats[data.format]);
+                    else room.tournament.updateName(data.format);
                 }
-            } else {
-                if (data.format in Tournament.formats) room.tournament.updateName(Tournament.formats[data.format]);
-                else room.tournament.updateName(data.format);
+            }
+            catch (e) {
+                console.log(e);
             }
         }
         if (type === "join") {
