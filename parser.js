@@ -335,11 +335,11 @@ bot.on("tournament", (parts, data) => {
             if (!data.format) return;
             if (room.tournament.official && room.tournament.officialname) {
                 if (data.format in Tournament.formats) {
-                    room.tournament.name = Tournament.formats[data.format];
+                    room.tournament.updateName(Tournament.formats[data.format]);
                     if (!room.tournament.name.startsWith("Official"))
                         room.send(`/tour name Official ${room.tournament.name}`);
                 } else {
-                    room.tournament.name = data.format;
+                    room.tournament.updateName(data.format);
                     if (!room.tournament.name.startsWith("Official"))
                         room.send(`/tour name Official ${room.tournament.name}`);
                 }
