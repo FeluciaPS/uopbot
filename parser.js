@@ -312,6 +312,7 @@ bot.on("tournament", (parts, data) => {
             //if (room.tournament.official) room.tournament.name = "Official " + room.tournament.format;
             let format = Tournament.formats[toId(parts[3])] ? Tournament.formats[toId(parts[3])] : parts[3];
             announceTours(room, format);
+            if (parts[6]) room.tournament.updateName(parts[6]);
             /*if (room.id === "tournaments" && toId(parts[3]).match(/gen\dcap/gi))
                 Rooms["capproject"].send(`${format} tournament in <<tours>>`);
             if (room.id === "toursplaza" && toId(parts[3]).match(/gen\dcap/gi))
