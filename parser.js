@@ -291,8 +291,10 @@ let announceTours = function(room, format) {
         let formatid = toId(format);
         if (targetroom.settings.announcedFormats.includes(formatid) || 
             targetroom.settings.announcedFormats.includes("all")) {
-            let msg = `/addhtmlbox <a href="/${room.id}" class="ilink"><b>${format}</b> tournament in <b>${room.name}</b></a>`;
-            targetroom.send(msg);
+                let id = "secura-" + Math.floor(Math.random() * 100000);
+                let msg = `/adduhtml ${id}, <a href="/${room.id}" class="ilink"><b>${format}</b> tournament in <b>${room.name}</b></a>`;
+                room.tournament.notifications[room.id] = id;
+                targetroom.send(msg);
         }
     }
 }
@@ -342,8 +344,8 @@ bot.on("tournament", (parts, data) => {
                         room.send(`/tour name Official ${room.tournament.name}`);
                 }
             } else {
-                if (data.format in Tournament.formats) room.tournament.name = Tournament.formats[data.format];
-                else room.tournament.name = data.format;
+                if (data.format in Tournament.formats) room.tournament.updateName(Tournament.formats[data.format]);
+                else room.tournament.updateName(data.format);
             }
         }
         if (type === "join") {

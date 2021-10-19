@@ -18,6 +18,7 @@ class Tournament {
         this.official = data.official || data.scrappie;
         this.blt = data.blt;
         this.chill = data.chill;
+        this.notifications = {};
         this.rules = {
             bans: [],
             unbans: [],
@@ -51,6 +52,15 @@ class Tournament {
         if (this.chill) room.send("/modchat +");
         this.startCheckTimer = false;
         this.autostart = false;
+    }
+
+    updateName(name) {
+        this.name = name;
+        for (let roomid in this.notifications) {
+            let room = Rooms[roomid];
+            let id = this.notifications[roomid];
+            room.send(`/changeuhtml ${id}, <a href="/${room.id}" class="ilink"><b>${name}</b>${name != this.format ? " (" + this.format + ")" : ""} tournament in <b>${room.name}</b></a>`)
+        }
     }
 
     checkstart() {
@@ -100,6 +110,8 @@ class Tournament {
         console.log(ret);
         return ret.substring(0, ret.length - 2);
     }
+
+
     end(data) {
         if (data) {
             let dt = JSON.parse(data);
