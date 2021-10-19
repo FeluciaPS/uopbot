@@ -59,7 +59,7 @@ class Tournament {
         for (let roomid in this.notifications) {
             let notifroom = Rooms[roomid];
             let id = this.notifications[roomid];
-            notifroom.send(`/changeuhtml ${id}, <a href="/${this.room.id}" class="ilink"><b>${name}</b>${name != this.format ? " (" + this.format + ")" : ""} tournament in <b>${this.room.name}</b></a>`)
+            notifroom.send(`/changeuhtml ${id}, <div class="infobox"><a href="/${this.room.id}" class="ilink"><b>${name}</b>${name != this.format ? " (" + this.format + ")" : ""} tournament in <b>${this.room.name}</b></a></div>`)
         }
     }
 
