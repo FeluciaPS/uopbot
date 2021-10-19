@@ -293,7 +293,7 @@ let announceTours = function(room, format) {
             targetroom.settings.announcedFormats.includes("all")) {
                 let id = "secura-" + Math.floor(Math.random() * 100000);
                 let msg = `/adduhtml ${id}, <a href="/${room.id}" class="ilink"><b>${format}</b> tournament in <b>${room.name}</b></a>`;
-                room.tournament.notifications[room.id] = id;
+                room.tournament.notifications[roomid] = id;
                 targetroom.send(msg);
         }
     }
