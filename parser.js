@@ -364,7 +364,7 @@ bot.on("tournament", (parts, data) => {
             if (parts[3] === "off") room.tournament.setAutostart(false);
             else room.tournament.setAutostart(parseInt(parts[4]));
         }
-        if (type === "start") room.startTour();
+        if (type === "start") room.tournament.start();
     }
 });
 
