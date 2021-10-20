@@ -330,7 +330,7 @@ bot.on("tournament", (parts, data) => {
         if (type === "update") {
             let data = JSON.parse(parts[3]);
             if (data.isStarted) {
-                room.tournament.started = true;
+                room.tournament.start();
                 return;
             }
             if (!data.format) return;
@@ -364,6 +364,7 @@ bot.on("tournament", (parts, data) => {
             if (parts[3] === "off") room.tournament.setAutostart(false);
             else room.tournament.setAutostart(parseInt(parts[4]));
         }
+        if (type === "start") room.startTour();
     }
 });
 

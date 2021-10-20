@@ -56,11 +56,26 @@ class Tournament {
 
     updateName(name) {
         this.name = name;
+        this.buildNotifs();
+    }
+
+    buildNotifs(end = false) {
         for (let roomid in this.notifications) {
             let notifroom = Rooms[roomid];
             let id = this.notifications[roomid];
-            notifroom.send(`/changeuhtml ${id}, <div class="infobox"><a href="/${this.room.id}" class="ilink"><b>${name}</b>${name != this.format ? " (" + this.format + ")" : ""} tournament in <b>${this.room.name}</b></a></div>`)
+            let msg = `<div class="infobox"><a href="/${this.room.id}" class="ilink">`;
+            msg += `<b>${this.name}</b>${this.name != this.format ? " (" + this.format + ")" : ""} tournament`;
+            msg += ` in <b>${this.room.name}</b>`;
+            if (end) msg += ` (ended)`;
+            else if (this.started) msg += ` (started)`;
+            msg += `</a></div>`
+            notifroom.send(`/changeuhtml ${id}, </a></div>`)
         }
+    }
+
+    start() {
+        this.started = true;
+        this.buildNotifs();
     }
 
     checkstart() {
@@ -150,6 +165,7 @@ class Tournament {
             else this.name = dt.format ? dt.format : this.name;
         }
         if (this.chill) this.room.send("/modchat ac");
+        this.buildNotifs(end);
     }
 }
 
