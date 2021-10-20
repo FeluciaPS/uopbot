@@ -165,7 +165,7 @@ class Tournament {
             else this.name = dt.format ? dt.format : this.name;
         }
         if (this.chill) this.room.send("/modchat ac");
-        this.buildNotifs(end);
+        this.buildNotifs(true);
     }
 }
 
