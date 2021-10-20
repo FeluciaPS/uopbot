@@ -12,6 +12,7 @@ let formats = {};
  */
 class Tournament {
     constructor(room, data) {
+        if (!data) data = {};
         this.room = room;
         this.started = false;
         this.players = {};
