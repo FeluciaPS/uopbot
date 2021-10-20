@@ -70,7 +70,7 @@ class Tournament {
             if (end) msg += ` (ended)`;
             else if (this.started) msg += ` (started)`;
             msg += `</a></div>`
-            notifroom.send(`/changeuhtml ${id}, </a></div>`)
+            notifroom.send(`/changeuhtml ${id}, ${msg}`)
         }
     }
 
