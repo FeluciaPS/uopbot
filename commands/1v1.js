@@ -295,7 +295,7 @@ module.exports = {
         natdex: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] National Dex 1v1");
-            room.send(buildRuleset("natdex"));
+            room.send(`/tour rules +Past`);
         },
         inverse: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
