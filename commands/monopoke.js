@@ -41,7 +41,6 @@ module.exports = {
             Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] Monopoke " + mon);
             room.startTour("monopoke");
             room.send(ruleset);
-            room.send("/tour name [Gen 8] Monopoke " + mon);
             room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
             if (x === "official") room.send(".official");
         },
@@ -57,7 +56,6 @@ module.exports = {
             Utils.checkGenerator(room, "gen71v1", args, "[Gen 7] Monopoke " + mon);
             room.startTour("monopoke");
             room.send(ruleset);
-            room.send("/tour name [Gen 7] Monopoke " + mon);
             room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
             if (x === "official") room.send(".official");
         },
@@ -71,7 +69,6 @@ module.exports = {
             Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] National Dex Monopoke " + mon);
             room.startTour("monopoke");
             room.send(ruleset);
-            room.send("/tour name [Gen 8] Monopoke " + mon);
             room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
             if (x === "official") room.send(".official");
         }
