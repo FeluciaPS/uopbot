@@ -277,7 +277,7 @@ module.exports = {
         if (room.id === "1v1" && !user.can(room, '+')) return user.send("Please use this command in PM.");
         let rooms = [];
         let targetroom = false;
-        for (let i in user.rooms) {
+        for (let i in (toId(args[0]) === "all" ? Officials : user.rooms)) {
             let robj = Rooms[i];
             if (room !== user && robj !== room) continue;
             if (!Officials[i]) continue;
