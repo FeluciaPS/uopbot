@@ -118,7 +118,7 @@ global.Officials = {
         autostart: 5,
     },
     othermetas: {
-        schedule: ["bh", "mnm", "aaa", "stab", "camo", "omotm", "lcotm"],
+        schedule: ["bh", "mnm", "aaa", "stab", "godlygift", "omotm", "lcotm"],
         times: [21],
         forcepublic: true,
         forcetimer: true,

@@ -20,9 +20,9 @@ module.exports = {
             Utils.checkGenerator(room, "stab", args);
             if (args[0] === "o") room.startTour("ot");
         },
-        camo: function (room, user, args) {
+        godlygift: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return false;
-            Utils.checkGenerator(room, "camo", args);
+            Utils.checkGenerator(room, "godlygift", args);
             if (args[0] === "o") room.startTour("ot");
         },
         omotm: function (room, user, args) {
