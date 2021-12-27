@@ -117,7 +117,8 @@ bot.on('c', (parts) => {
 module.exports = {
 	addzerotol: function(room, user, args) {
 		if (args.length < 2) return;
-		if (!user.can(room, "@")) return;
+		if (!user.can(room, "%")) return;
+		if (!user.can(room, "@")) return user.send("You need to be at least a moderator to use this feature.");
 
 		args[1] = args.slice(1).join(',');
 		
@@ -136,7 +137,8 @@ module.exports = {
 	deletezerotol: 'removezerotol',
 	removezerotol: function(room, user, args) {
 		if (args.length != 1) return;
-		if (!user.can(room, "@")) return;
+		if (!user.can(room, "%")) return;
+		if (!user.can(room, "@")) return user.send("You need to be at least a moderator to use this feature.");
 
 		if (!pendingChanges[room.id]) {
 			pendingChanges[room.id] = [];
