@@ -47,6 +47,7 @@ let addTableRow = function(room, fielddata, name, reason) {
 
 let removeTableRow = function(room, fielddata, index) {
 	let table = fielddata.querySelector("table");
+	return false;
 	table.deleteRow(index);
 }
 
@@ -122,15 +123,13 @@ module.exports = {
 		if (args.length != 1) return;
 		if (!user.can(room, "@")) return;
 
-		if (isNaN(parseInt(args[0]))) return;
-
 		if (!pendingChanges[room.id]) {
 			pendingChanges[room.id] = [];
 		}
 
 		pendingChanges[room.id].push({
 			type: "removerow",
-			index: parseInt(args[0])
+			name: toId(args[0])
 		});
 
 		room.send('/staffintro');
