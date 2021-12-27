@@ -117,6 +117,7 @@ module.exports = {
 
 		room.send('/staffintro');
 	},
+	deletezerotol: 'removezerotol',
 	removezerotol: function(room, user, args) {
 		if (args.length != 1) return;
 		if (!user.can(room, "@")) return;
