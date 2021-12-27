@@ -9,7 +9,7 @@ let fieldname = "zerotolarea";
 
 let buildEmptyTable = function(roomid) {
 	let ret = `<div id="${fieldname}">`
-	ret += `<table style="border-collapse: collapse ; border-spacing: 0px ; border: 1px solid ; width: 100%" border="1">`;
+	ret += `<table style="border-collapse: collapse ; border-spacing: 0px ; border: 1px solid #888 ; width: 100%" border="1">`;
 	ret += `<tbody><tr>`;
 	ret += `<th colspan="3" style="${title_style}">Low Tolerance Moderation</th>`;
 	ret += `</tr>`;
@@ -22,7 +22,7 @@ let buildEmptyTable = function(roomid) {
 	ret += `<form style="margin:5px" data-submitsend="/botmsg ${Config.username}, ${roomid}, addzerotol {name}, {reason}">`;
 	ret += `Add user: `;
 	ret += `<input name="name" placeholder="Name" />`;
-	ret += `<input name="reason" placeholder="Reason" />`;
+	ret += `<input name="reason" placeholder="Reason" maxlength="250"/>`;
 	ret += `<input class="button" type="submit" />`;
     ret += `</form>`;
 	
@@ -52,7 +52,7 @@ let removeTableRow = function(room, fielddata, name) {
     console.log('\n\n');
 	for (let element of table.querySelectorAll("tr")) {
         let username = element.querySelector("username");
-        if (!td) continue;
+        if (!username) continue;
         
         if (toId(username.innerHTML) === name) target = element.rowIndex;
     }
