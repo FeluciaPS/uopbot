@@ -95,7 +95,7 @@ bot.on('c', (parts) => {
 	room.send(`/staffintro ${dom.body.innerHTML}`);
 });
 
-exports.commands = {
+module.exports = {
 	addzerotol: function(room, user, args) {
 		if (args.length < 2) return;
 		if (!user.can(room, "@")) return;
@@ -119,7 +119,7 @@ exports.commands = {
 		if (!user.can(room, "@")) return;
 
 		if (isNaN(parseInt(args[0]))) return;
-		
+
 		if (!pendingChanges[room.id]) {
 			pendingChanges[room.id] = [];
 		}
