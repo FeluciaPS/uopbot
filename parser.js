@@ -167,7 +167,7 @@ bot.on("pm", (parts) => {
         message = parts.slice(1).join(",").trim();
 
         // If the room exists, the command was used in a room, else it was used in PM.
-        if (Rooms.get(parts[0])) room = Rooms.get(parts[0]);
+        if (Rooms[parts[0]]) room = Rooms[parts[0]];
     }
 
     let [cmd, args, val] = Utils.SplitMessage(message);
