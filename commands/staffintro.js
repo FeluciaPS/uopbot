@@ -77,8 +77,8 @@ bot.on('c', (parts) => {
 
 	let table = dom.querySelector(`#${fieldname}`);
 	if (!table) {
-		table = new JSDOM(buildEmptyTable(room.id)).window.document;
-		dom.body.append(table.querySelector(`#${fieldname}`));
+		dom.body.append(new JSDOM(buildEmptyTable(room.id)).window.document.querySelector(`#${fieldname}`));
+		table = dom.querySelector(`#${fieldname}`);
 	}
 
 	for (let i of pendingChanges[room.id]) {
