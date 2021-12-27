@@ -53,6 +53,9 @@ bot.on('c', (parts) => {
 
 	room = Rooms[room];
 
+	if (!pendingChanges[room.id]) 
+		return;
+
 	// These are not the droids we're looking for
 	if (!data.startsWith('/raw')) 
 		return;
@@ -72,13 +75,13 @@ bot.on('c', (parts) => {
 
 	let dom = new JSDOM(document.querySelector("code").innerHTML.slice(12)).window.document;
 
-	let table = dom.querySelector('#zerotolarea');
+	let table = dom.querySelector(`#${fieldname}`);
 	if (!table) {
 		table = new JSDOM(buildEmptyTable(room.id)).window.document;
 		dom.append(table);
 	}
 
-	for (let i of pendingChanges[room]) {
+	for (let i of pendingChanges[room.id]) {
 		if (i.type === "removerow") {
 			removeTableRow(room, table, i.index);
 		}
@@ -86,7 +89,7 @@ bot.on('c', (parts) => {
 			addTableRow(room, table, i.name, i.reason);
 		}
 	}
-	pendingChanges[room] = [];
+	pendingChanges[room.id] = [];
 
 	room.send(`/staffintro ${dom.body.innerHTML}`);
 });
