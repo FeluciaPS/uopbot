@@ -94,3 +94,41 @@ bot.on('c', (parts) => {
 
 	room.send(`/staffintro ${dom.body.innerHTML}`);
 });
+
+exports.commands = {
+	addzerotol: function(room, user, args) {
+		if (args.length < 2) return;
+		if (!user.can(room, "@")) return;
+
+		args[1] = args.slice(1).join(',');
+		
+		if (!pendingChanges[room.id]) {
+			pendingChanges[room.id] = [];
+		}
+
+		pendingChanges[room.id].push({
+			type: "addrow",
+			name: args[0],
+			reason: args[1]
+		});
+
+		room.send('/staffintro');
+	},
+	removezerotol: function(room, user, args) {
+		if (args.length != 1) return;
+		if (!user.can(room, "@")) return;
+
+		if (isNaN(parseInt(args[0]))) return;
+		
+		if (!pendingChanges[room.id]) {
+			pendingChanges[room.id] = [];
+		}
+
+		pendingChanges[room.id].push({
+			type: "removerow",
+			index: parseInt(args[0])
+		});
+
+		room.send('/staffintro');
+	}
+}

@@ -154,6 +154,22 @@ bot.on("pm", (parts) => {
         Users.add(parts[2]);
         user = Users[toId(parts[2])];
     } else logger.emit("pm", user.name, message); // Note: No PM handler exists for the logger.
+
+    if (message.startsWith("/botmsg")) {
+        // Yes it's a bot message
+        var botmsg = true;
+
+        // Remove "/botmsg " from the message
+        message = message.substr(8);
+
+        // Split and retrieve the room it was used in, this should be sent in ALL instances of /botmsg.
+        let parts = message.split(",");
+        message = parts.slice(1).join(",").trim();
+
+        // If the room exists, the command was used in a room, else it was used in PM.
+        if (Rooms.get(parts[0])) room = Rooms.get(parts[0]);
+    }
+
     let [cmd, args, val] = Utils.SplitMessage(message);
     if (cmd in Commands) {
         if (typeof Commands[cmd] === "string") cmd = Commands[cmd];
@@ -168,7 +184,7 @@ bot.on("pm", (parts) => {
             func = func[target];
             args.shift();
         }
-        func(user, user, args, val, false, cmd);
+        func(room || user, user, args, val, false, cmd);
         logger.emit("cmd", cmd, val);
     }
     if (cmd === "tco" && user.id === "vrbot" && Rooms["1v1"])
