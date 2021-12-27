@@ -43,6 +43,7 @@ let addTableRow = function(room, fielddata, name, reason) {
 	namecell.innerHTML = `<username class="username">${name}</username>`;
 	reasoncell.innerHTML = reason;
 	deletecell.innerHTML = `<button class="button" name="send" value="/botmsg ${Config.username}, ${room.id}, deletezerotol ${toId(name)}">Delete</button>`;
+	return true;
 }
 
 let removeTableRow = function(room, fielddata, name) {
@@ -58,9 +59,10 @@ let removeTableRow = function(room, fielddata, name) {
     }
 
 	if (!target)
-		return;
+		return false;
 		
 	table.deleteRow(target);
+	return true;
 }
 
 bot.on('c', (parts) => {
@@ -98,12 +100,13 @@ bot.on('c', (parts) => {
 		table = dom.querySelector(`#${fieldname}`);
 	}
 
+	let success = false;
 	for (let i of pendingChanges[room.id]) {
 		if (i.type === "removerow") {
-			removeTableRow(room, table, i.index);
+			success = success || removeTableRow(room, table, i.index);
 		}
 		else if (i.type === "addrow") {
-			addTableRow(room, table, i.name, i.reason);
+			success = success || addTableRow(room, table, i.name, i.reason);
 		}
 	}
 	pendingChanges[room.id] = [];
