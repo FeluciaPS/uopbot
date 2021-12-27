@@ -34,9 +34,11 @@ let addTableRow = function(room, fielddata, name, reason) {
 	let row = table.insertRow(-1);
 
 	let namecell = row.insertCell(0);
+	namecell.setAttribute("style", "text-align:center");
 	let reasoncell = row.insertCell(1);
 	let deletecell = row.insertCell(2);
-
+	deletecell.setAttribute("style", "text-align:center");
+	
 	namecell.innerHTML = `<username class="username">${name}</username>`;
 	reasoncell.innerHTML = reason;
 	deletecell.innerHTML = `<button class="button" name="send" value="/botmsg ${Config.username}, ${room.id}, deletezerotol ${row.rowIndex}">Delete</button>`;
