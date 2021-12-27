@@ -42,7 +42,7 @@ let addTableRow = function(room, fielddata, name, reason) {
 
 	namecell.innerHTML = `<username class="username">${name}</username>`;
 	reasoncell.innerHTML = reason;
-	deletecell.innerHTML = `<button class="button" name="send" value="/botmsg ${Config.username}, ${room.id}, deletezerotol ${row.rowIndex}">Delete</button>`;
+	deletecell.innerHTML = `<button class="button" name="send" value="/botmsg ${Config.username}, ${room.id}, deletezerotol ${toId(name)}">Delete</button>`;
 }
 
 let removeTableRow = function(room, fielddata, name) {
