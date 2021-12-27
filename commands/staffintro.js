@@ -20,6 +20,7 @@ let buildEmptyTable = function(roomid) {
 	ret += `</tr></tbody></table>`;
 
 	ret += `<form style="margin:5px" data-submitsend="/botmsg ${Config.username}, ${roomid}, addzerotol {name}, {reason}">`;
+	ret += `Add user: `;
 	ret += `<input name="name" placeholder="Name" />`;
 	ret += `<input name="reason" placeholder="Reason" />`;
 	ret += `<input class="button" type="submit" />`;
@@ -38,7 +39,7 @@ let addTableRow = function(room, fielddata, name, reason) {
 	let reasoncell = row.insertCell(1);
 	let deletecell = row.insertCell(2);
 	deletecell.setAttribute("style", "text-align:center");
-	
+
 	namecell.innerHTML = `<username class="username">${name}</username>`;
 	reasoncell.innerHTML = reason;
 	deletecell.innerHTML = `<button class="button" name="send" value="/botmsg ${Config.username}, ${room.id}, deletezerotol ${row.rowIndex}">Delete</button>`;
