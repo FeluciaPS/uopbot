@@ -45,10 +45,22 @@ let addTableRow = function(room, fielddata, name, reason) {
 	deletecell.innerHTML = `<button class="button" name="send" value="/botmsg ${Config.username}, ${room.id}, deletezerotol ${row.rowIndex}">Delete</button>`;
 }
 
-let removeTableRow = function(room, fielddata, index) {
+let removeTableRow = function(room, fielddata, name) {
 	let table = fielddata.querySelector("table");
-	return false;
-	table.deleteRow(index);
+
+	let target = false;
+    console.log('\n\n');
+	for (let element of table.querySelectorAll("tr")) {
+        let username = element.querySelector("username");
+        if (!td) continue;
+        
+        if (toId(username.innerHTML) === name) target = element.rowIndex;
+    }
+
+	if (!target)
+		return;
+		
+	table.deleteRow(target);
 }
 
 bot.on('c', (parts) => {
