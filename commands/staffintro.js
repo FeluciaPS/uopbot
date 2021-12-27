@@ -103,7 +103,7 @@ bot.on('c', (parts) => {
 	let success = false;
 	for (let i of pendingChanges[room.id]) {
 		if (i.type === "removerow") {
-			success = success || removeTableRow(room, table, i.index);
+			success = success || removeTableRow(room, table, i.name);
 		}
 		else if (i.type === "addrow") {
 			success = success || addTableRow(room, table, i.name, i.reason);
@@ -111,7 +111,7 @@ bot.on('c', (parts) => {
 	}
 	pendingChanges[room.id] = [];
 
-	room.send(`/staffintro ${dom.body.innerHTML}`);
+	if (success) room.send(`/staffintro ${dom.body.innerHTML}`);
 });
 
 module.exports = {
