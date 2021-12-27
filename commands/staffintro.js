@@ -1,4 +1,5 @@
 const {JSDOM} = require("jsdom");
+const he = require('he');
 
 global.pendingChanges = {};
 
@@ -60,7 +61,7 @@ bot.on('c', (parts) => {
 	if (!data.startsWith('/raw')) 
 		return;
 	
-	data = data.slice(5);
+	data = he.decode(data.slice(5));
 
 	let { document } = new JSDOM(data).window;
 
