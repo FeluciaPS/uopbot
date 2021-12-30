@@ -132,8 +132,8 @@ bot.on("c", (parts) => {
         if (typeof Commands[cmd] === "string") cmd = Commands[cmd];
 
         // Disabled commands cannot be used in the specified room
-        if (Rooms[room].settings.disabledcommands && cmd in Rooms[room].settings.disabledcommands) return;
-        
+        if (Rooms[room].settings.disabledcommands && Rooms[room].settings.disabledcommands.includes(cmd)) return;
+
         let func = Commands[cmd];
         if (typeof func === "object") {
             let target = toId(args[0]);
