@@ -130,6 +130,10 @@ bot.on("c", (parts) => {
     let [cmd, args, val] = Utils.SplitMessage(message);
     if (cmd in Commands) {
         if (typeof Commands[cmd] === "string") cmd = Commands[cmd];
+
+        // Disabled commands cannot be used in the specified room
+        if (Rooms[room].settings.disabledcommands && cmd in Rooms[room].settings.disabledcommands) return;
+        
         let func = Commands[cmd];
         if (typeof func === "object") {
             let target = toId(args[0]);
