@@ -99,9 +99,13 @@ let lasthellothere = {
     "1v1": 0,
 };
 bot.on("c", (parts) => {
+    if (!parts[4]) {
+        parts[4] = parts[3];
+        parts[3] = parts[2];
+        parts[2] = 0;
+    }
     let room = Utils.getRoom(parts[0]);
     let user = Users[toId(parts[3])];
-    if (!parts[4]) return;
     if (!user) {
         console.log(parts);
         return;
@@ -117,13 +121,9 @@ bot.on("c", (parts) => {
     // Check if any official tours need starting
     Officials.official();
 
-    if (message.includes("added a roomevent titled") || message.includes("edited the roomevent titled")) {
-        console.log("1");
-        if (room.settings.sortevents) {
-            console.log("2");
+    if (message.includes("added a roomevent titled") || message.includes("edited the roomevent titled"))
+        if (room.settings.sortevents) 
             room.send("/events sortby date | asc");
-        }
-    }
 
     // Continue as usual
     Monitor.monitor(user.name, message);
