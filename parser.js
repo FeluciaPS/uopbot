@@ -117,6 +117,10 @@ bot.on("c", (parts) => {
     // Check if any official tours need starting
     Officials.official();
 
+    if (message.includes("added a roomevent titled") || message.includes("edited the roomevent titled"))
+        if (room.settings.sortevents) 
+            room.send("/events sortby date | asc");
+
     // Continue as usual
     Monitor.monitor(user.name, message);
     logger.emit("chat", Utils.getRoom(parts[0]), user.name, message);
