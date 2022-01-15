@@ -110,7 +110,7 @@ bot.on("c", (parts) => {
         console.log(parts);
         return;
     }
-    let message = parts[4].trim();
+    let message = parts.slice(4).join('|').trim();
     for (let i in Rooms) {
         if (Rooms[i].tournament && !Rooms[i].tournament.started) Rooms[i].tournament.checkstart();
     }
@@ -161,7 +161,7 @@ bot.on("c", (parts) => {
 bot.on("pm", (parts) => {
     let room = null;
     let user = Users[toId(parts[2])];
-    let message = parts[4].trim();
+    let message = parts.slice(4).join('|').trim();
     if (!user) {
         Users.add(parts[2]);
         user = Users[toId(parts[2])];
