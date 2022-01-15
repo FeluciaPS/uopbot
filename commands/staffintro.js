@@ -7,6 +7,13 @@ let title_style = "background: rgba(100 , 100 , 255 , 0.3)";
 let header_style = "background: rgba(100 , 100 , 255 , 0.2)";
 let fieldname = "zerotolarea";
 
+let modnote = function(room, user, target, add = false) {
+	if (!room.id) room = Rooms[toId(room)];
+	if (!user.id) user = Users[toId(user)];
+	target = toId(target);
+	room.send(`/modnote ZEROTOL ${add ? "ADD" : "REMOVE"}: [${target}] by [${user.id}]${typeof add === "string" ? " (" + add + ")" : ""}`);
+}
+
 let buildEmptyTable = function(roomid) {
 	let ret = `<div id="${fieldname}">`
 	ret += `<table style="border-collapse: collapse ; border-spacing: 0px ; border: 1px solid #888 ; width: 100%" border="1">`;
@@ -132,6 +139,7 @@ module.exports = {
 			reason: args[1]
 		});
 
+		modnote(room, user, args[0], args[1]);
 		room.send('/staffintro');
 	},
 	deletezerotol: 'removezerotol',
@@ -149,6 +157,7 @@ module.exports = {
 			name: toId(args[0])
 		});
 
+		modnote(room, user, args[0]);
 		room.send('/staffintro');
 	}
 }
