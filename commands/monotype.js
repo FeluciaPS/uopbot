@@ -114,7 +114,7 @@ module.exports = {
         BLT.next = false;
         room.send(`/tour create ${format}monotype, elim,,, Official ${Tournament.formats[format + "monotype"]}`);
         room.send("/tour scouting disallow");
-        room.startTour("blt");
+        room.startTour({blt: true});
     },
     nextblt: function (room, user, args) {
         let target = user.can(room, "+") ? room : user;
