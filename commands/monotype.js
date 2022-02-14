@@ -107,14 +107,18 @@ module.exports = {
         return user.send("Done.");
     },
     startblt: function (room, user, args) {
-        if (!user.can(room, "%")) return;
+        if (!user.can(room, "+")) return;
         if (room.id !== "monotype" && !room.id.includes("test")) return;
         let format = BLT.getNext();
         BLT.last = format;
         BLT.next = false;
         room.send(`/tour create ${format}monotype, elim,,, Official ${Tournament.formats[format + "monotype"]}`);
         room.send("/tour scouting disallow");
-        room.startTour({blt: true});
+        room.startTour({
+            blt: true,
+            official: true,
+            officialname: "BLT Qualifiers"
+        });
     },
     nextblt: function (room, user, args) {
         let target = user.can(room, "+") ? room : user;

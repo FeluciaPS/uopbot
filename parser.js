@@ -364,14 +364,15 @@ bot.on("tournament", (parts, data) => {
             if (!data.format) return;
             try {
                 if (room.tournament.official && room.tournament.officialname) {
+                    let prefix = room.tournament.officialname === true ? "Official" : room.tournament.officialname;
                     if (data.format in Tournament.formats) {
                         room.tournament.updateName(Tournament.formats[data.format]);
-                        if (!room.tournament.name.startsWith("Official"))
-                            room.send(`/tour name Official ${room.tournament.name}`);
+                        if (!room.tournament.name.startsWith(prefix))
+                            room.send(`/tour name ${prefix} ${room.tournament.name}`);
                     } else {
                         room.tournament.updateName(data.format);
-                        if (!room.tournament.name.startsWith("Official"))
-                            room.send(`/tour name Official ${room.tournament.name}`);
+                        if (!room.tournament.name.startsWith(prefix))
+                            room.send(`/tour name ${prefix} ${room.tournament.name}`);
                     }
                 } else {
                     if (data.format in Tournament.formats) room.tournament.updateName(Tournament.formats[data.format]);
