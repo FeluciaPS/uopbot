@@ -25,6 +25,16 @@ module.exports = {
             Utils.checkGenerator(room, "godlygift", args);
             if (args[0] === "o") room.startTour("ot");
         },
+        nfe: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "nfe", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
+        camomons: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "camomons", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
         omotm: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return false;
             Utils.checkGenerator(room, "omotm", args);

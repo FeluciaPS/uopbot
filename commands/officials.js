@@ -118,7 +118,7 @@ global.Officials = {
         autostart: 5,
     },
     othermetas: {
-        schedule: ["bh", "mnm", "aaa", "stab", "godlygift", "omotm", "lcotm"],
+        schedule: ["bh", "aaa", "mnm", "stab", "godlygift", "nfe", "camomons"],
         times: [21],
         forcepublic: true,
         forcetimer: true,
@@ -127,9 +127,6 @@ global.Officials = {
         handler: function (room, format) {
             room.send(`/wall The daily tour!`);
             room.send(`!om ${format}`);
-            if (format !== "omotm" && format !== "lcotm") {
-                room.send(`!rfaq ${format}samples`);
-            }
         },
     },
     overused: {
