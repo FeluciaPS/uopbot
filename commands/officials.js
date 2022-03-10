@@ -80,6 +80,27 @@ global.Officials = {
         command: "ag",
         autostart: 7,
     },
+    bdspmetagames: {
+        schedule: [
+            ["ou", "mono", "ou", "ubers", "uu", "ru"], // Monday
+            ["mono", "ou", "ubers", "uu", "ru", "nu"], // Tuesday
+            ["ou", "rands", "uu", "ru", "nu", "mono"], // Wednesday
+            ["rands", "uu", "ru", "nu", "lc", "ou"], // Thursday
+            ["uu", "ru", "nu", "lc", "mono", "ou"], // Friday
+            ["ru", "nu", "lc", "mono", "ou", "rands"], // Saturday
+            ["ru", "ou", "mono", "ou", "ubers", "uu"], // Sunday
+        ],
+        times: [0, 4, 8, 12, 16, 20],
+        EST: true,
+        forcepublic: true,
+        forcetimer: true,
+        scouting: true,
+        scrappie: true,
+        command: "bdspmetagames",
+        handler: function (room, format) {
+            room.send("!om " + format);
+        },
+    },
     capproject: {
         schedule: [
             ["gen8", "gen8", "gen8", "gen8"], // Monday
