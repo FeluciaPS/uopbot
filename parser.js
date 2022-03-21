@@ -357,6 +357,7 @@ bot.on("tournament", (parts, data) => {
         if (type === "end" || type === "forceend") room.endTour(parts[3]);
         if (type === "update") {
             let data = JSON.parse(parts[3]);
+            if (!room.tournament) return;
             if (data.isStarted) {
                 room.tournament.start();
                 return;
