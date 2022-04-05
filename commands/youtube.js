@@ -36,6 +36,7 @@ let generateInput = function(type, id, ...args) {
 			throw new Error(`unknown input type: ${type}`);
 	}
 }
+
 let sendEmbed = function(user, name, activity, link, reason, content) {
 	let namematches = user.id === toId(name);
 	let data = {
@@ -68,7 +69,7 @@ let sendEmbed = function(user, name, activity, link, reason, content) {
 					}
 				],
 				footer: {
-					text: `Whitelist Application submitted by ${user.name}.` + namematches ? "" : ` PS username does NOT match claimed username`
+					text: `Whitelist Application submitted by ${user.name}.` + (namematches ? "" : ` PS username does NOT match claimed username`)
 				}
 			},
 		],
