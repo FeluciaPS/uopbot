@@ -58,6 +58,10 @@ global.Ranks = {
 };
 
 exports.SplitMessage = function (message) {
+    if (message.startsWith("``") && message.endsWith("``")) {
+        message = message.slice(2, message.length - 2);
+    }
+
     let a = message.startsWith(Config.char) ? message.split(" ")[0].substring(Config.char.length) : false;
     let b = message
         .substring(a.length + 2)
