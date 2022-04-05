@@ -58,7 +58,7 @@ global.Ranks = {
 };
 
 exports.SplitMessage = function (message) {
-    if (message.startsWith("``") && message.endsWith("``")) {
+    if (message.startsWith("```") && message.endsWith("```")) {
         message = message.slice(2, message.length - 2);
     }
 

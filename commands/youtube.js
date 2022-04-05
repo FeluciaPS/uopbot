@@ -142,17 +142,19 @@ module.exports = {
 	requestwhitelist: function(room, user, args) {
 		if (!Config.youtubehook) 
 			return;
-		if (room.id != "youtube")
-			return;
 		
-		if (!args[0]) 
+		if (!args[0]) {
+			if (room.id !== "youtube") return
 			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm()}`);
+		} 
 
 		args = args.join(', ').split(' -- ');
 		let [name, activity, link, reason, content, ...rest] = args.map(x => x.trim());
-		if (rest.length) 
+		if (rest.length) {
+			console.log(rest);
 			// something went wrong
 			return;
+		}
 
 		if (!name)
 			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("The username field is mandatory.")}`);
