@@ -18,7 +18,7 @@ let generateInput = function(type, id, ...args) {
 		case "radio":
 			let ret = [];
 			for (let i in args) {
-				ret.push(`<input type="radio" name="${id}" value="${args[i]}">`);
+				ret.push(`<input type="radio" name="${id}" value="${i}"><label>${args[i]}</label>`);
 			}
 			return ret.join('<br>');
 		default:
@@ -42,25 +42,25 @@ let buildForm = function(error = false) {
 	// Form
 	ret += `<form style="margin:5px" data-submitsend="/w ${Config.username}, !code .submitwhitelist {name} -- {activity} -- {link} -- {reason} -- {content}">`;
 	
-	ret += `<label>What is your PS! username?</label>`;
+	ret += `<label>What is your PS! username?</label><br>`;
 	ret += `${generateInput("short", "name", "username")}`;
-	ret += `<br>`;
+	ret += `<br><br>`;
 
-	ret += `<label>Have you been chatting in the room for more than 2 weeks?</label>`;
+	ret += `<label>Have you been chatting in the room for more than 2 weeks?</label><br>`;
 	ret += `${generateInput("radio", "activity", "Yes, for more than a month", "Yes, for around 2 weeks", "I'm not sure")}`;
-	ret += `<br>`;
+	ret += `<br><br>`;
 
-	ret += `<label>Explain in a few sentences why you want to be whitelisted</label>`;
+	ret += `<label>Explain in a few sentences why you want to be whitelisted</label><br>`;
 	ret += `${generateInput("long", "reason")}`;
-	ret += `<br>`;
+	ret += `<br><br>`;
 
-	ret += `<label>Please give us a link to your channel</label>`;
+	ret += `<label>Please give us a link to your channel</label><br>`;
 	ret += `${generateInput("short", "link", "channel url")}`;
-	ret += `<br>`;
+	ret += `<br><br>`;
 
-	ret += `<label>Briefly describe your content, this is not mandatory</label>`;
+	ret += `<label>Briefly describe your content, this is not mandatory</label><br>`;
 	ret += `${generateInput("long", "content")}`;
-	ret += `<br>`;
+	ret += `<br><br>`;
 
 	ret += `<input class="button" type="submit" />`;
 	ret += `</form>`;
