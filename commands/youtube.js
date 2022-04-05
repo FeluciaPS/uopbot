@@ -146,7 +146,7 @@ module.exports = {
 		if (!args[0]) {
 			if (room.id !== "youtube") return
 			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm()}`);
-		} 
+		}
 
 		args = args.join(', ').split(' -- ');
 		let [name, activity, link, reason, content, ...rest] = args.map(x => x.trim());

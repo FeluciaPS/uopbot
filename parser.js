@@ -182,6 +182,14 @@ bot.on("pm", (parts) => {
         if (Rooms[split[0]]) room = Rooms[split[0]];
     }
 
+    if (message.startsWith('/raw')) {
+		message = message.slice(5);
+		let regex = new RegExp("<[^\>]+[^/]>", "gi");
+		message = message.replace('</summary>', '<br />').replace(regex, '').replace(/<br \/>/gi, '\n')
+			.replace(/&gt;/gi, '>').replace(/&lt;/gi, '<').replace(/&quot;/gi, '"').replace(/&amp;/gi, '&').replace(/&apos;/gi, '\'').replace(/&#x2f;/gi, '/').trim();
+		message = message.replace(/\<wbr \/\>/gi, '');
+	}
+    
     let [cmd, args, val] = Utils.SplitMessage(message);
     if (cmd in Commands) {
         if (typeof Commands[cmd] === "string") cmd = Commands[cmd];
