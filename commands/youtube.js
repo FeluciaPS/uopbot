@@ -1,5 +1,6 @@
 const {JSDOM} = require("jsdom");
 const he = require('he');
+const { toId } = require("../utils");
 
 let link = function(url, text) {
 	return `<a href="${url}">${text}</a>`;
@@ -7,9 +8,7 @@ let link = function(url, text) {
 
 const psrules = "https://pokemonshowdown.com/rules";
 const ytrules = "https://showdownyt.weebly.com/rules.html";
-
 const styling = `background: rgba(100, 100, 255, 0.1); padding: 80px; height:100%`;
-
 
 const questions = {
 	"name": "What is your PS! username?",
@@ -18,6 +17,9 @@ const questions = {
 	"link": "Please give us a link to your channel",
 	"content": "Briefly describe your content, this is not mandatory"
 }
+
+let pending = {};
+const WHITELIST_TIMEOUT = 1000 * 60 * 60 * 24 * 4 // 4 days
 
 let generateInput = function(type, id, ...args) {
 	switch (type) {
@@ -93,6 +95,15 @@ let buildSuccessPage = function() {
 	return ret;
 }
 
+let buildPendingPage = function() {
+	let ret = `<div style="${styling}">`
+	ret += `<h1>YouTube Whitelist Application</h1>`;
+	ret += `<hr>You've submitted an application recently. We're reviewing it and will get back to you as soon as possible.`;
+	ret += `<br>If you really need to make a new application, please message a staff member.`;
+	ret += `</div>`;
+	return ret;
+}
+
 let buildForm = function(error = false) {
 	let ret = `<div style="${styling}">`
 	ret += `<h1>YouTube Whitelist Application</h1>`;
@@ -145,8 +156,15 @@ module.exports = {
 		if (!Config.youtubehook) 
 			return;
 		
+		if (pending[user.id]) {
+			if (Date.now() > pending[user.id]) 
+				delete pending[user.id];
+			else
+				return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildPendingPage()}`)
+		}
+
 		if (!args[0]) {
-			if (room.id !== "youtube") return
+			if (room.id !== "youtube") return;
 			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm()}`);
 		}
 
@@ -168,6 +186,12 @@ module.exports = {
 			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please fill out why you want to be whitelisted.")}`);
 		
 		sendEmbed(user, name, activity, link, reason, content);
-		return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildSuccessPage()}`);
+		pending[user.id] = Date.now() + WHITELIST_TIMEOUT;
+		return Rooms.youtube.send(`/sendhtmlpage ${user.id}, whitelist, ${buildSuccessPage()}`);
+	},
+	freewhitelist: function(room, user, args) {
+		if (!user.can(Rooms.youtube, '%')) return;
+		delete pending[toId(args[0])];
+		user.send(`User ${args[0]} can now make another whitelist application.`);
 	}
 }
