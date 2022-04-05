@@ -18,6 +18,7 @@ const questions = {
 	"link": "Please give us a link to your channel",
 	"content": "Briefly describe your content, this is not mandatory"
 }
+
 let generateInput = function(type, id, ...args) {
 	switch (type) {
 		case "short":
@@ -35,8 +36,8 @@ let generateInput = function(type, id, ...args) {
 			throw new Error(`unknown input type: ${type}`);
 	}
 }
-
 let sendEmbed = function(user, name, activity, link, reason, content) {
+	let namematches = user.id === toId(name);
 	let data = {
 		username: "Whitelist Application",
 		embeds: [
@@ -44,9 +45,6 @@ let sendEmbed = function(user, name, activity, link, reason, content) {
 				title: "__New Whitelist Application__",
 				description: "",
 				color: 4054098,
-				author: {
-					name: `${user.name}`,
-				},
 				fields: [
 					{
 						"name": questions.name,
@@ -68,7 +66,10 @@ let sendEmbed = function(user, name, activity, link, reason, content) {
 						"name": questions.content,
 						"value": content ? content : "-"
 					}
-				]
+				],
+				footer: {
+					text: `Whitelist Application submitted by ${user.name}.` + namematches ? "" : ` PS username does NOT match claimed username`
+				}
 			},
 		],
 	};
@@ -148,7 +149,7 @@ module.exports = {
 			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm()}`);
 		}
 
-		args = args.join(', ').split(' -- ');
+		args = args.join(', ').split('--');
 		let [name, activity, link, reason, content, ...rest] = args.map(x => x.trim());
 		if (rest.length) {
 			console.log(rest);
