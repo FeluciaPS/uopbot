@@ -12,13 +12,13 @@ let generateInput = function(type, id, ...args) {
 	switch (type) {
 		case "short":
 			if (!args[0]) throw new Error("generateInput: Short input must have a placeholder argument.");
-			return `<input type="text" style="width:50%" name="${id}" placeholder="${args[0]}>`;
+			return `<input type="text" style="width:50%" name="${id}" placeholder="${args[0]}">`;
 		case "long":
 			return `<textarea style="width:80%; height: 15vh" name="${id}"></textarea>`;
 		case "radio":
 			let ret = [];
 			for (let i in args) {
-				ret.push(`<input type="radio" name="${id}" value="${args[i]}>`);
+				ret.push(`<input type="radio" name="${id}" value="${args[i]}">`);
 			}
 			return ret.join('<br>');
 		default:
@@ -27,7 +27,7 @@ let generateInput = function(type, id, ...args) {
 }
 
 let buildForm = function(error = false) {
-	let ret = `<div style="background: rgba(100, 100, 255, 0.2); padding: 80px">`
+	let ret = `<div style="background: rgba(100, 100, 255, 0.2); padding: 80px; height:100%">`
 	ret += `<h1>YouTube Whitelist Application</h1>`;
 	ret += `<hr>Before applying make sure you meet the following requirements:<ul>`;
 	ret += `<li>You must have at least 2 weeks of chatting in the YouTube chatroom. This does not mean you must be extremely active, but it does mean we want to have seen your name in chat relatively regularly for more than just 1 message.</li>`;
