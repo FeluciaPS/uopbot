@@ -177,13 +177,13 @@ module.exports = {
 		}
 
 		if (!name)
-			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("The username field is mandatory.")}`);
+			return Rooms.youtube.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("The username field is mandatory.")}`);
 		if (!link)
-			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please fill out a link to your channel.")}`);
+			return Rooms.youtube.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please fill out a link to your channel.")}`);
 		if (!activity)
-			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please select an activity option.")}`);
+			return Rooms.youtube.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please select an activity option.")}`);
 		if (!reason)
-			return room.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please fill out why you want to be whitelisted.")}`);
+			return Rooms.youtube.send(`/sendhtmlpage ${user.id}, whitelist, ${buildForm("Please fill out why you want to be whitelisted.")}`);
 		
 		sendEmbed(user, name, activity, link, reason, content);
 		pending[user.id] = Date.now() + WHITELIST_TIMEOUT;
