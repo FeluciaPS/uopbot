@@ -5,6 +5,9 @@ let link = function(url, text) {
 	return `<a href="${url}">${text}</a>`;
 }
 
+const psrules = "https://pokemonshowdown.com/rules";
+const ytrules = "https://showdownyt.weebly.com/rules.html";
+
 let generateInput = function(type, id, ...args) {
 	switch (type) {
 		case "short":
