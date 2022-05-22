@@ -118,8 +118,8 @@ global.Officials = {
             room.send("/wall Rules: https://pastebin.com/raw/Z3SgDjjL");
         },
     },
-    nationaldex: {
-        times: [0, 18, 19, 22, 23],
+    nationaldexou: {
+        times: [0, 8, 9, 19, 22],
         formats: ["gen8", "gen8", "gen8", "gen8", "gen8"],
         scrappie: true,
         command: "natdex",
