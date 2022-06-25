@@ -59,8 +59,11 @@ let removeTableRow = function(room, fielddata, name) {
 	let target = false;
     console.log('\n\n');
 	for (let element of table.querySelectorAll("tr")) {
-        let username = element.querySelector("username");
-        if (!username) continue;
+		let cells = element.querySelectorAll("<td>");
+		if (cells.length !== 3) continue;
+		let cell = cells[0];
+        let username = cell.querySelector("username");
+		if (!username) username = cell;
         
         if (toId(username.innerHTML) === name) target = element.rowIndex;
     }
