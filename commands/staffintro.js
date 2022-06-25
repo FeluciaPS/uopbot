@@ -130,7 +130,7 @@ module.exports = {
 		if (!user.can(room, "%")) return;
 		if (!user.can(room, "@")) return user.send("You need to be at least a moderator to use this feature.");
 
-		args[1] = args.slice(1).join(',');
+		args[1] = args.slice(1).map(x => x.trim()).join(', ');
 		
 		if (!pendingChanges[room.id]) {
 			pendingChanges[room.id] = [];
