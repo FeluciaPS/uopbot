@@ -104,7 +104,7 @@ bot.on('c', (parts) => {
 	room = Rooms[room];
 
 	if (data.startsWith('/log ')) {
-		if (room.id !== "wifi") return;
+		if (!room.settings.escalate) return;
 		let action = data.slice(4);
 		let type = false;
 		if (action.match(/was warned by .{1,19}\./)) type = "warn";
