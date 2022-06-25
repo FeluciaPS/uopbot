@@ -53,6 +53,27 @@ let addTableRow = function(room, fielddata, name, reason) {
 	return true;
 }
 
+let findTableRow = function(room, fielddata, name) {
+	let table = fielddata.querySelector("table");
+
+	let target = false;
+    console.log('\n\n');
+	for (let element of table.querySelectorAll("tr")) {
+		let cells = element.querySelectorAll("td");
+		if (cells.length !== 3) continue;
+		let cell = cells[0];
+        let username = cell.querySelector("username");
+		if (!username) username = cell;
+        
+        if (toId(username.innerHTML) === name) target = element.rowIndex;
+    }
+
+	if (!target)
+		return false;
+
+	return true;
+}
+
 let removeTableRow = function(room, fielddata, name) {
 	let table = fielddata.querySelector("table");
 
@@ -81,6 +102,25 @@ bot.on('c', (parts) => {
 	if (!data) return;
 
 	room = Rooms[room];
+
+	if (data.startsWith('/log ')) {
+		if (room.id !== "wifi") return;
+		let action = data.slice(4);
+		let type = false;
+		if (action.match(/was warned by .{1,19}\./)) type = "warn";
+		if (action.match(/was muted by .{1,19} for 7 minutes\./)) type = "mute";
+		if (action.match(/was muted by .{1,19} for 1 hour\./)) type = "hourmute";
+
+		if (!type) return;
+		let user = action.split(/was (muted|warned) by .{1,19}/)[0];
+		user = toId(user);
+		if (!pendingChanges[room.id]) pendingChanges[room.id] = [];
+		pendingChanges[room.id].push({
+			type: "escalate",
+			punishment: type,
+			name: user
+		});
+	}
 
 	if (!pendingChanges[room.id]) 
 		return;
@@ -117,6 +157,22 @@ bot.on('c', (parts) => {
 		}
 		else if (i.type === "addrow") {
 			success = success || addTableRow(room, table, i.name, i.reason);
+		}
+		else if (i.type === "escalate") {
+			let found = findTableRow(room, table, i.name);
+			if (!found)
+				continue;
+			
+			let punishments = [
+				"warn",
+				"mute",
+				"hourmute",
+				"roomban"
+			];
+
+			let index = punishments.indexOf(i.punishment) + 1;
+
+			room.send(`/${punishments[index]} ${i.name}, Escalated punishment for low tolerance user.`);
 		}
 	}
 	pendingChanges[room.id] = [];
