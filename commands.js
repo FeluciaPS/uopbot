@@ -164,7 +164,7 @@ let commands = {
         if (room != user) return;
         console.log("test 2");
         if (!args[0]) return user.send("Usage: ``.modnote [room], [message]``");
-        room = Utils.Utils.toRoomId(args[0]);
+        room = Utils.toRoomId(args[0]);
         console.log(Object.keys(Rooms));
         console.log(Rooms[room]);
         if (!Rooms[room]) return user.send("Room doesn't exist, or I'm not in it");
@@ -353,7 +353,9 @@ let commands = {
         },
     },
     settings: {
-        '': 'help',
+        '': function(room, user, args) {
+            
+        },
         help: function(room, user, args) {
             let target = user.can(room, '#') ? room : user;
             if (args.length === 0) {
