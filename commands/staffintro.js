@@ -120,6 +120,7 @@ bot.on('c', (parts) => {
 			punishment: type,
 			name: user
 		});
+		room.send('/staffintro');
 	}
 
 	if (!pendingChanges[room.id]) 
