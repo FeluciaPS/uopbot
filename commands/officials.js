@@ -51,9 +51,9 @@ global.Officials = {
         autostart: 7,
         handler: function (room, format) {
             room.send(".board");
-            if (!room.settings.tourhook) return;
+            if (!room.settings.officialhook) return;
             let request = require('request');
-            request({url:room.settings.tourhook, body: {content:`<@&887737042786746369> **Official ${format}** tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
+            request({url:room.settings.officialhook, body: {content:`<@&887737042786746369> **Official ${format}** tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
     },
     "2v2": {
@@ -120,7 +120,7 @@ global.Officials = {
     },
     nationaldexou: {
         times: [0, 8, 9, 19, 22],
-        formats: ["gen8", "gen8", "gen8", "gen8", "gen8"],
+        formats: ["gen9", "gen9", "gen9", "gen9", "gen9"],
         scrappie: true,
         command: "natdex",
     },

@@ -11,21 +11,38 @@ let buildRuleset = function (meta) {
 
 module.exports = {
     natdex: {
-        "": "gen8",
+        "": "gen9",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9nationaldex", args);
+        },
+        uu: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9nationaldexuu", args);
+        },
+        bh: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9nationaldexbh", args);
+            room.send("!rfaq BH");
+        },
+        mono: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9nationaldexmonotype", args);
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nationaldex", args);
         },
-        uu: function (room, user, args) {
+        gen8uu: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nationaldexuu", args);
         },
-        bh: function (room, user, args) {
+        gen8bh: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nationaldexbh", args);
             room.send("!rfaq BH");
         },
-        "1v1": function (room, user, args) {
+        "gen81v1": function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] National Dex 1v1");
             room.send(buildRuleset("natdex"));
@@ -40,7 +57,7 @@ module.exports = {
             Utils.checkGenerator(room, "gen8almostanyability", args, "[Gen 8] National Dex AAA");
             room.send(buildRuleset("ndaaa"));
         },
-        mono: function (room, user, args) {
+        gen8mono: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nationaldexmonotype", args);
         },
