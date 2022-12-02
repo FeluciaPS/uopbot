@@ -1,6 +1,10 @@
 module.exports = {
     nfe: {
-        "": "gen8",
+        "": "gen9",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen8nfe", args);
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nfe", args);

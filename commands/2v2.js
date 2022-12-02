@@ -2,7 +2,11 @@ let moncountrule = "max team size = 4, min team size = 2, picked team size = 2";
 
 module.exports = {
     "2v2": {
-        "": "gen8",
+        "": "gen9",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen92v2doubles", args);
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen82v2doubles", args);

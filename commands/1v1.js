@@ -254,6 +254,10 @@ module.exports = {
     },
     "1v1": {
         "": "help",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen91v1", args);
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen81v1", args);

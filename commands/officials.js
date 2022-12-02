@@ -74,11 +74,12 @@ global.Officials = {
         autostart: 7,
     },
     anythinggoes: {
-        schedule: ["galar", "gen7", "natdex", "gen6", "galar", "gen7", "galar"],
+        schedule: ["gen9", "gen7", "galar", "gen6", "gen9", "gen7", "gen9"],
         times: [18],
         scouting: true,
         command: "ag",
         autostart: 7,
+        autodq: 2
     },
     bdspmetagames: {
         schedule: [

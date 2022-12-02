@@ -184,7 +184,12 @@ module.exports = {
     },
     mono: {
         // Old (and current) generations
-        "": "gen8",
+        "": "gen9",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9monotype", args);
+            room.send("/tour scouting off");
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8monotype", args);

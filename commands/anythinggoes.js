@@ -1,6 +1,10 @@
 module.exports = {
     ag: {
-        "": "natdex",
+        "": "gen9",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9anythinggoes", args);
+        },
         natdex: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nationaldexag", args);

@@ -1,6 +1,10 @@
 module.exports = {
     overused: {
-        "": "gen8",
+        "": "gen9",
+        gen9: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9ou", args, args[0] === "official" ? "[Gen 8] OURLT" : undefined);
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8ou", args, args[0] === "official" ? "[Gen 8] OURLT" : undefined);
