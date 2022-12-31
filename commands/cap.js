@@ -1,6 +1,6 @@
 module.exports = {
     cap: {
-        "": "gen8",
+        "": "gen9",
         gen9: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9cap", args);

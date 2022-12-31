@@ -104,13 +104,13 @@ global.Officials = {
     },
     capproject: {
         schedule: [
-            ["gen8", "gen8", "gen8", "gen8"], // Monday
-            ["gen8", "gen8", "gen8", "gen4"], // Tuesday
-            ["gen8", "gen8", "gen8", "gen5"], // Wednesday
-            ["gen8", "gen8", "gen8", "gen6"], // Thursday
-            ["gen8", "gen7", "gen8", "gen8"], // Friday
-            ["gen8", "gen8", "gen8", "gen7"], // Saturday
-            ["gen8", "gen6", "gen8", "gen8"], // Sunday
+            ["gen9", "gen9", "gen9", "gen9"], // Monday
+            ["gen9", "gen9", "gen9", "gen5"], // Tuesday
+            ["gen9", "gen9", "gen9", "gen6"], // Wednesday
+            ["gen9", "gen9", "gen9", "gen7"], // Thursday
+            ["gen9", "gen8", "gen9", "gen9"], // Friday
+            ["gen9", "gen9", "gen9", "gen8"], // Saturday
+            ["gen9", "gen7", "gen9", "gen9"], // Sunday
         ],
         times: [2, 12, 18, 22],
         scrappie: true,
