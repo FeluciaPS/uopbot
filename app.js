@@ -31,6 +31,7 @@ try {
     global.Utils = require("./utils.js");
     global.toId = Utils.toId;
     global.colors = require("colors");
+    global.automod = require("./automod.js");
     global.Parse = require("./parser.js");
     global.Rooms = require("./Room.js");
     global.Users = require("./User.js");

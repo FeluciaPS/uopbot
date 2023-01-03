@@ -96,17 +96,6 @@ let removeTableRow = function(room, fielddata, name) {
 	return true;
 }
 
-bot.on('trypunish', (room, type, user, reason = "Automated Punishment") => {
-	if (!pendingChanges[room.id]) pendingChanges[room.id] = [];
-	pendingChanges[room.id].push({
-		type: "punish",
-		punishment: type,
-		name: user.name ? user.name : user,
-		reason: reason
-	});
-	room.send('/staffintro');
-});
-
 bot.on('c', (parts) => {
 	let room = Utils.getRoom(parts[0]);
     let data = parts.slice(4).join('|').trim();
