@@ -114,7 +114,7 @@ bot.on('c', (parts) => {
 		if (!type) return;
 		let user = action.split(/was (muted|warned) by .{1,19}/)[0];
 		let author = action.split(/was (muted|warned) by /)[1];
-		if (toId(author) !== toId(Config.username)) {
+		if (toId(author) !== Users.self.id) {
 			user = toId(user);
 			if (!pendingChanges[room.id]) pendingChanges[room.id] = [];
 			pendingChanges[room.id].push({
