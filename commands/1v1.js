@@ -286,6 +286,11 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen31v1", args);
         },
+        gsc: "gen2",
+        gen2: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen21v1", args);
+        },
         aaa: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen71v1", args, "[Gen 7] AAA 1v1");
