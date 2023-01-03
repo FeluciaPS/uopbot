@@ -113,14 +113,17 @@ bot.on('c', (parts) => {
 
 		if (!type) return;
 		let user = action.split(/was (muted|warned) by .{1,19}/)[0];
-		user = toId(user);
-		if (!pendingChanges[room.id]) pendingChanges[room.id] = [];
-		pendingChanges[room.id].push({
-			type: "escalate",
-			punishment: type,
-			name: user
-		});
-		room.send('/staffintro');
+		let author = action.split(/was (muted|warned) by /)[1];
+		if (toId(author) !== toId(Config.username)) {
+			user = toId(user);
+			if (!pendingChanges[room.id]) pendingChanges[room.id] = [];
+			pendingChanges[room.id].push({
+				type: "escalate",
+				punishment: type,
+				name: user
+			});
+			room.send('/staffintro');
+		}
 	}
 
 	if (!pendingChanges[room.id]) 
