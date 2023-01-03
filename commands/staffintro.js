@@ -96,6 +96,17 @@ let removeTableRow = function(room, fielddata, name) {
 	return true;
 }
 
+bot.on('trypunish', (room, type, user, reason = "Automated Punishment") => {
+	if (!pendingChanges[room.id]) pendingChanges[room.id] = [];
+	pendingChanges[room.id].push({
+		type: "punish",
+		punishment: type,
+		name: user.name ? user.name : user,
+		reason: reason
+	});
+	room.send('/staffintro');
+});
+
 bot.on('c', (parts) => {
 	let room = Utils.getRoom(parts[0]);
     let data = parts.slice(4).join('|').trim();
@@ -161,6 +172,22 @@ bot.on('c', (parts) => {
 		}
 		else if (i.type === "addrow") {
 			success = success || addTableRow(room, table, i.name, i.reason);
+		}
+		else if (i.type === "punish") {
+			let found = findTableRow(room, table, i.name);
+			if (!found)
+				continue;
+			
+			let punishments = [
+				"warn",
+				"mute",
+				"hourmute",
+				"roomban"
+			];
+
+			let index = punishments.indexOf(i.punishment) + 1;
+
+			room.send(`/${punishments[index]} ${i.name}, ${i.reason}`);
 		}
 		else if (i.type === "escalate") {
 			let found = findTableRow(room, table, i.name);
