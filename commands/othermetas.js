@@ -45,5 +45,10 @@ module.exports = {
             Utils.checkGenerator(room, "lcotm", args);
             if (args[0] === "o") room.startTour("ot");
         },
+        pic: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9partnersincrime", args);
+            if (args[0] === "o") room.startTour("ot");
+        }
     },
 };
