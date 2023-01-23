@@ -9,7 +9,11 @@ module.exports = {
         },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen82v2doubles", args);
+            Utils.checkGenerator(room, "gen8doublesou", args, "[Gen 8] 2v2 Doubles");
+            room.send(
+                "/tour rules Accuracy Moves Clause, Z-Move Clause, +Gengar-Mega, -Kangaskhan-Mega, -Salamence-Mega, -Final Gambit, -Focus Sash, -Tapu Lele, +Snorlax, -Perish Song, " +
+                    moncountrule
+            );
         },
         gen7: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
@@ -24,14 +28,14 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen6doublesou", args, "[Gen 6] 2v2 Doubles");
             room.send(
-                "/tour rules Accuracy Moves Clause, -Perish Song, -Focus Sash, -Kangaskhan-Mega, " + moncountrule
+                "/tour rules Accuracy Moves Clause, Gravity Sleep Clause, -Focus Sash, -Perish Song, -Final Gambit, -Kangaskhan-Mega, -Ally Switch, Team Preview, " + moncountrule
             );
         },
         bw: "gen5",
         gen5: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen5doublesou", args, "[Gen 5] 2v2 Doubles");
-            room.send("/tour rules Accuracy Moves Clause, -Perish Song, -Focus Sash, -Kingdra, " + moncountrule);
+            room.send("/tour rules Accuracy Moves Clause, -Focus Sash, -Kingdra, -Final Gambit, -Perish Song, -Ally Switch, Team Preview, " + moncountrule);
         },
         dp: "gen4",
         gen4: function (room, user, args) {
@@ -41,18 +45,18 @@ module.exports = {
         },
         inverse: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen82v2doubles", args, "[Gen 8] Inverse 2v2");
+            Utils.checkGenerator(room, "gen92v2doubles", args, "[Gen 9] Inverse 2v2");
             room.send("/tour rules Inverse Mod");
         },
         monotype: "mono",
         mono: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen82v2doubles", args, "[Gen 8] Monotype 2v2");
+            Utils.checkGenerator(room, "gen92v2doubles", args, "[Gen 9] Monotype 2v2");
             room.send("/tour rules Same Type Clause");
         },
         chill: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen82v2doubles", args);
+            Utils.checkGenerator(room, "gen92v2doubles", args);
             room.startTour("chill");
         },
         help: function (room, user, args) {
