@@ -3,7 +3,7 @@
 global.BLT = {
     next: false,
     last: false,
-    tours: ["gen8", "gen8", "gen8", "gen7", "gen6", "gen5"],
+    tours: ["gen9", "gen9", "gen9", "gen9", "gen8", "gen7", "gen6", "gen5"],
     getNext: function () {
         if (BLT.next) return BLT.next;
         let x = Object.assign([], BLT.tours);
