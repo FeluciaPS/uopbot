@@ -285,6 +285,9 @@ let Schedules = {
             if (Officials[room] && Officials[room].monthly) {
                 Officials[room].schedule = data;
             }
+            if (data.isHiddenData) {
+                Officials[room] = data;
+            }
         }
     },
 };
@@ -460,7 +463,8 @@ module.exports = {
                         schedule[date][time] = meta;
                     }
 
-                    Schedules.save(room, schedule);
+                    if (Officials[room].isHiddenData) Schedules.save(room, Officials[room])
+                    else Schedules.save(room, schedule);
                     return user.send("Official schedule successfully updated.");
                 });
             })

@@ -33,9 +33,13 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen2ou", args, args[0] === "official" ? "[Gen 2] OURLT" : undefined);
         },
-        gen2: function (room, user, args) {
+        gen1: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen1ou", args, args[0] === "official" ? "[Gen 1] OURLT" : undefined);
         },
-    },
+        natdex: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "nationaldex", args, args[0] === "official" ? "[Gen 1] OURLT" : undefined);
+        }
+    }
 };
