@@ -257,7 +257,12 @@ global.Officials = {
             }
 
             room.send("/modnote OFFICIAL: " + format);
-            Commands[data.command][format](room, Users.staff, data.args ? [...data.args] : []);
+            if (!Commands[data.command][format]) {
+                room.send(`/tour new ${format}, elim`);
+            }
+            else {
+                Commands[data.command][format](room, Users.staff, data.args ? [...data.args] : []);
+            }
             room.startTour(data);
 
             if (data.handler) data.handler(room, format);
@@ -463,7 +468,10 @@ module.exports = {
                         schedule[date][time] = meta;
                     }
 
-                    if (Officials[room].isHiddenData) Schedules.save(room, Officials[room])
+                    if (Officials[room].isHiddenData) {
+                        Officials[room].schedule = schedule;
+                        Schedules.save(room, Officials[room])
+                    }
                     else Schedules.save(room, schedule);
                     return user.send("Official schedule successfully updated.");
                 });
