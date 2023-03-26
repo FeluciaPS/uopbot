@@ -29,7 +29,7 @@ module.exports = function (id, challstr) {
         Config.password +
         "&challengekeyid=" +
         id +
-        "&challenge=" +
+        "&challstr=" +
         challstr;
     requestOptions.headers = {
         "Content-Type": "application/x-www-form-urlencoded",
