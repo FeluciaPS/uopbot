@@ -18,7 +18,7 @@ try {
 
     // Config
     global.FS = require("fs");
-    if (!fs.existsSync('./config.js')) {
+    if (!FS.existsSync('./config.js')) {
         global.Config = require("./config-example.js");
         logger.emit("error", "Config.js doesn't exist. Cloning from config-example.js...");
         FS.copyFile("config-example.js", "config.js", function () {});
