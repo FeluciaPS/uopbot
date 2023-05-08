@@ -49,6 +49,36 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return false;
             Utils.checkGenerator(room, "gen9partnersincrime", args);
             if (args[0] === "o") room.startTour("ot");
+        },
+        covergence: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9convergence", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
+        forte: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9fortemons", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
+        shared: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9sharedpower", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
+        crossevo: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9crossevolution", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
+        revelation: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9revelationmons", args);
+            if (args[0] === "o") room.startTour("ot");
+        },
+        trademarked: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9trademarked", args);
+            if (args[0] === "o") room.startTour("ot");
         }
     },
 };

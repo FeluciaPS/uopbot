@@ -140,8 +140,16 @@ global.Officials = {
         autostart: 5,
     },
     othermetas: {
-        schedule: ["bh", "aaa", "mnm", "stab", "godlygift", "nfe", "pic"],
-        times: [21],
+        schedule: [
+            ["camomons", "bh"], 
+            ["convergence", "aaa"], 
+            ["forte", "mnm"], 
+            ["shared", "stab"], 
+            ["crossevo", "godlygift"], 
+            ["revelation", "nfe"], 
+            ["trademarked", "pic"]
+        ],
+        times: [18, 21],
         forcepublic: true,
         forcetimer: true,
         scouting: true,
