@@ -126,8 +126,8 @@ global.Officials = {
         command: "natdex",
     },
     nationaldexmonotype: {
-        times: [14, 19, 23],
-        formats: ["mono", "mono", "mono"],
+        times: [0, 12, 14, 16, 18, 20, 22],
+        formats: ["mono", "mono", "threat", "monoubers", "mono", "threat", "monoubers"],
         scrappie: true,
         command: "natdex"
     },

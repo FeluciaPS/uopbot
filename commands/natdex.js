@@ -66,5 +66,57 @@ module.exports = {
             Utils.checkGenerator(room, "gen8camomons", args, "[Gen 8] National Dex Camomons");
             room.send(buildRuleset("ndcamo"));
         },
+        monoubers: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "nationaldexubers", args, "[NatDex] Monotype Ubers");
+            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, -Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause, -Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian, -Zacian-Crowned, +Miraidon");
+        },
+        threat: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+
+            // I can't be bothered to implement nonrandom monothreat
+            const types = [
+                "Normal",
+                "Fire",
+                "Water",
+                "Grass",
+                "Electric",
+                "Ice",
+                "Fighting",
+                "Poison",
+                "Ground",
+                "Flying",
+                "Psychic",
+                "Bug",
+                "Rock",
+                "Ghost",
+                "Dark",
+                "Dragon",
+                "Steel",
+                "Fairy",
+            ];
+
+            const dayTypes = {
+                0: [ "Ground", "Rock", false ],
+                1: [ "Water", "Fire", "Grass" ],
+                2: [ "Dark", "Fighting", "Psychic" ],
+                3: [ "Steel", "Fairy", "Dragon" ],
+                4: [ "Electric", "Ice", "Flying" ],
+                5: [ "Normal", "Ghost", false ],
+                6: [ "Bug", "Poison", false ],
+            }
+
+            const day = new Date(Date.now()).getDay();
+
+            const typeOptions = dayTypes[day];
+            let type = typeOptions[Math.floor(Math.random() * typeOptions.length)];
+            if (!type) type = types[Math.floor(Math.random() * types.length)];
+
+            Utils.checkGenerator(room, "gen9nationaldexmonotype", args, "[Gen 9] Monothreat " + type);
+            room.send(`/tour rules Force Monotype = ${type}`);
+            room.send(`/tour autostart 8`);
+            room.send("/tour scouting off");
+            room.send("!rfaq threat");
+        },
     },
 };
