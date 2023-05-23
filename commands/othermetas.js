@@ -50,7 +50,7 @@ module.exports = {
             Utils.checkGenerator(room, "gen9partnersincrime", args);
             if (args[0] === "o") room.startTour("ot");
         },
-        covergence: function (room, user, args) {
+        convergence: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return false;
             Utils.checkGenerator(room, "gen9convergence", args);
             if (args[0] === "o") room.startTour("ot");
