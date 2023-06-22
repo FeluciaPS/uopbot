@@ -98,7 +98,7 @@ let removeTableRow = function(room, fielddata, name) {
 
 bot.on('c', (parts) => {
 	let room = Utils.getRoom(parts[0]);
-    let data = parts.slice(4).join('|').trim();
+    let data = parts.slice(3).join('|').trim();
 	if (!data) return;
 
 	room = Rooms[room];
