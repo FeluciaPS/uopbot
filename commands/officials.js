@@ -120,8 +120,8 @@ global.Officials = {
         },
     },
     nationaldexou: {
-        times: [8, 9, 10, 17, 18, 20, 22, 23],
-        formats: ["gen9", "gen9", "gen8", "gen9","gen8", "gen8", "gen9", "gen9"],
+        times: [0, 8, 9, 10, 18, 19, 20, 22],
+        formats: ["gen9", "gen9", "gen9", "gen8", "gen8","gen9", "gen8", "gen9"],
         scrappie: true,
         command: "natdex",
     },
