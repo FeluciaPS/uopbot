@@ -101,6 +101,8 @@ bot.on('c', (parts) => {
     let data = parts.slice(3).join('|').trim();
 	if (!data) return;
 
+	if (data.startsWith("~")) data = data.slice(2);
+
 	room = Rooms[room];
 
 	if (data.startsWith('/log ')) {
@@ -129,7 +131,6 @@ bot.on('c', (parts) => {
 	if (!pendingChanges[room.id]) 
 		return;
 
-	console.log(data.slice(0, 25));
 	// These are not the droids we're looking for
 	if (!data.startsWith('/raw')) 
 		return;
