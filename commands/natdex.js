@@ -29,6 +29,16 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9nationaldexmonotype", args);
         },
+        ubersmono: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "nationaldexubers", args, "[Gen 9] NatDex Monotype Ubers");
+            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, -Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause, -Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian, -Zacian-Crowned");
+        },
+        gen8mono: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen8nationaldexmonotype", args, "[Gen 8] National Dex Monotype");
+            room.send("/wall Samples: https://www.smogon.com/forums/posts/8742407");
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8nationaldex", args);
@@ -110,6 +120,11 @@ module.exports = {
 
             const typeOptions = dayTypes[day];
             let type = typeOptions[Math.floor(Math.random() * typeOptions.length)];
+            
+            // Type shold always be random as of now but I ain't deleting the above code
+            type = false;
+
+
             if (!type) type = types[Math.floor(Math.random() * types.length)];
 
             Utils.checkGenerator(room, "gen9nationaldexmonotype", args, "[Gen 9] Monothreat " + type);
