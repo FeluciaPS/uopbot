@@ -79,6 +79,11 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return false;
             Utils.checkGenerator(room, "gen9trademarked", args);
             if (args[0] === "o") room.startTour("ot");
+        },
+        inheritance: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return false;
+            Utils.checkGenerator(room, "gen9inheritance", args);
+            if (args[0] === "o") room.startTour("ot");
         }
     },
 };

@@ -147,7 +147,7 @@ global.Officials = {
             ["forte", "mnm"], 
             ["shared", "stab"], 
             ["crossevo", "godlygift"], 
-            ["revelation", "nfe"], 
+            ["revelation", "inheritance"], 
             ["trademarked", "pic"]
         ],
         times: [18, 21],
