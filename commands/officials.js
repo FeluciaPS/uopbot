@@ -55,7 +55,7 @@ global.Officials = {
             let request = require('request');
             request({url:room.settings.officialhook, body: {content:`<@&887737042786746369> **Official ${format}** tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
-        linecountbeta: true
+        linecountbeta: false
     },
     "2v2": {
         schedule: [
