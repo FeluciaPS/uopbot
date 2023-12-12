@@ -47,7 +47,7 @@ module.exports = {
             Utils.checkGenerator(room, "gen8nationaldexbh", args);
             room.send("!rfaq BH");
         },
-        "gen81v1": function (room, user, args) {
+        gen81v1: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] National Dex 1v1");
             room.send(buildRuleset("natdex"));
@@ -74,7 +74,11 @@ module.exports = {
         monoubers: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "nationaldexubers", args, "[Gen 9] NatDex Monotype Ubers");
-            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, -Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause, -Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian, -Zacian-Crowned");
+            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, " +
+                        "-Focus Band, -Gengarite, -King's Rock, +Koraidon, -Lax Incense, -Marshadow, " + 
+                        "-Miraidon, -Xerneas, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause," + 
+                        "-Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z," + 
+                        "-Zacian, -Zacian-Crowned");
         },
         threat: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
