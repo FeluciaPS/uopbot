@@ -55,6 +55,7 @@ global.Officials = {
             let request = require('request');
             request({url:room.settings.officialhook, body: {content:`<@&887737042786746369> **Official ${format}** tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
+        linecountbeta: true
     },
     "2v2": {
         schedule: [
@@ -203,7 +204,7 @@ global.Officials = {
             if (day < 0) day = 6;
 
             // We don't do tours not at a full hour. Deal with it.
-            if (now.getMinutes() > 5) continue;
+            if (now.getMinutes() > 5 && !data.linecountbeta) continue;
 
             // Check if a tour should be made at all
             // and check the format if so
@@ -233,6 +234,35 @@ global.Officials = {
                     continue;
                 }
                 format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
+            } else if (data.linecountbeta && data.randomformats) {
+
+                // When was the last tour?
+                let time_since_last_tour = Date.now() - room.lasttour[0];
+
+                // We need that in hours
+                time_since_last_tour = time_since_last_tour / (1000 * 60 * 60);
+
+                if (time_since_last_tour > data.cooldown)
+                    continue;
+
+                // Messages?
+                // WIP
+
+                // Random tour formats, weighted.
+                let max = 0;
+                for (let formatname in data.randomformats) {
+                    max += data.randomformats[formatname];
+                }
+
+                let roll = Math.floor(Math.random() * max);
+                n = 0;
+                for (let formatname in data.randomformats) {
+                    n += data.randomformats[formatname];
+                    if (n > roll) {
+                        format = formatname;
+                        break;
+                    }
+                }
             } else {
                 // Something went wrong
                 continue;

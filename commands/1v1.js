@@ -19,7 +19,11 @@ let findPMRoom = function (user) {
 
 global.getGen = function (mon) {
     if (mon.num < 1) return 0;
-    if (mon.num >= 810 || ["Gmax", "Galar", "Galar-Zen"].includes(mon.forme)) {
+
+    let id = toId(mon.name);
+    if (PokeDex[id] && !Gen8PokeDex[id]) {
+        return 9;
+    } else if (mon.num >= 810 || ["Gmax", "Galar", "Galar-Zen"].includes(mon.forme)) {
         return 8;
     } else if (mon.num >= 722 || (mon.forme && mon.forme.startsWith("Alola")) || mon.forme === "Starter") {
         return 7;
@@ -40,28 +44,42 @@ global.getGen = function (mon) {
     }
 };
 let inspireMe = function (arg) {
+    let dex = PokeDex;
+    let fd = fdata;
     let banlist = [
-        "Eternatus",
-        "Jirachi",
-        "Kyurem-Black",
-        "Kyurem-White",
-        "Lunala",
-        "Marshadow",
-        "Melmetal",
-        "Mew",
-        "Mewtwo",
-        "Mimikyu",
-        "Necrozma",
-        "Necrozma-Dawn-Wings",
-        "Necrozma-Dusk-Mane",
-        "Reshiram",
-        "Sableye",
-        "Solgaleo",
-        "Zacian",
-        "Zamazenta",
-        "Zekrom",
+        "Arceus", "Calyrex-Ice", "Calyrex-Shadow", "Chi-Yu", "Cinderace", "Dialga", 
+        "Dialga-Origin", "Dragonite", "Eternatus", "Flutter Mane", "Gholdengo", "Giratina", 
+        "Giratina-Origin", "Groudon", "Hoopa-Unbound", "Jirachi", "Koraidon", "Kyogre", 
+        "Magearna", "Meloetta", "Mew", "Mewtwo", "Mimikyu", "Miraidon", "Ogerpon-Cornerstone", 
+        "Palkia", "Palkia-Origin", "Rayquaza", "Scream Tail", "Shaymin-Sky", "Snorlax", "Zacian", 
+        "Zacian-Crowned", "Zamazenta", "Zamazenta-Crowned"
     ];
-    let gen = 8;
+    let gen = 9;
+    if (["ss", "swsh", "8", "gen8"].includes(arg)) {
+        dex = Gen8PokeDex;
+        fd = Gen8fdata;
+        banlist = [
+            "Eternatus",
+            "Jirachi",
+            "Kyurem-Black",
+            "Kyurem-White",
+            "Lunala",
+            "Marshadow",
+            "Melmetal",
+            "Mew",
+            "Mewtwo",
+            "Mimikyu",
+            "Necrozma",
+            "Necrozma-Dawn-Wings",
+            "Necrozma-Dusk-Mane",
+            "Reshiram",
+            "Sableye",
+            "Solgaleo",
+            "Zacian",
+            "Zamazenta",
+            "Zekrom",
+        ];
+    }
     if (["sm", "usum", "7", "gen7"].includes(arg)) {
         banlist = [
             "Arceus",
@@ -198,14 +216,14 @@ let inspireMe = function (arg) {
         gen = 3;
     }
     let valid = [];
-    for (let i in PokeDex) {
-        let entry = PokeDex[i];
+    for (let i in dex) {
+        let entry = dex[i];
         entry.gen = getGen(entry);
         if (!entry.gen) continue;
         if (entry.gen > gen) continue;
         if (banlist.includes(entry.name)) continue;
         if (entry.baseSpecies && banlist.includes(entry.baseSpecies.name)) continue;
-        if (gen === 8 && fdata[i] && fdata[i].isNonstandard === "Past") continue;
+        if (gen === 8 && fd[i] && fd[i].isNonstandard === "Past") continue;
         let n = 0;
         for (let s in entry.baseStats) n += entry.baseStats[s];
         if (n < 420) continue;
