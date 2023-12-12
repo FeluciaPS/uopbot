@@ -27,13 +27,28 @@ module.exports = {
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (fdt.isNonstandard === "Past")
                 return Commands["monopoke"]["natdex"](room, user, args, official ? "official" : false);
-            else return Commands["monopoke"]["gen8"](room, user, args, official ? "official" : false);
+            else return Commands["monopoke"]["gen9"](room, user, args, official ? "official" : false);
+        },
+        gen9: function (room, user, args, x) {
+            if (!Utils.canMakeTour(room, user)) return;
+            if (!args[0]) args[0] = chooseMonopoke("gen9");
+            let dex = PokeDex[toId(args[0])];
+            let fdt = fdata[toId(args[0])];
+            if (!dex) return room.send(`${args[0]} is not a Pokémon`);
+            if (fdt.isNonstandard === "Past") return room.send(`${dex.name} is only available in past gens`);
+            let mon = dex.name;
+            let ruleset = `/tour rules !Team Preview, !!Max Team Size = 1, !Picked Team Size, -All Pokemon, +${mon}`;
+            Utils.checkGenerator(room, "gen91v1", args, "[Gen 9] Monopoke " + mon);
+            room.startTour("monopoke");
+            room.send(ruleset);
+            room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
+            if (x === "official") room.send(".official");
         },
         gen8: function (room, user, args, x) {
             if (!Utils.canMakeTour(room, user)) return;
             if (!args[0]) args[0] = chooseMonopoke("gen8");
-            let dex = PokeDex[toId(args[0])];
-            let fdt = fdata[toId(args[0])];
+            let dex = Gen8PokeDex[toId(args[0])];
+            let fdt = Gen8fdata[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             if (fdt.isNonstandard === "Past") return room.send(`${dex.name} is only available in past gens`);
             let mon = dex.name;
