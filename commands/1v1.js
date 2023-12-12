@@ -56,6 +56,7 @@ let inspireMe = function (arg) {
     ];
     let gen = 9;
     if (["ss", "swsh", "8", "gen8"].includes(arg)) {
+        gen = 8;
         dex = Gen8PokeDex;
         fd = Gen8fdata;
         banlist = [
