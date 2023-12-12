@@ -222,7 +222,7 @@ let inspireMe = function (arg) {
         if (!entry.gen) continue;
         if (entry.gen > gen) continue;
         if (banlist.includes(entry.name)) continue;
-        if (entry.baseSpecies && banlist.includes(entry.baseSpecies.name)) continue;
+        if (entry.baseSpecies && banlist.includes(entry.baseSpecies)) continue;
         if (gen >= 8 && fd[i] && fd[i].isNonstandard === "Past") continue;
         let n = 0;
         for (let s in entry.baseStats) n += entry.baseStats[s];
