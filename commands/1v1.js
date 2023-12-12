@@ -262,6 +262,11 @@ module.exports = {
     inspireme: function (room, user, args) {
         if (room !== user && !user.can(room, "+")) return user.send("Please use this command in private messages.");
         let target = user.can(room, "+") && room !== user && Users.self.can(room, "*") ? room : findPMRoom(user);
+        if (!target) {
+            user.send("I tried to send you HTML for ``.inspireme`` but I'm not in any rooms that allow me to do that...");
+            user.send("(this is a bug with offline PMs)");
+            return;
+        }
         let prefix =
             user.can(room, "+") && room !== user && Users.self.can(room, "*")
                 ? "/addhtmlbox "
