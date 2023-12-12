@@ -4,7 +4,7 @@ global.fdata = require("./data/formats-data.js");
 global.Items = require("./data/items.js");
 
 global.Gen8fdata = require("./data/gen8/formats-data.js");
-global.Gen8PokeDex = require("./data/gen8/formats-data.js");
+global.Gen8PokeDex = require("./data/gen8/pokedex.js");
 global.Gen8Items = require("./data/gen8/items.js");
 
 
