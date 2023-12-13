@@ -74,7 +74,7 @@ module.exports = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if (source?.baseSpecies.num === 483 || pokemon.baseSpecies.num === 483) {
+			if (source.baseSpecies.num === 483 || pokemon.baseSpecies.num === 483) {
 				return false;
 			}
 			return true;
@@ -619,7 +619,7 @@ module.exports = {
 		},
 		onUpdate(pokemon) {
 			if (!this.effectState.started || pokemon.transformed) return;
-			if (this.queue.peek(true)?.choice === 'runSwitch') return;
+			if (this.queue.peek(true).choice === 'runSwitch') return;
 
 			if (pokemon.hasAbility('protosynthesis') && !this.field.isWeather('sunnyday') && pokemon.useItem()) {
 				pokemon.addVolatile('protosynthesis');
@@ -2350,7 +2350,7 @@ module.exports = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if (source?.baseSpecies.num === 487 || pokemon.baseSpecies.num === 487) {
+			if (source.baseSpecies.num === 487 || pokemon.baseSpecies.num === 487) {
 				return false;
 			}
 			return true;
@@ -3267,7 +3267,7 @@ module.exports = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if (source?.baseSpecies.num === 484 || pokemon.baseSpecies.num === 484) {
+			if (source.baseSpecies.num === 484 || pokemon.baseSpecies.num === 484) {
 				return false;
 			}
 			return true;
@@ -7522,7 +7522,7 @@ module.exports = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if (source?.baseSpecies.num === -66 || pokemon.baseSpecies.num === -66) {
+			if (source.baseSpecies.num === -66 || pokemon.baseSpecies.num === -66) {
 				return false;
 			}
 			return true;
