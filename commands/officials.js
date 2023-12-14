@@ -72,7 +72,7 @@ global.Officials = {
             gen2: 1
         },
         minlines: 250,
-        mintime: 1.5 * 60 // At least 1.5 hours between tours
+        mintime: 1.55 * 60 // At least 1.55 hours between tours
     },
     "2v2": {
         schedule: [
@@ -205,7 +205,7 @@ global.Officials = {
         msgroom.lasttour[2]++;
 
         // Save every 50 lines, that should be good enough.
-        if (msgroom.pasttours[2] % 50 == 0) msgroom.saveSettings();
+        if (msgroom.lasttour[2] % 50 == 0) msgroom.saveSettings();
         for (let i in this) {
             if (i === "official") continue;
             let room = Rooms[i];
@@ -258,7 +258,6 @@ global.Officials = {
             }
 
             if (!format && data.linecountbeta) {
-                console.log("Debugging time");
                 // When was the last tour?
                 let time_since_last_tour = room.lasttour[0] - Date.now();
 
@@ -268,13 +267,10 @@ global.Officials = {
                 if (time_since_last_tour > data.mintime)
                     continue;
 
-                console.log('Reaches')
 
                 // Messages?
                 if (room.lasttour[2] < data.minlines)
                     continue;
-
-                console.log('Reaches 2')
 
                 // Random tour formats, weighted.
                 let max = 0;
@@ -291,8 +287,6 @@ global.Officials = {
                         break;
                     }
                 }
-
-                console.log(format);
             }
 
             if (!format) 
