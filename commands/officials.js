@@ -258,7 +258,7 @@ global.Officials = {
             }
 
             if (!format && data.linecountbeta) {
-
+                console.log("Debugging time");
                 // When was the last tour?
                 let time_since_last_tour = Date.now() - room.lasttour[0];
 
@@ -268,9 +268,13 @@ global.Officials = {
                 if (time_since_last_tour > data.mintime)
                     continue;
 
+                console.log('Reaches')
+
                 // Messages?
                 if (room.lasttour[2] < data.minlines)
                     continue;
+
+                console.log('Reaches 2')
 
                 // Random tour formats, weighted.
                 let max = 0;
@@ -287,6 +291,8 @@ global.Officials = {
                         break;
                     }
                 }
+
+                console.log(format);
             }
 
             if (!format) 
