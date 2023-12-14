@@ -39,15 +39,15 @@ const fs = require("fs");
 global.Officials = {
     "1v1": {
         schedule: [
-            [ "gen2", "gen9", "gen8", "gen9", "gen7", "gen9", "gen6", "gen9" ], // Monday
-            [ "gen5", "gen4", "gen9", "gen3", "gen9", "gen2", "gen9", "gen8" ], // Tuesday
-            [ "gen9", "gen9", "gen7", "gen9", "gen6", "gen9", "gen5", "gen9" ], // Wednesday
-            [ "gen4", "gen3", "gen9", "gen2", "gen9", "gen8", "gen9", "gen7" ], // Thursday
-            [ "gen9", "gen9", "gen6", "gen9", "gen5", "gen9", "gen4", "gen9" ], // Friday
-            [ "gen3", "gen2", "gen9", "gen8", "gen9", "gen7", "gen9", "gen6" ], // Saturday
-            [ "gen9", "gen9", "gen5", "gen9", "gen4", "gen9", "gen3", "gen9" ], // Sunday
+            [ "gen2", "gen9", "gen9" ], // Monday
+            [ "gen9", "gen4", "gen9" ], // Tuesday
+            [ "gen9", "gen9", "gen6" ], // Wednesday
+            [ "gen3", "gen9", "gen9" ], // Thursday
+            [ "gen9", "gen5", "gen9" ], // Friday
+            [ "gen9", "gen9", "gen7" ], // Saturday
+            [ "gen9", "gen8", "gen9" ], // Sunday
         ],
-        times: [0, 3, 6, 9, 12, 15, 18, 21],
+        times: [9, 15, 21],
         EST: true,
         scouting: true,
         scrappie: true,
@@ -234,30 +234,30 @@ global.Officials = {
             let format = false;
             if (data.monthly) {
                 if (!data.schedule[now.getDate()]) {
-                    // There is no tour scheduled for today.
-                    continue;
+                    // There is a tour scheduled for today.
+                    let today = data.schedule[now.getDate()];
+                    if (today[now.getHours()]) {
+                        // There is a tour scheduled for right now.
+                        format = today[now.getHours()];
+                    }                
                 }
-                let today = data.schedule[now.getDate()];
-                if (!today[now.getHours()]) {
-                    // There is no tour scheduled for right now.
-                    continue;
-                }
-                format = today[now.getHours()];
             } else if (data.formats) {
                 let index = data.times.indexOf(now.getHours());
                 if (index === -1) {
-                    // There's no tour scheduled for right now.
-                    continue;
+                    // There's a tour scheduled for right now.
+                    format = data.formats[index];
                 }
-                format = data.formats[index];
             } else if (data.schedule) {
                 let index = data.times.indexOf(now.getHours());
                 if (index === -1) {
-                    // There's no tour scheduled for right now.
-                    continue;
+                    // There's a tour scheduled for right now.
+                    format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
                 }
-                format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
-            } else if (data.linecountbeta && data.randomformats) {
+            } else {
+                // Something went wrong
+            }
+
+            if (!format && data.linecountbeta) {
 
                 // When was the last tour?
                 let time_since_last_tour = Date.now() - room.lasttour[0];
@@ -279,7 +279,7 @@ global.Officials = {
                 }
 
                 let roll = Math.floor(Math.random() * max);
-                n = 0;
+                let n = 0;
                 for (let formatname in data.randomformats) {
                     n += data.randomformats[formatname];
                     if (n > roll) {
@@ -287,10 +287,10 @@ global.Officials = {
                         break;
                     }
                 }
-            } else {
-                // Something went wrong
-                continue;
             }
+
+            if (!format) 
+                continue;
 
             if (!data.command) {
                 // is bad
@@ -318,6 +318,10 @@ global.Officials = {
                     room.endTour();
                 }
             }
+
+            // Make sure the linetours don't double fire. Kinda hacky but we'll take it.
+            room.lasttour[2] = 0;
+            room.saveSettings();
 
             room.send("/modnote OFFICIAL: " + format);
             if (!Commands[data.command][format]) {
