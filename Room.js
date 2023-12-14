@@ -4,7 +4,7 @@ class Room {
         this.id = id;
         this.tournament = false;
         this.pasttours = [];
-        this.lasttour = [false, false];
+        this.lasttour = [false, false, 0];
         this.loadSettings();
     }
 
@@ -81,6 +81,7 @@ class Room {
             this.pasttours.push(this.tournament.toString());
             this.lasttour[0] = Date.now();
             this.lasttour[1] = this.tournament.toString();
+            this.lasttour[2] = 0;
         }
         while (this.pasttours.join(", ").length > 250) this.pasttours.shift();
         this.tournament = false;

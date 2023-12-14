@@ -29,6 +29,11 @@ const fs = require("fs");
  *  - autostart: autostart in minutes
  *  - autodq: autodq in minutes
  *  - args: optional set of arguments to pass into the tournament command
+ * 
+ *  - linecountbeta: true to use the beta code for doing official tours by lines
+ *  - randomformats: weighted object (key: string formatname. Valud: int weight) with random tour formats to choose from
+ *  - minlines: minimum lines between tours
+ *  - mintime: minimum time between tours
  */
 
 global.Officials = {
@@ -55,7 +60,19 @@ global.Officials = {
             let request = require('request');
             request({url:room.settings.officialhook, body: {content:`<@&887737042786746369> **Official ${format}** tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
-        linecountbeta: false
+        linecountbeta: true,
+        randomformats: {
+            gen9: 7,
+            gen8: 1,
+            gen7: 1,
+            gen6: 1,
+            gen5: 1,
+            gen4: 1,
+            gen3: 1,
+            gen2: 1
+        },
+        minlines: 250,
+        mintime: 1.5 * 60 // At least 1.5 hours between tours
     },
     "2v2": {
         schedule: [
@@ -182,7 +199,13 @@ global.Officials = {
 
     // Overarching official tournament function.
     // This will make so many things so much better.
-    official: function () {
+    official: function (msgroom) {
+        // Fill in room.pasttours[2] if it doesn't exist
+        if (!msgroom.lasttour[2]) msgroom.lasttour[2] = 0;
+        msgroom.lasttour[2]++;
+
+        // Save every 50 lines, that should be good enough.
+        if (msgroom.pasttours[2] % 50 == 0) msgroom.saveSettings();
         for (let i in this) {
             if (i === "official") continue;
             let room = Rooms[i];
@@ -239,14 +262,15 @@ global.Officials = {
                 // When was the last tour?
                 let time_since_last_tour = Date.now() - room.lasttour[0];
 
-                // We need that in hours
-                time_since_last_tour = time_since_last_tour / (1000 * 60 * 60);
+                // We need that in minutes
+                time_since_last_tour = time_since_last_tour / (1000 * 60);
 
-                if (time_since_last_tour > data.cooldown)
+                if (time_since_last_tour > data.mintime)
                     continue;
 
                 // Messages?
-                // WIP
+                if (room.lasttour[2] < data.minlines)
+                    continue;
 
                 // Random tour formats, weighted.
                 let max = 0;
