@@ -259,14 +259,13 @@ global.Officials = {
 
             if (!format && data.linecountbeta) {
                 // When was the last tour?
-                let time_since_last_tour = room.lasttour[0] - Date.now();
+                let time_since_last_tour = Date.now() - room.lasttour[0];
 
                 // We need that in minutes
                 time_since_last_tour = time_since_last_tour / (1000 * 60);
 
-                if (time_since_last_tour > data.mintime)
+                if (time_since_last_tour < data.mintime)
                     continue;
-
 
                 // Messages?
                 if (room.lasttour[2] < data.minlines)
