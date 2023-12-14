@@ -21,12 +21,16 @@ class Room {
         if (this.settings.pasttours) {
             this.pasttours = this.settings.pasttours;
         }
+        if (this.settings.lasttour) {
+            this.lasttour = this.settings.lasttour;
+        }
     }
 
     saveSettings(load = false) {
         const PATH = `./rooms/${this.id}.json`;
         this.settings.repeat = this.repeat;
         this.settings.pasttours = this.pasttours;
+        this.settings.lasttour = this.lasttour;
         let settings = JSON.stringify(this.settings, null, 4);
         FS.writeFileSync(PATH, settings);
         if (load) this.loadSettings();
