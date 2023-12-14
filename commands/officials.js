@@ -263,10 +263,12 @@ global.Officials = {
 
                 // We need that in minutes
                 time_since_last_tour = time_since_last_tour / (1000 * 60);
-
+                
+                console.log(time_since_last_tour, data.mintime);
                 if (time_since_last_tour < data.mintime)
                     continue;
 
+                console.log(room.lasttour[2], data.minlines);
                 // Messages?
                 if (room.lasttour[2] < data.minlines)
                     continue;
