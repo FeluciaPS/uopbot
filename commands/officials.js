@@ -233,7 +233,7 @@ global.Officials = {
             // and check the format if so
             let format = false;
             if (data.monthly) {
-                if (!data.schedule[now.getDate()]) {
+                if (data.schedule[now.getDate()]) {
                     // There is a tour scheduled for today.
                     let today = data.schedule[now.getDate()];
                     if (today[now.getHours()]) {
@@ -243,13 +243,13 @@ global.Officials = {
                 }
             } else if (data.formats) {
                 let index = data.times.indexOf(now.getHours());
-                if (index === -1) {
+                if (index !== -1) {
                     // There's a tour scheduled for right now.
                     format = data.formats[index];
                 }
             } else if (data.schedule) {
                 let index = data.times.indexOf(now.getHours());
-                if (index === -1) {
+                if (index !== -1) {
                     // There's a tour scheduled for right now.
                     format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
                 }
