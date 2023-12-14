@@ -119,7 +119,7 @@ bot.on("c", (parts) => {
     Reminder.parse(user, Rooms[room], message);
 
     // Check if any official tours need starting
-    Officials.official();
+    Officials.official(Rooms[room]);
 
     if (message.includes("added a roomevent titled") || message.includes("edited the roomevent titled"))
         if (room.settings.sortevents) 
