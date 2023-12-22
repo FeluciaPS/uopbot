@@ -232,6 +232,7 @@ global.Officials = {
             // Check if a tour should be made at all
             // and check the format if so
             let format = false;
+            let randomformat = false;
             if (data.monthly) {
                 if (data.schedule[now.getDate()]) {
                     // There is a tour scheduled for today.
@@ -285,6 +286,7 @@ global.Officials = {
                     n += data.randomformats[formatname];
                     if (n > roll) {
                         format = formatname;
+                        randomformat = true;
                         break;
                     }
                 }
@@ -299,6 +301,7 @@ global.Officials = {
                 continue;
             }
 
+            if (now.getMinutes() > 5 && !randomformat) continue;
             if (!Commands[data.command]) {
                 // is also bad
                 console.log(`Invalid tour command for ${i}: ${data.command}`);
