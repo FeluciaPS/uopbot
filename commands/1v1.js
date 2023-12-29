@@ -1,3 +1,48 @@
+if (!global.banlists) global.banlists = {};
+
+banlists['1v1'] = {
+    gen9: [
+        'Arceus', 'Calyrex-Ice', 'Calyrex-Shadow', 'Chi-Yu', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Defense', 'Deoxys-Speed', 'Dialga', 'Dialga-Origin',
+        'Dragonite', 'Eternatus', 'Flutter Mane', 'Gholdengo', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Jirachi', 'Koraidon', 'Kyogre',
+        'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Magearna', 'Mew', 'Mewtwo', 'Mimikyu', 'Miraidon', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
+        'Ogerpon-Cornerstone', 'Palkia', 'Palkia-Origin', 'Rayquaza', 'Reshiram', 'Scream Tail', 'Shaymin-Sky', 'Snorlax', 'Solgaleo', 'Terapagos',
+        'Zacian', 'Zacian-Crowned', 'Zamazenta', 'Zamazenta-Crowned', 'Zekrom'
+    ],
+    gen8: [
+        'Calyrex-Ice', 'Calyrex-Shadow', 'Cinderace', 'Dialga', 'Dragonite', 'Eternatus', 'Genesect', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Jirachi',
+        'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Melmetal', 'Mew', 'Mewtwo', 'Mimikyu', 'Necrozma', 'Necrozma-Dawn-Wings',
+        'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Sableye', 'Snorlax', 'Solgaleo', 'Victini', 'Xerneas', 'Yveltal', 'Zacian', 'Zacian-Crowned',
+        'Zamazenta', 'Zamazenta-Crowned', 'Zekrom'
+    ],
+    gen7: [
+        'Arceus', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon',
+        'Ho-Oh', 'Kangaskhan-Mega', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mew', 'Mewtwo',
+        'Mimikyu', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky',
+        'Snorlax', 'Solgaleo', 'Tapu Koko', 'Xerneas', 'Yveltal', 'Zekrom'
+    ],
+    gen6: [
+        'Arceus', 'Blaziken', 'Charizard-Mega-Y', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense', 'Dialga',
+        'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Kangaskhan-Mega', 'Kyogre', 'Kyurem-White', 'Lugia', 'Mewtwo',
+        'Palkia', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky', 'Snorlax', 'Xerneas', 'Yveltal', 'Zekrom'
+    ],
+    gen5: [
+        'Arceus', 'Blaziken', 'Cottonee', 'Darkrai', 'Deoxys', 'Dialga', 'Dragonite', 'Giratina', 'Groudon', 'Ho-Oh',
+        'Jirachi', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Mew', 'Mewtwo', 'Palkia', 'Rayquaza', 'Reshiram',
+        'Shaymin-Sky', 'Togekiss', 'Victini', 'Whimsicott', 'Zekrom'
+    ],
+    gen4: [
+        'Arceus', 'Darkrai', 'Deoxys-Attack', 'Deoxys-Base', 'Deoxys-Defense', 'Deoxys-Speed', 'Dialga', 'Garchomp',
+        'Giratina', 'Groudon', 'Ho-Oh', 'Jirachi', 'Kyogre', 'Latias', 'Latios', 'Lugia', 'Machamp', 'Manaphy', 'Mew',
+        'Mewtwo', 'Palkia', 'Porygon-Z', 'Rayquaza', 'Salamence', 'Shaymin', 'Shaymin-Sky', 'Snorlax', 'Togekiss',
+    ],
+    gen3: [
+        'Clefable', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense',
+        'Deoxys-Speed', 'Groudon', 'Ho-Oh', 'Kyogre', 'Latias', 'Latios',
+        'Lugia', 'Mew', 'Mewtwo', 'Rayquaza', 'Slaking', 'Snorlax', 'Suicune',
+        'Zapdos'
+    ]
+}
+
 let buildRuleset = function (meta) {
     let banlist = Banlist[meta];
     let ret = "/tour rules ";
@@ -46,174 +91,32 @@ global.getGen = function (mon) {
 let inspireMe = function (arg) {
     let dex = PokeDex;
     let fd = fdata;
-    let banlist = [
-        "Arceus", "Calyrex-Ice", "Calyrex-Shadow", "Chi-Yu", "Cinderace", "Dialga", 
-        "Dialga-Origin", "Dragonite", "Eternatus", "Flutter Mane", "Gholdengo", "Giratina", 
-        "Giratina-Origin", "Groudon", "Hoopa-Unbound", "Jirachi", "Koraidon", "Kyogre", 
-        "Magearna", "Meloetta", "Mew", "Mewtwo", "Mimikyu", "Miraidon", "Ogerpon-Cornerstone", 
-        "Palkia", "Palkia-Origin", "Rayquaza", "Scream Tail", "Shaymin-Sky", "Snorlax", "Zacian", 
-        "Zacian-Crowned", "Zamazenta", "Zamazenta-Crowned"
-    ];
+    let banlist = banlists['1v1'].gen9;
     let gen = 9;
     if (["ss", "swsh", "8", "gen8"].includes(arg)) {
         gen = 8;
         dex = Gen8PokeDex;
         fd = Gen8fdata;
-        banlist = [
-            "Eternatus",
-            "Jirachi",
-            "Kyurem-Black",
-            "Kyurem-White",
-            "Lunala",
-            "Marshadow",
-            "Melmetal",
-            "Mew",
-            "Mewtwo",
-            "Mimikyu",
-            "Necrozma",
-            "Necrozma-Dawn-Wings",
-            "Necrozma-Dusk-Mane",
-            "Reshiram",
-            "Sableye",
-            "Solgaleo",
-            "Zacian",
-            "Zamazenta",
-            "Zekrom",
-        ];
+        banlist = banlists['1v1'].gen8;
     }
     if (["sm", "usum", "7", "gen7"].includes(arg)) {
-        banlist = [
-            "Arceus",
-            "Darkrai",
-            "Deoxys-Base",
-            "Deoxys-Attack",
-            "Deoxys-Defense",
-            "Dialga",
-            "Giratina",
-            "Groudon",
-            "Ho-Oh",
-            "Kangaskhan-Mega",
-            "Kyogre",
-            "Kyurem-Black",
-            "Kyurem-White",
-            "Lugia",
-            "Lunala",
-            "Marshadow",
-            "Mewtwo",
-            "Mimikyu",
-            "Necrozma-Dawn-Wings",
-            "Necrozma-Dusk-Mane",
-            "Palkia",
-            "Rayquaza",
-            "Reshiram",
-            "Salamence-Mega",
-            "Shaymin-Sky",
-            "Snorlax",
-            "Solgaleo",
-            "Tapu Koko",
-            "Xerneas",
-            "Yveltal",
-            "Zekrom",
-        ];
+        banlist = banlists['1v1'].gen7;
         gen = 7;
     }
     if (["xy", "oras", "6", "gen6"].includes(arg)) {
-        banlist = [
-            "Arceus",
-            "Blaziken",
-            "Darkrai",
-            "Deoxys-Base",
-            "Deoxys-Attack",
-            "Deoxys-Defense",
-            "Dialga",
-            "Giratina",
-            "Groudon",
-            "Ho-Oh",
-            "Kangaskhan-Mega",
-            "Kyogre",
-            "Kyurem-White",
-            "Lugia",
-            "Mewtwo",
-            "Palkia",
-            "Rayquaza",
-            "Reshiram",
-            "Salamence-Mega",
-            "Shaymin-Sky",
-            "Xerneas",
-            "Yveltal",
-            "Zekrom",
-        ];
+        banlist = banlists['1v1'].gen6
         gen = 6;
     }
     if (["bw", "bw2", "b2w2", "5", "gen5"].includes(arg)) {
-        banlist = [
-            "Arceus",
-            "Blaziken",
-            "Darkrai",
-            "Deoxys",
-            "Dialga",
-            "Giratina",
-            "Groudon",
-            "Ho-Oh",
-            "Kyogre",
-            "Kyurem-White",
-            "Lugia",
-            "Mewtwo",
-            "Palkia",
-            "Rayquaza",
-            "Reshiram",
-            "Shaymin-Sky",
-            "Whimsicott",
-            "Zekrom",
-        ];
+        banlist = banlists['1v1'].gen5;
         gen = 5;
     }
     if (["dp", "dpp", "dppt", "4", "gen4"].includes(arg)) {
-        banlist = [
-            "Latias",
-            "Arceus",
-            "Darkrai",
-            "Deoxys",
-            "Dialga",
-            "Garchomp",
-            "Giratina",
-            "Groudon",
-            "Ho-oh",
-            "Kyogre",
-            "Latios",
-            "Lugia",
-            "Manaphy",
-            "Mew",
-            "Mewtwo",
-            "Palkia",
-            "Porygon-Z",
-            "Rayquaza",
-            "Salamence",
-            "Shaymin-Sky",
-        ];
+        banlist = banlists['1v1'].gen4;
         gen = 4;
     }
     if (["adv", "rse", "rs", "3", "gen3"].includes(arg)) {
-        banlist = [
-            "Slaking",
-            "Deoxys",
-            "Deoxys-Attack",
-            "Deoxys-Defense",
-            "Deoxys-Speed",
-            "Groudon",
-            "Ho-Oh",
-            "Kyogre",
-            "Latias",
-            "Latios",
-            "Lugia",
-            "Mew",
-            "Mewtwo",
-            "Rayquaza",
-            "Snorlax",
-            "Suicune",
-            "Wobbuffet",
-            "Wynaut",
-        ];
+        banlist = banlists['1v1'].gen3;
         gen = 3;
     }
     let valid = [];

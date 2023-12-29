@@ -76,12 +76,12 @@ module.exports = {
         },
         natdex: function(room, user, args, x) {
             if (!Utils.canMakeTour(room, user)) return;
-            if (!args[0]) args[0] = chooseMonopoke("gen8");
+            if (!args[0]) args[0] = chooseMonopoke("gen9");
             let dex = PokeDex[toId(args[0])];
             if (!dex) return room.send(`${args[0]} is not a Pokémon`);
             let mon = dex.name;
             let ruleset = `/tour rules +Past, !Team Preview, !!Max Team Size = 1, !Picked Team Size, -All Pokemon, +${mon}`;
-            Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] National Dex Monopoke " + mon);
+            Utils.checkGenerator(room, "gen91v1", args, "[Gen 9] National Dex Monopoke " + mon);
             room.startTour("monopoke");
             room.send(ruleset);
             room.send(`/wall Monopoke ${mon}! Use only ${mon}`);
