@@ -19,6 +19,10 @@ let selectPotd = function(room) {
     potd[room] = selectedPOTD;
 }
 
+Clock.on('minute', (timestamp) => {
+    console.log(`Minute event fired ${timestamp}`);
+})
+
 module.exports = {
     potd: function(room, user, args) {
         if (!user.can(room, '+')) return;
