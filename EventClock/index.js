@@ -81,7 +81,7 @@ const scheduleRecurringEvent = function(name, hours, minutes, seconds, offset, i
   
     setTimeout(function() {
         Clock.emit(name, new Date());
-        scheduleRecurringEvent(name, hours, minutes, seconds, false);
+        scheduleRecurringEvent(name, hours, minutes, seconds, offset, false);
     }, timeUntilEvent).unref();
 }
 
