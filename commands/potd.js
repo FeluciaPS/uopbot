@@ -1,4 +1,4 @@
-const Clock = require('./EventClock');
+const Clock = require('../EventClock');
 
 let potd = {};
 
