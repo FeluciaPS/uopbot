@@ -7,8 +7,7 @@ let selectPotd = function(room) {
     
     let keys = Object.keys(PokeDex).filter(key => {
         let dex = PokeDex[key];
-        if (!fdata[key]) console.log(key);
-        if (!fdata[key] || fdata[key].isNonStandard) return false;
+        if (!fdata[key] || fdata[key].isNonstandard) return false;
         if (Object.values(dex.baseStats).reduce((partialSum, a) => partialSum + a, 0) < 420) return false;
         if (banlist.includes(dex.name) || (dex.baseSpecies && banlist.includes(dex.baseSpecies))) return false;
         return true;
