@@ -19,8 +19,8 @@ let selectPotd = function(room) {
     potd[room] = selectedPOTD;
 }
 
-Clock.on('minute', (timestamp) => {
-    console.log(`Minute event fired ${timestamp}`);
+Clock.on('day', (timestamp) => {
+    selectPotd('1v1');
 })
 
 module.exports = {
