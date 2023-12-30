@@ -27,7 +27,7 @@ module.exports = {
     potd: function(room, user, args) {
         if (!user.can(room, '+')) return;
 
-        if (!potd['1v1']) selectPotd('1v1');
+        if (!potd['1v1']) return user.send("No potd selected. Did the bot restart or crash...?");
         user.send(`The POTD is ${potd['1v1']}`);
     }
 }
