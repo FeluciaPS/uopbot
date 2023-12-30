@@ -17,9 +17,11 @@ let selectPotd = function(room) {
     let selectedPOTD = Utils.select(keys);
 
     potd[room] = selectedPOTD;
+
+    if (Users.felucia) Users.felucia.send('The new POTD is ' + selectedPOTD);
 }
 
-Clock.on('day', (timestamp) => {
+Clock.on('hour-quarter', (timestamp) => {
     selectPotd('1v1');
 })
 
