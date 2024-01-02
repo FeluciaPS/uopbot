@@ -34,9 +34,18 @@ const fs = require("fs");
  *  - randomformats: weighted object (key: string formatname. Valud: int weight) with random tour formats to choose from
  *  - minlines: minimum lines between tours
  *  - mintime: minimum time between tours
+ * 
+ *  - room: room to target for when "key" doesn't work for some reason (cough 1v1 potd)
  */
 
 global.Officials = {
+    "1v1potd": {
+        formats: ['monopoke', 'monopoke'],
+        times: [5, 17],
+        room: '1v1',
+        command: 'potd',
+        autostart: 7
+    },
     "1v1": {
         schedule: [
             [ "gen2", "gen9", "gen9" ], // Monday
@@ -208,12 +217,13 @@ global.Officials = {
         if (msgroom.lasttour[2] % 50 == 0) msgroom.saveSettings();
         for (let i in this) {
             if (i === "official") continue;
-            let room = Rooms[i];
+            let data = this[i];
+
+            let room = data.room ? Rooms[data.room] : Rooms[i];
 
             // Bot is not in the room.
             if (!room) continue;
 
-            let data = this[i];
 
             // Tour has already been made.
             if (data.hasStarted) {
