@@ -74,7 +74,7 @@ module.exports = {
         },
         monopoke: function(room, user, args) {
             if (room.id !== '1v1') return;
-            Commands.monopoke(room, user, [room.settings.potd]);
+            Commands.monopoke[""](room, user, [room.settings.potd]);
         },
         set: function(room, user, args) {
             if (!user.can(Rooms['1v1'], '#')) return;
