@@ -11,8 +11,8 @@ let buildPotdBox = function(room) {
     let name = mondata.name;
     let box = ``
         + `<center>`
-        + `<div style="width: 400px; border: 1px solid; position:relative; height: 192px">`
-        + `<div style="width:128px; height:192px; background-image: url('${iconURL}');`
+        + `<div style="width: 400px; position:relative; height: 192px">`
+        + `<div style="width:128px; height:192px; background-image: url(${iconURL});`
         + ` background-position: center; background-repeat: no-repeat; position:absolute; left: 16px">`
         + `</div>`
         + `<div style="position:absolute; right:16px; width:240px; padding-top:24px">`
@@ -55,7 +55,7 @@ Clock.on('hour', (timestamp) => {
 
     // Slightly delay to ensure a new POTD is picked before we trigger displaying it.
     setTimeout(() => {
-        Rooms['1v1'].send(`/addhtmlbox ${buildPotdBox('1v1')}`);
+        Rooms['1v1'].send(`/adduhtml potd, ${buildPotdBox('1v1')}`);
     }, 1000)
 })
 
@@ -69,7 +69,7 @@ module.exports = {
                 return user.send(`The POTD is ${Rooms['1v1'].settings.potd}`);
             }
             if (room.id === "1v1") {
-                return room.send(`/addhtmlbox ${buildPotdBox('1v1')}`)
+                return room.send(`/adduhtml potd, ${buildPotdBox('1v1')}`)
             }
         },
         monopoke: function(room, user, args) {
