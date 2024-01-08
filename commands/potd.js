@@ -18,7 +18,7 @@ let buildPotdBox = function(room) {
         + `<div style="position:absolute; right:16px; width:240px; padding-top:24px">`
         + `The <b>Pokémon of the Day</b> is <b>${name}.</b><hr>`
         + `Use this opportunity to use ${name} on ladder, build sets with the community, and participate in the two `
-        + `<b>Monopoke ${name}</b> tournaments today, at Noon and Midnight UTC-5.`
+        + `<b>Monopoke ${name}</b> tournaments today, at Noon and Midnight UTC-5. `
         + `Use <code>/servertime</code> to see the current time.</div></div></center>`
 
     return box;
@@ -50,8 +50,8 @@ Clock.on('day', (timestamp) => {
     selectPotd('1v1');
 })
 
-Clock.on('hour', (timestamp) => {
-    if (timestamp.getHours() % 5 != 0) return;
+Clock.on('hour-half', (timestamp) => {
+    if (timestamp.getHours() % 5 != 0 || timestamp.getMinutes() != 30) return;
 
     // Slightly delay to ensure a new POTD is picked before we trigger displaying it.
     setTimeout(() => {
