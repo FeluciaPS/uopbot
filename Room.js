@@ -76,6 +76,7 @@ class Room {
     }
 
     startTour(settings) {
+        this.lasttour[0] = Date.now();
         this.tournament = new Tournament.Tournament(this, settings);
     }
 
