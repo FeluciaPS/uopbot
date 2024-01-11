@@ -5671,8 +5671,7 @@ module.exports = {
 		natDexTier: "Uber",
 	},
 	pecharunt: {
-		isNonstandard: "Unobtainable",
-		tier: "Unreleased",
+		tier: "OU",
 	},
 	missingno: {
 		isNonstandard: "Custom",
