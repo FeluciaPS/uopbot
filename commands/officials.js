@@ -481,8 +481,7 @@ module.exports = {
         room = Rooms[roomid];
         if (!room)
             return user.send("I can't check if you have permission to do that, as I am not in the specified room...");
-        if (room.id === "smogondoubles" && !user.can(room, '@')) return user.send("Only Mods (@) and up can update this room's tournament schedule");
-        else if (!user.can(room, "#")) return user.send("Only Room Owners (#) can update their room's tournament schedule");
+        if (!user.can(room, '@')) return user.send("Only Mods (@) and up can update this room's tournament schedule");
 
         let url = args[1];
 
