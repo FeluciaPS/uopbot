@@ -146,6 +146,12 @@ global.Officials = {
             room.send("/wall Rules: https://pastebin.com/raw/Z3SgDjjL");
         },
     },
+    smogondoubles: {
+        schedule: {},
+        monthly: true,
+        EST: true,
+        command: "overused",
+    },
     nationaldexou: {
         times: [0, 8, 9, 10, 18, 19, 20, 22],
         formats: ["gen9", "gen9", "gen9", "gen8", "gen8","gen9", "gen8", "gen9"],
