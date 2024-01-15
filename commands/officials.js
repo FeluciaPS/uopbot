@@ -481,7 +481,8 @@ module.exports = {
         room = Rooms[roomid];
         if (!room)
             return user.send("I can't check if you have permission to do that, as I am not in the specified room...");
-        if (!user.can(room, "#")) return user.send("Only Room Owners (#) can update their room's tournament schedule");
+        if (room.id === "smogondoubles" && !user.can(room, '@')) return user.send("Only Mods (@) and up can update this room's tournament schedule");
+        else if (!user.can(room, "#")) return user.send("Only Room Owners (#) can update their room's tournament schedule");
 
         let url = args[1];
 
@@ -538,13 +539,13 @@ module.exports = {
                             );
                         }
 
-                        if (!Commands[Officials[roomid].command][meta]) {
+                        /*if (!Commands[Officials[roomid].command][meta]) {
                             return user.send(
                                 `Invalid meta input on line ${l + 1}. Valid metas: ${Object.keys(
                                     Commands[Officials[roomid].command]
                                 ).join(" ")}`
                             );
-                        }
+                        }*/
                         // ok everything is valid.
 
                         if (!schedule[date]) schedule[date] = {};
