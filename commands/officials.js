@@ -274,6 +274,11 @@ global.Officials = {
                 // Something went wrong
             }
 
+            if (format && room.settings.ignorenext) {
+                room.settings.ignorenext--;
+                room.send(`/mn OFFICIAL SKIPPED: ${format}`)
+                continue;
+            }
             if (!format && data.linecountbeta) {
                 // When was the last tour?
                 let time_since_last_tour = Date.now() - room.lasttour[0];
@@ -592,4 +597,19 @@ module.exports = {
             room.send(x);
         });
     },
+    cancelnextot: function (room, user, args) {
+        if (!user.can(room, '@')) return;
+
+        let target = room.id;
+        if (!Officials[target]) return user.send("This room doesn't have officials configured");
+
+        if (args[0]) args[0] = +args[0];
+        if (isNaN(args[0])) return user.send("Usage: ``.cancelnextot [number]``");
+
+        if (!args[0]) args[0] = 1;
+        room.settings.ignorenext = args[0];
+        room.saveSettings();
+        
+        return room.send(`Next ${args[0]} official${args[0] != 1 ? 's' : ''} will be ignored.`);
+    }
 };
