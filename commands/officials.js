@@ -311,20 +311,20 @@ global.Officials = {
             if (!format) 
                 continue;
 
-            if (!data.command) {
+            if (!data.command && !Tournament.formats[format]) {
                 // is bad
                 console.log(`No tour command given for ${i}`);
                 continue;
             }
 
             if (now.getMinutes() > 5 && !randomformat) continue;
-            if (!Commands[data.command]) {
+            if (!Commands[data.command] && !Tournament.formats[format]) {
                 // is also bad
                 console.log(`Invalid tour command for ${i}: ${data.command}`);
                 continue;
             }
 
-            if (!Commands[data.command][format]) {
+            if (!Commands[data.command][format] && !Tournament.formats[format]) {
                 // is equally bad
                 console.log(`Invalid subcommand for ${i}-${data.command}: ${format}`);
                 continue;
