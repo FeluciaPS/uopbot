@@ -276,7 +276,11 @@ global.Officials = {
 
             if (format && room.settings.ignorenext) {
                 room.settings.ignorenext--;
-                room.send(`/mn OFFICIAL SKIPPED: ${format}`)
+                room.send(`/mn OFFICIAL SKIPPED: ${format}`);
+                data.hasStarted = true;
+                setTimeout(() => {
+                    data.hasStarted = false;
+                }, 7 * 1000 * 60);
                 continue;
             }
             if (!format && data.linecountbeta) {
@@ -609,7 +613,7 @@ module.exports = {
         if (!args[0]) args[0] = 1;
         room.settings.ignorenext = args[0];
         room.saveSettings();
-        
+
         return room.send(`Next ${args[0]} official${args[0] != 1 ? 's' : ''} will be ignored.`);
     }
 };
