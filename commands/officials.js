@@ -274,6 +274,15 @@ global.Officials = {
                 // Something went wrong
             }
 
+            if (format && room.settings.ignorenext) {
+                room.settings.ignorenext--;
+                room.send(`/mn OFFICIAL SKIPPED: ${format}`);
+                data.hasStarted = true;
+                setTimeout(() => {
+                    data.hasStarted = false;
+                }, 7 * 1000 * 60);
+                continue;
+            }
             if (!format && data.linecountbeta) {
                 // When was the last tour?
                 let time_since_last_tour = Date.now() - room.lasttour[0];
@@ -311,20 +320,20 @@ global.Officials = {
             if (!format) 
                 continue;
 
-            if (!data.command) {
+            if (!data.command && !Tournament.formats[format]) {
                 // is bad
                 console.log(`No tour command given for ${i}`);
                 continue;
             }
 
             if (now.getMinutes() > 5 && !randomformat) continue;
-            if (!Commands[data.command]) {
+            if (!Commands[data.command] && !Tournament.formats[format]) {
                 // is also bad
                 console.log(`Invalid tour command for ${i}: ${data.command}`);
                 continue;
             }
 
-            if (!Commands[data.command][format]) {
+            if (!Commands[data.command][format] && !Tournament.formats[format]) {
                 // is equally bad
                 console.log(`Invalid subcommand for ${i}-${data.command}: ${format}`);
                 continue;
@@ -592,4 +601,19 @@ module.exports = {
             room.send(x);
         });
     },
+    cancelnextot: function (room, user, args) {
+        if (!user.can(room, '@')) return;
+
+        let target = room.id;
+        if (!Officials[target]) return user.send("This room doesn't have officials configured");
+
+        if (args[0]) args[0] = +args[0];
+        if (isNaN(args[0])) return user.send("Usage: ``.cancelnextot [number]``");
+
+        if (!args[0]) args[0] = 1;
+        room.settings.ignorenext = args[0];
+        room.saveSettings();
+
+        return room.send(`Next ${args[0]} official${args[0] != 1 ? 's' : ''} will be ignored.`);
+    }
 };
