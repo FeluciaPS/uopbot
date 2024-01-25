@@ -362,7 +362,7 @@ global.Officials = {
                 continue;
             }
 
-            if (!Commands[data.command][format] && !Tournament.formats[format]) {
+            if (data.command && !Commands[data.command][format] && !Tournament.formats[format]) {
                 // is equally bad
                 console.log(`Invalid subcommand for ${i}-${data.command}: ${format}`);
                 continue;
@@ -382,7 +382,7 @@ global.Officials = {
             room.saveSettings();
 
             room.send("/modnote OFFICIAL: " + format);
-            if (!Commands[data.command][format]) {
+            if (!data.command || !Commands[data.command][format]) {
                 room.send(`/tour new ${format}, elim`);
             }
             else {
