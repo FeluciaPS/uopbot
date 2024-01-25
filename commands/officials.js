@@ -146,6 +146,21 @@ global.Officials = {
             room.send("/wall Rules: https://pastebin.com/raw/Z3SgDjjL");
         },
     },
+    deutsche: {
+        times: [21],
+        randomformats: {
+            gen9randombattle: 1,            gen8randombattle: 1,
+            gen7randombattle: 1,            gen6randombattle: 1,
+            gen5randombattle: 1,            gen4randombattle: 1,
+            gen3randombattle: 1,            gen2randombattle: 1,
+            gen1randombattle: 1,            gen7letsgorandombattle: 1,
+            bdsprandombattle: 1,            gen6firstbloodrandombattle: 1,
+            gen9monotyperandombattle: 1,    gen9randomdoublesbattle: 1,
+            gen8battlefactory: 1,           gen9battlefactory: 1,
+            gen8bssfactory: 1,              randombattlemayhem: 1,
+            randomroulette: 1,              challengecup6v6: 1
+        }
+    },
     smogondoubles: {
         schedule: {},
         monthly: true,
@@ -270,8 +285,22 @@ global.Officials = {
                     // There's a tour scheduled for right now.
                     format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
                 }
-            } else {
-                // Something went wrong
+            } else if (data.randomformats && !data.linecountbeta) {
+                // Random tour formats, weighted.
+                let max = 0;
+                for (let formatname in data.randomformats) {
+                    max += data.randomformats[formatname];
+                }
+
+                let roll = Math.floor(Math.random() * max);
+                let n = 0;
+                for (let formatname in data.randomformats) {
+                    n += data.randomformats[formatname];
+                    if (n > roll) {
+                        format = formatname;
+                        break;
+                    }
+                }
             }
 
             if (format && room.settings.ignorenext) {
