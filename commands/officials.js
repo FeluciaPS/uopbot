@@ -482,7 +482,7 @@ module.exports = {
             let meta = "";
             next = obj.times.indexOf(next);
             if (obj.formats) meta = obj.formats[next];
-            else {
+            else if (obj.schedule) {
                 let day = now.getDay() - 1 + tomorrow;
                 while (day < 0) day += 7;
                 meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
