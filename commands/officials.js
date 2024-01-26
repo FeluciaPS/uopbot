@@ -147,7 +147,7 @@ global.Officials = {
         },
     },
     deutsche: {
-        times: [21],
+        times: [19],
         randomformats: {
             gen9randombattle: 1,            gen8randombattle: 1,
             gen7randombattle: 1,            gen6randombattle: 1,
