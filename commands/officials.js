@@ -301,6 +301,9 @@ global.Officials = {
                         break;
                     }
                 }
+
+                let index = data.times.indexOf(now.getHours());
+                if (index === -1) format = false;
             }
 
             if (format && room.settings.ignorenext) {
