@@ -482,8 +482,11 @@ module.exports = {
 
                 let meta = "";
                 next = obj.times.indexOf(next);
-                console.log(entry);
+
                 if (obj.formats) meta = obj.formats[next];
+                else if (!obj.schedule) {
+                    meta = officialRoom;
+                }
                 else {
                     let day = now.getDay() - 1 + tomorrow;
                     while (day < 0) day += 7;
