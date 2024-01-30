@@ -437,7 +437,7 @@ let hasOfficial = function(id) {
 module.exports = {
     nextot: function (room, user, args) {
         if (room.id === "1v1" && !user.can(room, '+')) return user.send("Please use this command in PM.");
-        let rooms = [];
+        let rooms = {};
         let entries = [];
         let targetroom = false;
         for (let i in (toId(args[0]) === "all" ? Officials : user.rooms)) {
@@ -524,9 +524,10 @@ module.exports = {
                 ret = "in " + ret;
                 if (timeremaining < -5 * 60) ret = "should've just started";
                 r += `<b>${officialRoom}</b> - ${meta} ${ret}`;
-                rooms.push(r);
+                rooms[officialRoom] = r;
             }
         }
+        rooms = Object.values(rooms);
         if (!rooms.length) {
             if (room === user) return user.send("You're not in any rooms that have Official Tours configured");
             else return user.send("No official tours configured for this room");
