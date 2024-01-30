@@ -427,6 +427,13 @@ let Schedules = {
 
 Schedules.load();
 
+let hasOfficial = function(id) {
+    if (Officials[id]) return true;
+    for (let i in officials) {
+        if (Officials[i].room === id) return true;
+    }
+    return false;
+}
 module.exports = {
     nextot: function (room, user, args) {
         if (room.id === "1v1" && !user.can(room, '+')) return user.send("Please use this command in PM.");
