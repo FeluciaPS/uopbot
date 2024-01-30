@@ -491,8 +491,8 @@ module.exports = {
 
                 let betterDuplicate = false;
                 for (let i of entries) {
-                    if (entries[i][0] !== officialRoom) continue;
-                    if (entries[i][1] < timeremaining) betterDuplicate = true;
+                    if (i[0] !== officialRoom) continue;
+                    if (i[1] < timeremaining) betterDuplicate = true;
                 }
 
                 if (betterDuplicate) continue;
