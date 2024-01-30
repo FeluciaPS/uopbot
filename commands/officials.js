@@ -431,69 +431,90 @@ module.exports = {
     nextot: function (room, user, args) {
         if (room.id === "1v1" && !user.can(room, '+')) return user.send("Please use this command in PM.");
         let rooms = [];
+        let entries = [];
         let targetroom = false;
         for (let i in (toId(args[0]) === "all" ? Officials : user.rooms)) {
             let robj = Rooms[i];
             if (room !== user && robj !== room) continue;
-            if (!Officials[i]) continue;
+            if (!hasOfficial(i)) continue;
             if (!Users.self.can(robj, "*")) continue; // bot isn't auth in the room, can't start official tours, so no point displaying them.
             if (Users.self.rooms[i] === "*") targetroom = robj; // this is useful later
-            let obj = Officials[i];
 
-            // Sorry I can't be asked to write this right now
-            if (obj.monthly) continue;
+            for (let entry in Officials) {
+                let obj = Officials[entry];
+                if (entry !== i && obj.room !== i) continue;
+                let officialRoom = obj.room || entry;
 
-            let r = "";
-            let now = obj.EST ? getESTDate() : new Date(Date.now());
-            let next = obj.times[0];
-            for (let i in obj.times) {
-                if (now.getHours() >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
+                // Sorry I can't be asked to write this right now
+                if (obj.monthly) continue;
+
+                let r = "";
+                let now = obj.EST ? getESTDate() : new Date(Date.now());
+                let next = obj.times[0];
+                for (let i in obj.times) {
+                    if (now.getHours() >= obj.times[i]) next = obj.times[(parseInt(i) + 1) % obj.times.length];
+                }
+
+                let tomorrow = now.getHours() > next;
+
+                let time = next * 60 * 60 * 1000;
+                let dayprogress = now.getTime() % (24 * 60 * 60 * 1000);
+
+                if (tomorrow) dayprogress -= 24 * 60 * 60 * 1000;
+
+                let timeremaining = Math.floor((time - dayprogress) / 1000);
+                let timer = {
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0,
+                };
+
+                timer.hours = Math.floor(timeremaining / 3600);
+                timer.minutes = Math.floor((timeremaining - timer.hours * 3600) / 60);
+                timer.seconds = timeremaining % 60;
+
+                let meta = "";
+                next = obj.times.indexOf(next);
+                if (obj.formats) meta = obj.formats[next];
+                else {
+                    let day = now.getDay() - 1 + tomorrow;
+                    while (day < 0) day += 7;
+                    meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
+                }
+
+                let betterDuplicate = false;
+                for (let i of entries) {
+                    if (entries[i][0] !== officialRoom) continue;
+                    if (entries[i][1] < timeremaining) betterDuplicate = true;
+                }
+
+                if (betterDuplicate) continue;
+
+                entries.push([
+                    officialRoom,
+                    timeremaining
+                ])
+
+                let ret = [];
+                if (timer.hours) {
+                    ret.push(timer.hours + " hour" + (timer.hours === 1 ? "" : "s"));
+                }
+                if (timer.minutes) {
+                    ret.push(timer.minutes + " minute" + (timer.minutes === 1 ? "" : "s"));
+                }
+                if (timer.seconds) {
+                    ret.push(timer.seconds + " second" + (timer.seconds === 1 ? "" : "s"));
+                }
+
+                if (ret.length > 1) ret[ret.length - 1] = "and " + ret[ret.length - 1];
+                ret = ret.join(ret.length === 3 ? ", " : " ");
+
+                
+                ret = "in " + ret;
+                if (timeremaining < -5 * 60) ret = "should've just started";
+                r += `<b>${officialRoom}</b> - ${meta} ${ret}`;
+                rooms.push(r);
             }
-
-            let tomorrow = now.getHours() > next;
-
-            let time = next * 60 * 60 * 1000;
-            let dayprogress = now.getTime() % (24 * 60 * 60 * 1000);
-
-            if (tomorrow) dayprogress -= 24 * 60 * 60 * 1000;
-
-            let timeremaining = Math.floor((time - dayprogress) / 1000);
-            let timer = {
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-            };
-
-            timer.hours = Math.floor(timeremaining / 3600);
-            timer.minutes = Math.floor((timeremaining - timer.hours * 3600) / 60);
-            timer.seconds = timeremaining % 60;
-
-            let ret = [];
-            if (timer.hours) {
-                ret.push(timer.hours + " hour" + (timer.hours === 1 ? "" : "s"));
-            }
-            if (timer.minutes) {
-                ret.push(timer.minutes + " minute" + (timer.minutes === 1 ? "" : "s"));
-            }
-            if (timer.seconds) {
-                ret.push(timer.seconds + " second" + (timer.seconds === 1 ? "" : "s"));
-            }
-
-            if (ret.length > 1) ret[ret.length - 1] = "and " + ret[ret.length - 1];
-            ret = ret.join(ret.length === 3 ? ", " : " ");
-
-            let meta = "";
-            next = obj.times.indexOf(next);
-            if (obj.formats) meta = obj.formats[next];
-            else if (obj.schedule) {
-                let day = now.getDay() - 1 + tomorrow;
-                while (day < 0) day += 7;
-                meta = typeof obj.schedule[0] === "string" ? obj.schedule[day] : obj.schedule[day][next];
-            }
-            ret = "in " + ret;
-            if (timeremaining < -5 * 60) ret = "should've just started";
-            r += `<b>${robj.name}</b> - ${meta} ${ret}`;
-            rooms.push(r);
         }
         if (!rooms.length) {
             if (room === user) return user.send("You're not in any rooms that have Official Tours configured");
