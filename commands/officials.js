@@ -429,7 +429,7 @@ Schedules.load();
 
 let hasOfficial = function(id) {
     if (Officials[id]) return true;
-    for (let i in officials) {
+    for (let i in Officials) {
         if (Officials[i].room === id) return true;
     }
     return false;
