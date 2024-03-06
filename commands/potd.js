@@ -38,9 +38,14 @@ let selectPotd = function(room) {
         return true;
     });
 
-    let selectedPOTD = Utils.select(keys);
+    if (!roomobj.settings.potdhistory) roomobj.settings.potdhistory = [];
 
+    let selectedPOTD = Utils.select(keys);
+    while (roomobj.settings.potdhistory.includes(selectedPOTD)) selectedPOTD = Utils.select(keys);
+    
     roomobj.settings.potd = selectedPOTD;
+    if (roomobj.settings.potdhistory.length == 7) roomobj.settings.potdhistory.shift();
+    roomobj.settings.potdhistory.push(selectedPOTD);
     roomobj.saveSettings();
 
     if (Users.felucia) Users.felucia.send('The new POTD is ' + selectedPOTD);
