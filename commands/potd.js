@@ -24,7 +24,7 @@ let buildPotdBox = function(room) {
     return box;
 }
 
-let selectPotd = function(room) {
+let selectPotd = function(room, replace = false) {
     // For now this'll do
     if (!Rooms[room] || !banlists[room]) return;
     let roomobj = Rooms[room];
@@ -44,8 +44,13 @@ let selectPotd = function(room) {
     while (roomobj.settings.potdhistory.includes(selectedPOTD)) selectedPOTD = Utils.select(keys);
     
     roomobj.settings.potd = selectedPOTD;
-    if (roomobj.settings.potdhistory.length == 7) roomobj.settings.potdhistory.shift();
-    roomobj.settings.potdhistory.push(selectedPOTD);
+    if (!replace) {
+        if (roomobj.settings.potdhistory.length == 7) roomobj.settings.potdhistory.shift();
+        roomobj.settings.potdhistory.push(selectedPOTD);
+    }
+    else {
+        roomobj.settings.potdhistory[roomobj.settings.potdhistory.length - 1] = selectedPOTD;
+    }
     roomobj.saveSettings();
 
     if (Users.felucia) Users.felucia.send('The new POTD is ' + selectedPOTD);
@@ -84,7 +89,7 @@ module.exports = {
         },
         set: function(room, user, args) {
             if (!user.can(Rooms['1v1'], '#')) return;
-            selectPotd('1v1');
+            selectPotd('1v1', true);
         }
     }
 }
