@@ -121,8 +121,9 @@ bot.on("c", (parts) => {
     // Check if any official tours need starting
     Officials.official(Rooms[room]);
 
+    // Not the slightest clue why this crashes but we're just gonna check for room.settings and be done with it
     if (message.includes("added a roomevent titled") || message.includes("edited the roomevent titled"))
-        if (room.settings.sortevents) 
+        if (room.settings && room.settings.sortevents) 
             room.send("/events sortby date | asc");
 
     // Continue as usual
