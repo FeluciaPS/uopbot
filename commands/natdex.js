@@ -74,11 +74,16 @@ module.exports = {
         monoubers: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "nationaldexubers", args, "[Gen 9] NatDex Monotype Ubers");
-            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, " +
-                        "-Focus Band, -Gengarite, -King's Rock, +Koraidon, -Lax Incense, -Marshadow, " + 
-                        "-Miraidon, -Xerneas, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause," + 
-                        "-Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z," + 
-                        "-Zacian, -Zacian-Crowned");
+            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, "
+                    + "-Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, -Miraidon, +Shedinja, " 
+                    + "-Xerneas, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause, -Quick Claw, "
+                    + "Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian-Crowned");
+        },
+        noz: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9nationaldexmonotype", args, "[Gen 9] Z-Less NatDex Monotype");
+            room.send("/tour rules +Baxcalibur, +Chien-Pao, +Darkrai, +Dragapult, +Espathra, +Flutter Mane, +Gouging Fire, "
+                    + "+Hoopa-Unbound, +Kingambit, +Spectrier, +Ursaluna-Bloodmoon, +Zamazenta, Z-Move Clause")
         },
         threat: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;

@@ -31,6 +31,7 @@ let selectPotd = function(room, replace = false) {
     let banlist = banlists[room].gen9;
     
     let keys = Object.keys(PokeDex).filter(key => {
+        if (key === "ditto") return true;
         let dex = PokeDex[key];
         if (!fdata[key] || fdata[key].isNonstandard) return false;
         if (Object.values(dex.baseStats).reduce((partialSum, a) => partialSum + a, 0) < 420) return false;
