@@ -42,7 +42,7 @@ try {
     global.Reminder = require("./Reminder.js");
 
     // Connect
-    let psurl = "wss://sim.smogon.com/showdown/websocket";
+    let psurl = "wss://sim3.psim.us/showdown/websocket";
     let WebSocketClient = require("websocket").client;
     let websocket = new WebSocketClient();
     websocket.connect(psurl);
