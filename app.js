@@ -59,9 +59,11 @@ try {
         });
 
         connection.on("close", function () {
+            console.log("Connection failed");
             setTimeout(process.exit, 30 * 1000); // Force stayalive for 30 seconds
         });
         connection.on("connectFailed", function () {
+            console.log("Connection failed");
             setTimeout(process.exit, 30 * 1000); // Force stayalive for 30 seconds
         });
     });
