@@ -3,7 +3,7 @@ let url = require("url");
 let https = require("https");
 let util = require("util");
 
-let psurl = "ws://sim3.psim.us:8000/showdown/websocket";
+let psurl = "wss://sim3.psim.us/showdown/websocket";
 let loginurl = "https://play.pokemonshowdown.com/~~showdown/action.php";
 
 let autoJoin = function (index) {
