@@ -21,24 +21,22 @@ module.exports = {
         },
         gen5: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen5ou", args, "[Gen 5] CAP");
-            room.send("/tour rules +CAP, +CAP NFE, +CAP LC, -Cawmodore");
+            Utils.checkGenerator(room, "gen5cap", args);
         },
         gen4: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen4ou", args, "[Gen 4] CAP");
-            room.send("/tour rules +CAP, +CAP NFE, +CAP LC");
+            Utils.checkGenerator(room, "gen4cap", args);
         },
 
         // OMs
         natdex: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen8nationaldex", args, "[Gen 8] National Dex CAP");
+            Utils.checkGenerator(room, "gen9nationaldex", args, "[Gen 9] National Dex CAP");
             room.send("/tour rules +CAP, +CAP NFE, +CAP LC");
         },
         "1v1": function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen81v1", args, "[Gen 8] CAP 1v1");
+            Utils.checkGenerator(room, "gen91v1", args, "[Gen 9] CAP 1v1");
             room.send("/tour rules -All Pokemon, +CAP, +CAP NFE, +CAP LC");
         },
         aaa: function (room, user, args) {
