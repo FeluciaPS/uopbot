@@ -4,4 +4,5 @@ package-lock.json
 /data/BLT.json
 /data/reminders.json
 /data/potd.json
+/data/stats
 /sandbox
