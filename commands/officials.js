@@ -560,6 +560,7 @@ module.exports = {
                 
                 ret = "in " + ret;
                 if (timeremaining < -5 * 60) ret = "should've just started";
+                if (!meta) meta = "No tour scheduled"
                 r += `<b>${officialRoom}</b> - ${meta} ${ret}`;
                 rooms[officialRoom] = r;
             }
