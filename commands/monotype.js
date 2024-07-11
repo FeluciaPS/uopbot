@@ -301,6 +301,43 @@ module.exports = {
             Utils.checkGenerator(room, "gen9monotype", args);
             room.startTour("chill");
         },
+        // Threat
+        threat: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+
+            // I can't be bothered to implement nonrandom monothreat
+            const types = [
+                "Normal",
+                "Fire",
+                "Water",
+                "Grass",
+                "Electric",
+                "Ice",
+                "Fighting",
+                "Poison",
+                "Ground",
+                "Flying",
+                "Psychic",
+                "Bug",
+                "Rock",
+                "Ghost",
+                "Dark",
+                "Dragon",
+                "Steel",
+                "Fairy",
+            ];
+
+            let type = types[Math.floor(Math.random() * types.length)];
+            
+            // Type shold always be random as of now but I ain't deleting the above code
+            type = false;
+
+
+            if (!type) type = types[Math.floor(Math.random() * types.length)];
+
+            Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] Monothreat " + type);
+            room.send(`/tour rules Force Monotype = ${type}`);
+        },
     },
     cc1v1: function (room, user, args) {
         if (!Utils.canMakeTour(room, user)) return;

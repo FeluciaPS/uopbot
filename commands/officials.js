@@ -167,6 +167,34 @@ global.Officials = {
         EST: true,
         command: "overused",
     },
+    monotype: {
+        schedule: [
+            ["gen9", "tera", "aaa", "lc", "stab", "gen9"], // Monday
+            [], // Tuesday
+            [], // Wednesday
+            [], // Thursday
+            ["gen9", "gen5", "gen8", "gen7", "gen6", "gen9"], // Friday
+            ["uu", "gen7", "gen9", "gen9", "gen8", "natdex"], // Saturday
+            ["gen6", "gen9", "threat", "cap", "gen9", "gen5"], // Sunday
+        ],
+        altschedule: [
+            ["lc", "stab", "gen9", "gen9", "tera", "aaa"], // Monday
+            [], // Tuesday
+            [], // Wednesday
+            [], // Thursday
+            ["gen7", "gen6", "gen9", "gen9", "gen5", "gen8"], // Friday
+            ["gen9", "gen8", "natdex", "uu", "gen7", "gen9"], // Saturday
+            ["cap", "gen9", "gen5", "gen6", "gen9", "threat"], // Sunday
+        ],
+        times: [9, 10, 11, 21, 22, 23],
+        EST: true,
+        scrappie: true,
+        officialname: "Tour Nights",
+        command: "mono",
+        handler: function (room) {
+            room.send("!rfaq samples");
+        },
+    },
     nationaldexou: {
         times: [0, 8, 9, 10, 18, 19, 20, 22],
         formats: ["gen9", "gen9", "gen9", "gen8", "gen8","gen9", "gen8", "gen9"],
@@ -288,8 +316,11 @@ global.Officials = {
             } else if (data.schedule) {
                 let index = data.times.indexOf(now.getHours());
                 if (index !== -1) {
+                    const week = Math.floor(now / (1000 * 60 * 60 * 24 * 7));
+                    let schedule = data.altschedule ? week % 2 && data.altschedule : data.schedule;
+                    
                     // There's a tour scheduled for right now.
-                    format = typeof data.schedule[0] === "string" ? data.schedule[day] : data.schedule[day][index];
+                    format = typeof schedule[0] === "string" ? schedule[day] : schedule[day][index];
                 }
             } else if (data.randomformats && !data.linecountbeta) {
                 // Random tour formats, weighted.
