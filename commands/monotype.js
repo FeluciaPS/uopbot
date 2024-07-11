@@ -190,6 +190,11 @@ module.exports = {
             Utils.checkGenerator(room, "gen9monotype", args);
             room.send("/tour scouting off");
         },
+        natdex: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9nationaldexmonotype", args);
+            room.send("/tour scouting off");
+        },
         gen8: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen8monotype", args);
@@ -238,32 +243,51 @@ module.exports = {
         lc: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9lc", args, "[Gen 9] Monotype LC");
-            room.send("/tour rules Same Type Clause");
+            room.send("/tour rules Same Type Clause, Terastal Clause, -Bright Powder, -Damp Rock, -Focus Band, -Heat Rock, -Icy Rock, -King's Rock, -Lax Incense, -Quick Claw, +Diglett-Base, +Growlithe-Hisui, +Porygon, +Vulpix, +Vulpix-Alola, +Snivy, +Scraggy, +Sticky Web");
             room.send("/tour scouting off");
         },
         uber: "ubers",
         ubers: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "nationaldexubers", args, "[NatDex] Monotype Ubers");
-            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, -Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause, -Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian, -Zacian-Crowned, +Miraidon");
+            Utils.checkGenerator(room, "gen9ubers", args, "[Gen 9] Monotype Ubers");
+            room.send("/tour rules Same Type Clause, Terastal Clause, Evasion Abilities Clause, -Koraidon, -Miraidon, -Zacian-Crowned, -Bright Powder, -Lax Incense, -Quick Claw, -Focus Band, -Acupressure");
             room.send("/tour scouting off");
         },
         // Mixups with OMs
+        uu: function(room, user, args) {
+            Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] Monotype UU");
+            room.send(
+                "/tour rules -Scizor, -Chien Pao, -Archaludon, -Iron Hands, -Azumarill, -Great Tusk, -Ceruledge, -Corviknight, -Meowscarada, -Clodsire, -Hatterene, -Volcarona, -Greninja, -Baxcalibur, -Raging Bolt, -Flutter Mane, -Gouging Fire, -Landorus, -Ogerpon-Hearthflame, -Ursaluna-Bloodmoon, -Dragapult, -Iron Valiant, -Heatran, -Skarmory,  -Iron Treads, -Mamoswine, -Zoroark-Hisui, -Sneasler, -Gholdengo, -Primarina, -Kingambit, -Goodra-Hisui, -Toxapex, -Latios, -Samurott-Hisui, -Urshifu*, -Ting-Lu, -Roaring Moon, -Zamazenta, -Espathra, -Dragonite, -Excadrill, -Klefki, -Gallade, -Kyurem, -Sableye, -Spectrier"
+            );
+            room.send("/tour scouting off");
+        },
         almostanyability: "aaa",
         aaa: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen8almostanyability", args, "[Gen 8] Monotype Almost Any Ability");
-            room.send(
-                "/tour rules Same Type Clause, +Buzzwole, +Zeraora, -Dragapult, -Dracovish, -Dragonite, -Keldeo, -Urshifu, -Urshifu-Rapid-Strike, -Melmetal, -Psychic Surge, -Triage, -Damp Rock, -Terrain Extender"
-            );
+            Utils.checkGenerator(room, "gen9almostanyability", args, "[Gen 9] Monotype Almost Any Ability");
+            room.send("/tour rules Same Type Clause, +Zoroark-Hisui, -Chi-Yu, -Kommo-o, -Booster Energy, -Bright Powder, -Damp Rock, -Focus Band, -King's Rock, -Lax Incense, -Quick Claw, -Smooth Rock");
+            room.send("/tour scouting off");
+        },
+        cap: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] CAP Monotype");
+            room.send("/tour rules +CAP, -Cawmodore, -Fidgit, -Hemogoblin, -Crucibellite, -Heat Rock");
             room.send("/tour scouting off");
         },
         stab: "stabmons",
         stabmons: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
-            Utils.checkGenerator(room, "gen8stabmons", args, "[Gen 8] Monotype STABmons");
+            Utils.checkGenerator(room, "gen9stabmons", args, "[Gen 9] Monotype STABmons");
             room.send(
-                "/tour rules Same Type Clause, -Blaziken, -Dracovish, -Dragapult, -Landorus-Incarnate, -Magearna, -Terrain Extender, -Damp Rock, +Darmanitan-Galar, +Porygon Z, +Thundurus, +Arena Trap"
+                "/tour rules Same Type Clause, Terastal Clause, +Basculegion, +Basculegion-F, +Houndstone, -Iron Hands, -Palafin, -Last Respects, -Surging Strikes, -Booster Energy, -Bright Powder, -Damp Rock, -Focus Band, -King's Rock, -Lax Incense, -Quick Claw"
+            );
+            room.send("/tour scouting off");
+        },
+        tera: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] Terastal Monotype");
+            room.send(
+                "/tour rules !Terastal Clause, -Chien-Pao, -Dragonite, -Espathra, -Flutter Mane, -Gouging Fire, -Kingambit, -Ogerpon-Hearthflame, -Sneasler, -Spectrier, -Terapagos, -Ursaluna-Bloodmoon, -Volcarona, -Zamazenta"
             );
             room.send("/tour scouting off");
         },
