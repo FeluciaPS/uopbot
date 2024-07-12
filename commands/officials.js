@@ -83,23 +83,6 @@ global.Officials = {
         minlines: 250,
         mintime: 1.55 * 60 // At least 1.55 hours between tours
     },
-    "2v2": {
-        schedule: [
-            ["gen9", "gen6", "gen9"],
-            ["gen8", "gen8", "gen9"],
-            ["gen9", "gen9", "gen5"],
-            ["gen9", "gen5", "gen9"],
-            ["gen7", "gen9", "gen9"],
-            ["gen9", "gen9", "gen5"],
-            ["gen9", "gen7", "gen9"],
-        ],
-        times: [5, 13, 21],
-        EST: true,
-        scouting: true,
-        scrappie: true,
-        command: "2v2",
-        autostart: 7,
-    },
     anythinggoes: {
         schedule: ["gen9", "gen7", "galar", "gen6", "gen9", "gen7", "gen9"],
         times: [18],
@@ -107,27 +90,6 @@ global.Officials = {
         command: "ag",
         autostart: 7,
         autodq: 2
-    },
-    bdspmetagames: {
-        schedule: [
-            ["ou", "mono", "ou", "ubers", "uu", "ru"], // Monday
-            ["mono", "ou", "ubers", "uu", "ru", "nu"], // Tuesday
-            ["ou", "rands", "uu", "ru", "nu", "mono"], // Wednesday
-            ["rands", "uu", "ru", "nu", "lc", "ou"], // Thursday
-            ["uu", "ru", "nu", "lc", "mono", "ou"], // Friday
-            ["ru", "nu", "lc", "mono", "ou", "rands"], // Saturday
-            ["ru", "ou", "mono", "ou", "ubers", "uu"], // Sunday
-        ],
-        times: [0, 4, 8, 12, 16, 20],
-        EST: true,
-        forcepublic: true,
-        forcetimer: true,
-        scouting: true,
-        scrappie: true,
-        command: "bdspmetagames",
-        handler: function (room, format) {
-            room.send("!om " + format);
-        },
     },
     capproject: {
         schedule: [
