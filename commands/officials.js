@@ -168,6 +168,8 @@ global.Officials = {
         formats: ["uu", "uu", "uu", "uu"],
         scrappie: true,
         command: "natdex",
+        autostart: 5,
+        autodq: 5
     },
     nationaldexmonotype: {
         times: [8, 10, 12, 14, 16, 18, 20],
