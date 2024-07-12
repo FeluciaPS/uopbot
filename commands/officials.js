@@ -186,7 +186,7 @@ global.Officials = {
             ["gen9", "gen8", "natdex", "uu", "gen7", "gen9"], // Saturday
             ["cap", "gen9", "gen5", "gen6", "gen9", "threat"], // Sunday
         ],
-        times: [9, 10, 11, 21, 22, 23],
+        times: [8, 9, 10, 20, 21, 22],
         EST: true,
         scrappie: true,
         officialname: "Tour Nights",
