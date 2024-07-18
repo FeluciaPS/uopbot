@@ -284,7 +284,7 @@ global.Officials = {
                     let schedule = data.altschedule ? week % 2 && data.altschedule : data.schedule;
                     
                     // There's a tour scheduled for right now.
-                    format = typeof schedule[0] === "string" ? schedule[day] : schedule[day][index];
+                    format = schedule[day] && typeof schedule[day] === "string" ? schedule[day] : schedule[day][index];
                 }
             } else if (data.randomformats && !data.linecountbeta) {
                 // Random tour formats, weighted.
