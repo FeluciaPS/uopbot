@@ -281,10 +281,10 @@ global.Officials = {
                 let index = data.times.indexOf(now.getHours());
                 if (index !== -1) {
                     const week = Math.floor(now / (1000 * 60 * 60 * 24 * 7));
-                    let schedule = data.altschedule ? week % 2 && data.altschedule : data.schedule;
+                    let schedule = data.altschedule && week % 2 ? data.altschedule : data.schedule;
                     
                     // There's a tour scheduled for right now.
-                    format = schedule[day] && typeof schedule[day] === "string" ? schedule[day] : schedule[day][index];
+                    format = typeof schedule[day] === "string" ? schedule[day] : schedule[day][index];
                 }
             } else if (data.randomformats && !data.linecountbeta) {
                 // Random tour formats, weighted.
