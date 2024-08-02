@@ -7,12 +7,13 @@ let buildPotdBox = function(room) {
 
     let potd = room.settings.potd;
     let mondata = PokeDex[potd];
-    let iconURL = `https://play.pokemonshowdown.com/sprites/ani/${mondata.name.toLowerCase().replace(/\s/g, '')}.gif`;
+    //let iconURL = `https://play.pokemonshowdown.com/sprites/ani/${mondata.name.toLowerCase().replace(/\s/g, '')}.gif`;
+    let iconURL = `https://chiy.uk/256/${mondata.name.toLowerCase().replace(/\s/g, '%20')}`;
     let name = mondata.name;
     let box = ``
         + `<center>`
         + `<div style="width: 400px; position:relative; height: 192px">`
-        + `<div style="width:128px; height:192px; background-image: url(${iconURL});`
+        + `<div style="width:192px; height:192px; background-image: url(${iconURL});`
         + ` background-position: center; background-repeat: no-repeat; position:absolute; left: 16px">`
         + `</div>`
         + `<div style="position:absolute; right:16px; width:240px; padding-top:24px">`
