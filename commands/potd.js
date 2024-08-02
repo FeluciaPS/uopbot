@@ -13,7 +13,7 @@ let buildPotdBox = function(room) {
     let box = ``
         + `<center>`
         + `<div style="width: 400px; position:relative; height: 192px">`
-        + `<div style="width:128px; height:192px; background-image: url(${iconURL}); background-size: 160px`
+        + `<div style="width:128px; height:192px; background-image: url(${iconURL}); background-size: 160px;`
         + ` background-position: center; background-repeat: no-repeat; position:absolute; left: 16px">`
         + `</div>`
         + `<div style="position:absolute; right:16px; width:240px; padding-top:24px">`
