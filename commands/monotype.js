@@ -271,7 +271,7 @@ module.exports = {
         cap: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] CAP Monotype");
-            room.send("/tour rules +CAP, -Cawmodore, -Fidgit, -Hemogoblin, -Crucibellite, -Heat Rock");
+            room.send("/tour rules +CAP, -Cawmodore, -Fidgit, -Crucibellite, -Heat Rock");
             room.send("/tour scouting off");
         },
         stab: "stabmons",
