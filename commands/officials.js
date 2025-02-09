@@ -109,7 +109,7 @@ global.Officials = {
         },
     },
     deutsche: {
-        times: [18],
+        times: [19],
         randomformats: {
             gen9randombattle: 1,            gen8randombattle: 1,
             gen7randombattle: 1,            gen6randombattle: 1,
@@ -128,6 +128,7 @@ global.Officials = {
         monthly: true,
         EST: true,
         command: "overused",
+        soft: true
     },
     monotype: {
         schedule: [
@@ -387,7 +388,7 @@ global.Officials = {
 
             if (room.tournament) {
                 if (room.tournament.official) return console.log(`${i}: Official tour already exists`);
-                else {
+                else if (!data.soft) {
                     room.send("/wall Official time. Ending ongoing tournament");
                     room.send("/tour end");
                     room.endTour();
