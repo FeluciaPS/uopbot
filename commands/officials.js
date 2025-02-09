@@ -332,6 +332,19 @@ global.Officials = {
                 if (room.lasttour[2] < data.minlines)
                     continue;
 
+                if (room.settings.ignorenext) {
+                    room.settings.ignorenext--;
+                    room.send(`/mn OFFICIAL SKIPPED: ${format}`);
+                    data.hasStarted = true;
+                    room.lasttour[0] = Date.now();
+                    room.lasttour[2] = 0;
+                    room.saveSettings();
+                    setTimeout(() => {
+                        data.hasStarted = false;
+                    }, 7 * 1000 * 60);
+                    continue;
+                }
+                
                 // Random tour formats, weighted.
                 let max = 0;
                 for (let formatname in data.randomformats) {
