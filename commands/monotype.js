@@ -243,7 +243,7 @@ module.exports = {
         lc: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9lc", args, "[Gen 9] Monotype LC");
-            room.send("/tour rules Same Type Clause, Terastal Clause, -Bright Powder, -Damp Rock, -Focus Band, -Heat Rock, -Icy Rock, -King's Rock, -Lax Incense, -Quick Claw, +Diglett-Base, +Growlithe-Hisui, +Porygon, +Vulpix, +Vulpix-Alola, +Snivy, +Scraggy, +Sticky Web");
+            room.send("/tour rules Same Type Clause, Terastal Clause, -Bright Powder, -Damp Rock, -Focus Band, -Heat Rock, -Icy Rock, -King's Rock, -Lax Incense, -Quick Claw, -Minccino, -Meowth, +Diglett-Base, +Porygon, +Vulpix, +Vulpix-Alola, +Snivy, +Scraggy, +Voltorb-Hisui, +Sticky Web");
             room.send("/tour scouting off");
         },
         uber: "ubers",
@@ -256,9 +256,17 @@ module.exports = {
         // Mixups with OMs
         uu: function(room, user, args) {
             Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] Monotype UU");
-            room.send(
-                "/tour rules -Scizor, -Chien Pao, -Archaludon, -Iron Hands, -Azumarill, -Great Tusk, -Ceruledge, -Corviknight, -Meowscarada, -Clodsire, -Hatterene, -Volcarona, -Greninja, -Baxcalibur, -Raging Bolt, -Flutter Mane, -Gouging Fire, -Landorus, -Ogerpon-Hearthflame, -Ursaluna-Bloodmoon, -Dragapult, -Iron Valiant, -Heatran, -Skarmory,  -Iron Treads, -Mamoswine, -Zoroark-Hisui, -Sneasler, -Gholdengo, -Primarina, -Kingambit, -Goodra-Hisui, -Toxapex, -Latios, -Samurott-Hisui, -Urshifu*, -Ting-Lu, -Roaring Moon, -Zamazenta, -Espathra, -Dragonite, -Excadrill, -Klefki, -Gallade, -Kyurem, -Sableye, -Spectrier"
-            );
+
+            let ruleset = `-Garchomp, -Ogerpon-wellspring, -Tornadus-therian, -Gliscor, -Cinderace, -Terapagos, `
+                + `-Hippowdon, -Scizor, -Spectrier, -Dragonite, -Kyurem, -Archaludon, -Iron Hands, -Great Tusk, `
+                + `-Ceruledge, -Corviknight, -Meowscarada, -Clodsire, -Hatterene, -Volcarona, -Greninja, -Baxcalibur, `
+                + `-Flutter Mane, -Gouging Fire, -Landorus-Base, -Ogerpon-Hearthflame, -Dragapult, -Iron Valiant, `
+                + `-Heatran, -Skarmory, -Iron Treads, -Sneasler, -Gholdengo, -Primarina, -Goodra-Hisui, -Toxapex, `
+                + `-Latios, -Urshifu*, -Ting-Lu, -Zamazenta, -Espathra, -Gallade, -Samurott-Hisui, -Pelipper, `
+                + `-Politoed, -Darkrai, -Zoroark-Hisui, -Mamoswine, -Roaring Moon, -Glimmora, -Mimikyu, -Sableye, `
+                + `-Pecharunt, -Bisharp, -Excadrill, -Blissey, -Ditto`
+
+            room.send(`/tour rules ${ruleset}`);
             room.send("/tour scouting off");
         },
         almostanyability: "aaa",
@@ -287,7 +295,7 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] Terastal Monotype");
             room.send(
-                "/tour rules !Terastal Clause, -Chien-Pao, -Dragonite, -Espathra, -Flutter Mane, -Gouging Fire, -Kingambit, -Ogerpon-Hearthflame, -Sneasler, -Spectrier, -Terapagos, -Ursaluna-Bloodmoon, -Volcarona, -Zamazenta"
+                "/tour rules !Terastal Clause, -Kingambit, -Flutter Mane, -Ogerpon-Hearthflame, -Gouging Fire, -Sneasler, -Cresselia, -Spectrier, -Terapagos, -Zamazenta, -Volcarona, -Dragonite, -Heat Rock, -Icy Rock"
             );
             room.send("/tour scouting off");
         },
