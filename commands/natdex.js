@@ -75,9 +75,17 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "nationaldexubers", args, "[Gen 9] NatDex Monotype Ubers");
             room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, "
-                    + "-Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, -Miraidon, +Shedinja, " 
-                    + "-Xerneas, Mega Rayquaza Clause, Terastal Clause, -Moody, OHKO Clause, -Quick Claw, "
-                    + "Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian-Crowned");
+                + "-Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, -Miraidon, +Shedinja, "
+                + "-Xerneas, Mega Rayquaza Clause, Terastal Clause, -Moody, -Power Construct, OHKO Clause, "
+                + "-Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian-Crowned");
+        }, 
+        monoru: function (room, user, args) {
+            if (!Utils.canMakeTour(room, user)) return;
+            Utils.checkGenerator(room, "nationaldexou", args, "[Gen 9] NatDex RU");
+            room.send("/tour rules -Barraskewda, -Basculegion, -Basculegion-F, -Latias, -Deoxys-Defense, "
+                + "-Cloyster, +Grafaiai, +Talonflame, +Grimmsnarl, -Blacephalon, +Golisopod, "
+                + "+Drizzle, +Drought, -Acupressure, -Booster Energy, -Icy Rock, "
+                + "+Light Clay, -Pidgeotite, -Swampertite, -Sablenite, -Terrain Extender");
         }, 
         noz: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;

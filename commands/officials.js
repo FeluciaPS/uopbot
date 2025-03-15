@@ -173,8 +173,8 @@ global.Officials = {
         autodq: 5
     },
     nationaldexmonotype: {
-        times: [8, 10, 12, 14, 16, 18, 20],
-        formats: ["mono", "threat", "mono", "noz", "mono", "monoubers", "mono"],
+        times: [0, 8, 10, 12, 14, 16, 18, 20, 22],
+        formats: ["mono", "mono", "threat", "mono", "gen8mono", "mono", "monoru", "mono", "monoubers"],
         scrappie: true,
         EST: true,
         command: "natdex"
