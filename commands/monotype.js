@@ -259,10 +259,10 @@ module.exports = {
 
             let ruleset = `-Garchomp, -Ogerpon-wellspring, -Tornadus-therian, -Gliscor, -Cinderace, -Terapagos, `
                 + `-Hippowdon, -Scizor, -Spectrier, -Dragonite, -Kyurem, -Archaludon, -Iron Hands, -Great Tusk, `
-                + `-Ceruledge, -Corviknight, -Meowscarada, -Clodsire, -Hatterene, -Volcarona, -Greninja, -Baxcalibur, `
-                + `-Flutter Mane, -Gouging Fire, -Landorus-Base, -Ogerpon-Hearthflame, -Dragapult, -Iron Valiant, `
+                + `-Ceruledge, -Corviknight, -Meowscarada, -Clodsire, -Hatterene, -Volcarona, -Greninja, `
+                + `-Flutter Mane, -Landorus-Base, -Ogerpon-Hearthflame, -Dragapult, -Iron Valiant, `
                 + `-Heatran, -Skarmory, -Iron Treads, -Sneasler, -Gholdengo, -Primarina, -Goodra-Hisui, -Toxapex, `
-                + `-Latios, -Urshifu*, -Ting-Lu, -Zamazenta, -Espathra, -Gallade, -Samurott-Hisui, -Pelipper, `
+                + `-Latios, -Urshifu*, -Ting-Lu, -Gallade, -Samurott-Hisui, -Pelipper, `
                 + `-Politoed, -Darkrai, -Zoroark-Hisui, -Mamoswine, -Roaring Moon, -Glimmora, -Mimikyu, -Sableye, `
                 + `-Pecharunt, -Bisharp, -Excadrill, -Blissey, -Ditto`
 
@@ -295,7 +295,7 @@ module.exports = {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "gen9monotype", args, "[Gen 9] Terastal Monotype");
             room.send(
-                "/tour rules !Terastal Clause, -Kingambit, -Flutter Mane, -Ogerpon-Hearthflame, -Gouging Fire, -Sneasler, -Cresselia, -Spectrier, -Terapagos, -Zamazenta, -Volcarona, -Dragonite, -Heat Rock, -Icy Rock"
+                "/tour rules !Terastal Clause, -Flutter Mane, -Ogerpon-Hearthflame, -Sneasler, -Cresselia, -Spectrier, -Terapagos, -Volcarona, -Dragonite, -Heat Rock, -Icy Rock"
             );
             room.send("/tour scouting off");
         },
