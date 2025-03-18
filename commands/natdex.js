@@ -74,7 +74,7 @@ module.exports = {
         monoubers: function (room, user, args) {
             if (!Utils.canMakeTour(room, user)) return;
             Utils.checkGenerator(room, "nationaldexubers", args, "[Gen 9] NatDex Monotype Ubers");
-            room.send("/tour rules -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, "
+            room.send("/tour rules Same Type Clause, -Bright Powder, -Calyrex-Shadow, Dynamax Clause, Evasion Moves Clause, "
                 + "-Focus Band, -Gengarite, -King's Rock, -Lax Incense, -Marshadow, -Miraidon, +Shedinja, "
                 + "-Xerneas, Mega Rayquaza Clause, Terastal Clause, -Moody, -Power Construct, OHKO Clause, "
                 + "-Quick Claw, Same Type Clause, Sleep Clause Mod, Species Clause, -Ultranecrozium Z, -Zacian-Crowned");
