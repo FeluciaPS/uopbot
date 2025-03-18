@@ -132,7 +132,7 @@ global.Officials = {
     },
     monotype: {
         schedule: [
-            ["gen9", "tera", "aaa", "lc", "stabmons", "gen9"], // Monday
+            ["gen9", "tera", "gen6", "lc", "gen5", "gen9"], // Monday
             [], // Tuesday
             [], // Wednesday
             [], // Thursday
@@ -141,7 +141,7 @@ global.Officials = {
             ["gen6", "gen9", "threat", "cap", "gen9", "gen5"], // Sunday
         ],
         altschedule: [
-            ["lc", "stabmons", "gen9", "gen9", "tera", "aaa"], // Monday
+            ["lc", "gen7", "gen9", "gen9", "tera", "gen8"], // Monday
             [], // Tuesday
             [], // Wednesday
             [], // Thursday
