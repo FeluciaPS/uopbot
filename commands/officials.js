@@ -44,7 +44,18 @@ global.Officials = {
         times: [5, 17],
         room: '1v1',
         command: 'potd',
-        autostart: 7
+        autostart: 7,
+        soft: true
+    },
+    "1v1tlt": {
+        formats: ['gen9', 'gen9', 'gen9', 'gen9'],
+        times: [ 0, 6, 12, 18 ],
+        room: '1v1',
+        command: '1v1',
+        officialname: 'TLT',
+        args: 'e2',
+        autostart: 7,
+        scouting: true,
     },
     "1v1": {
         schedule: [
@@ -81,7 +92,8 @@ global.Officials = {
             gen2: 1
         },
         minlines: 250,
-        mintime: 1.55 * 60 // At least 1.55 hours between tours
+        mintime: 1.55 * 60, // At least 1.55 hours between tours
+        soft: true
     },
     anythinggoes: {
         schedule: ["gen9", "gen7", "galar", "gen6", "gen9", "gen7", "gen9"],
