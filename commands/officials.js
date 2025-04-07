@@ -58,6 +58,7 @@ global.Officials = {
         scouting: true,
         handler: function(room, format) {
             room.send("!rfaq tlt");
+            room.send("TLT [Gen 9] 1v1");
         }
     },
     "1v1": {
