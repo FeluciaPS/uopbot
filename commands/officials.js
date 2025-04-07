@@ -59,6 +59,9 @@ global.Officials = {
         handler: function(room, format) {
             room.send("!rfaq tlt");
             room.send("/tour name TLT [Gen 9] 1v1");
+            if (!room.settings.officialhook) return;
+            let request = require('request');
+            request({url:room.settings.officialhook, body: {content:`<@&708404210890309653> **${format}** TLT tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         }
     },
     "1v1": {
