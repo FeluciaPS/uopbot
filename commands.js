@@ -26,7 +26,7 @@ let commands = {
             let target = user.can(room, '+') ? room : user;
             let https = require('https');
             let url = args[0];
-            if (!url || !url.match(/$https:\/\/pastie.io\/raw\/.+/)) return target.send("Please provide a valid pastie.io url containing tour data");
+            if (!url || !url.match(/^https:\/\/pastie.io\/raw\/.+/)) return target.send("Please provide a valid pastie.io url containing tour data");
             https.get(url, (res) => {
                 let data = "";
                 res.on("data", (chunk) => {
