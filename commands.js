@@ -7,9 +7,48 @@ global.Gen8fdata = require("./data/gen8/formats-data.js");
 global.Gen8PokeDex = require("./data/gen8/pokedex.js");
 global.Gen8Items = require("./data/gen8/items.js");
 
+const { getSimplifiedBracket, getPlacementsFromSimplifiedBracket } = require('./BracketParser.js');
 
 let commands = {
     // Utilities
+    parsetourdata: 
+    {
+        '': 'help',
+        help: function(room, user, args) {
+            let target = user.can(room, '+') ? room : user;
+            target.send("Please use ``.parsetourdata [e1/e2], [pastie.io url]``.");
+        },
+        e1: function (room, user, args) {
+            let target = user.can(room, '+') ? room : user;
+            target.send("Single Elimination bracket parsing is not implemented.");
+        },
+        e2: function(room, user, args) {
+            let target = user.can(room, '+') ? room : user;
+            let https = require('https');
+            let url = args[0];
+            if (!url || !url.match(/$https:\/\/pastie.io\/raw\/.+/)) return target.send("Please provide a valid pastie.io url containing tour data");
+            https.get(url, (res) => {
+                let data = "";
+                res.on("data", (chunk) => {
+                    data += chunk;
+                })
+
+                res.on("end", () => {
+                    if (data.startsWith("|tournament|end|")) data = data.slice(16);
+                    data = JSON.parse(data);
+                    let bracket = getSimplifiedBracket(data);
+                    let placements = getPlacementsFromSimplifiedBracket(bracket);
+
+                    Utils.uploadToHastebin(JSON.stringify(bracket, null, 2), (url) => {
+                        Utils.uploadToHastebin(JSON.stringify(placements, null, 2), (url2) => {
+                            target.send(`Readable bracket data: ${url} | Placements: ${url2}`);
+                        })
+                    })
+                })
+            })
+        }
+
+    },
     stat: function (room, user, args) {
         let target = user.can(room, "+") ? room : user;
         args = args[0].split(" ");
