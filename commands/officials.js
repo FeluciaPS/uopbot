@@ -53,9 +53,12 @@ global.Officials = {
         room: '1v1',
         command: '1v1',
         officialname: 'TLT',
-        args: 'e2',
+        args: ['e2'],
         autostart: 7,
         scouting: true,
+        handler: function(room, format) {
+            room.send("!rfaq tlt");
+        }
     },
     "1v1": {
         schedule: [
