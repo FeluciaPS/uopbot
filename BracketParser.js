@@ -18,7 +18,7 @@ function simplifyBracket(node) {
 }
 
 exports.getSimplifiedBracket = function (data) {
-    const root = data.bracketData?.rootNode;
+    const root = data.bracketData ? data.bracketData.rootNode : false;
     if (!root) throw new Error("Invalid bracket data: rootNode missing");
     return simplifyBracket(root);
 }
