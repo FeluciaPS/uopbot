@@ -153,7 +153,7 @@ exports.uploadToHastebin = function (toUpload, callback) {
     req.end();
 };
 
-exports.createHtmlTable = function(data, headers = []) {
+exports.createHtmlTable = function(data, headers = [], bold_first = undefined) {
     if (typeof data !== "object") throw new Error("createHtmlTable should receive an object as input");
     if (!Array.isArray(headers)) throw new Error("createHtmlTable headers must be an array");
 
@@ -171,6 +171,7 @@ exports.createHtmlTable = function(data, headers = []) {
 
         if (!Array.isArray(obj)) {
             entry = [i, ...entry];
+            if (bold_first !== false) bold_first = true;
         }
 
         obj.push(entry);
@@ -178,15 +179,16 @@ exports.createHtmlTable = function(data, headers = []) {
         max = Math.max(max, entry.length);
     }
 
-    let tablestyle = `border-spacing: 0px ; border-collapse: collapse ; border: 1px solid #888 ; background: rgba(225 , 120 , 120 , 0.10)`;
+    let tablestyle = `border-spacing: 0px ; border-collapse: collapse ; border: 1px solid #888 ; background: rgba(225 , 120 , 120 , 0.10); text-align: center`;
+    let cellstyle = `padding: 1px 5px`;
 
     let header = `<table style="${tablestyle}"><tr>`;
-    if (headers.length === 0) header += `<th colspan="${max}">Table</th>`;
+    if (headers.length === 0) header += `<th style="${cellstyle}" colspan="${max}">Table</th>`;
     else {
         for (let i = 0; i < headers.length - 2; i++) {
-            header += `<th>${headers[i]}</th>`;
+            header += `<th style="${cellstyle}">${headers[i]}</th>`;
         }
-        header += `<th colspan="${headers.length - max}">${headers[headers.length - 1]}</th>`;
+        header += `<th style="${cellstyle}" colspan="${headers.length - max}">${headers[headers.length - 1]}</th>`;
     }
     header += `</tr>`;
 
@@ -196,7 +198,7 @@ exports.createHtmlTable = function(data, headers = []) {
         for (let i = 0; i < max; i++) {
             let text = row[i] || '';
 
-            body += `<td>${ESCAPE_HTML(text)}</td>`
+            body += `<td style="${cellstyle}">${ESCAPE_HTML(text)}</td>`
         }
         body += `</tr>`;
     }
