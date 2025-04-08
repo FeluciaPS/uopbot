@@ -1,3 +1,5 @@
+const ESCAPE_HTML = require('escape-html');
+
 const DELAY = 120;
 let queue = [];
 let sendNext = function () {
@@ -150,3 +152,56 @@ exports.uploadToHastebin = function (toUpload, callback) {
     req.write(toUpload);
     req.end();
 };
+
+exports.createHtmlTable = function(data, headers = []) {
+    if (typeof data !== "object") throw new Error("createHtmlTable should receive an object as input");
+    if (!Array.isArray(headers)) throw new Error("createHtmlTable headers must be an array");
+
+    headers = headers.map(ESCAPE_HTML);
+    let obj = [];
+
+    let max = 0;
+    for (let i in data) {
+
+        let entry = data[i];
+
+        if (typeof entry !== "object") entry = [entry];
+
+        if (!Array.isArray(entry)) throw new Error("createHtmlTable entries should be arrays");
+
+        if (!Array.isArray(obj)) {
+            entry = [i, ...entry];
+        }
+
+        obj.push(entry);
+
+        max = Math.max(max, entry.length);
+    }
+
+    let tablestyle = `border-spacing: 0px ; border-collapse: collapse ; border: 1px solid #888 ; background: rgba(225 , 120 , 120 , 0.10)`;
+
+    let header = `<table style="${tablestyle}"><tr>`;
+    if (headers.length === 0) header += `<th colspan="${max}">Table</th>`;
+    else {
+        for (let i = 0; i < headers.length - 2; i++) {
+            header += `<th>${headers[i]}</th>`;
+        }
+        header += `<th colspan="${headers.length - max}">${headers[headers.length - 1]}</th>`;
+    }
+    header += `</tr>`;
+
+    let body = ''
+    for (let row of obj) {
+        body += '<tr>'
+        for (let i = 0; i < max; i++) {
+            let text = row[i] || '';
+
+            body += `<td>${ESCAPE_HTML(text)}</td>`
+        }
+        body += `</tr>`;
+    }
+
+    body = `${header}${body}</table>`
+
+    return body;
+}
