@@ -559,7 +559,7 @@ module.exports = {
                 ret = "in " + ret;
                 if (timeremaining < -5 * 60) ret = "should've just started";
                 if (!meta) meta = "No tour scheduled"
-                if (obj.nextotprefix) meta = `<b>${nextotprefix}</b> ${meta}`;
+                if (obj.nextotprefix) meta = `<b>${obj.nextotprefix}</b> ${meta}`;
                 r += `<b>${officialRoom}</b> - ${meta} ${ret}`;
                 rooms[officialRoom] = r;
             }
