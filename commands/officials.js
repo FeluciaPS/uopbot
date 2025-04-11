@@ -62,7 +62,8 @@ global.Officials = {
             if (!room.settings.officialhook) return;
             let request = require('request');
             request({url:room.settings.officialhook, body: {content:`<@&708404210890309653> **${format}** TLT tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
-        }
+        },
+        nextotprefix: 'TLT'
     },
     "1v1": {
         schedule: [
@@ -558,6 +559,7 @@ module.exports = {
                 ret = "in " + ret;
                 if (timeremaining < -5 * 60) ret = "should've just started";
                 if (!meta) meta = "No tour scheduled"
+                if (obj.nextotprefix) meta = `<b>${nextotprefix}</b> ${meta}`;
                 r += `<b>${officialRoom}</b> - ${meta} ${ret}`;
                 rooms[officialRoom] = r;
             }
