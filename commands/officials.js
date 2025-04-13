@@ -49,7 +49,7 @@ global.Officials = {
     },
     "1v1tlt": {
         formats: ['gen9', 'gen9', 'gen9', 'gen9'],
-        times: [ 0, 6, 12, 18 ],
+        times: [ 2, 8, 14, 20 ],
         room: '1v1',
         command: '1v1',
         officialname: 'TLT',
