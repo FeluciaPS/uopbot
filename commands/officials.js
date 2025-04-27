@@ -41,7 +41,7 @@ const fs = require("fs");
 global.Officials = {
     "1v1potd": {
         formats: ['monopoke', 'monopoke'],
-        times: [5, 17],
+        times: [6, 18],
         room: '1v1',
         command: 'potd',
         autostart: 7,
