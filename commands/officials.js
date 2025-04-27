@@ -49,7 +49,7 @@ global.Officials = {
     },
     "1v1tlt": {
         formats: ['gen9', 'gen9', 'gen9', 'gen9'],
-        times: [ 3, 9, 15, 21 ],
+        times: [ 5, 11, 17, 23 ],
         room: '1v1',
         command: '1v1',
         officialname: 'TLT',
@@ -75,7 +75,7 @@ global.Officials = {
             [ "gen9", "gen9", "gen7" ], // Saturday
             [ "gen9", "gen8", "gen9" ], // Sunday
         ],
-        times: [8, 14, 20],
+        times: [9, 15, 21],
         EST: true,
         scouting: true,
         scrappie: true,
