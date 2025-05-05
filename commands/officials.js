@@ -63,7 +63,8 @@ global.Officials = {
             let request = require('request');
             request({url:room.settings.officialhook, body: {content:`<@&708404210890309653> **${format}** TLT tournament created. Starting in ${this.autostart} minutes!`}, method:"POST", json:true});
         },
-        nextotprefix: 'TLT'
+        nextotprefix: 'TLT',
+        disable: true
     },
     "1v1": {
         schedule: [
@@ -258,7 +259,7 @@ global.Officials = {
         for (let i in this) {
             if (i === "official") continue;
             let data = this[i];
-
+            if (data.disable) continue;
             let room = data.room ? Rooms[data.room] : Rooms[i];
 
             // Bot is not in the room.
@@ -484,6 +485,7 @@ module.exports = {
 
             for (let entry in Officials) {
                 let obj = Officials[entry];
+                if (obj.disable) continue;
                 if (entry !== i && obj.room !== i) continue;
                 let officialRoom = obj.room || entry;
 
