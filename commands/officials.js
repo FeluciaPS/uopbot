@@ -246,6 +246,26 @@ global.Officials = {
         command: "rby",
         autostart: 7,
     },
+    unofficialmetas: {
+        est: true,
+        schedule: [
+            ["gen91v1", "gen91v1", "gen91v1"], // Monday
+            ["gen9anythinggoes", "gen9anythinggoes", "gen9anythinggoes"], // Tuesday
+            ["gen9nfe", "gen9nfe", "gen9nfe"], // Wednesday
+            ["gen92v2doubles", "gen92v2doubles", "gen92v2doubles"], // Thursday
+            ["gen9zu", "gen9zu", "gen9zu"], // Friday
+            [], // Saturday
+            ["gen9ubersuu", "gen9ubersuu", "gen9ubersuu"], // Sunday
+        ],
+        times: [9, 16, 21],
+        handler: function (room, format) {
+            if (!room.settings.officialhook) return;
+            let request = require('request');
+
+            let text = `Come join the ${format} tour happening in https://play.pokemonshowdown.com/unofficialmetas`
+            request({url:room.settings.officialhook, body: {content:text}, method:"POST", json:true});
+        },
+    },
 
     // Overarching official tournament function.
     // This will make so many things so much better.
