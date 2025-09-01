@@ -151,34 +151,6 @@ global.Officials = {
         command: "overused",
         soft: true
     },
-    monotype: {
-        schedule: [
-            ["gen9", "tera", "gen6", "lc", "gen5", "gen9"], // Monday
-            [], // Tuesday
-            [], // Wednesday
-            [], // Thursday
-            ["gen9", "gen5", "gen8", "gen7", "gen6", "gen9"], // Friday
-            ["uu", "gen7", "gen9", "gen9", "gen8", "natdex"], // Saturday
-            ["gen6", "gen9", "threat", "cap", "gen9", "gen5"], // Sunday
-        ],
-        altschedule: [
-            ["lc", "gen7", "gen9", "gen9", "tera", "gen8"], // Monday
-            [], // Tuesday
-            [], // Wednesday
-            [], // Thursday
-            ["gen7", "gen6", "gen9", "gen9", "gen5", "gen8"], // Friday
-            ["gen9", "gen8", "natdex", "uu", "gen7", "gen9"], // Saturday
-            ["cap", "gen9", "gen5", "gen6", "gen9", "threat"], // Sunday
-        ],
-        times: [8, 9, 10, 20, 21, 22],
-        EST: true,
-        scrappie: true,
-        officialname: "Tour Nights",
-        command: "mono",
-        handler: function (room) {
-            room.send("!rfaq samples");
-        },
-    },
     nationaldexou: {
         times: [0, 8, 9, 10, 18, 19, 20, 22],
         formats: ["gen9", "gen9", "gen9", "gen8", "gen8","gen9", "gen8", "gen9"],
@@ -192,13 +164,6 @@ global.Officials = {
         command: "natdex",
         autostart: 5,
         autodq: 5
-    },
-    nationaldexmonotype: {
-        times: [0, 8, 10, 12, 14, 16, 18, 20, 22],
-        formats: ["mono", "mono", "threat", "mono", "gen8mono", "mono", "monoru", "mono", "monoubers"],
-        scrappie: true,
-        EST: true,
-        command: "natdex"
     },
     nfe: {
         times: [1, 20],
