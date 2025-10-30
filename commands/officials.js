@@ -40,8 +40,8 @@ const fs = require("fs");
 
 global.Officials = {
     "1v1potd": {
-        formats: ['monopoke', 'monopoke'],
-        times: [6, 18],
+        formats: ['dailyformat', 'dailyformat', 'monopoke'],
+        times: [5, 17, 23],
         room: '1v1',
         command: 'potd',
         autostart: 7,
@@ -71,13 +71,21 @@ global.Officials = {
             [ "gen2", "gen9", "gen9" ], // Monday
             [ "gen9", "gen4", "gen9" ], // Tuesday
             [ "gen9", "gen9", "gen6" ], // Wednesday
-            [ "gen3", "gen9", "gen9" ], // Thursday
+            [ "gen3", "gen9", "gen9nationaldex1v1" ], // Thursday
             [ "gen9", "gen5", "gen9" ], // Friday
             [ "gen9", "gen9", "gen7" ], // Saturday
             [ "gen9", "gen8", "gen9" ], // Sunday
         ],
-        times: [9, 15, 21],
-        EST: true,
+        altschedule: [
+            [ "gen5", "gen9", "gen9" ], // Monday
+            [ "gen9", "gen7", "gen9" ], // Tuesday
+            [ "gen8", "gen9", "gen2" ], // Wednesday
+            [ "gen9", "gen9", "gen9" ], // Thursday
+            [ "gen4", "gen9", "gen9" ], // Friday
+            [ "gen9", "gen6", "gen3" ], // Saturday
+            [ "gen9", "gen9nationaldex1v1", "gen9" ], // Sunday
+        ],
+        times: [2, 14, 20],
         scouting: true,
         scrappie: true,
         officialname: true,
