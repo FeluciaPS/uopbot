@@ -34,7 +34,7 @@
     ],
 	"LGPE 1v1": [
 		"/tour create gen7letsgoou, elimination,,, LGPE 1v1",
-	    "/tour rules Picked Team Size = 1, Max Team Size = 3, -charizard-mega-x, -melmetal, -yawn, -sleep powder, -lovely kiss, -spore, -sing, -hypnosis, +gengar-mega, +alakazam, -gyarados-mega /tour name LGPE 1v1"
+	    "/tour rules Picked Team Size = 1, Max Team Size = 3, -charizard-mega-x, -melmetal, -yawn, -sleep powder, -lovely kiss, -spore, -sing, -hypnosis, +gengar-mega, +alakazam, -gyarados-mega"
     ],
 	"National Dex 1v1": [
 		"/tour new gen9nationaldex1v1, elim"
