@@ -135,7 +135,7 @@ Clock.on('hour-half', (timestamp) => {
 })
 
 Clock.on('hour-half', (timestamp) => {
-    if (timestamp.getHours + 2 % 5 != 0 || timestamp.getMinutes != 30) return;
+    if ((timestamp.getHours + 2) % 5 != 0 || timestamp.getMinutes != 30) return;
 
     Rooms['1v1'].send(`/adduhtml dailyformat, ${buildDailyFormatBox('1v1')}`);
 })
