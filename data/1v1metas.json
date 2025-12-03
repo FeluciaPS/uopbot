@@ -4,7 +4,7 @@
     ],
     "Mix and Mega 1v1": [
 		"/tour create gen9mixandmega, elim,,, Mix and Mega 1v1",
-	    "/tour rules Picked Team Size = 1, Max Team Size = 3, -Arceus, -Calyrex-Ice, -Mew, -Mimikyu, -Scream Tail, -Focus Band, -Focus Sash, -King's Rock, -Razor Fang, -Quick Claw, -Altarianite, -Banettite, -Blue Orb, -Cornerstone Mask, -Rusted Sword, -Sablenite, -Perish Song, +Basculegion-M, +Ceruledge, +Gengar, +Gholdengo, +Gouging Fire, +Iron Bundle, +Manaphy, +Sneasler, +Ursaluna-Bloodmoon, +Urshifu-Single-Strike, +Walking Wake +Blazikenite, +Gengarite, +Baton Pass, +Shed Tail, *Deoxys-Defense, *Deoxys-Speed, *Dragonite, *Iron Valiant, *Magearna, *Kyogre, *Spectrier, *Zamazenta"
+	    "/tour rules Picked Team Size = 1, Max Team Size = 3, -Arceus, -Calyrex-Ice, -Mew, -Mimikyu, -Scream Tail, -Focus Band, -Focus Sash, -King's Rock, -Razor Fang, -Quick Claw, -Altarianite, -Banettite, -Blue Orb, -Cornerstone Mask, -Rusted Sword, -Sablenite, -Perish Song, +Basculegion-M, +Ceruledge, +Gengar, +Gholdengo, +Gouging Fire, +Iron Bundle, +Manaphy, +Sneasler, +Ursaluna-Bloodmoon, +Urshifu-Single-Strike, +Walking Wake, +Blazikenite, +Gengarite, +Baton Pass, +Shed Tail, *Deoxys-Defense, *Deoxys-Speed, *Dragonite, *Iron Valiant, *Magearna, *Kyogre, *Spectrier, *Zamazenta"
     ],
 	"CAP 1v1": [
 		"/tour new gen91v1,elim,,, CAP 1v1",
@@ -20,8 +20,8 @@
     ],
 	"Scalemons 1v1": [
 		"/tour new gen91v1,elim,,,1v1 Scalemons ",
-	    "/tour rules scalemonsmod, +Archaludon, +Calyrex-Ice, +Calyrex-Shadow, +Chi-Yu, +Cinderace, +Deoxys, +Dialga, +Dragonite, +Eternatus, +Flutter Mane, +Gholdengo, +Giratina, +Gouging Fire, +Groudon, +Ho-Oh, +Jirachi, +Koraidon, +Kyogre, +Kyurem-Black, +Kyurem-White, +Lugia, +Lunala, +Magearna, +Meloetta, +Mew, +Mewtwo, +Miraidon, +Necrozma, +Ogerpon-Hearthflame, +Palkia, +Rayquaza, +Regidrago, +Reshiram, +Shaymin-Sky, +Snorlax, +Solgaleo, +Terapagos, +Zacian, +Zamazenta, +Zekrom, -Eviolite, -Light Ball, -Smeargle, -Sableye, -Scream Tail, -Ogerpon-Cornerstone, -Huge Power, -Pure Power",
-	    "!om Scalemons mod"
+	    "/tour rules scalemonsmod, +Archaludon, +Calyrex-Ice, +Calyrex-Shadow, +Chi-Yu, +Cinderace, +Deoxys, +Dialga, +Dragonite, +Eternatus, +Flutter Mane, +Gholdengo, +Giratina, +Gouging Fire, +Groudon, +Ho-Oh, +Jirachi, +Koraidon, +Kyogre, +Kyurem-Black, +Kyurem-White, +Lugia, +Lunala, +Magearna, +Meloetta, +Mew, +Mewtwo, +Miraidon, +Necrozma, +Ogerpon-Cornerstone, +Ogerpon-Hearthflame, +Palkia, +Rayquaza, +Regidrago, +Reshiram, +Scream Tail, +Shaymin-Sky, +Snorlax, +Solgaleo, +Terapagos, +Zacian, +Zamazenta, +Zekrom, -Eviolite, -Light Ball, -Meditite, -Medicham, -Smeargle, -Sableye, -Scream Tail, -Ogerpon-Cornerstone",
+	    "!om Scalemons"
     ],
 	"Bad n Boosted 1v1": [
 		"/tour new gen91v1,elim,,,1v1 Bad n Boosted",
@@ -56,19 +56,20 @@
     ],
 	"AAA 1v1": [
 		"/tour new [Gen 9] 1v1, Elimination,,,[Gen 9] 1v1 AAA",
-	    "/tour rules !Obtainable Abilities, Ability Clause = 1, -Regigigas, -Hoopa-Unbound, -Slaking, -Contrary, -Fur Coat, -Good as Gold, -Gorilla Tactics, -Huge Power, -Ice Scales, -Imposter, -Magic Bounce, -Neutralizing Gas, -Parental Bond, -Pure Power, -Shadow Tag, -Simple, -Speed Boost, -Stench, -Unburden, -Water Bubble, -Wonder Guard, -Sturdy, -Prankster, -Shadow Shield, -Multiscale, -Intrepid Sword"
+	    "/tour rules !Obtainable Abilities, Ability Clause = 1, -Iron Bundle, -Iron Crown, -Dragapult, -Regigigas, -Slaking, -Spectrier, -Contrary, -Fur Coat, -Good as Gold, -Gorilla Tactics, -Huge Power, -Ice Scales, -Imposter,  -Intrepid Sword, -Magic Bounce, -Multiscale, -Neutralizing Gas, -Normalize, -Parental Bond, -Prankster, -Pure Power, -Shadow Shield, -Shadow Tag, -Simple, -Speed Boost, -Sturdy, -Unburden, -Water Bubble, -Wonder Guard"
     ],
 	"STABmons 1v1": [
 		"/tour new [Gen 9] 1v1, Elimination,,,[Gen 9] 1v1 STABmons",
-	    "/tour rules STABmons Move Legality, *Acupressure, *Belly Drum, *Clangorous Soul, *Dire Claw, *Dragon Energy, *Electro Shot, *Extreme Speed, *Fillet Away, *Gigaton Hammer, *No Retreat, *Shell Smash, *Shift Gear, *Triple Arrows, *V-create, *Victory Dance, *Wicked Blow"
+	    "/tour rules STABmons Move Legality, -Enamorus-Base, *Acupressure, *Astral Barrage, *Belly Drum, *Boomburst, *Clangorous Soul, *Dire Claw, *Dragon Energy, *Extreme Speed, *Fillet Away, *Gigaton Hammer, *Lumina Crash, *No Retreat, *Shell Smash, *Shift Gear, *Transform, *Torch Song, *Triple Arrows, *V-create, *Victory Dance, *Wicked Blow, *Wicked Torque"
     ],
 	"Convergence 1v1": [
 		"/tour new [Gen 9] 1v1, Elimination,,,[Gen 9] 1v1 Convergence",
-	    "/tour rules Standard OMs, Convergence Legality, !Obtainable Abilities, -Regigigas, -Slaking, -Smeargle, -Contrary, -Imposter, -Pure Power, -Speed Boost, -Extreme Speed, -Population Bomb, -Quiver Dance, -Rage Fist, -Shed Tail, -Shell Smash, -Transform",
-	    "!om convergence"
+	    "/tour rules Standard OMs, Convergence Legality, !Obtainable Abilities, -Regigigas, -Slaking, -Smeargle, -Contrary, -Imposter, -Pure Power, -Speed Boost, -Boomburst, -Extreme Speed, -Population Bomb, -Quiver Dance, -Rage Fist, -Shed Tail, -Shell Smash, -Transform",
+	    "!om convergence",
+		"!wall CONVERGENCE MOVESETS TO MAKE BUILDING EASIER https://pokepast.es/e6a6a6f85d6cfc93"
     ],
 	"1v1 Randbats": [
-		"/tour create gen9randombattles, elimination ,,,1v1 Randbats",
+		"/tour create gen9randombattle, elimination ,,,1v1 Randbats",
 	    "/tour rules Max Team Size=3, Picked Team Size=1, Team Preview, Terastal Clause"
     ],
 	"Metronome 1v1": [
@@ -82,7 +83,7 @@
     ],
 	"Pokemon Legends ZA 1v1": [
 		"/tour new gen9legendszaou,elim,,,PLZA 1v1",
-	    "/tour rules max team size = 3, picked team size = 1, -focus band, -focus sash, -perish song, +gengar-mega, +arena trap, +shadow tag, +baton pass, -dragonite-mega, -blatoise-mega",
+	    "/tour rules max team size = 3, picked team size = 1, -focus band, -focus sash, -perish song, +gengar-mega, +arena trap, +shadow tag, +baton pass, -dragoninite",
 	    "!tier gen9legendszaou",
 	    "/wall THIS IS LEGENDS ZA 1v1 CHECK WHAT THE STONES DO IN THE ABOVE LINK THESE ARE NOT THE OFFICIAL ABILITIES"
     ],
@@ -90,9 +91,5 @@
 		"/tour new gen91v1,elim,,,Camomons 1v1",
 	    "/tour rules Camomons Mod, Team Type Preview",
 	    "!om Camomons"
-    ],
-	"True 1v1": [
-		"/tour new gen91v1,elim,,,True 1v1",
-		"/tour rules !!Max Team Size = 1"
-	]
+    ]
 }
