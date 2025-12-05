@@ -56,7 +56,7 @@
     ],
 	"AAA 1v1": [
 		"/tour new [Gen 9] 1v1, Elimination,,,[Gen 9] 1v1 AAA",
-	    "/tour rules !Obtainable Abilities, Ability Clause = 1, -Iron Bundle, -Iron Crown, -Dragapult, -Regigigas, -Slaking, -Spectrier, -Contrary, -Fur Coat, -Good as Gold, -Gorilla Tactics, -Huge Power, -Ice Scales, -Imposter,  -Intrepid Sword, -Magic Bounce, -Multiscale, -Neutralizing Gas, -Normalize, -Parental Bond, -Prankster, -Pure Power, -Shadow Shield, -Shadow Tag, -Simple, -Speed Boost, -Sturdy, -Unburden, -Water Bubble, -Wonder Guard"
+	    "/tour rules !Obtainable Abilities, Ability Clause = 1, -Hoopa-Unbound, -Iron Bundle, -Iron Crown, -Dragapult, -Regigigas, -Slaking, -Spectrier, -Contrary, -Fur Coat, -Good as Gold, -Gorilla Tactics, -Huge Power, -Ice Scales, -Imposter,  -Intrepid Sword, -Magic Bounce, -Multiscale, -Neutralizing Gas, -Normalize, -Parental Bond, -Prankster, -Pure Power, -Shadow Shield, -Shadow Tag, -Simple, -Speed Boost, -Sturdy, -Unburden, -Water Bubble, -Wonder Guard"
     ],
 	"STABmons 1v1": [
 		"/tour new [Gen 9] 1v1, Elimination,,,[Gen 9] 1v1 STABmons",
@@ -83,7 +83,7 @@
     ],
 	"Pokemon Legends ZA 1v1": [
 		"/tour new gen9legendszaou,elim,,,PLZA 1v1",
-	    "/tour rules max team size = 3, picked team size = 1, -focus band, -focus sash, -perish song, +gengar-mega, +arena trap, +shadow tag, +baton pass, -dragoninite",
+	    "/tour rules max team size = 3, picked team size = 1, -focus band, -focus sash, -perish song, +gengar-mega, +arena trap, +shadow tag, +baton pass, -blastoisinite, -dragoninite",
 	    "!tier gen9legendszaou",
 	    "/wall THIS IS LEGENDS ZA 1v1 CHECK WHAT THE STONES DO IN THE ABOVE LINK THESE ARE NOT THE OFFICIAL ABILITIES"
     ],
