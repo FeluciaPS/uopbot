@@ -220,7 +220,6 @@ global.Officials = {
         autostart: 7,
     },
     unofficialmetas: {
-        est: true,
         schedule: [
             ["gen91v1", "gen91v1", "gen91v1"], // Monday
             ["gen9anythinggoes", "gen9anythinggoes", "gen9anythinggoes"], // Tuesday
@@ -230,7 +229,7 @@ global.Officials = {
             [], // Saturday
             ["gen9ubersuu", "gen9ubersuu", "gen9ubersuu"], // Sunday
         ],
-        times: [12, 17, 22],
+        times: [3, 17, 22],
         handler: function (room, format) {
             if (!room.settings.officialhook) return;
             let request = require('request');
