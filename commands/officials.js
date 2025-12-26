@@ -220,7 +220,6 @@ global.Officials = {
         autostart: 7,
     },
     unofficialmetas: {
-        est: true,
         schedule: [
             ["gen91v1", "gen91v1", "gen91v1"], // Monday
             ["gen9anythinggoes", "gen9anythinggoes", "gen9anythinggoes"], // Tuesday
