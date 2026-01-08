@@ -232,7 +232,7 @@ global.Officials = {
             if (!room.settings.officialhook) return;
             let request = require('request');
 
-            let text = `<@&1413620540031373402> Come join the ${format} tour happening in https://play.pokemonshowdown.com/unofficialmetas`
+            let text = `<@&1413620540031373402> Come join the ${format} tour happening in <https://play.pokemonshowdown.com/unofficialmetas>`
             request({url:room.settings.officialhook, body: {content:text}, method:"POST", json:true});
         },
     },
