@@ -518,13 +518,13 @@ module.exports = {
                 next = obj.times.indexOf(next);
 
                 if (obj.formats) meta = obj.formats[next];
-                else if (!obj.schedule) {
-                    meta = officialRoom;
-                }
                 else if (obj.rotatingformats) {
                     let last = robj.settings.lastrotatingformat || -1;
                     let nextid = (last + 1) % obj.rotatingformats.length;
                     meta = obj.rotatingformats[nextid];
+                }
+                else if (!obj.schedule) {
+                    meta = officialRoom;
                 }
                 else {
                     let day = now.getDay() - 1 + tomorrow;
