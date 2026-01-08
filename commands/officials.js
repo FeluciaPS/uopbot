@@ -213,11 +213,9 @@ global.Officials = {
         },
         args: ["official"],
     },
-    rby: {
-        times: [3, 9, 15, 21],
-        formats: ["ou", "randbats", "ou", "randbats"],
-        command: "rby",
-        autostart: 7,
+    petmods: {
+        times: [0, 18],
+        rotatingformats: ["gen9chatbats", "gen9scootopiarandombattle", "gen9legendszaou"],
     },
     unofficialmetas: {
         schedule: [
@@ -234,7 +232,7 @@ global.Officials = {
             if (!room.settings.officialhook) return;
             let request = require('request');
 
-            let text = `Come join the ${format} tour happening in https://play.pokemonshowdown.com/unofficialmetas`
+            let text = `<@&1413620540031373402> Come join the ${format} tour happening in https://play.pokemonshowdown.com/unofficialmetas`
             request({url:room.settings.officialhook, body: {content:text}, method:"POST", json:true});
         },
     },
@@ -319,6 +317,13 @@ global.Officials = {
 
                 let index = data.times.indexOf(now.getHours());
                 if (index === -1) format = false;
+            } else if (data.rotatingformats) {
+                if (!room.settings.lastrotatingformat) room.settings.lastrotatingformat = -1;
+                let count = data.rotatingformats.length;
+
+                let next = room.settings.lastrotatingformat++ % count;
+                format = data.rotatingformats[next];
+                room.saveSettings();
             }
 
             if (format && room.settings.ignorenext) {
@@ -515,6 +520,11 @@ module.exports = {
                 if (obj.formats) meta = obj.formats[next];
                 else if (!obj.schedule) {
                     meta = officialRoom;
+                }
+                else if (obj.rotatingformats) {
+                    let last = robj.settings.lastrotatingformat;
+                    let nextid = (last + 1) % obj.rotatingformats.length;
+                    meta = obj.rotatingformats[nextid];
                 }
                 else {
                     let day = now.getDay() - 1 + tomorrow;
