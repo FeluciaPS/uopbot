@@ -522,7 +522,7 @@ module.exports = {
                     meta = officialRoom;
                 }
                 else if (obj.rotatingformats) {
-                    let last = robj.settings.lastrotatingformat;
+                    let last = robj.settings.lastrotatingformat || -1;
                     let nextid = (last + 1) % obj.rotatingformats.length;
                     meta = obj.rotatingformats[nextid];
                 }
