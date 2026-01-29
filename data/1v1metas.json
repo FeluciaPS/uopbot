@@ -12,7 +12,7 @@
     ],
 	"1v1 UU": [
 		"/tour new gen91v1,elim,,, 1v1 UU",
-	    "/tour rules -Iron Valiant, -Volcanion, -Hoopa-Unbound, -Sylveon, -Primarina, -Iron Crown, -Dragapult, -Raging Bolt, -Metagross, -Donphan, -Roaring Moon, -Ursaluna, -Urshifu-Rapid-Strike, -Corviknight, -Iron Hands, -Scizor, -Zapdos, -Sneasler, -Walking Wake, -Annihilape, -Meowscarada, -Goodra-Hisui, -Pecharunt, -Landorus-Therian, -Ninetales-Alola, -Garchomp, -Chien-Pao, -Great Tusk, -Urshifu, -Haxorus, -Volcarona, -Spectrier, -Darkrai, -Skeledirge, -Ogerpon-Wellspring, -Iron Moth, -Tinkaton, -Azumarill, -Sableye, +Ursaluna-Bloodmoon, +Zapdos-Galar"
+	    "/tour rules -Hoopa-Unbound, -Urshifu-Rapid-Strike, -Primarina, -Iron Valiant, -Metagross, -Meowscarada, -Raging Bolt, -Volcanion, -Ursaluna, -Donphan, -Sylveon, -Garchomp, -Iron Crown, -Scizor, -Pecharunt, -Iron Hands, -Dragapult, -Sneasler, -Spectrier, -Landorus-Therian, -Zapdos, -Great Tusk, -Goodra-Hisui, -Volcarona, -Roaring Moon, -Corviknight, -Ogerpon-Wellspring, -Chien-Pao, -Urshifu, -Walking Wake, -Haxorus, -Skeledirge, -Annihilape, -Iron Moth, -Ursaluna-Bloodmoon, -Greninja, -Ceruledge, -Darkrai, -Sableye, -Ninetales-Alola, +Zapdos-Galar, +Custap Berry"
     ],
 	"LC 1v1": [
 		"/tour create gen91v1, elimination,,, LC 1v1",
@@ -34,7 +34,7 @@
     ],
 	"LGPE 1v1": [
 		"/tour create gen7letsgoou, elimination,,, LGPE 1v1",
-	    "/tour rules Picked Team Size = 1, Max Team Size = 3, -charizard-mega-x, -melmetal, -yawn, -sleep powder, -lovely kiss, -spore, -sing, -hypnosis, +gengar-mega, +alakazam, -gyarados-mega"
+	    "/tour rules Picked Team Size = 1, Max Team Size = 3, -aerodactyl-mega, -charizard-mega-x, -gyarados-mega, -melmetal, -yawn, -sleep powder, -lovely kiss, -spore, -sing, -hypnosis, +gengar-mega, +alakazam, -gyarados-mega"
     ],
 	"National Dex 1v1": [
 		"/tour new gen9nationaldex1v1, elim"
