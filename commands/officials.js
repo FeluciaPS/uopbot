@@ -227,7 +227,7 @@ global.Officials = {
             [], // Saturday
             ["gen9ubersuu", "gen9ubersuu", "gen9ubersuu"], // Sunday
         ],
-        times: [3, 17, 22],
+        times: [2, 16, 21],
         handler: function (room, format) {
             if (!room.settings.officialhook) return;
             let request = require('request');
