@@ -78,7 +78,7 @@ bot.on("updateuser", (parts) => {
             skipnext = false;
             continue;
         }
-        if (i.match(/,\d/)) {
+        if (i.match(/^,\d+$/)) {
             skipnext = true;
             continue;
         }
