@@ -3,6 +3,7 @@
   "description": "UOP is bot mainframe",
   "author": "UnleashOurPassion <TheMezStrikes@gmail.com>",
   "dependencies": {
+    "active-win": "^8.2.1",
     "colors": "1.x.x",
     "escape-html": "^1.0.3",
     "he": "^1.2.0",
@@ -11,6 +12,6 @@
     "websocket": "1.x.x"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "forever start --minUptime 2000 --spinSleepTime 30000 app.js"
   }
 }
